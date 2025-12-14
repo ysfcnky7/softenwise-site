@@ -962,3 +962,32 @@ a {
 .cases {
   padding: 88px 0;
 }
+
+/* FIXES – PROD SAFETY */
+
+/* Mobil menu layer fix */
+.nav {
+  z-index: 200;
+}
+
+/* Absolute menu anchor fix */
+.header-inner {
+  position: relative;
+}
+
+/* iOS scroll lock safety */
+body {
+  overscroll-behavior: contain;
+}
+
+/* Mobile GPU performance guard */
+@media (hover: none) {
+  .service-card:hover,
+  .work-card:hover,
+  .step:hover,
+  .faq-item:hover,
+  .contact-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
