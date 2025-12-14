@@ -791,3 +791,40 @@ a{ color:inherit; }
   .services, .process, .work, .about, .faq{ padding:64px 0; }
   .cta{ padding:64px 0; }
 }
+
+
+/* TRUST STRIP */
+.trust-strip{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
+
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+  padding:28px 0;
+}
+
+.trust-item{
+  text-align:center;
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  background:var(--bg-soft);
+}
+
+.trust-item strong{
+  display:block;
+  font-weight:800;
+}
+
+.trust-item span{
+  font-size:13px;
+  color:var(--text-muted);
+}
+.footer-note{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--text-muted);
+}
