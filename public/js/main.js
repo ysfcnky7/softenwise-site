@@ -1,72 +1,82 @@
-// ===== MOBILE MENU (aria + close on link click) =====
+// ===== SAFE SELECTORS =====
 const menuBtn = document.getElementById("menuBtn");
 const nav = document.getElementById("nav");
 const header = document.getElementById("header");
 
-const setMenuState = (open) => {
-  nav.classList.toggle("open", open);
-  menuBtn.setAttribute("aria-expanded", String(open));
-  document.body.style.overflow = open ? "hidden" : "";
-};
+// ===== MOBILE MENU (ARIA + SAFE) =====
+if (menuBtn && nav) {
+  const setMenuState = (open) => {
+    nav.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  };
 
-menuBtn.addEventListener("click", () => {
-  const isOpen = nav.classList.contains("open");
-  setMenuState(!isOpen);
-});
+  menuBtn.addEventListener("click", () => {
+    setMenuState(!nav.classList.contains("open"));
+  });
 
-// Menüden linke tıklayınca kapat (mobil UX)
-nav.querySelectorAll("a").forEach(a => {
-  a.addEventListener("click", () => setMenuState(false));
-});
+  // Menü linkine tıklayınca kapat
+  nav.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => setMenuState(false));
+  });
 
-// Dışarı tıklayınca kapat
-document.addEventListener("click", (e) => {
-  const isOpen = nav.classList.contains("open");
-  if (!isOpen) return;
+  // Dışarı tıklayınca kapat
+  document.addEventListener("click", (e) => {
+    if (!nav.classList.contains("open")) return;
+    if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
+      setMenuState(false);
+    }
+  });
 
-  const clickedInside =
-    nav.contains(e.target) || menuBtn.contains(e.target);
+  // ESC ile kapat
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setMenuState(false);
+  });
 
-  if (!clickedInside) setMenuState(false);
-});
+  // Ekran büyüyünce kapat
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) setMenuState(false);
+  });
+}
 
-// ESC ile kapat
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") setMenuState(false);
-});
+// ===== HEADER SHADOW (CSS CLASS) =====
+if (header) {
+  const applyHeaderShadow = () => {
+    header.classList.toggle("scrolled", window.scrollY > 18);
+  };
 
-// Ekran büyüyünce menüyü kapat (responsive bug fix)
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 768) setMenuState(false);
-});
+  window.addEventListener("scroll", applyHeaderShadow, { passive: true });
+  applyHeaderShadow();
+}
 
-// ===== HEADER SHADOW ON SCROLL =====
-const applyHeaderShadow = () => {
-  header.style.boxShadow =
-    window.scrollY > 18
-      ? "0 10px 30px rgba(0,0,0,.08)"
-      : "none";
-};
+// ===== REVEAL (ACCESSIBLE + PERFORMANT) =====
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
 
-window.addEventListener("scroll", applyHeaderShadow, { passive: true });
-applyHeaderShadow();
+if (prefersReducedMotion) {
+  document.querySelectorAll(".reveal").forEach((el) => {
+    el.classList.add("active");
+  });
+} else {
+  const reveals = document.querySelectorAll(".reveal");
 
-// ===== REVEAL (IntersectionObserver - performanslı) =====
-const reveals = document.querySelectorAll(".reveal");
-
-const io = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-        io.unobserve(entry.target);
+  if (reveals.length) {
+    const io = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -80px 0px",
       }
-    });
-  },
-  {
-    threshold: 0.12,
-    rootMargin: "0px 0px -80px 0px"
-  }
-);
+    );
 
-reveals.forEach(el => io.observe(el));
+    reveals.forEach((el) => io.observe(el));
+  }
+}
