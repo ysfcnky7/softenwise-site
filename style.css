@@ -88,14 +88,6 @@ a {
   align-items: center;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
 /* LOGO – SVG BASED (FINAL) */
 .logo {
   display: flex;
