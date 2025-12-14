@@ -11,6 +11,7 @@ if (menuBtn && nav) {
     document.body.style.overflow = open ? "hidden" : "";
   };
 
+  // Toggle menu
   menuBtn.addEventListener("click", () => {
     setMenuState(!nav.classList.contains("open"));
   });
@@ -30,16 +31,18 @@ if (menuBtn && nav) {
 
   // ESC ile kapat
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setMenuState(false);
+    if (e.key === "Escape" && nav.classList.contains("open")) {
+      setMenuState(false);
+    }
   });
 
-  // Ekran büyüyünce kapat
+  // Ekran büyüyünce kapat (CSS breakpoint ile uyumlu)
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) setMenuState(false);
   });
 }
 
-// ===== HEADER SHADOW (CSS CLASS) =====
+// ===== HEADER SHADOW (CSS CLASS BASED) =====
 if (header) {
   const applyHeaderShadow = () => {
     header.classList.toggle("scrolled", window.scrollY > 18);
