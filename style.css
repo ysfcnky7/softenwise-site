@@ -959,3 +959,6 @@ a {
   font-size: 13px;
   color: var(--text-muted);
 }
+.cases {
+  padding: 88px 0;
+}
