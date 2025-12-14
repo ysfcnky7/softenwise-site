@@ -944,3 +944,23 @@ a {
   font-size: 13px;
   color: var(--text-muted);
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.logo-mark {
+  color: #111; /* ana renk */
+  display: flex;
+}
+
+.site-header .logo-mark {
+  color: #111;
+}
+
+.site-footer .logo-mark {
+  color: #111;
+}
