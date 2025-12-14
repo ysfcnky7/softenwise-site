@@ -99,7 +99,7 @@
       <nav class="nav" id="nav" aria-label="Ana menü">
         <a href="#solutions">Çözümler</a>
         <a href="#approach">Yaklaşım</a>
-        <a href="#work">Çalışmalar</a>
+        <a href="#work">Ne Yaptık?</a>
         <a href="#about">Hakkımızda</a>
         <a href="#faq">SSS</a>
         <a href="#contact">İletişim</a>
@@ -130,6 +130,12 @@
             Teslimde sadece çalışan kod değil, sürdürülebilir bir sistem
             alırsınız.
           </p>
+
+          <div class="hero-meta">
+            <span>Performans bütçesi (Lighthouse odaklı)</span>
+            <span>CI/CD</span>
+            <span>Monitoring + Log</span>
+          </div>
 
           <div class="hero-actions">
             <a href="#contact" class="btn-primary">
@@ -189,80 +195,6 @@
       </div>
     </section>
 
-    <!-- CASES (ANONİM) -->
-    <section class="cases">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Gerçekte Ne Yaptık?</h2>
-          <p class="section-desc reveal">
-            Müşteri isimleri paylaşmıyoruz. Ama çözdüğümüz problemleri ve
-            ürettiğimiz sonuçları açıkça anlatıyoruz.
-          </p>
-        </header>
-
-        <div class="work-grid">
-          <article class="work-card reveal">
-            <div class="work-head">
-              <div class="tag">Kurumsal Sistem</div>
-              <div class="tag soft">Operasyon</div>
-            </div>
-            <h3>Manuel Operasyondan Ölçeklenebilir Sisteme</h3>
-            <p>
-              <strong>Problem:</strong> Excel ve e-posta ile yürüyen, hataya
-              açık operasyon süreci.
-            </p>
-            <p>
-              <strong>Çözüm:</strong> Rol bazlı panel, otomatik iş akışları ve
-              merkezi raporlama.
-            </p>
-            <p>
-              <strong>Sonuç:</strong> Operasyon süresi %40 azaldı, hata oranı
-              ciddi şekilde düştü.
-            </p>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-head">
-              <div class="tag">Entegrasyon</div>
-              <div class="tag soft">API</div>
-            </div>
-            <h3>Dağınık Sistemler Arası Entegrasyon</h3>
-            <p>
-              <strong>Problem:</strong> Kopuk sistemler, manuel veri taşıma ve
-              tutarsız kayıtlar.
-            </p>
-            <p>
-              <strong>Çözüm:</strong> API-first mimari, event tabanlı
-              senkronizasyon ve hata izleme.
-            </p>
-            <p>
-              <strong>Sonuç:</strong> Gerçek zamanlı veri akışı ve sıfıra
-              yakın manuel müdahale.
-            </p>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-head">
-              <div class="tag">Ürün</div>
-              <div class="tag soft">Web & Mobil</div>
-            </div>
-            <h3>Büyümeye Hazır Ürün Altyapısı</h3>
-            <p>
-              <strong>Problem:</strong> Büyüdükçe yavaşlayan ve kırılan bir
-              ürün.
-            </p>
-            <p>
-              <strong>Çözüm:</strong> Modüler backend, performans odaklı
-              frontend ve izlenebilirlik.
-            </p>
-            <p>
-              <strong>Sonuç:</strong> Yeni özellikler teknik borç oluşturmadan
-              eklenebilir hale geldi.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <!-- SOLUTIONS -->
     <section class="services" id="solutions">
@@ -381,8 +313,7 @@
         <header class="section-head">
           <h2 class="reveal">Neden TALSoftware?</h2>
           <p class="section-desc reveal">
-            Çünkü biz “site yapan” değil, sürdürülebilir sistem kuran
-            mühendislik ekibiyiz.
+            Site yapan değil, sürdürülebilir sistem kuran mühendislik ekibiyiz.
           </p>
         </header>
 
@@ -393,9 +324,7 @@
               <h3>Ajans Değil, Mühendislik</h3>
             </div>
             <p>
-              Görsellik tek başına iş çözmez. Biz; veri modeli, mimari
-              kararlar ve bakım kolaylığıyla
-              <strong>uzun ömürlü</strong> sistem kurarız.
+              Veri modeli, mimari kararlar ve bakım kolaylığıyla uzun ömürlü sistem kurarız.
             </p>
             <ul class="mini-list">
               <li>Kod standardı + review kültürü</li>
@@ -410,30 +339,12 @@
               <h3>Operasyonel Teslim</h3>
             </div>
             <p>
-              “Çalışıyor” diyip bırakmayız. Canlı sonrası için sistemin
-              <strong>izlenebilir</strong> ve
-              <strong>yönetilebilir</strong> olmasını sağlarız.
+              Canlı sonrası için izleme, loglama, alarm ve bakım planıyla teslim ederiz.
             </p>
             <ul class="mini-list">
-              <li>Loglama + izleme yaklaşımı</li>
+              <li>Monitoring + loglama</li>
               <li>Hata yönetimi & alarm mantığı</li>
               <li>Bakım / geliştirme planı</li>
-            </ul>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon" aria-hidden="true">📌</div>
-              <h3>Net Kapsam, Net Sonuç</h3>
-            </div>
-            <p>
-              Belirsizlik proje öldürür. Kapsamı başta netleştirir, parçalar
-              ve şeffaf şekilde ilerleriz. Sürpriz yok.
-            </p>
-            <ul class="mini-list">
-              <li>Milestone + teslim takvimi</li>
-              <li>Demo & raporlama ritmi</li>
-              <li>Riskleri baştan konuşma</li>
             </ul>
           </article>
         </div>
@@ -504,50 +415,43 @@
       </div>
     </section>
 
-    <!-- WORK / CASES -->
+    <!-- WORK (TEK BÖLÜM) -->
     <section class="work" id="work">
       <div class="container">
         <header class="section-head">
-          <h2 class="reveal">Neler Üretiyoruz?</h2>
+          <h2 class="reveal">Ne Ürettik?</h2>
           <p class="section-desc reveal">
-            “Güzel görünen” değil; işi çözen, ölçülen ve büyüyen ürünler.
-            Aşağıdaki örnekler; sık yaptığımız iş türlerini gösterir.
+            Müşteri isimleri paylaşmıyoruz. Ama problemleri, yaklaşımı ve sonucu net anlatıyoruz.
+          </p>
+          <p class="section-desc reveal">
+            Bu yaklaşımı; yüksek trafikli, çok entegreli ve operasyonel yükü olan projelerde uyguladık.
+          </p>
+          <p class="work-metric reveal">
+            Ortalama 10+ entegrasyonlu sistemlerde çalıştık · aylık yüksek işlem hacmi
           </p>
         </header>
 
         <div class="work-grid">
           <article class="work-card reveal">
             <div class="work-head">
-              <div class="tag">Kurumsal</div>
-              <div class="tag soft">Panel & Raporlama</div>
+              <div class="tag">Kurumsal Sistem</div>
+              <div class="tag soft">Operasyon</div>
             </div>
-            <h3>Operasyon Paneli + Dashboard</h3>
-            <p>
-              Rol bazlı yetkilendirme, raporlama, kayıt yönetimi, loglama ve
-              performans odaklı admin arayüzleri.
-            </p>
-            <ul class="mini-list">
-              <li>Yetki & rol matrisi</li>
-              <li>Raporlama + dışa aktarma</li>
-              <li>Audit & log takibi</li>
-            </ul>
+            <h3>Manuel Operasyondan Ölçeklenebilir Sisteme</h3>
+            <p><strong>Problem:</strong> Excel/e-posta ile yürüyen hataya açık operasyon.</p>
+            <p><strong>Çözüm:</strong> Rol bazlı panel, otomatik iş akışları, merkezi raporlama.</p>
+            <p><strong>Sonuç:</strong> Operasyon süresi %40 azaldı, hata oranı düştü.</p>
           </article>
 
           <article class="work-card reveal">
             <div class="work-head">
               <div class="tag">Entegrasyon</div>
-              <div class="tag soft">API & Otomasyon</div>
+              <div class="tag soft">API</div>
             </div>
-            <h3>API Entegrasyonu & Senkronizasyon</h3>
-            <p>
-              Üçüncü parti servisler ile güvenli veri akışı, webhook tabanlı
-              otomasyon ve hata yönetimi.
-            </p>
-            <ul class="mini-list">
-              <li>Retry / kuyruk yaklaşımı</li>
-              <li>Rate-limit & güvenlik</li>
-              <li>İzleme ve alarm</li>
-            </ul>
+            <h3>Dağınık Sistemler Arası Senkronizasyon</h3>
+            <p><strong>Problem:</strong> Kopuk sistemler, manuel veri taşıma, tutarsız kayıt.</p>
+            <p><strong>Çözüm:</strong> API-first, event tabanlı akış, hata izleme.</p>
+            <p><strong>Sonuç:</strong> Gerçek zamanlı veri akışı, minimum manuel müdahale.</p>
           </article>
 
           <article class="work-card reveal">
@@ -555,42 +459,16 @@
               <div class="tag">Ürün</div>
               <div class="tag soft">Web & Mobil</div>
             </div>
-            <h3>Müşteri Portalı / Ürün Uygulaması</h3>
-            <p>
-              Hızlı onboarding, güvenli giriş, performanslı ekranlar ve
-              sürdürülebilir sürüm yönetimi.
-            </p>
-            <ul class="mini-list">
-              <li>Kimlik doğrulama</li>
-              <li>Ölçeklenebilir backend</li>
-              <li>Analitik & geri bildirim</li>
-            </ul>
+            <h3>Büyümeye Hazır Ürün Altyapısı</h3>
+            <p><strong>Problem:</strong> Büyüdükçe yavaşlayan ve kırılan ürün altyapısı.</p>
+            <p><strong>Çözüm:</strong> Modüler backend, performans odaklı frontend, izlenebilirlik.</p>
+            <p><strong>Sonuç:</strong> Yeni özellikler teknik borç şişirmeden eklenebilir hale geldi.</p>
           </article>
-        </div>
-
-        <div class="stack reveal" aria-label="Teknoloji yaklaşımı">
-          <h3>Teknoloji Yaklaşımı</h3>
-          <p>
-            Projeye göre teknoloji seçeriz; ama her zaman
-            <strong>bakım kolaylığı</strong>, <strong>performans</strong> ve
-            <strong>güvenlik</strong> önceliğimizdir.
-          </p>
-
-          <div class="stack-badges">
-            <span class="badge">Backend</span>
-            <span class="badge ghost">API</span>
-            <span class="badge ghost">DB</span>
-            <span class="badge ghost">CI/CD</span>
-            <span class="badge ghost">Monitoring</span>
-            <span class="badge ghost">Security</span>
-          </div>
         </div>
 
         <div class="work-note reveal">
           <p>
-            Gösterilen örnekler; sık karşılaştığımız iş türlerini temsil eder.
-            Gizlilik sebebiyle müşteri isimleri ve ekran görüntüleri
-            paylaşılmamaktadır.
+            Gizlilik sebebiyle müşteri isimleri ve ekran görüntüleri paylaşılmamaktadır.
           </p>
         </div>
       </div>
@@ -608,9 +486,7 @@
             değer üreten sistemler kurmaktır.
           </p>
           <p>
-            Çalışma biçimimiz net: Kapsamı doğru tanımlar, uygulanabilir plan
-            çıkarır, şeffaf şekilde geliştirir ve canlıdan sonra operasyonel
-            sürdürülebilirliği garanti ederiz.
+            Kapsamı netleştirir, planlar, iteratif geliştirir ve canlı sonrası operasyonu güvence altına alırız.
           </p>
 
           <div class="about-points">
@@ -790,7 +666,10 @@
             class="btn-primary">
             Projem için net cevap istiyorum
           </a>
-          <a href="#faq" class="btn-ghost"> Süreç nasıl ilerliyor? </a>
+          <a href="mailto:info@talsoftware.dev?subject=TALSoftware%20-%20Girilebilir%20mi%20Girilmez%20mi"
+            class="btn-ghost">
+            Girilir mi, girilmez mi? Net söyleyin
+          </a>
         </div>
       </div>
     </section>
@@ -829,7 +708,7 @@
           <div class="footer-title">Menü</div>
           <a href="#solutions">Çözümler</a>
           <a href="#approach">Yaklaşım</a>
-          <a href="#work">Çalışmalar</a>
+          <a href="#work">Ne Yaptık?</a>
           <a href="#about">Hakkımızda</a>
           <a href="#faq">SSS</a>
         </div>
