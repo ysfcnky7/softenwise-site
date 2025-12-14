@@ -991,3 +991,15 @@ body {
     box-shadow: none;
   }
 }
+
+.why {
+  padding: 88px 0;
+}
+
+.cta-points {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
