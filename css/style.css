@@ -122,7 +122,11 @@ a {
 }
 
 .logo-text {
-  letter-spacing: 0.2px;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #0e3a46;
+  letter-spacing: -0.02em;
 }
 
 .nav {
@@ -914,4 +918,11 @@ body[style*="overflow: hidden"] {
 
 .site-header.scrolled {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.footer-logo-text {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #0e3a46;
 }
