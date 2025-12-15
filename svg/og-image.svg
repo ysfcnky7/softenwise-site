@@ -1,28 +1,61 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0f6f7a"/>
-      <stop offset="100%" stop-color="#1aa6b0"/>
-    </linearGradient>
-  </defs>
+<svg
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="SoftenWise - Ölçeklenen yazılım. Operasyonel teslim."
+>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#ffffff" />
 
-  <rect width="1200" height="630" fill="#ffffff"/>
+  <!-- Soft circles (arka plan) -->
+  <circle cx="1050" cy="80" r="260" fill="#E8F3F4" />
+  <circle cx="120" cy="540" r="260" fill="#E8F3F4" />
 
-  <circle cx="980" cy="-40" r="420" fill="url(#g)" opacity="0.12"/>
-  <circle cx="200" cy="700" r="360" fill="url(#g)" opacity="0.10"/>
-
-  <!-- LOGO -->
-  <rect x="120" y="170" width="120" height="120" rx="20" fill="url(#g)"/>
-  <path d="M155 205 H205 V220 H185 V255 H175 V220 H155 Z" fill="#fff"/>
-
-  <!-- TEXT -->
-  <text x="280" y="230" font-size="56" font-weight="700" fill="#0f1f2e"
-        font-family="Inter, Arial, sans-serif">
-    TALSoftware
+  <!-- SW Icon -->
+  <rect
+    x="140"
+    y="260"
+    rx="24"
+    ry="24"
+    width="96"
+    height="96"
+    fill="#0E3A46"
+  />
+  <text
+    x="188"
+    y="325"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto"
+    font-size="44"
+    font-weight="800"
+    fill="#ffffff"
+  >
+    SW
   </text>
 
-  <text x="280" y="280" font-size="28" fill="#5f6f7f"
-        font-family="Inter, Arial, sans-serif">
+  <!-- Brand Name -->
+  <text
+    x="260"
+    y="315"
+    font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto"
+    font-size="64"
+    font-weight="800"
+    fill="#0B1F2A"
+  >
+    softenwise
+  </text>
+
+  <!-- Tagline -->
+  <text
+    x="260"
+    y="360"
+    font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto"
+    font-size="28"
+    font-weight="400"
+    fill="#475569"
+  >
     Ölçeklenen yazılım. Operasyonel teslim.
   </text>
 </svg>
