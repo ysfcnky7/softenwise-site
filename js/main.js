@@ -107,7 +107,9 @@ if (form) {
 
       if (response.ok) {
         form.reset();
-        document.getElementById("formSuccess").style.display = "block";
+        const successMsg = document.getElementById("formSuccess");
+        if (successMsg) successMsg.style.display = "block";
+
         submitBtn.textContent = "Talep Alındı";
       } else {
         alert("Bir hata oluştu. Lütfen tekrar deneyin.");
