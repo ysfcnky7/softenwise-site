@@ -14,7 +14,7 @@
 
   /* BORDERS / SHADOW */
   --border: #dde4ea;
-  --shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  --shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
 
   /* RADIUS */
   --r-lg: 16px;
@@ -216,9 +216,9 @@ a {
 }
 
 .hero h1 {
-  font-size: 44px;
+  font-size: 40px;
+  letter-spacing: -0.3px;
   line-height: 1.15;
-  letter-spacing: -0.4px;
 }
 
 .hero p {
@@ -411,7 +411,7 @@ a {
 }
 
 .service-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-2px);
   border-color: rgba(15, 111, 122, 0.4);
   box-shadow: var(--shadow);
 }
@@ -436,7 +436,7 @@ a {
   background: var(--accent-soft);
   border: 1px solid rgba(15, 111, 122, 0.22);
   color: var(--accent);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -550,7 +550,7 @@ a {
     box-shadow 0.22s ease;
 }
 .work-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-2px);
   border-color: rgba(15, 111, 122, 0.4);
   box-shadow: var(--shadow);
 }
@@ -674,13 +674,6 @@ a {
     ),
     var(--bg-main);
   border-top: 1px solid var(--border);
-}
-.cta-actions {
-  margin-top: 18px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
 }
 
 .footer-grid {
