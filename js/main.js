@@ -83,3 +83,43 @@ if (prefersReducedMotion) {
     reveals.forEach((el) => io.observe(el));
   }
 }
+const form = document.getElementById("contactForm");
+
+if (form) {
+  const submitBtn = form.querySelector("button[type='submit']");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Gönderiliyor...";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xldqyewl", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        form.reset();
+        const successMsg = document.getElementById("formSuccess");
+        if (successMsg) successMsg.style.display = "block";
+
+        submitBtn.textContent = "Talep Alındı";
+      } else {
+        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "15 Dakikalık Teknik Görüşme Talep Et";
+      }
+    } catch (error) {
+      alert("Bağlantı hatası. Lütfen tekrar deneyin.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "15 Dakikalık Teknik Görüşme Talep Et";
+    }
+  });
+}
