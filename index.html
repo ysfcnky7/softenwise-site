@@ -762,8 +762,16 @@
         </div>
 
         <form action="https://formspree.io/f/xldqyewl" method="POST" class="contact-form">
-          <input type="hidden" name="_subject" value="SoftenWise – Yeni İletişim Talebi">
 
+          <!-- FORM AYARLARI -->
+          <input type="hidden" name="_subject" value="SoftenWise – Yeni İletişim Talebi">
+          <input type="hidden" name="_next" value="https://softenwise.com/#contact">
+          <input type="hidden" name="_confirmation" value="Talebiniz alındı. En kısa sürede dönüş yapacağız.">
+
+          <!-- SPAM KORUMA (BOTLAR İÇİN) -->
+          <input type="text" name="_gotcha" style="display:none">
+
+          <!-- KULLANICI ALANLARI -->
           <div class="form-group">
             <input type="text" name="name" placeholder="Ad Soyad" required />
           </div>
@@ -777,10 +785,9 @@
           </div>
 
           <button type="submit" class="btn-primary">
-            Gönder
+            Ücretsiz Teknik Değerlendirme Talep Et
           </button>
         </form>
-
       </div>
     </section>
   </main>
