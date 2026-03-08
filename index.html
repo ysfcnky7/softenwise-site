@@ -149,16 +149,28 @@
           </div>
         </div>
 
-        <!-- <div class="hero-image reveal">
-          <figure class="media-card">
-            <img src="images/photo-1526378722484-bd91ca387e72.jpeg" alt="SoftenWise yazılım geliştirme süreci"
-              loading="eager" decoding="async" />
-            <figcaption>
-              <span class="badge">Uçtan uca geliştirme</span>
-              <span class="badge ghost">Mimari • Test • DevOps</span>
-            </figcaption>
-          </figure>
-        </div> -->
+        <div class="hero-products reveal" aria-label="Yeni ürünler vitrini">
+          <section class="product-showcase" id="productShowcase" data-autoplay-ms="5000">
+            <header class="product-showcase-head">
+              <span class="product-showcase-title">Ürünlerimiz</span>
+            </header>
+
+            <div class="product-track" id="productTrack" role="list" aria-live="polite"></div>
+
+            <footer class="product-showcase-footer">
+              <div class="product-dots" id="productDots" aria-label="Ürün seçimi"></div>
+
+              <div class="product-controls">
+                <button type="button" class="product-nav-btn" id="productPrev" aria-label="Önceki ürün">
+                  ←
+                </button>
+                <button type="button" class="product-nav-btn" id="productNext" aria-label="Sonraki ürün">
+                  →
+                </button>
+              </div>
+            </footer>
+          </section>
+        </div>
       </div>
     </section>
 
@@ -570,6 +582,45 @@
       </div>
     </section>
 
+    <section class="references" id="references">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="reveal">Referanslar</h2>
+          <p class="section-desc reveal">
+            Farklı sektörlerde birlikte çalıştığımız kurumlar.
+          </p>
+        </header>
+
+        <div class="logo-marquee single-logo reveal" aria-label="Referans logoları">
+          <div class="logo-track">
+            <div class="logo-item">
+              <a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo web sitesini yeni sekmede aç">
+                <img src="images/reference/sharingoref.png" alt="Sharingo logosu" loading="lazy" decoding="async" />
+              </a>
+            </div>
+            <div class="logo-item">
+              <a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-label="AytuCar web sitesini yeni sekmede aç">
+                <img src="images/reference/aytucarref.png" alt="AytuCar logosu" loading="lazy" decoding="async" />
+              </a>
+            </div>
+            <div class="logo-item">
+              <a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-label="Aytu Otomotiv web sitesini yeni sekmede aç">
+                <img src="images/reference/aytuotomotivref.png" alt="Aytu Otomotiv logosu" loading="lazy" decoding="async" />
+              </a>
+            </div>
+            <div class="logo-item">
+              <a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-label="Otomini web sitesini yeni sekmede aç">
+                <img src="images/reference/otominiref.png" alt="Otomini logosu" loading="lazy" decoding="async" />
+              </a>
+            </div>
+            <div class="logo-item">
+              <img src="images/reference/destclinicaref.jpg" alt="Dest Clinic logosu" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ABOUT -->
     <section class="about" id="about">
       <div class="container about-grid">
@@ -598,8 +649,8 @@
               <div>
                 <div class="point-title">Net İletişim</div>
                 <div class="point-desc">
-                  Kapsam, tarih ve riskler saklanmaz. Ne varsa baştan
-                  konuşulur.
+                  Proje kapsamı, takvim ve riskler süreç boyunca
+                  şeffaf ve düzenli şekilde paylaşılır.
                 </div>
               </div>
             </div>
@@ -609,8 +660,8 @@
               <div>
                 <div class="point-title">Kalite Standardı</div>
                 <div class="point-desc">
-                  Kod düzeni, test yaklaşımı ve izlenebilirlik “sonradan”
-                  eklenmez.
+                  Kalite; geliştirme sürecinin başından itibaren planlanır.
+                  Güvenilir, sürdürülebilir ve kolay yönetilebilir çözümler üretilir.
                 </div>
               </div>
             </div>
@@ -620,7 +671,8 @@
               <div>
                 <div class="point-title">Operasyonel Teslim</div>
                 <div class="point-desc">
-                  CI/CD, loglama ve bakım planı ile teslim ederiz.
+                  Sistemler; yayın, izleme ve bakım süreçleri tanımlı şekilde
+                  devreye alınır ve sürdürülebilir kullanım için hazır teslim edilir.
                 </div>
               </div>
             </div>
@@ -843,7 +895,7 @@
     </div>
 
     <div class="container footer-bottom">
-      © 2022–2025 SoftenWise · Tüm hakları saklıdır
+      © 2022–2026 SoftenWise · Tüm hakları saklıdır
     </div>
   </footer>
   <script src="js/main.js" defer></script>
