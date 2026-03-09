@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" viewBox="0 0 240 80" role="img" aria-label="Social Tourism demo logo">
+  <defs>
+    <linearGradient id="stG" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0d8f6b"/>
+      <stop offset="100%" stop-color="#3dc77c"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="80" rx="12" fill="#f5fbf7"/>
+  <circle cx="36" cy="40" r="20" fill="url(#stG)"/>
+  <text x="24" y="46" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#ffffff">ST</text>
+  <path d="M64 26h12l8 8h20" fill="none" stroke="#ff9f1c" stroke-width="3" stroke-linecap="round"/>
+  <text x="74" y="38" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#215047">SOCIAL</text>
+  <text x="74" y="56" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#2f6a4e">TOURISM</text>
+</svg>

@@ -5,10 +5,21 @@ const header = document.getElementById("header");
 
 // ===== MOBILE MENU (ARIA + SAFE) =====
 if (menuBtn && nav) {
+  const navItemsWithDropdown = nav.querySelectorAll(".nav-item.has-dropdown");
+
+  const closeAllDropdowns = () => {
+    navItemsWithDropdown.forEach((item) => {
+      item.classList.remove("open");
+      const toggle = item.querySelector(".nav-parent-toggle");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    });
+  };
+
   const setMenuState = (open) => {
     nav.classList.toggle("open", open);
     menuBtn.setAttribute("aria-expanded", String(open));
     document.body.style.overflow = open ? "hidden" : "";
+    if (!open) closeAllDropdowns();
   };
 
   // Toggle menu
@@ -19,6 +30,21 @@ if (menuBtn && nav) {
   // Menü linkine tıklayınca kapat
   nav.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", () => setMenuState(false));
+  });
+
+  navItemsWithDropdown.forEach((item) => {
+    const toggle = item.querySelector(".nav-parent-toggle");
+    if (!toggle) return;
+
+    toggle.addEventListener("click", (e) => {
+      if (window.innerWidth > 768) return;
+      e.preventDefault();
+
+      const willOpen = !item.classList.contains("open");
+      closeAllDropdowns();
+      item.classList.toggle("open", willOpen);
+      toggle.setAttribute("aria-expanded", String(willOpen));
+    });
   });
 
   // Dışarı tıklayınca kapat
@@ -38,8 +64,39 @@ if (menuBtn && nav) {
 
   // Ekran büyüyünce kapat (CSS breakpoint ile uyumlu)
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) setMenuState(false);
+    if (window.innerWidth > 768) {
+      setMenuState(false);
+      closeAllDropdowns();
+    }
   });
+}
+
+// ===== ACTIVE NAV LINK =====
+const activeNav = document.getElementById("nav");
+if (activeNav) {
+  const page = window.location.pathname.split("/").pop() || "index.html";
+  const ecosystemPages = ["academy.html", "girisim-ortakligi.html"];
+
+  const setActive = (el) => {
+    if (el) el.classList.add("is-active");
+  };
+
+  if (ecosystemPages.includes(page)) {
+    setActive(
+      activeNav.querySelector(`.nav-dropdown a[href="${page}"]`)
+    );
+    setActive(
+      activeNav.querySelector('.nav-main-link[href*="#ecosystem"]')
+    );
+  } else if (page === "kariyer.html") {
+    setActive(activeNav.querySelector('.nav-main-link[href="kariyer.html"]'));
+    setActive(activeNav.querySelector('.nav-dropdown a[href="kariyer.html"]'));
+  } else if (page === "index.html" && window.location.hash) {
+    const hashLink = activeNav.querySelector(`.nav-main-link[href="${window.location.hash}"]`);
+    setActive(hashLink);
+  } else {
+    setActive(activeNav.querySelector('.nav-main-link[href*="solutions"]'));
+  }
 }
 
 // ===== HEADER SHADOW (CSS CLASS BASED) =====
@@ -262,10 +319,16 @@ if (
   startAutoplay();
 }
 
-const form = document.getElementById("contactForm");
+// ===== CONTACT FORMS (MULTI PAGE SUPPORT) =====
+const contactForms = document.querySelectorAll("[data-contact-form]");
 
-if (form) {
+contactForms.forEach((form) => {
   const submitBtn = form.querySelector("button[type='submit']");
+  if (!submitBtn) return;
+
+  const defaultLabel =
+    form.dataset.submitLabel || submitBtn.textContent.trim() || "Gönder";
+  const endpoint = form.dataset.endpoint || "https://formspree.io/f/xldqyewl";
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -276,7 +339,7 @@ if (form) {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch("https://formspree.io/f/xldqyewl", {
+      const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
         headers: {
@@ -286,19 +349,52 @@ if (form) {
 
       if (response.ok) {
         form.reset();
-        const successMsg = document.getElementById("formSuccess");
+
+        const successMsg =
+          form.querySelector(".form-success") ||
+          document.getElementById("formSuccess");
         if (successMsg) successMsg.style.display = "block";
 
         submitBtn.textContent = "Talep Alındı";
       } else {
         alert("Bir hata oluştu. Lütfen tekrar deneyin.");
         submitBtn.disabled = false;
-        submitBtn.textContent = "15 Dakikalık Teknik Görüşme Talep Et";
+        submitBtn.textContent = defaultLabel;
       }
     } catch (error) {
       alert("Bağlantı hatası. Lütfen tekrar deneyin.");
       submitBtn.disabled = false;
-      submitBtn.textContent = "15 Dakikalık Teknik Görüşme Talep Et";
+      submitBtn.textContent = defaultLabel;
     }
+  });
+});
+
+// ===== SERVICE CATEGORY FILTER =====
+const serviceFilterButtons = document.querySelectorAll("[data-service-filter]");
+const serviceCards = document.querySelectorAll(
+  "[data-filterable-services] .service-card[data-service-category]"
+);
+
+if (serviceFilterButtons.length && serviceCards.length) {
+  const applyServiceFilter = (category) => {
+    serviceCards.forEach((card) => {
+      const cardCategory = card.dataset.serviceCategory;
+      const visible = category === "all" || cardCategory === category;
+      card.classList.toggle("is-hidden", !visible);
+    });
+  };
+
+  serviceFilterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.dataset.serviceFilter || "all";
+
+      serviceFilterButtons.forEach((btn) => {
+        const isActive = btn === button;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+
+      applyServiceFilter(category);
+    });
   });
 }

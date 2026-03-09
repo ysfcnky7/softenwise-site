@@ -38,7 +38,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="SoftenWise | Ölçeklenebilir Yazılım Sistemleri" />
-  <meta name="twitter:description" content="2022’den beri sürdürülebilir, ölçeklenebilir yazılım çözümleri." />
+  <meta name="twitter:description" content="Kurumsal ölçekte hızlı, güvenli ve ölçeklenebilir yazılım çözümleri." />
   <meta name="twitter:image" content="https://softenwise.com/images/og-image.png" />
 
   <!-- FAVICON (istersen ekle) -->
@@ -85,12 +85,77 @@
         <span class="logo-text">SoftenWise</span>
       </a>
       <nav class="nav" id="nav" aria-label="Ana menü">
-        <a href="#solutions">Çözümler</a>
-        <a href="#approach">Yaklaşım</a>
-        <a href="#work">Ne Yaptık?</a>
-        <a href="#about">Hakkımızda</a>
-        <a href="#faq">SSS</a>
-        <a href="#contact">İletişim</a>
+        <div class="nav-item has-dropdown">
+          <a class="nav-main-link" href="#solutions">Hizmetler</a>
+          <button class="nav-parent-toggle" type="button" aria-label="Hizmetler alt menüsünü aç/kapat" aria-expanded="false">▾</button>
+          <div class="nav-dropdown" aria-label="Hizmetler alt menü">
+            <a class="nav-dropdown-link" href="ozel-yazilim.html">
+              <span class="nav-dd-icon" aria-hidden="true">⚙️</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Özel Yazılım Geliştirme</span>
+                <span class="nav-dd-desc">Kuruma özel ürün ve platform geliştirme</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="mobil-gelistirme.html">
+              <span class="nav-dd-icon" aria-hidden="true">📱</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Mobil Geliştirme</span>
+                <span class="nav-dd-desc">Native ve hybrid mobil uygulama çözümleri</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="entegrasyon-otomasyon.html">
+              <span class="nav-dd-icon" aria-hidden="true">🔌</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Entegrasyon & Otomasyon</span>
+                <span class="nav-dd-desc">Sistemler arası veri akışı ve süreç otomasyonu</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="guvenlik-denetim.html">
+              <span class="nav-dd-icon" aria-hidden="true">🛡️</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Güvenlik & Denetim</span>
+                <span class="nav-dd-desc">Risk analizi, uyum ve güvenlik değerlendirmesi</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="teknik-danismanlik.html">
+              <span class="nav-dd-icon" aria-hidden="true">🧭</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Teknik Danışmanlık</span>
+                <span class="nav-dd-desc">Mimari karar, ölçeklenme ve yol haritası</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a class="nav-main-link nav-main-link--accent" href="#ecosystem">Ekosistem</a>
+          <button class="nav-parent-toggle" type="button" aria-label="Ekosistem alt menüsünü aç/kapat" aria-expanded="false">▾</button>
+          <div class="nav-dropdown" aria-label="Ekosistem alt menü">
+            <a class="nav-dropdown-link" href="academy.html">
+              <span class="nav-dd-icon" aria-hidden="true">🎓</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Academy</span>
+                <span class="nav-dd-desc">Yeni nesillere eğitim ve mentorluk programı</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="kariyer.html">
+              <span class="nav-dd-icon" aria-hidden="true">💼</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Kariyer</span>
+                <span class="nav-dd-desc">Açık roller ve teknik işe alım süreci</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="girisim-ortakligi.html">
+              <span class="nav-dd-icon" aria-hidden="true">🚀</span>
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Fikir Ortaklığı / Yatırım</span>
+                <span class="nav-dd-desc">Fikirden MVP’ye ürünleştirme ve yatırım</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <a class="nav-main-link" href="kariyer.html">Kariyer</a>
+        <a class="nav-main-link" href="#references">Referanslar</a>
+        <a class="nav-main-link" href="#contact">İletişim</a>
       </nav>
 
       <button class="menu-btn" id="menuBtn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="nav">
@@ -104,7 +169,7 @@
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-text reveal">
-          <div class="eyebrow">2022’den beri • Ürün odaklı mühendislik</div>
+          <div class="eyebrow">Kurumsal ölçekte hızlı ve güvenli mühendislik</div>
 
           <h1>
             Ölçeklenebilir yazılım sistemleri,<br />
@@ -196,388 +261,137 @@
       </div>
     </section>
 
-
     <!-- SOLUTIONS -->
     <section class="services" id="solutions">
       <div class="container">
         <header class="section-head">
           <h2 class="reveal">Çözüm Alanlarımız</h2>
           <p class="section-desc reveal">
-            Her projeyi aynı teknolojiyle değil, probleme göre kurguluyoruz.
-            İhtiyaca uygun mimari, ekip modeli ve teslim standardı oluşturuyoruz.
+            İhtiyacınıza göre doğru hizmete tek tıkla gidin. Detaylar ilgili hizmet sayfalarında.
           </p>
         </header>
 
         <div class="service-grid">
           <article class="service-card reveal">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">⚙️</div>
-              <h3>Özel Yazılım Geliştirme</h3>
+              <div class="icon" aria-hidden="true">⚙️</div><h3>Özel Yazılım Geliştirme</h3>
             </div>
-            <p>
-              İş süreçlerinize özel; bakımı kolay, modüler, büyümeye uygun
-              yazılım çözümleri.
-            </p>
-            <ul class="mini-list">
-              <li>İhtiyaç analizi & kapsam</li>
-              <li>Domain odaklı tasarım yaklaşımı</li>
-              <li>Test stratejisi & kalite kontrol</li>
-            </ul>
+            <p>Kuruma özel, büyümeye uygun yazılım ürünleri ve platformlar geliştiriyoruz.</p>
+            <div class="service-card-actions">
+              <a href="ozel-yazilim.html" class="btn-ghost">Hizmeti İncele</a>
+            </div>
           </article>
 
           <article class="service-card reveal">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">🌐</div>
-              <h3>Web Tabanlı Sistemler</h3>
+              <div class="icon" aria-hidden="true">📱</div><h3>Mobil Geliştirme</h3>
             </div>
-            <p>
-              Kurumsal web panelleri, müşteri portalları ve
-              arka plan servisleriyle entegre çalışan yüksek performanslı sistemler.
-            </p>
-            <ul class="mini-list">
-              <li>Admin panel & raporlama</li>
-              <li>Yetkilendirme / rol sistemi</li>
-              <li>SEO & performans odaklı UI</li>
-            </ul>
+            <p>Native ve hybrid teknolojilerle iOS/Android uygulamalar geliştiriyoruz.</p>
+            <div class="service-card-actions">
+              <a href="mobil-gelistirme.html" class="btn-ghost">Hizmeti İncele</a>
+            </div>
           </article>
 
           <article class="service-card reveal">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">📱</div>
-              <h3>Mobil Uygulamalar</h3>
+              <div class="icon" aria-hidden="true">🔌</div><h3>Entegrasyon & Otomasyon</h3>
             </div>
-            <p>
-              Ürün odaklı yaklaşım ile iOS/Android için güvenilir ve kullanıcı
-              dostu uygulamalar.
-            </p>
-            <ul class="mini-list">
-              <li>Stabil sürüm yönetimi</li>
-              <li>Bildirim & analitik entegrasyonları</li>
-              <li>API-first tasarım</li>
-            </ul>
+            <p>Dağınık sistemleri API ve otomasyon ile birbirine bağlayıp operasyonu hızlandırıyoruz.</p>
+            <div class="service-card-actions">
+              <a href="entegrasyon-otomasyon.html" class="btn-ghost">Hizmeti İncele</a>
+            </div>
           </article>
 
           <article class="service-card reveal">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">🏢</div>
-              <h3>Kurumsal Sistemler</h3>
+              <div class="icon" aria-hidden="true">🛡️</div><h3>Güvenlik & Denetim</h3>
             </div>
-            <p>
-              Operasyon, raporlama, süreç yönetimi ve iç sistem çözümleri ile
-              ölçülebilir verimlilik.
-            </p>
-            <ul class="mini-list">
-              <li>Raporlama & dashboard</li>
-              <li>İş akışı / onay süreçleri</li>
-              <li>Loglama & izlenebilirlik</li>
-            </ul>
+            <p>Bilgi güvenliği, uyum ve teknik risk analizleriyle kurumları denetime hazır hale getiriyoruz.</p>
+            <div class="service-card-actions">
+              <a href="guvenlik-denetim.html" class="btn-ghost">Hizmeti İncele</a>
+            </div>
           </article>
 
           <article class="service-card reveal">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">🔌</div>
-              <h3>Entegrasyon & Otomasyon</h3>
+              <div class="icon" aria-hidden="true">🧭</div><h3>Teknik Danışmanlık</h3>
             </div>
-            <p>
-              API entegrasyonları, veri senkronizasyonu ve otomasyon ile manuel operasyonları ortadan kaldırırız.
-            </p>
-            <ul class="mini-list">
-              <li>REST/GraphQL entegrasyonları</li>
-              <li>Webhook / event tabanlı akışlar</li>
-              <li>İzleme & hata yönetimi</li>
-            </ul>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon" aria-hidden="true">🧭</div>
-              <h3>Teknik Danışmanlık</h3>
+            <p>Mimari, teknoloji seçimi, refactor ve büyüme yol haritası için net teknik danışmanlık sunuyoruz.</p>
+            <div class="service-card-actions">
+              <a href="teknik-danismanlik.html" class="btn-ghost">Hizmeti İncele</a>
             </div>
-            <p>
-              Mimari kararlar, teknoloji seçimi ve yol haritası için net ve
-              uygulanabilir danışmanlık.
-            </p>
-            <ul class="mini-list">
-              <li>Kod inceleme & refactor planı</li>
-              <li>Performans / güvenlik analizleri</li>
-              <li>CI/CD & devops iyileştirmeleri</li>
-            </ul>
           </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon" aria-hidden="true">🧭</div>
-              <h3>Servis Operasyonu & Süreç Yönetimi</h3>
-            </div>
-            <p>
-              Kurum içi servis operasyonlarını uçtan uca ele alır,
-              ölçülebilir, izlenebilir ve sürdürülebilir hale getiririz.
-            </p>
-            <ul class="mini-list">
-              <li>ITSM & servis kataloğu</li>
-              <li>Süreç tasarımı ve iyileştirme</li>
-              <li>Operasyonel KPI & raporlama</li>
-            </ul>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon" aria-hidden="true">🛡️</div>
-              <h3>Bilgi Güvenliği, Denetim & Gap Analizi</h3>
-            </div>
-            <p>
-              Teknik altyapı ve yazılım sistemlerini güvenlik,
-              regülasyon ve operasyonel riskler açısından değerlendiririz.
-            </p>
-            <ul class="mini-list">
-              <li>KVKK, ISO 27001, SOC 2</li>
-              <li>EPDK-SYM, CB DDO, SPK BT Tebliği</li>
-              <li>Teknik gap & risk analizi</li>
-            </ul>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon" aria-hidden="true">🧠</div>
-              <h3>AI Destekli Analiz & Demo Çözümler</h3>
-            </div>
-            <p>
-              Danışmanlık ve analiz süreçlerinde,
-              yapay zeka destekli ön değerlendirme,
-              taslak rapor ve demo çıktılar üretiriz.
-            </p>
-            <ul class="mini-list">
-              <li>AI-assisted gap analizi</li>
-              <li>Risk & uyum skorlaması (demo)</li>
-              <li>PoC & beta çıktılar</li>
-            </ul>
-          </article>
-
         </div>
       </div>
     </section>
 
-    <!-- WHY SOFTENWISE -->
-    <section class="why">
+    <!-- ECOSYSTEM -->
+    <section class="ecosystem" id="ecosystem">
       <div class="container">
         <header class="section-head">
-          <h2 class="reveal">Neden SoftenWise?</h2>
+          <h2 class="reveal">SoftenWise Ekosistemi</h2>
           <p class="section-desc reveal">
-            Büyüme, regülasyon ve yüksek operasyonel yük altında çalışabilen yazılım sistemleri tasarlıyoruz.
+            Sadece yazılım geliştirmiyoruz; eğitim, ekip büyütme ve yeni fikirlerin hayata geçmesi için uçtan uca bir ekosistem sunuyoruz.
           </p>
         </header>
 
         <div class="service-grid">
-          <article class="service-card reveal">
+          <article class="service-card ecosystem-card ecosystem-card--academy reveal" id="academy">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">🧱</div>
-              <h3>Mühendislik Odaklı Yaklaşım</h3>
+              <div class="icon" aria-hidden="true">🎓</div>
+              <h3>SoftenWise Academy</h3>
             </div>
+            <div class="ecosystem-badge">Eğitim Programı</div>
             <p>
-              Veri modeli, mimari kararlar ve bakım kolaylığıyla uzun ömürlü sistem kurarız.
+              Yazılım eğitimleri, mentorluk ve proje bazlı gelişim programları ile ekipleri ve bireyleri üretime hazır hale getiriyoruz.
             </p>
             <ul class="mini-list">
-              <li>Kod standardı + review kültürü</li>
-              <li>Teknik borç üretmeyen yaklaşım</li>
-              <li>Ürün gibi sahiplenme</li>
+              <li>Backend, frontend, mobil ve devops eğitimleri</li>
+              <li>Proje tabanlı bootcamp ve mentorluk</li>
+              <li>Kurumlara özel teknik eğitim programı</li>
             </ul>
+            <div class="service-card-actions">
+              <a href="academy.html" class="btn-ghost">Academy Sayfasına Git</a>
+            </div>
           </article>
 
-          <article class="service-card reveal">
+          <article class="service-card ecosystem-card ecosystem-card--career reveal" id="careers">
             <div class="card-top">
-              <div class="icon" aria-hidden="true">🛠️</div>
-              <h3>Operasyonel Teslim</h3>
+              <div class="icon" aria-hidden="true">💼</div>
+              <h3>Bizimle Çalış</h3>
             </div>
+            <div class="ecosystem-badge">Kariyer Fırsatı</div>
             <p>
-              Canlı sonrası için izleme, loglama, alarm ve bakım planıyla teslim ederiz.
+              Ürün odaklı, mühendislik disiplini yüksek ekiplerle çalışmak isteyen yazılımcılar için açık bir kariyer hattı sunuyoruz.
             </p>
             <ul class="mini-list">
-              <li>Monitoring + loglama</li>
-              <li>Hata yönetimi & alarm mantığı</li>
-              <li>Bakım / geliştirme planı</li>
+              <li>Staj, junior ve uzman roller</li>
+              <li>Gerçek ürünlerde mentorlukla gelişim</li>
+              <li>Performans ve sahiplik odaklı kültür</li>
             </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="zero-trust">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Zero Trust Yaklaşımımız</h2>
-          <p class="section-desc reveal">
-            Zero Trust’ı bir ürün olarak değil;
-            kurumunuza özel bir güvenlik yaklaşımı ve
-            uygulanabilir yol haritası olarak ele alıyoruz.
-          </p>
-        </header>
-
-        <div class="service-grid">
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon">🔍</div>
-              <h3>Zero Trust Assessment</h3>
+            <div class="service-card-actions">
+              <a href="kariyer.html" class="btn-ghost">Kariyer Sayfasına Git</a>
             </div>
+          </article>
+
+          <article class="service-card ecosystem-card ecosystem-card--venture reveal" id="ventures">
+            <div class="card-top">
+              <div class="icon" aria-hidden="true">🚀</div>
+              <h3>Fikir Ortaklığı & Melek Yatırım</h3>
+            </div>
+            <div class="ecosystem-badge">Girişim Hattı</div>
             <p>
-              Mevcut altyapınızın zero trust prensiplerine
-              ne kadar hazır olduğunu analiz ederiz.
+              Potansiyeli yüksek fikirleri teknik doğrulama, MVP geliştirme ve uygun modellerde ortaklık/yatırım yaklaşımıyla hayata geçiriyoruz.
             </p>
             <ul class="mini-list">
-              <li>Kimlik, erişim ve ağ analizi</li>
-              <li>Uygulama & veri akışı değerlendirmesi</li>
-              <li>Risk ve açıklıkların tespiti</li>
+              <li>Fikir değerlendirme ve teknik fizibilite</li>
+              <li>MVP tasarım, geliştirme ve lansman planı</li>
+              <li>Yüzde bazlı ortaklık veya melek yatırım modeli</li>
             </ul>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <div class="icon">🗺️</div>
-              <h3>Roadmap & Mimari Taslak</h3>
+            <div class="service-card-actions">
+              <a href="girisim-ortakligi.html" class="btn-ghost">Fikir/Yatırım Sayfasına Git</a>
             </div>
-            <p>
-              Kurumunuza uygun, adım adım uygulanabilir
-              bir zero trust geçiş planı oluştururuz.
-            </p>
-            <ul class="mini-list">
-              <li>Kısa / orta / uzun vadeli plan</li>
-              <li>Teknoloji & süreç önerileri</li>
-              <li>PoC ve pilot senaryolar</li>
-            </ul>
           </article>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- APPROACH -->
-    <section class="process" id="approach">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Yaklaşımımız</h2>
-          <p class="section-desc reveal">
-            Yazılımı bir “teslim” değil, yaşayan bir “sistem” olarak ele
-            alıyoruz. Bu yüzden süreçlerimiz net, dokümantasyonumuz düzenli,
-            operasyonumuz sağlamdır.
-          </p>
-        </header>
-
-        <div class="process-steps">
-          <div class="step reveal">
-            <span>01</span>
-            <h4>Keşif & Analiz</h4>
-            <p>
-              Hedef, kullanıcı, süreç ve riskleri çıkarır; ölçülebilir başarı
-              kriterleri belirleriz.
-            </p>
-          </div>
-
-          <div class="step reveal">
-            <span>02</span>
-            <h4>Tasarım & Plan</h4>
-            <p>
-              Mimari, ekran akışları, veri modeli, zaman planı ve teslim
-              stratejisini netleştiririz.
-            </p>
-          </div>
-
-          <div class="step reveal">
-            <span>03</span>
-            <h4>Geliştirme</h4>
-            <p>
-              Iteratif geliştirme, kod standartları, test yaklaşımı ve düzenli
-              demo ile ilerleriz.
-            </p>
-          </div>
-
-          <div class="step reveal">
-            <span>04</span>
-            <h4>Canlı & Operasyon</h4>
-            <p>
-              CI/CD, izleme, loglama, hata takibi ve bakım planı ile
-              sürdürülebilirliği garanti ederiz.
-            </p>
-          </div>
-        </div>
-
-        <div class="approach-box reveal" role="note" aria-label="Teslim standardı">
-          <h3>Teslim Standardımız</h3>
-          <p>
-            Her projede “çalışıyor” demek yetmez. Biz teslimde;
-            <strong>kurulum adımları</strong>,
-            <strong>ortam yapılandırması</strong>,
-            <strong>izleme & loglama</strong> ve
-            <strong>bakım planı</strong> gibi operasyonel parçaları da
-            tamamlarız.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- WORK (TEK BÖLÜM) -->
-    <section class="work" id="work">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Ne Ürettik?</h2>
-          <p class="section-desc reveal">
-            Müşteri isimleri paylaşmıyoruz. Ama problemleri, yaklaşımı ve sonucu net anlatıyoruz.
-          </p>
-          <p class="section-desc reveal">
-            Bu yaklaşımı; yüksek trafikli, çok entegreli ve operasyonel yükü olan projelerde uyguladık.
-          </p>
-          <p class="work-metric reveal">
-            Ortalama 10+ entegrasyonlu, yüksek işlem hacimli operasyonel sistemlerde çalıştık.
-          </p>
-        </header>
-
-        <div class="work-grid">
-          <article class="work-card reveal">
-            <div class="work-head">
-              <div class="tag">Kurumsal Sistem</div>
-              <div class="tag soft">Operasyon</div>
-            </div>
-            <h3>Manuel Operasyondan Ölçeklenebilir Sisteme</h3>
-            <p><strong>Problem:</strong> Excel/e-posta ile yürüyen hataya açık operasyon.</p>
-            <p><strong>Çözüm:</strong> Rol bazlı panel, otomatik iş akışları, merkezi raporlama.</p>
-            <p><strong>Sonuç:</strong> Operasyon süresi %40 azaldı, hata oranı düştü.</p>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-head">
-              <div class="tag">Entegrasyon</div>
-              <div class="tag soft">API</div>
-            </div>
-            <h3>Dağınık Sistemler Arası Senkronizasyon</h3>
-            <p><strong>Problem:</strong> Kopuk sistemler, manuel veri taşıma, tutarsız kayıt.</p>
-            <p><strong>Çözüm:</strong> API-first, event tabanlı akış, hata izleme.</p>
-            <p><strong>Sonuç:</strong> Gerçek zamanlı veri akışı, minimum manuel müdahale.</p>
-          </article>
-
-          <article class="work-card reveal">
-            <div class="work-head">
-              <div class="tag">Ürün</div>
-              <div class="tag soft">Web & Mobil</div>
-            </div>
-            <h3>Büyümeye Hazır Ürün Altyapısı</h3>
-            <p><strong>Problem:</strong> Büyüdükçe yavaşlayan ve kırılan ürün altyapısı.</p>
-            <p><strong>Çözüm:</strong> Modüler backend, performans odaklı frontend, izlenebilirlik.</p>
-            <p><strong>Sonuç:</strong> Yeni özellikler teknik borç şişirmeden eklenebilir hale geldi.</p>
-          </article>
-        </div>
-
-        <div class="work-note reveal">
-          <p>
-            Gizlilik sebebiyle müşteri isimleri ve ekran görüntüleri paylaşılmamaktadır.
-          </p>
-        </div>
-
-        <div class="work-note reveal">
-          <p>
-            Çalışmalarımız; regülasyonlu sektörler, yüksek işlem hacimli
-            sistemler ve çoklu entegrasyon gerektiren kurumsal yapılarda
-            gerçekleştirilmiştir.
-            Referans yaklaşımımız; gizlilik, operasyonel gerçeklik ve
-            sürdürülebilir sonuçlar üzerine kuruludur.
-          </p>
         </div>
       </div>
     </section>
@@ -591,7 +405,7 @@
           </p>
         </header>
 
-        <div class="logo-marquee single-logo reveal" aria-label="Referans logoları">
+        <div class="logo-marquee reveal" aria-label="Referans logoları">
           <div class="logo-track">
             <div class="logo-item">
               <a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo web sitesini yeni sekmede aç">
@@ -616,174 +430,27 @@
             <div class="logo-item">
               <img src="images/reference/destclinicaref.jpg" alt="Dest Clinic logosu" loading="lazy" decoding="async" />
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="about" id="about">
-      <div class="container about-grid">
-        <div class="about-text reveal">
-          <h2>Hakkımızda</h2>
-          <p class="about-lead">
-            SoftenWise, yazılımı yalnızca geliştiren değil;
-            onu uzun vadede çalışır, izlenebilir ve sürdürülebilir kılan
-            mühendislik yaklaşımıyla konumlanır.
-          </p>
-          <p>
-            SoftenWise, 2022’den beri yazılım geliştirme ve dijital dönüşüm
-            projelerine odaklanan bir mühendislik ekibidir. Amacı;
-            büyüdükçe yeniden yazılmak zorunda kalmayan,
-            yıllarca geliştirilebilen ve farklı ortamlara taşınabilen
-            yazılım sistemleri oluşturmaktır.
-          </p>
-          <p>
-            Projeler; tanımlı kapsam, iteratif geliştirme modeli
-            ve canlı sonrası operasyonel standartlarla yürütülür.
-          </p>
-
-          <div class="about-points">
-            <div class="point">
-              <div class="icon" aria-hidden="true">✅</div>
-              <div>
-                <div class="point-title">Net İletişim</div>
-                <div class="point-desc">
-                  Proje kapsamı, takvim ve riskler süreç boyunca
-                  şeffaf ve düzenli şekilde paylaşılır.
-                </div>
-              </div>
+            <div class="logo-item">
+              <img src="images/reference/demo-sva-group.svg" alt="SVA Group demo logosu" loading="lazy" decoding="async" />
             </div>
-
-            <div class="point">
-              <div class="icon" aria-hidden="true">✅</div>
-              <div>
-                <div class="point-title">Kalite Standardı</div>
-                <div class="point-desc">
-                  Kalite; geliştirme sürecinin başından itibaren planlanır.
-                  Güvenilir, sürdürülebilir ve kolay yönetilebilir çözümler üretilir.
-                </div>
-              </div>
+            <div class="logo-item">
+              <img src="images/reference/demo-social-tourism.svg" alt="Social Tourism demo logosu" loading="lazy" decoding="async" />
             </div>
-
-            <div class="point">
-              <div class="icon" aria-hidden="true">✅</div>
-              <div>
-                <div class="point-title">Operasyonel Teslim</div>
-                <div class="point-desc">
-                  Sistemler; yayın, izleme ve bakım süreçleri tanımlı şekilde
-                  devreye alınır ve sürdürülebilir kullanım için hazır teslim edilir.
-                </div>
-              </div>
+            <div class="logo-item">
+              <img src="images/reference/demo-nova-rent.svg" alt="Nova Rent demo logosu" loading="lazy" decoding="async" />
+            </div>
+            <div class="logo-item">
+              <img src="images/reference/demo-npt-systems.svg" alt="NPT Systems demo logosu" loading="lazy" decoding="async" />
+            </div>
+            <div class="logo-item">
+              <img src="images/reference/demo-npt-finance.svg" alt="NPT Finance demo logosu" loading="lazy" decoding="async" />
+            </div>
+            <div class="logo-item">
+              <img src="images/reference/demo-sva-group.svg" alt="SVA Group demo logosu" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
-
-        <!-- <div class="about-image reveal">
-          <figure class="media-card">
-            <img src="images/photo-1552664730-d307ca884978.jpeg" alt="SoftenWise ekip çalışması" loading="lazy"
-              decoding="async" />
-            <figcaption>
-              <span class="badge">Mühendislik odaklı</span>
-              <span class="badge ghost">Sürdürülebilir teslim</span>
-            </figcaption>
-          </figure>
-        </div> -->
       </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq" id="faq">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Sık Sorulan Sorular</h2>
-          <p class="section-desc reveal">
-            Kısa, net cevaplar. Belirsizliğe yer bırakmıyoruz.
-          </p>
-        </header>
-
-        <div class="faq-grid">
-          <details class="faq-item reveal">
-            <summary>
-              Proje süresi ve fiyatlandırma nasıl belirleniyor?
-            </summary>
-            <div class="faq-content">
-              Kısa bir keşif görüşmesiyle kapsamı netleştiriyoruz. Ardından iş
-              kırılımı (milestone), teslim takvimi ve riskleri belirleyip
-              şeffaf teklif sunuyoruz.
-            </div>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Mevcut projeyi devralıyor musunuz?</summary>
-            <div class="faq-content">
-              Evet. Önce kod inceleme ve teknik borç analizi yaparız. Sonra
-              refactor/iyileştirme planı çıkarır, kontrollü şekilde
-              devralırız.
-            </div>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Canlıya çıktıktan sonra destek veriyor musunuz?</summary>
-            <div class="faq-content">
-              Evet. Bakım & operasyon yaklaşımıyla çalışırız: izleme, hata
-              takibi, düzenli iyileştirme ve SLA seçenekleriyle sürdürülebilir
-              destek sunarız.
-            </div>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Güvenlik ve performans yaklaşımınız nedir?</summary>
-            <div class="faq-content">
-              Güvenlik ve performans “sonradan” eklenmez. Entegrasyonlar için
-              güvenli akış, rate-limit, loglama, izleme ve gerekirse yük
-              testleri uygularız.
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- FAQ JSON-LD (SEO) -->
-      <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Proje süresi ve fiyatlandırma nasıl belirleniyor?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Kısa bir keşif görüşmesiyle kapsamı netleştiriyoruz. Ardından iş kırılımı (milestone), teslim takvimi ve riskleri belirleyip şeffaf teklif sunuyoruz."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Mevcut projeyi devralıyor musunuz?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Evet. Önce kod inceleme ve teknik borç analizi yaparız. Sonra refactor/iyileştirme planı çıkarır, kontrollü şekilde devralırız."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Canlıya çıktıktan sonra destek veriyor musunuz?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Evet. Bakım & operasyon yaklaşımıyla izleme, hata takibi, düzenli iyileştirme ve SLA seçenekleriyle destek sunarız."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Güvenlik ve performans yaklaşımınız nedir?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Güvenlik ve performans süreçten başlar. Güvenli entegrasyon, rate-limit, loglama, izleme ve gerekirse yük testleri uygularız."
-                }
-              }
-            ]
-          }
-        </script>
     </section>
 
     <!-- CONTACT -->
@@ -799,7 +466,7 @@
           <strong>teknik gap analizi</strong>,
           <strong>güvenlik & ölçeklenebilirlik riskleri</strong> ve
           <strong>AI destekli demo / PoC üretilebilir mi</strong>
-          net şekilde ortaya koyalım.
+          net şekilde ortaya koyalım. Bu form sadece yazılım proje talepleri için kullanılır.
         </p>
 
 
@@ -818,7 +485,7 @@
           </div>
         </div>
 
-        <form id="contactForm" class="contact-form">
+        <form id="contactForm" class="contact-form" data-contact-form data-submit-label="15 Dakikalık Teknik Görüşme Talep Et">
           <input type="hidden" name="_subject" value="SoftenWise – Yeni İletişim Talebi">
           <input type="text" name="_gotcha" style="display:none">
 
@@ -838,7 +505,7 @@
             15 Dakikalık Teknik Görüşme Talep Et
           </button>
 
-          <!-- BAŞARI MESAJI -->
+          <!-- BASARI MESAJI -->
           <p id="formSuccess" style="display:none; margin-top:16px; color:#0f6f7a; font-weight:600;">
             Talebinizi aldık. En kısa sürede sizinle iletişime geçeceğiz.
           </p>
@@ -849,7 +516,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
+      <footer class="site-footer">
     <div class="container footer-grid">
       <div>
         <div class="footer-brand">
@@ -857,26 +524,31 @@
         </div>
 
         <p class="footer-desc">
-          2022’den beri sürdürülebilir ve ölçeklenebilir yazılım çözümleri.
-          Uzun ömürlü, ölçeklenebilir ve operasyonel yazılım sistemlerinde
-          uçtan uca mühendislik.
+          Kurumsal ölçekte hızlı, güvenli ve ölçeklenebilir yazılım çözümleri.
+          Kritik iş süreçleri için uçtan uca mühendislik sunuyoruz.
         </p>
 
-        <!-- 👇 BURAYA -->
         <p class="footer-note">
-          SoftenWise, yazılımı operasyonel ve stratejik bir varlık olarak konumlayan mühendislik çözüm ortağıdır.
+          Yazılımı operasyonel ve stratejik değere dönüştüren mühendislik çözüm ortağı.
         </p>
-        <!-- 👆 BURAYA -->
       </div>
 
       <div class="footer-links">
         <div class="footer-col">
-          <div class="footer-title">Menü</div>
-          <a href="#solutions">Çözümler</a>
-          <a href="#approach">Yaklaşım</a>
-          <a href="#work">Ne Yaptık?</a>
-          <a href="#about">Hakkımızda</a>
-          <a href="#faq">SSS</a>
+          <div class="footer-title">Hizmetler</div>
+          <a href="ozel-yazilim.html">Özel Yazılım</a>
+          <a href="mobil-gelistirme.html">Mobil Geliştirme</a>
+          <a href="entegrasyon-otomasyon.html">Entegrasyon & Otomasyon</a>
+          <a href="guvenlik-denetim.html">Güvenlik & Denetim</a>
+          <a href="teknik-danismanlik.html">Teknik Danışmanlık</a>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">Ekosistem</div>
+          <a href="academy.html">Academy</a>
+          <a href="kariyer.html">Kariyer</a>
+          <a href="girisim-ortakligi.html">Fikir Ortaklığı</a>
+          <a href="index.html#references">Referanslar</a>
         </div>
 
         <div class="footer-col">
@@ -890,7 +562,6 @@
           <span>İstanbul</span>
           <span>Antalya</span>
         </div>
-
       </div>
     </div>
 
