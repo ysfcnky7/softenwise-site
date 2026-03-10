@@ -75,22 +75,23 @@ if (menuBtn && nav) {
 const activeNav = document.getElementById("nav");
 if (activeNav) {
   const page = window.location.pathname.split("/").pop() || "index.html";
-  const ecosystemPages = ["academy.html", "girisim-ortakligi.html"];
+  const servicePages = [
+    "ozel-yazilim.html",
+    "mobil-gelistirme.html",
+    "entegrasyon-otomasyon.html",
+    "guvenlik-denetim.html",
+    "teknik-danismanlik.html",
+  ];
 
   const setActive = (el) => {
     if (el) el.classList.add("is-active");
   };
 
-  if (ecosystemPages.includes(page)) {
-    setActive(
-      activeNav.querySelector(`.nav-dropdown a[href="${page}"]`)
-    );
-    setActive(
-      activeNav.querySelector('.nav-main-link[href*="#ecosystem"]')
-    );
-  } else if (page === "kariyer.html") {
-    setActive(activeNav.querySelector('.nav-main-link[href="kariyer.html"]'));
-    setActive(activeNav.querySelector('.nav-dropdown a[href="kariyer.html"]'));
+  if (servicePages.includes(page)) {
+    setActive(activeNav.querySelector(`.nav-dropdown a[href="${page}"]`));
+    setActive(activeNav.querySelector('.nav-main-link[href*="solutions"]'));
+  } else if (page === "kariyer.html" || page === "academy.html" || page === "girisim-ortakligi.html") {
+    setActive(activeNav.querySelector(`.nav-main-link[href="${page}"]`));
   } else if (page === "index.html" && window.location.hash) {
     const hashLink = activeNav.querySelector(`.nav-main-link[href="${window.location.hash}"]`);
     setActive(hashLink);
@@ -161,7 +162,7 @@ const featuredProducts = [
   },
   {
     name: "GeoMaps",
-    label: "Yakında",
+    label: "Canlı",
     image: "images/geomaps_logo.png",
     imageAlt: "GeoMaps ürün logosu",
     imageMode: "contain",
@@ -170,9 +171,9 @@ const featuredProducts = [
     bullets: [
       "Canlı konum ve rota görünümü",
       "Saha ekipleri için durum takibi",
-      "Yeni modüller eklendikçe bu alanda yayınlanacak",
+      "Yeni modüller düzenli olarak ekleniyor",
     ],
-    cta: "Yayına alınınca açılacak",
+    cta: "Ürün yayında",
     url: "",
   },
 ];
@@ -322,6 +323,58 @@ if (
 // ===== CONTACT FORMS (MULTI PAGE SUPPORT) =====
 const contactForms = document.querySelectorAll("[data-contact-form]");
 
+const createHumanCheck = (form) => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "human-check";
+
+  const label = document.createElement("label");
+  label.className = "human-check-label";
+  const inputId = `humanCheck-${Math.random().toString(36).slice(2, 8)}`;
+  label.setAttribute("for", inputId);
+
+  const challengeText = document.createElement("span");
+  challengeText.className = "human-check-question";
+
+  const input = document.createElement("input");
+  input.type = "number";
+  input.id = inputId;
+  input.inputMode = "numeric";
+  input.className = "human-check-input";
+  input.placeholder = "Sonuç";
+  input.required = true;
+  input.autocomplete = "off";
+  input.min = "0";
+  input.step = "1";
+
+  label.appendChild(challengeText);
+  wrapper.appendChild(label);
+  wrapper.appendChild(input);
+
+  let expectedAnswer = 0;
+
+  const refresh = () => {
+    const a = Math.floor(Math.random() * 8) + 2;
+    const b = Math.floor(Math.random() * 8) + 2;
+    expectedAnswer = a + b;
+    challengeText.textContent = `${a} + ${b} =`;
+    input.value = "";
+    wrapper.classList.remove("is-invalid");
+  };
+
+  refresh();
+
+  return {
+    element: wrapper,
+    input,
+    refresh,
+    validate() {
+      const ok = Number(input.value) === expectedAnswer;
+      wrapper.classList.toggle("is-invalid", !ok);
+      return ok;
+    },
+  };
+};
+
 contactForms.forEach((form) => {
   const submitBtn = form.querySelector("button[type='submit']");
   if (!submitBtn) return;
@@ -329,9 +382,25 @@ contactForms.forEach((form) => {
   const defaultLabel =
     form.dataset.submitLabel || submitBtn.textContent.trim() || "Gönder";
   const endpoint = form.dataset.endpoint || "https://formspree.io/f/xldqyewl";
+  const startedAt = Date.now();
+
+  const humanCheck = createHumanCheck(form);
+  submitBtn.before(humanCheck.element);
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+
+    const elapsedMs = Date.now() - startedAt;
+    if (elapsedMs < 4000) {
+      alert("Lütfen formu dikkatlice doldurup tekrar deneyin.");
+      return;
+    }
+
+    if (!humanCheck.validate()) {
+      alert("Doğrulama yanıtı hatalı. Lütfen tekrar deneyin.");
+      humanCheck.input.focus();
+      return;
+    }
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Gönderiliyor...";
@@ -349,6 +418,7 @@ contactForms.forEach((form) => {
 
       if (response.ok) {
         form.reset();
+        humanCheck.refresh();
 
         const successMsg =
           form.querySelector(".form-success") ||

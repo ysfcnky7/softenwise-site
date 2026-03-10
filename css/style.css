@@ -29,6 +29,11 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -41,11 +46,25 @@ body {
   color: var(--text-main);
   line-height: 1.65;
   overscroll-behavior: contain;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a,
+button {
+  touch-action: manipulation;
 }
 
 a {
@@ -79,6 +98,7 @@ a {
   top: 0;
   background: rgba(255, 255, 255, 0.82);
   border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   z-index: 100;
   transition: box-shadow 0.2s ease;
@@ -191,6 +211,49 @@ a {
 .nav-main-link--accent {
   color: var(--accent) !important;
   font-weight: 700;
+}
+
+/* Ecosystem links as standalone premium items */
+.nav .nav-main-link[href="academy.html"],
+.nav .nav-main-link[href="kariyer.html"],
+.nav .nav-main-link[href="girisim-ortakligi.html"] {
+  padding-left: 20px;
+}
+
+.nav .nav-main-link[href="academy.html"] {
+  margin-left: 6px;
+  border-left: 1px solid rgba(15, 111, 122, 0.26);
+}
+
+.nav .nav-main-link[href="academy.html"]::marker,
+.nav .nav-main-link[href="kariyer.html"]::marker,
+.nav .nav-main-link[href="girisim-ortakligi.html"]::marker {
+  content: "";
+}
+
+.nav .nav-main-link[href="academy.html"]::before,
+.nav .nav-main-link[href="kariyer.html"]::before,
+.nav .nav-main-link[href="girisim-ortakligi.html"]::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.nav .nav-main-link[href="academy.html"]::before {
+  background: linear-gradient(135deg, #148f77, #2ab391);
+}
+
+.nav .nav-main-link[href="kariyer.html"]::before {
+  background: linear-gradient(135deg, #1f6cc1, #4f8ed6);
+}
+
+.nav .nav-main-link[href="girisim-ortakligi.html"]::before {
+  background: linear-gradient(135deg, #9a51c8, #d06ce0);
 }
 
 
@@ -353,6 +416,7 @@ a {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 252, 254, 0.82) 100%);
   border: 1px solid rgba(211, 224, 233, 0.92);
   box-shadow: 0 20px 48px rgba(8, 30, 40, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -403,6 +467,7 @@ a {
   border: 1px solid rgba(15, 111, 122, 0.24);
   border-radius: 22px;
   box-shadow: 0 20px 46px rgba(8, 26, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   position: relative;
 }
@@ -1191,7 +1256,7 @@ a {
 }
 
 .ecosystem {
-  background: var(--bg-soft);
+  background: radial-gradient(900px 240px at 10% 0%, rgba(15, 111, 122, 0.08), transparent 65%), var(--bg-soft);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -1203,6 +1268,15 @@ a {
 .ecosystem-card {
   position: relative;
   padding-top: 20px;
+  border-color: #d9e6ed;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fcfe 100%);
+  box-shadow: 0 14px 34px rgba(8, 34, 46, 0.06);
+  overflow: hidden;
+}
+
+.ecosystem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(8, 34, 46, 0.1);
 }
 
 .ecosystem-card::after {
@@ -1211,7 +1285,7 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 5px;
   border-top-left-radius: var(--r-lg);
   border-top-right-radius: var(--r-lg);
 }
@@ -1231,32 +1305,76 @@ a {
 .ecosystem-badge {
   display: inline-flex;
   margin-top: 2px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  color: #27434a;
-  background: #eef6f8;
-  border: 1px solid #d9eaef;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #2f4b58;
+  background: linear-gradient(180deg, #f3fafc 0%, #e8f3f7 100%);
+  border: 1px solid #d8e9ef;
   border-radius: 999px;
-  padding: 5px 10px;
+  padding: 6px 11px;
 }
 
 .ecosystem-card .btn-ghost {
   width: 100%;
   text-align: center;
+  font-weight: 800;
+  border-color: #d4e3ea;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbfd 100%);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.ecosystem-card .card-top {
+  margin-bottom: 8px;
+}
+
+.ecosystem-card .icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+}
+
+.ecosystem-card h3 {
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+}
+
+.ecosystem-card p {
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.ecosystem-card .mini-list {
+  font-size: 14px;
+  gap: 8px;
+}
+
+.ecosystem-card .mini-list li::marker {
+  color: rgba(15, 111, 122, 0.72);
 }
 
 .ecosystem-card--academy .btn-ghost:hover {
-  border-color: rgba(15, 111, 122, 0.4);
+  color: #0f6f7a;
+  border-color: rgba(15, 111, 122, 0.48);
+  box-shadow: 0 10px 24px rgba(15, 111, 122, 0.16);
+  transform: translateY(-1px);
 }
 
 .ecosystem-card--career .btn-ghost:hover {
-  border-color: rgba(63, 94, 169, 0.45);
+  color: #3f5ea9;
+  border-color: rgba(63, 94, 169, 0.5);
+  box-shadow: 0 10px 24px rgba(63, 94, 169, 0.16);
+  transform: translateY(-1px);
 }
 
 .ecosystem-card--venture .btn-ghost:hover {
-  border-color: rgba(122, 77, 15, 0.45);
+  color: #8d6116;
+  border-color: rgba(122, 77, 15, 0.52);
+  box-shadow: 0 10px 24px rgba(122, 77, 15, 0.17);
+  transform: translateY(-1px);
 }
 
 .academy {
@@ -1512,6 +1630,84 @@ a {
   font-size: 14px;
 }
 
+.contact-link,
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(15, 111, 122, 0.24);
+  flex: 0 0 20px;
+}
+
+.social-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #fff;
+  flex: 0 0 22px;
+}
+
+.social-dot--linkedin {
+  background: #0a66c2;
+}
+
+.social-dot--instagram {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+
+.social-dot--x {
+  background: #111827;
+}
+
+.social-link {
+  width: 100%;
+  max-width: 200px;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid rgba(15, 111, 122, 0.2);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(239, 247, 250, 0.84) 0%, rgba(232, 243, 247, 0.76) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.social-link span:last-child {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2f4b58;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.social-link:hover {
+  text-decoration: none;
+  border-color: rgba(15, 111, 122, 0.42);
+  background: linear-gradient(180deg, rgba(233, 246, 250, 0.96) 0%, rgba(225, 240, 245, 0.92) 100%);
+  box-shadow: 0 8px 20px rgba(12, 56, 68, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.52);
+  transform: translateY(-1px);
+}
+
+.contact-link span:last-child {
+  white-space: nowrap;
+}
+
 .footer-col a[href^="tel:"] {
   white-space: nowrap;
 }
@@ -1557,11 +1753,16 @@ a {
   }
   .btn-primary,
   .btn-ghost,
+  .contact-form,
   .service-card,
   .work-card,
   .step,
   .faq-item {
     transition: none;
+  }
+
+  .contact-form:hover {
+    transform: none;
   }
   .logo-track {
     animation: none;
@@ -1591,6 +1792,12 @@ a {
 }
 
 @media (max-width: 768px) {
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+
   .menu-btn {
     display: block;
   }
@@ -1630,6 +1837,23 @@ a {
     border-top: 1px solid var(--border);
     width: 100%;
     display: block;
+  }
+
+  .nav .nav-main-link[href="academy.html"],
+  .nav .nav-main-link[href="kariyer.html"],
+  .nav .nav-main-link[href="girisim-ortakligi.html"] {
+    padding-left: 20px;
+  }
+
+  .nav .nav-main-link[href="academy.html"] {
+    margin-left: 0;
+    border-left: 0;
+  }
+
+  .nav .nav-main-link[href="academy.html"]::before,
+  .nav .nav-main-link[href="kariyer.html"]::before,
+  .nav .nav-main-link[href="girisim-ortakligi.html"]::before {
+    display: none;
   }
 
   .nav-dropdown {
@@ -1685,6 +1909,13 @@ a {
 
   .nav-item.open .nav-parent-toggle {
     transform: rotate(180deg);
+  }
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
   }
 }
 
@@ -1791,6 +2022,16 @@ a {
   flex-wrap: wrap;
 }
 
+.cta .section-desc a {
+  color: #0f6f7a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cta .section-desc a:hover {
+  text-decoration: underline;
+}
+
 body[style*="overflow: hidden"] {
   touch-action: none;
 }
@@ -1821,13 +2062,35 @@ body[style*="overflow: hidden"] {
 .contact-form {
   max-width: 520px;
   margin: 32px auto 0;
-  padding: 28px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow);
+  padding: 30px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fcfe 100%);
+  border: 1px solid rgba(14, 98, 111, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(8, 50, 62, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.92);
   display: grid;
   gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.contact-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  opacity: 0.95;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-form:hover {
+    transform: translateY(-2px);
+    border-color: rgba(14, 98, 111, 0.24);
+    box-shadow: 0 22px 46px rgba(8, 50, 62, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.94);
+  }
 }
 
 /* FORM GROUP */
@@ -1844,10 +2107,17 @@ body[style*="overflow: hidden"] {
   font-size: 14px;
   padding: 14px 16px;
   border-radius: var(--r-md);
-  border: 1px solid var(--border);
-  background: #fff;
+  border: 1px solid #cfdee6;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
   color: var(--text-main);
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.contact-form input:hover,
+.contact-form select:hover,
+.contact-form textarea:hover {
+  border-color: #b8d1dc;
 }
 
 .contact-form textarea {
@@ -1877,9 +2147,84 @@ body[style*="overflow: hidden"] {
 
 /* SUBMIT BUTTON */
 .contact-form button {
-  margin-top: 6px;
+  margin-top: 10px;
   width: 100%;
   text-align: center;
+  box-shadow: 0 14px 28px rgba(9, 74, 88, 0.24);
+}
+
+.human-check {
+  border: 1px solid rgba(15, 111, 122, 0.24);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(234, 249, 252, 0.95) 0%, rgba(246, 252, 255, 0.98) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 20px rgba(12, 76, 90, 0.08);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.human-check:hover {
+  border-color: rgba(15, 111, 122, 0.36);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 10px 24px rgba(12, 76, 90, 0.1);
+}
+
+.human-check-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #184f5a;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.human-check-question {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(15, 111, 122, 0.2);
+}
+
+.human-check-input {
+  width: 90px;
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #c7dbe3;
+  background: #ffffff;
+  font-weight: 700;
+  color: #173d49;
+  text-align: center;
+}
+
+.human-check-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(26, 166, 176, 0.2);
+}
+
+.human-check.is-invalid {
+  border-color: #d45a5a;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff9f9 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 8px 18px rgba(160, 46, 46, 0.1);
+}
+
+@media (max-width: 560px) {
+  .human-check {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .human-check-question {
+    white-space: normal;
+  }
+
+  .human-check-input {
+    width: 100%;
+  }
 }
 
 /* MOBILE */
@@ -1918,6 +2263,14 @@ body[style*="overflow: hidden"] {
 
   .detail-visual-media img {
     min-height: 220px;
+  }
+
+  .ecosystem-card h3 {
+    font-size: 21px;
+  }
+
+  .ecosystem-card p {
+    font-size: 15px;
   }
 }
 

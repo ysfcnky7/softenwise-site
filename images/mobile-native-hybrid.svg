@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E7F7FA"/>
+      <stop offset="1" stop-color="#D8EEF3"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F6F7A"/>
+      <stop offset="1" stop-color="#1AA6B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="28" fill="url(#bg)"/>
+  <circle cx="1030" cy="130" r="120" fill="#BFE9F1" opacity=".6"/>
+  <circle cx="180" cy="690" r="140" fill="#CDEFF5" opacity=".65"/>
+
+  <rect x="420" y="110" width="360" height="580" rx="38" fill="#102130"/>
+  <rect x="438" y="150" width="324" height="486" rx="26" fill="white"/>
+  <rect x="540" y="124" width="120" height="12" rx="6" fill="#3E5260"/>
+
+  <rect x="468" y="190" width="264" height="86" rx="16" fill="url(#phone)"/>
+  <text x="600" y="243" fill="white" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" text-anchor="middle">MOBILE APP</text>
+
+  <rect x="468" y="302" width="125" height="52" rx="12" fill="#EEF6F9" stroke="#C9DEE6"/>
+  <text x="530" y="334" fill="#2A4654" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">iOS</text>
+
+  <rect x="607" y="302" width="125" height="52" rx="12" fill="#EEF6F9" stroke="#C9DEE6"/>
+  <text x="670" y="334" fill="#2A4654" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">Android</text>
+
+  <rect x="468" y="380" width="264" height="56" rx="14" fill="#F7FBFD" stroke="#CCE1E8"/>
+  <text x="600" y="416" fill="#0F6F7A" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" text-anchor="middle">Native + Hybrid</text>
+
+  <rect x="468" y="458" width="264" height="146" rx="14" fill="#FBFEFF" stroke="#D5E6ED"/>
+  <circle cx="500" cy="497" r="7" fill="#1AA6B0"/>
+  <text x="520" y="504" fill="#2F4B58" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600">React Native / Flutter</text>
+  <circle cx="500" cy="538" r="7" fill="#1AA6B0"/>
+  <text x="520" y="545" fill="#2F4B58" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600">Swift / Kotlin</text>
+  <circle cx="500" cy="579" r="7" fill="#1AA6B0"/>
+  <text x="520" y="586" fill="#2F4B58" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600">Store Release Ready</text>
+</svg>
