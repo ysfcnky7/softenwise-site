@@ -10,10 +10,10 @@ https://softenwise.com/
 https://softenwise.com/sitemap.xml
 
 ## Products
-- SoftenWise Clinic — https://softenwise.com/urunler.html#softenwise-clinic (canlı: https://softenwiseclinic.com/)
-- Envantra (stok, satış, fatura) — https://softenwise.com/urunler.html#envantra (canlı: https://www.envantra.com/)
-- Otomini (ikinci el araç, değerleme, galeri) — https://softenwise.com/urunler.html#otomini (canlı: https://otomini.com/)
-- SoftenWise GeoMaps (canlı, kurumsal) — https://softenwise.com/urunler.html#geomaps
+- SoftenWise Clinic — https://softenwise.com/urunler.html#softenwise-clinic · https://softenwiseclinic.com/
+- Envantra (stok, satış, fatura) — https://softenwise.com/urunler.html#envantra · https://www.envantra.com/
+- Otomini (ikinci el araç, değerleme, galeri) — https://softenwise.com/urunler.html#otomini · https://otomini.com/
+- SoftenWise GeoMaps (kurumsal) — https://softenwise.com/urunler.html#geomaps
 
 ## Key Pages
 - https://softenwise.com/ozel-yazilim.html

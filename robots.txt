@@ -2,5 +2,8 @@
 User-agent: *
 Allow: /
 
-# Önerilen tarama giriş noktası
+# Yapay zekâ / asistan tarayıcıları için site özeti (HTML site haritasının yerine geçmez)
+Allow: /llms.txt
+
+# Tarama giriş noktası
 Sitemap: https://softenwise.com/sitemap.xml

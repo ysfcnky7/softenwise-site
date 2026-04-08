@@ -3,9 +3,9 @@
   --logo-ink: #f4f6f8;
   --ink-secondary: #a8b4c4;
 
-  /* Marka logosu: koyu yeşil + koyu arayüzde okunur parlak ton */
-  --logo-green: #0e3a46;
-  --logo-green-on-dark: #0e3a46;
+  /* Marka yazısı: açık zeminde resmi koyu lacivert; koyu header/footer'da aynı ailenin net okunan açık tonu */
+  --logo-green: #001c2d;
+  --logo-green-on-dark: #9fd4ef;
 
   /* RoofStacks tarzı gece yüzeyi (tüm sayfa) */
   --surface-night: #0a0b0e;
@@ -2010,6 +2010,7 @@ a {
   border-top: 1px solid var(--line-on-night);
   border-bottom: 1px solid var(--line-on-night);
   padding: 64px 0;
+  overflow-x: hidden;
 }
 
 .references .section-head h2 {
@@ -2259,7 +2260,7 @@ a {
   font-size: 14px;
   letter-spacing: 0.02em;
   text-decoration: none;
-  /* Telefon CTA: arayüzde gri “arama kutusu” gibi durmaması için accent + hafif parlak metin */
+  /* Telefon CTA: arayüzde gri "arama kutusu" gibi durmaması için accent + hafif parlak metin */
   border: 1px solid rgba(var(--accent-rgb), 0.55);
   color: #d1eef4;
   background: rgba(var(--accent-rgb), 0.22);
@@ -2778,10 +2779,10 @@ a {
   }
 
   .product-nav-btn {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .trust-grid {
@@ -2841,6 +2842,7 @@ a {
 
   body.menu-open {
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   body.menu-open .site-header {
@@ -2896,9 +2898,14 @@ a {
 
   .menu-btn {
     display: block;
+    position: relative;
+    z-index: 10;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.04);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
   }
 
   .menu-btn:hover {
@@ -3010,7 +3017,7 @@ a {
     right: 0;
     bottom: 0;
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     min-height: calc(100dvh - var(--header-height) - env(safe-area-inset-top, 0px));
     min-height: calc(100vh - var(--header-height) - env(safe-area-inset-top, 0px));
     overflow-y: auto;
@@ -3029,6 +3036,7 @@ a {
 
   .nav.open {
     display: flex;
+    touch-action: pan-y;
   }
 
   .nav > a::after,
@@ -3435,10 +3443,6 @@ a {
   color: #fff;
 }
 
-body.menu-open {
-  touch-action: none;
-}
-
 .site-header.scrolled {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
   background: rgba(10, 11, 14, 0.92);
@@ -3499,7 +3503,7 @@ body.menu-open {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 
-/* Footer’da ikonlar: abartısız çerçeve, metinle hizalı premium satır */
+/* Footer'da ikonlar: abartısız çerçeve, metinle hizalı premium satır */
 .site-footer .social-dot {
   width: 36px;
   height: 36px;
@@ -3716,6 +3720,65 @@ body.menu-open {
 @media (max-width: 600px) {
   .contact-form {
     padding: 22px;
+  }
+}
+
+/* Telefon / dar viewport: yatay taşma, ergonomik dokunma, uzun başlıklar */
+@media (max-width: 768px) {
+  html {
+    overflow-x: hidden;
+  }
+
+  main {
+    overflow-x: clip;
+  }
+
+  .header-inner {
+    gap: 12px;
+  }
+
+  .header-inner .logo {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .site-header .logo-text {
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .product-jump-link {
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .cta h2,
+  .section-head h2 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .contact-form button[type="submit"],
+  .contact-form .btn-primary {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 380px) {
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 7px 10px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 .about-lead {

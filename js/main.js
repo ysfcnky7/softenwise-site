@@ -22,8 +22,9 @@ if (menuBtn && nav) {
     if (!open) closeAllDropdowns();
   };
 
-  // Toggle menu
-  menuBtn.addEventListener("click", () => {
+  // stopPropagation: tıklama document köküne kabarcıklanınca "dışarı tıklandı" ile çakışmasın (özellikle mobil)
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     setMenuState(!nav.classList.contains("open"));
   });
 
@@ -50,9 +51,9 @@ if (menuBtn && nav) {
   // Dışarı tıklayınca kapat
   document.addEventListener("click", (e) => {
     if (!nav.classList.contains("open")) return;
-    if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
-      setMenuState(false);
-    }
+    const t = e.target;
+    if (nav.contains(t) || menuBtn.contains(t)) return;
+    setMenuState(false);
   });
 
   // ESC ile kapat
@@ -161,65 +162,60 @@ if (prefersReducedMotion) {
 const featuredProducts = [
   {
     name: "SoftenWise Clinic",
-    label: "Canlı",
     image: "images/clinic_image.png",
     imageAlt: "SoftenWise Clinic ürün görseli",
     imageMode: "cover",
     description:
-      "Klinik yönetimi için randevu, hasta, finans ve raporlama modüllerini tek panelde birleştirir.",
+      "Sağlıkta dijital dönüşümün yalın hali: randevudan hasta takibine, finanstan raporlamaya klinik süreçleri tek merkezden yönetin.",
     bullets: [
-      "11 dil ve çok ülkeli kullanım",
-      "Rol/yetki yönetimi ve audit log",
+      "Küresel standartlar: 11 dil, çok ülkeli altyapı",
+      "Veri güvenliği: yetki ve audit log",
       "15 gün ücretsiz deneme",
     ],
     cta: "Detaya git",
-    /* Ana vitrin: site içi ürün özeti; canlı ürün sitesi urunler sayfasında */
     detailUrl: "urunler.html#softenwise-clinic",
   },
   {
     name: "Envantra",
-    label: "Canlı",
     image: "images/envantra-logo.png",
     imageAlt: "Envantra logosu — stok, satış ve fatura yönetimi",
     imageMode: "contain",
     description:
-      "Stok, satış, fatura ve operasyonu tek sade ekrandan yönetin; iOS uygulaması ile uyumlu vitrin ve altyapı.",
+      "Stok, satış ve faturayı tek panelde toplayan envanter hattı; çoklu depo ve varyantlarla tezgahtan sahaya aynı görünürlük.",
     bullets: [
-      "Stok takibi ve kritik seviye yönetimi",
-      "Hızlı satış kaydı ve fatura akışı",
-      "Mobil odaklı, App Store uyumlu çizgi",
+      "Stok: kritik uyarılar, hareket ve depo görünürlüğü",
+      "Satış ve fatura: hızlı satır akışı, gün sonu özeti",
+      "Mobil: iOS vitrin + operasyon odaklı deneyim",
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#envantra",
   },
   {
     name: "Otomini",
-    label: "Canlı",
     image: "images/otomini-logo.webp",
     imageAlt: "Otomini logosu — ikinci el araç değerleme ve galeri",
     imageMode: "contain",
     description:
-      "İkinci el araç için anlık dijital değerleme, ekspertiz adımları ve güvenli galeri ilan akışı sunan platform.",
+      "İkinci elde güven: anlık değerleme, şeffaf ekspertiz ve profesyonel galeri vitrini.",
     bullets: [
-      "Marka / model / donanım ile hızlı değerleme akışı",
-      "Tramer ve parça bazlı ekspertiz görünümü",
-      "Galeride paylaşım ve ilan vitrini",
+      "Akıllı değerleme: marka, model, donanım",
+      "Şeffaf ekspertiz: tramer ve hasar özeti",
+      "İlan yönetimi: vitrinde öne çıkma",
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#otomini",
   },
   {
     name: "SoftenWise GeoMaps",
-    label: "Canlı",
     image: "images/geomaps_logo.png",
     imageAlt: "SoftenWise GeoMaps ürün logosu",
     imageMode: "contain",
     description:
-      "Lokasyon, saha operasyonu ve harita tabanlı takip için üretimde olan ürün ailesi; operasyon paneli ve entegrasyon odaklı.",
+      "Konuma dayalı süreçleri anlık izleyin ve optimize edin; saha için modüler takip ekosistemi.",
     bullets: [
-      "Canlı konum ve rota görünümü",
-      "Saha ekipleri için durum takibi",
-      "Kurumsal entegrasyon ve raporlama (proje bazlı)",
+      "Anlık takip: konum ve geçmiş rota",
+      "Operasyonel verimlilik: iş emri ve lokasyon",
+      "Modüler yapı: düzenli yeni özellikler",
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#geomaps",
@@ -294,11 +290,15 @@ if (
       </div>
     `;
 
+    const badgeHtml = product.label
+      ? `<span class="product-badge">${product.label}</span>`
+      : "";
+
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
         <h3 class="product-name">${product.name}</h3>
-        <span class="product-badge">${product.label}</span>
+        ${badgeHtml}
       </div>
       <p class="product-desc">${product.description}</p>
       <ul class="product-list">
