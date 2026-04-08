@@ -6,7 +6,16 @@
   <title>Güvenlik & Denetim | SoftenWise</title>
   <meta name="description" content="Bilgi güvenliği, teknik denetim ve gap analizi hizmetleri ile risklerinizi görünür hale getiriyoruz." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="theme-color" content="#0f6f7a" />
+  <meta name="theme-color" content="#2a5865" />
+  <meta name="author" content="SoftenWise" />
+  <meta name="publisher" content="SoftenWise" />
+  <meta name="geo.region" content="TR" />
+  <link rel="alternate" hreflang="tr" href="https://softenwise.com/guvenlik-denetim.html" />
+  <link rel="alternate" hreflang="x-default" href="https://softenwise.com/guvenlik-denetim.html" />
+  <link rel="icon" href="icons/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
   <link rel="canonical" href="https://softenwise.com/guvenlik-denetim.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SoftenWise" />
@@ -14,7 +23,7 @@
   <meta property="og:title" content="Güvenlik & Denetim | SoftenWise" />
   <meta property="og:description" content="Bilgi güvenliği, teknik denetim ve gap analizi hizmetleri ile risklerinizi görünür hale getiriyoruz." />
   <meta property="og:url" content="https://softenwise.com/guvenlik-denetim.html" />
-  <meta property="og:image" content="https://softenwise.com/images/clinic_image.png" />
+  <meta property="og:image" content="images/clinic_image.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,12 +31,10 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Güvenlik & Denetim | SoftenWise" />
   <meta name="twitter:description" content="Bilgi güvenliği, teknik denetim ve gap analizi hizmetleri ile risklerinizi görünür hale getiriyoruz." />
-  <meta name="twitter:image" content="https://softenwise.com/images/clinic_image.png" />
+  <meta name="twitter:image" content="images/clinic_image.png" />
   <meta name="twitter:url" content="https://softenwise.com/guvenlik-denetim.html" />
   <meta name="twitter:image:alt" content="SoftenWise güvenlik ve denetim hizmeti" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/local-fonts.css" />
   <link rel="stylesheet" href="css/style.css" />
   <script type="application/ld+json">
   {
@@ -35,41 +42,58 @@
     "@type": "Service",
     "name": "Güvenlik ve Denetim",
     "serviceType": "Security Assessment and Technical Audit",
-    "provider": {
-      "@type": "Organization",
-      "name": "SoftenWise",
-      "url": "https://softenwise.com/"
-    },
+    "category": "Bilgi güvenliği ve denetim",
+    "provider": { "@id": "https://softenwise.com/#organization" },
     "url": "https://softenwise.com/guvenlik-denetim.html",
     "description": "Bilgi güvenliği, teknik denetim ve gap analizi hizmetleri ile risklerinizi görünür hale getiriyoruz.",
-    "areaServed": "TR"
+    "areaServed": { "@type": "Country", "name": "Turkey" },
+    "availableLanguage": ["tr", "en"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://softenwise.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Güvenlik ve Denetim", "item": "https://softenwise.com/guvenlik-denetim.html" }
+    ]
   }
   </script>
 </head>
 <body>
   <a class="skip-link" href="#main">İçeriğe atla</a>
+  <script src="js/sprite-inject.js"></script>
   <header class="site-header" id="header">
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="SoftenWise ana sayfa"><span class="logo-text">SoftenWise</span></a>
       <nav class="nav" id="nav" aria-label="Ana menü">
         <div class="nav-item has-dropdown">
           <a class="nav-main-link" href="index.html#solutions">Hizmetler</a>
-          <button class="nav-parent-toggle" type="button" aria-label="Hizmetler alt menüsünü aç/kapat" aria-expanded="false">▾</button>
+          <button class="nav-parent-toggle" type="button" aria-label="Hizmetler alt menüsünü aç/kapat" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
           <div class="nav-dropdown" aria-label="Hizmetler alt menü">
-            <a class="nav-dropdown-link" href="ozel-yazilim.html"><span class="nav-dd-icon" aria-hidden="true">⚙️</span><span class="nav-dd-body"><span class="nav-dd-title">Özel Yazılım Geliştirme</span><span class="nav-dd-desc">Kuruma özel ürün ve platform geliştirme</span></span></a>
-            <a class="nav-dropdown-link" href="mobil-gelistirme.html"><span class="nav-dd-icon" aria-hidden="true">📱</span><span class="nav-dd-body"><span class="nav-dd-title">Mobil Geliştirme</span><span class="nav-dd-desc">Native ve hybrid mobil uygulama çözümleri</span></span></a>
-            <a class="nav-dropdown-link" href="entegrasyon-otomasyon.html"><span class="nav-dd-icon" aria-hidden="true">🔌</span><span class="nav-dd-body"><span class="nav-dd-title">Entegrasyon & Otomasyon</span><span class="nav-dd-desc">Sistemler arası veri akışı ve süreç otomasyonu</span></span></a>
-            <a class="nav-dropdown-link" href="guvenlik-denetim.html"><span class="nav-dd-icon" aria-hidden="true">🛡️</span><span class="nav-dd-body"><span class="nav-dd-title">Güvenlik & Denetim</span><span class="nav-dd-desc">Risk analizi, uyum ve güvenlik değerlendirmesi</span></span></a>
-            <a class="nav-dropdown-link" href="teknik-danismanlik.html"><span class="nav-dd-icon" aria-hidden="true">🧭</span><span class="nav-dd-body"><span class="nav-dd-title">Teknik Danışmanlık</span><span class="nav-dd-desc">Mimari karar, ölçeklenme ve yol haritası</span></span></a>
+            <a class="nav-dropdown-link" href="ozel-yazilim.html"><span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-code"/></svg></span><span class="nav-dd-body"><span class="nav-dd-title">Özel Yazılım Geliştirme</span><span class="nav-dd-desc">Kuruma özel ürün ve platform geliştirme</span></span></a>
+            <a class="nav-dropdown-link" href="mobil-gelistirme.html"><span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-smartphone"/></svg></span><span class="nav-dd-body"><span class="nav-dd-title">Mobil Geliştirme</span><span class="nav-dd-desc">Native ve hybrid mobil uygulama çözümleri</span></span></a>
+            <a class="nav-dropdown-link" href="entegrasyon-otomasyon.html"><span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-plug"/></svg></span><span class="nav-dd-body"><span class="nav-dd-title">Entegrasyon & Otomasyon</span><span class="nav-dd-desc">Sistemler arası veri akışı ve süreç otomasyonu</span></span></a>
+            <a class="nav-dropdown-link" href="guvenlik-denetim.html"><span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-shield"/></svg></span><span class="nav-dd-body"><span class="nav-dd-title">Güvenlik & Denetim</span><span class="nav-dd-desc">Risk analizi, uyum ve güvenlik değerlendirmesi</span></span></a>
+            <a class="nav-dropdown-link" href="teknik-danismanlik.html"><span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-compass"/></svg></span><span class="nav-dd-body"><span class="nav-dd-title">Teknik Danışmanlık</span><span class="nav-dd-desc">Mimari karar, ölçeklenme ve yol haritası</span></span></a>
           </div>
         </div>
+        <a class="nav-main-link" href="urunler.html">Ürünler</a>
         <a class="nav-main-link" href="academy.html">Academy</a>
         <a class="nav-main-link" href="kariyer.html">Kariyer</a>
         <a class="nav-main-link" href="girisim-ortakligi.html">Fikir/Yatırım</a>
         <a class="nav-main-link" href="index.html#references">Referanslar</a>
         <a class="nav-main-link" href="index.html#contact">İletişim</a>
+        <div class="nav-mobile-footer">
+          <p class="nav-mobile-footer-label">Hızlı iletişim</p>
+          <div class="nav-mobile-actions">
+            <a class="nav-mobile-btn" href="tel:+905074216688" aria-label="Telefonla ara">Telefonla ara</a>
+            <a class="nav-mobile-btn nav-mobile-btn--wa" href="https://wa.me/905074216688" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile yazın">WhatsApp</a>
+          </div>
+        </div>
       </nav>
-      <button class="menu-btn" id="menuBtn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="nav"><span aria-hidden="true">☰</span></button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="nav"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-menu"/></svg></button>
     </div>
   </header>
   <main id="main">
@@ -77,9 +101,9 @@
     <section class="detail-visual"><div class="container detail-visual-grid"><figure class="detail-visual-media reveal"><img src="images/clinic_image.png" alt="Güvenlik ve denetim süreçlerinde kontrol ekranları" loading="lazy" decoding="async" width="1200" height="800" /></figure><div class="detail-visual-copy reveal"><h2>Riskleri görünür hale getiriyoruz</h2><p>Teknik denetim bulgularını iş etkisiyle birlikte ele alıyor, uygulanabilir güvenlik yol haritası oluşturuyoruz.</p><ul class="mini-list"><li>Mevcut durum ve gap analizi</li><li>Önceliklendirilmiş aksiyon planı</li><li>İyileştirme sürecinin metrik takibi</li></ul></div></div></section>
     <section class="delivery-model"><div class="container"><div class="section-head reveal"><h2>Detaylı hizmet açıklaması</h2><p class="section-desc">Güvenlik ve denetim hizmetini tek seferlik rapor üretimi olarak değil, riskleri azaltan sürekli bir iyileştirme mekanizması olarak ele alıyoruz.</p></div><div class="detail-copy reveal"><p>İlk aşamada uygulama, altyapı, erişim yetkileri ve operasyon süreçlerini birlikte değerlendiriyoruz. Teknik açıklar kadar süreç açıklarını da görünür hale getirerek risk haritası çıkarıyoruz. Bu sayede sadece "hangi açık var?" değil, "hangi açık iş sürekliliğini ne kadar etkiler?" sorusuna da net cevap alınıyor.</p><p>Sonraki aşamada uyum değerlendirmesi yapıyoruz. KVKK, ISO 27001 ve benzeri standartlar karşısında mevcut durumunuzu teknik kanıtlarla ölçüyor, eksik alanları önceliklendiriyoruz. Kurumun kaynak ve zaman planına uygun, uygulanabilir bir aksiyon yol haritası hazırladığımız için denetim sonuçları rafta kalmıyor.</p><p>İyileştirme sürecinde ekiplerle birlikte ilerleyerek kritik riskleri kapatma, kontrol mekanizmalarını güçlendirme ve tekrar denetim hazırlığını yönetiyoruz. Sonuçta kurum yalnızca denetimden geçen değil, güvenlik olgunluğu ölçülebilir şekilde yükselen bir yapıya kavuşuyor.</p></div></div></section>
     <section class="services"><div class="container"><div class="section-head reveal"><h2>Güvenlik & denetim kapsamı</h2><p class="section-desc">Sadece rapor değil, uygulanabilir güvenlik aksiyonları ve takvimi içeren bir model sunuyoruz.</p></div><div class="service-grid">
-      <article class="service-card reveal"><div class="card-top"><div class="icon" aria-hidden="true">🔍</div><h3>Mevcut Durum Analizi</h3></div><p>Uygulama, altyapı ve erişim modelleri güvenlik açısından derinlemesine incelenir.</p></article>
-      <article class="service-card reveal"><div class="card-top"><div class="icon" aria-hidden="true">📋</div><h3>Uyum ve Gap Analizi</h3></div><p>KVKK, ISO 27001 ve benzeri gereksinimlere göre teknik olgunluk seviyesi ölçülür.</p></article>
-      <article class="service-card reveal"><div class="card-top"><div class="icon" aria-hidden="true">🗺️</div><h3>İyileştirme Yol Haritası</h3></div><p>Önceliklendirilmiş aksiyon planı ile güvenlik olgunluğu adım adım artırılır.</p></article>
+      <article class="service-card reveal"><div class="card-top"><h3>Mevcut Durum Analizi</h3></div><p>Uygulama, altyapı ve erişim modelleri güvenlik açısından derinlemesine incelenir.</p></article>
+      <article class="service-card reveal"><div class="card-top"><h3>Uyum ve Gap Analizi</h3></div><p>KVKK, ISO 27001 ve benzeri gereksinimlere göre teknik olgunluk seviyesi ölçülür.</p></article>
+      <article class="service-card reveal"><div class="card-top"><h3>İyileştirme Yol Haritası</h3></div><p>Önceliklendirilmiş aksiyon planı ile güvenlik olgunluğu adım adım artırılır.</p></article>
     </div></div></section>
     <section class="process"><div class="container"><div class="section-head reveal"><h2>Denetim yaklaşımımız</h2><p class="section-desc">Kritik varlıklara odaklanır, bulguları iş etkisine göre önceliklendirir ve uygulanabilir aksiyona çeviririz.</p></div><div class="process-steps">
       <article class="step reveal"><span>Faz 1</span><h4>Varlık ve risk haritası</h4><p>Sistem envanteri, erişim modeli ve kritik risk yüzeyleri çıkarılır.</p></article>
@@ -92,7 +116,7 @@
       <article class="kpi-card reveal"><strong>Uyum değerlendirme dokümanı</strong><span>Standartlara göre mevcut durum ve eksik alanların net özeti.</span></article>
       <article class="kpi-card reveal"><strong>Aksiyon yol haritası</strong><span>Sorumlu ekipler, öncelik seviyesi ve hedef tarihleri içeren plan.</span></article>
     </div></div></section>
-    <section class="cta" id="contact"><div class="container reveal"><h2>Güvenlik risklerinizi netleştirelim</h2><p>Bu alan güvenlik ve denetim talepleri içindir. Formu doldurabilir ya da telefon ve e-posta üzerinden doğrudan bize ulaşabilirsiniz.</p><p class="section-desc">Hızlı iletişim: <a href="tel:+905442475439">+90 544 247 54 39</a> · <a href="mailto:info@softenwise.com">info@softenwise.com</a></p><form class="contact-form" data-contact-form data-submit-label="Güvenlik Talebi Gönder"><input type="hidden" name="_subject" value="Guvenlik Denetim - Yeni Talep"><input type="text" name="_gotcha" style="display:none"><div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" required /></div><div class="form-group"><input type="email" name="email" placeholder="E-posta" required /></div><div class="form-group"><textarea name="message" placeholder="Sistem ve beklentilerinizi yazın" rows="4" required></textarea></div><button type="submit" class="btn-primary">Güvenlik Talebi Gönder</button><p class="form-success" style="display:none; margin-top:16px; color:#0f6f7a; font-weight:600;">Talebiniz alındı. Ekibimiz sizinle iletişime geçecek.</p></form></div></section>
+    <section class="cta" id="contact"><div class="container reveal"><h2>Güvenlik risklerinizi netleştirelim</h2><p>Bu alan güvenlik ve denetim talepleri içindir. Formu doldurabilir ya da telefon ve e-posta üzerinden doğrudan bize ulaşabilirsiniz.</p><p class="section-desc">Hızlı iletişim: <a href="tel:+905074216688">+90 507 421 66 88</a> · <a href="mailto:info@softenwise.com">info@softenwise.com</a></p><div class="cta-quick-actions"><a class="cta-quick-btn" href="tel:+905074216688" aria-label="Telefonla ara">Telefonla ara</a> <a class="cta-quick-btn cta-quick-btn--whatsapp" href="https://wa.me/905074216688" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile yazın">WhatsApp</a></div><form class="contact-form" data-contact-form data-submit-label="Güvenlik Talebi Gönder"><input type="hidden" name="_subject" value="Guvenlik Denetim - Yeni Talep"><input type="text" name="_gotcha" style="display:none"><div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" required /></div><div class="form-group"><input type="email" name="email" placeholder="E-posta" required /></div><div class="form-group"><textarea name="message" placeholder="Sistem ve beklentilerinizi yazın" rows="4" required></textarea></div><button type="submit" class="btn-primary">Güvenlik Talebi Gönder</button><p class="form-success" style="display:none; margin-top:16px; color:#2a5865; font-weight:600;">Talebiniz alındı. Ekibimiz sizinle iletişime geçecek.</p></form></div></section>
   </main>
             <footer class="site-footer">
     <div class="container footer-grid">
@@ -123,6 +147,7 @@
 
         <div class="footer-col">
           <div class="footer-title">Ekosistem</div>
+          <a href="urunler.html">Ürünler</a>
           <a href="academy.html">Academy</a>
           <a href="kariyer.html">Kariyer</a>
           <a href="girisim-ortakligi.html">Fikir Ortaklığı</a>
@@ -132,8 +157,8 @@
 
         <div class="footer-col">
           <div class="footer-title">İletişim</div>
-          <a class="contact-link" href="tel:+905442475439"><span class="contact-icon" aria-hidden="true">&#9742;</span><span>+90 544 247 54 39</span></a>
-          <a class="contact-link" href="mailto:info@softenwise.com"><span class="contact-icon" aria-hidden="true">&#9993;</span><span>info@softenwise.com</span></a>
+          <a class="contact-link" href="tel:+905074216688"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg></span><span>+90 507 421 66 88</span></a>
+          <a class="contact-link" href="mailto:info@softenwise.com"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-mail"/></svg></span><span>info@softenwise.com</span></a>
         </div>
 
         <div class="footer-col">
@@ -151,6 +176,3 @@
   <script src="js/main.js" defer></script>
 </body>
 </html>
-
-
-

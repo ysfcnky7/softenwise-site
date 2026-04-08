@@ -18,7 +18,7 @@ if (menuBtn && nav) {
   const setMenuState = (open) => {
     nav.classList.toggle("open", open);
     menuBtn.setAttribute("aria-expanded", String(open));
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.classList.toggle("menu-open", open);
     if (!open) closeAllDropdowns();
   };
 
@@ -90,7 +90,12 @@ if (activeNav) {
   if (servicePages.includes(page)) {
     setActive(activeNav.querySelector(`.nav-dropdown a[href="${page}"]`));
     setActive(activeNav.querySelector('.nav-main-link[href*="solutions"]'));
-  } else if (page === "kariyer.html" || page === "academy.html" || page === "girisim-ortakligi.html") {
+  } else if (
+    page === "kariyer.html" ||
+    page === "academy.html" ||
+    page === "girisim-ortakligi.html" ||
+    page === "urunler.html"
+  ) {
     setActive(activeNav.querySelector(`.nav-main-link[href="${page}"]`));
   } else if (page === "index.html" && window.location.hash) {
     const hashLink = activeNav.querySelector(`.nav-main-link[href="${window.location.hash}"]`);
@@ -138,7 +143,17 @@ if (prefersReducedMotion) {
       }
     );
 
-    reveals.forEach((el) => io.observe(el));
+    reveals.forEach((el) => {
+      // Üst kahraman alanı: ilk boyamada görünür olsun (LCP / IO gecikmesi yok)
+      if (
+        el.classList.contains("hero-text") ||
+        el.classList.contains("hero-products")
+      ) {
+        el.classList.add("active");
+        return;
+      }
+      io.observe(el);
+    });
   }
 }
 
@@ -158,23 +173,56 @@ const featuredProducts = [
       "15 gün ücretsiz deneme",
     ],
     cta: "Detaya git",
-    url: "https://softenwiseclinic.com/",
+    /* Ana vitrin: site içi ürün özeti; canlı ürün sitesi urunler sayfasında */
+    detailUrl: "urunler.html#softenwise-clinic",
   },
   {
-    name: "GeoMaps",
+    name: "Envantra",
     label: "Canlı",
-    image: "images/geomaps_logo.png",
-    imageAlt: "GeoMaps ürün logosu",
+    image: "images/envantra-logo.png",
+    imageAlt: "Envantra logosu — stok, satış ve fatura yönetimi",
     imageMode: "contain",
     description:
-      "Lokasyon, saha operasyonu ve harita tabanlı takip ihtiyaçları için geliştirilen yeni ürün ailesi.",
+      "Stok, satış, fatura ve operasyonu tek sade ekrandan yönetin; iOS uygulaması ile uyumlu vitrin ve altyapı.",
+    bullets: [
+      "Stok takibi ve kritik seviye yönetimi",
+      "Hızlı satış kaydı ve fatura akışı",
+      "Mobil odaklı, App Store uyumlu çizgi",
+    ],
+    cta: "Detaya git",
+    detailUrl: "urunler.html#envantra",
+  },
+  {
+    name: "Otomini",
+    label: "Canlı",
+    image: "images/otomini-logo.webp",
+    imageAlt: "Otomini logosu — ikinci el araç değerleme ve galeri",
+    imageMode: "contain",
+    description:
+      "İkinci el araç için anlık dijital değerleme, ekspertiz adımları ve güvenli galeri ilan akışı sunan platform.",
+    bullets: [
+      "Marka / model / donanım ile hızlı değerleme akışı",
+      "Tramer ve parça bazlı ekspertiz görünümü",
+      "Galeride paylaşım ve ilan vitrini",
+    ],
+    cta: "Detaya git",
+    detailUrl: "urunler.html#otomini",
+  },
+  {
+    name: "SoftenWise GeoMaps",
+    label: "Canlı",
+    image: "images/geomaps_logo.png",
+    imageAlt: "SoftenWise GeoMaps ürün logosu",
+    imageMode: "contain",
+    description:
+      "Lokasyon, saha operasyonu ve harita tabanlı takip için üretimde olan ürün ailesi; operasyon paneli ve entegrasyon odaklı.",
     bullets: [
       "Canlı konum ve rota görünümü",
       "Saha ekipleri için durum takibi",
-      "Yeni modüller düzenli olarak ekleniyor",
+      "Kurumsal entegrasyon ve raporlama (proje bazlı)",
     ],
-    cta: "Ürün yayında",
-    url: "",
+    cta: "Detaya git",
+    detailUrl: "urunler.html#geomaps",
   },
 ];
 
@@ -202,15 +250,24 @@ if (
     item.setAttribute("role", "listitem");
     item.setAttribute("aria-hidden", "true");
 
-    const wrapperTag = product.url ? "a" : "div";
+    const linkUrl = (product.detailUrl || product.url || "").trim();
+    const wrapperTag = linkUrl ? "a" : "div";
     const wrapper = document.createElement(wrapperTag);
     wrapper.className = "product-card";
 
-    if (product.url) {
-      wrapper.href = product.url;
-      wrapper.target = "_blank";
-      wrapper.rel = "noopener noreferrer";
-      wrapper.setAttribute("aria-label", `${product.name} yeni sekmede açılır`);
+    if (linkUrl) {
+      wrapper.href = linkUrl;
+      const isExternal = /^https?:\/\//i.test(linkUrl);
+      if (isExternal) {
+        wrapper.target = "_blank";
+        wrapper.rel = "noopener noreferrer";
+        wrapper.setAttribute(
+          "aria-label",
+          `${product.name} harici bağlantı, yeni sekmede açılır`
+        );
+      } else {
+        wrapper.setAttribute("aria-label", `${product.name} ürün detayına git`);
+      }
     } else {
       item.classList.add("is-disabled");
     }
@@ -220,10 +277,15 @@ if (
         ? "product-media product-media--contain"
         : "product-media";
 
+    const imgAttrs =
+      index === 0
+        ? 'loading="eager" fetchpriority="high" decoding="async" width="640" height="360"'
+        : 'loading="lazy" decoding="async" width="640" height="360"';
+
     const mediaHtml = product.image
       ? `
       <div class="${mediaClass}">
-        <img src="${product.image}" alt="${product.imageAlt || product.name}" loading="lazy" decoding="async" />
+        <img src="${product.image}" alt="${product.imageAlt || product.name}" ${imgAttrs} />
       </div>
     `
       : `

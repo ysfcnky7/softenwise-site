@@ -6,12 +6,22 @@ It builds custom software products, mobile applications, integration/automation 
 ## Primary URL
 https://softenwise.com/
 
+## Sitemap
+https://softenwise.com/sitemap.xml
+
+## Products
+- SoftenWise Clinic — https://softenwise.com/urunler.html#softenwise-clinic (canlı: https://softenwiseclinic.com/)
+- Envantra (stok, satış, fatura) — https://softenwise.com/urunler.html#envantra (canlı: https://www.envantra.com/)
+- Otomini (ikinci el araç, değerleme, galeri) — https://softenwise.com/urunler.html#otomini (canlı: https://otomini.com/)
+- SoftenWise GeoMaps (canlı, kurumsal) — https://softenwise.com/urunler.html#geomaps
+
 ## Key Pages
 - https://softenwise.com/ozel-yazilim.html
 - https://softenwise.com/mobil-gelistirme.html
 - https://softenwise.com/entegrasyon-otomasyon.html
 - https://softenwise.com/guvenlik-denetim.html
 - https://softenwise.com/teknik-danismanlik.html
+- https://softenwise.com/urunler.html
 - https://softenwise.com/academy.html
 - https://softenwise.com/kariyer.html
 - https://softenwise.com/girisim-ortakligi.html
@@ -22,7 +32,7 @@ https://softenwise.com/
 
 ## Contact
 - Email: info@softenwise.com
-- Phone: +90 544 247 54 39
+- Phone: +90 507 421 66 88
 - LinkedIn: https://www.linkedin.com/in/softenwise-systems-4003a03b6/
 - Instagram: https://www.instagram.com/softenwise.systems/
 
