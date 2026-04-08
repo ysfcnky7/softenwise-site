@@ -6,6 +6,7 @@ const header = document.getElementById("header");
 // ===== MOBILE MENU (ARIA + SAFE) =====
 if (menuBtn && nav) {
   const navItemsWithDropdown = nav.querySelectorAll(".nav-item.has-dropdown");
+  const headerInner = header?.querySelector(".header-inner");
 
   const closeAllDropdowns = () => {
     navItemsWithDropdown.forEach((item) => {
@@ -15,11 +16,86 @@ if (menuBtn && nav) {
     });
   };
 
+  /** Sticky header içinde position:fixed bazı motorlarda bozuluyor; açık menüyü body'ye taşı */
+  const restoreNavToHeader = () => {
+    if (!headerInner) return;
+    if (nav.parentElement !== headerInner) {
+      headerInner.insertBefore(nav, menuBtn);
+    }
+  };
+
+  const mountNavForMobileOverlay = () => {
+    if (window.innerWidth > 768) return;
+    if (nav.parentElement !== document.body) {
+      document.body.appendChild(nav);
+    }
+  };
+
+  /** İçerik üst boşluğu (padding-top). Hash/scroll sonrası getBoundingClientRect bazen sapıyor; clamp + menuBtn doğrulaması */
+  const syncNavMobileTop = () => {
+    if (!header || window.innerWidth > 768 || !nav.classList.contains("open")) return;
+    const vh = window.visualViewport?.height ?? window.innerHeight;
+    const hb = header.getBoundingClientRect().bottom;
+    const mb = menuBtn?.getBoundingClientRect?.().bottom ?? hb;
+    let y = Math.max(hb, mb);
+    if (!Number.isFinite(y) || y < 32) {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue("--header-height");
+      const parsed = parseFloat(raw);
+      y = Number.isFinite(parsed) ? parsed + 12 : 84;
+    }
+    const maxInset = Math.max(96, vh - 160);
+    y = Math.min(Math.max(y + 8, 56), maxInset);
+    document.documentElement.style.setProperty("--nav-mobile-offset-top", `${Math.round(y * 100) / 100}px`);
+  };
+
+  const clearNavMobileTop = () => {
+    document.documentElement.style.removeProperty("--nav-mobile-offset-top");
+  };
+
+  /** Aynı sayfa #anchor — position:fixed + scrollTo + tarayıcı hash kaydırması siyah/boş ekran yapabiliyor */
+  const getSamePageHashTargetId = (anchor) => {
+    const href = anchor.getAttribute("href");
+    if (!href || href === "#" || href.startsWith("javascript:")) return null;
+    try {
+      const target = new URL(anchor.href, window.location.href);
+      const here = new URL(window.location.href);
+      if (target.pathname !== here.pathname) return null;
+      if (!target.hash || target.hash.length <= 1) return null;
+      return decodeURIComponent(target.hash.slice(1));
+    } catch {
+      return null;
+    }
+  };
+
   const setMenuState = (open) => {
+    const mobile = window.innerWidth <= 768;
+
+    if (open && mobile) {
+      mountNavForMobileOverlay();
+      nav.classList.add("open");
+      menuBtn.setAttribute("aria-expanded", "true");
+      document.documentElement.classList.add("menu-open");
+      document.body.classList.add("menu-open");
+      requestAnimationFrame(() => {
+        syncNavMobileTop();
+        requestAnimationFrame(() => {
+          syncNavMobileTop();
+          requestAnimationFrame(syncNavMobileTop);
+        });
+      });
+      return;
+    }
+
     nav.classList.toggle("open", open);
     menuBtn.setAttribute("aria-expanded", String(open));
+    document.documentElement.classList.toggle("menu-open", open);
     document.body.classList.toggle("menu-open", open);
-    if (!open) closeAllDropdowns();
+
+    if (!open) {
+      closeAllDropdowns();
+      clearNavMobileTop();
+      restoreNavToHeader();
+    }
   };
 
   // stopPropagation: tıklama document köküne kabarcıklanınca "dışarı tıklandı" ile çakışmasın (özellikle mobil)
@@ -28,9 +104,33 @@ if (menuBtn && nav) {
     setMenuState(!nav.classList.contains("open"));
   });
 
-  // Menü linkine tıklayınca kapat
+  // Menü linkine tıklayınca kapat; aynı sayfa #hash için kilidi kaldırdıktan sonra kaydır
   nav.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => setMenuState(false));
+    a.addEventListener("click", (e) => {
+      const mobile = window.innerWidth <= 768;
+      const hashId = getSamePageHashTargetId(a);
+      if (mobile && hashId) {
+        e.preventDefault();
+        setMenuState(false);
+        const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const run = () => {
+          const el = document.getElementById(hashId);
+          if (el) {
+            el.scrollIntoView({ behavior: prefersReduce ? "auto" : "smooth", block: "start" });
+            try {
+              history.replaceState(null, "", `#${hashId}`);
+            } catch {
+              /* file:// vb. */
+            }
+          } else {
+            window.location.href = a.href;
+          }
+        };
+        requestAnimationFrame(() => requestAnimationFrame(run));
+        return;
+      }
+      setMenuState(false);
+    });
   });
 
   navItemsWithDropdown.forEach((item) => {
@@ -66,10 +166,21 @@ if (menuBtn && nav) {
   // Ekran büyüyünce kapat (CSS breakpoint ile uyumlu)
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
+      clearNavMobileTop();
       setMenuState(false);
       closeAllDropdowns();
+    } else if (!nav.classList.contains("open")) {
+      restoreNavToHeader();
+    } else {
+      syncNavMobileTop();
     }
   });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", () => {
+      if (nav.classList.contains("open") && window.innerWidth <= 768) syncNavMobileTop();
+    });
+  }
 }
 
 // ===== ACTIVE NAV LINK =====

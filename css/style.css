@@ -2840,6 +2840,15 @@ a {
     padding-right: max(18px, env(safe-area-inset-right, 0px));
   }
 
+  /* backdrop-filter üst öğede olunca fixed .nav birçok motorde viewport yerine header'a göre konumlanır; mobil menü bozulur */
+  .site-header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(10, 11, 14, 0.92);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  html.menu-open,
   body.menu-open {
     overflow: hidden;
     overscroll-behavior: none;
@@ -2847,10 +2856,6 @@ a {
 
   body.menu-open .site-header {
     z-index: 1400;
-  }
-
-  .site-header {
-    padding-top: env(safe-area-inset-top, 0px);
   }
 
   .contact-form input,
@@ -2916,36 +2921,39 @@ a {
   .nav-mobile-footer {
     display: block;
     flex-shrink: 0;
+    align-self: stretch;
     position: relative;
-    width: min(100% - 32px, 380px);
-    margin: 28px auto 0;
-    padding: 18px 18px calc(18px + env(safe-area-inset-bottom, 0px));
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: none;
+    margin: 8px 0 0;
+    box-sizing: border-box;
+    padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    border-radius: 18px;
+    border: 1px solid rgba(168, 220, 236, 0.12);
     background: linear-gradient(
       165deg,
-      rgba(22, 26, 36, 0.94) 0%,
-      rgba(14, 16, 22, 0.98) 100%
+      rgba(20, 24, 32, 0.97) 0%,
+      rgba(12, 14, 20, 0.99) 100%
     );
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .nav-mobile-footer-label {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.2em;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(184, 221, 240, 0.88);
-    margin: 0 0 14px;
-    text-align: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(184, 221, 240, 0.92);
+    margin: 0 0 12px;
+    text-align: left;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .nav-mobile-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
   }
 
   .nav-mobile-btn {
@@ -3007,28 +3015,35 @@ a {
     transform: scale(0.98);
   }
 
+  /* Masaüstü .nav { flex-wrap:wrap; justify-content:flex-end } burada kalırsa sütun+wrap = 2. kolon; footer sağa kaçar */
+  /* Tam ekran overlay + padding-top: top yanlış ölçülünce (hash sonrası 2. açılış) panel viewport dışına kaçıp siyah ekran oluyordu */
   .nav {
     display: none;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: stretch;
     position: fixed;
-    top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
-    left: 0;
-    right: 0;
+    top: 0;
+    left: env(safe-area-inset-left, 0px);
+    right: env(safe-area-inset-right, 0px);
     bottom: 0;
     width: 100%;
     max-width: 100%;
-    min-height: calc(100dvh - var(--header-height) - env(safe-area-inset-top, 0px));
-    min-height: calc(100vh - var(--header-height) - env(safe-area-inset-top, 0px));
+    box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     background:
-      radial-gradient(120% 80% at 50% -20%, rgba(42, 88, 101, 0.12), transparent 55%),
-      var(--bg-main);
+      radial-gradient(140% 60% at 50% -10%, rgba(42, 88, 101, 0.14), transparent 52%),
+      linear-gradient(180deg, #0d0f14 0%, var(--bg-main) 28%);
     border-bottom: none;
-    padding: 10px 0 calc(16px + env(safe-area-inset-bottom, 0px));
+    padding-top: var(--nav-mobile-offset-top, calc(var(--header-height) + env(safe-area-inset-top, 0px) + 10px));
+    padding-right: clamp(14px, 4.5vw, 22px);
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    padding-left: clamp(14px, 4.5vw, 22px);
     margin: 0;
     z-index: 1350;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -3036,6 +3051,12 @@ a {
 
   .nav.open {
     display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: stretch;
+    gap: 10px;
     touch-action: pan-y;
   }
 
@@ -3044,17 +3065,23 @@ a {
     display: none;
   }
 
-  /* Mobil menü — dar ortalanmış sütun, sıkı dikey ritim */
+  /* Mobil menü — tam genişlik, sol hizalı (telefon sheet hissi) */
   .nav > .nav-main-link {
-    margin: 3px auto 0;
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    width: min(100% - 32px, 380px);
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 15px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    width: 100%;
+    max-width: none;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.035);
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
+    text-align: left;
+    line-height: 1.25;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .nav > a,
@@ -3084,12 +3111,13 @@ a {
 
   .nav-item {
     position: relative;
-    width: min(100% - 32px, 380px);
-    margin: 5px auto 0;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(168, 220, 236, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.02) 100%);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     box-sizing: border-box;
   }
@@ -3106,16 +3134,16 @@ a {
   }
 
   .nav .nav-item + .nav-main-link[href="urunler.html"] {
-    width: min(100% - 32px, 380px);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 14px;
-    padding: 12px 18px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    margin-top: 0;
+    padding: 15px 18px;
     border-top: none;
     border-left: 0;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .nav-dropdown {
@@ -3126,9 +3154,9 @@ a {
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    padding: 4px 6px 10px;
-    background: rgba(0, 0, 0, 0.32);
-    gap: 4px;
+    padding: 6px 8px 12px;
+    background: rgba(0, 0, 0, 0.28);
+    gap: 6px;
   }
 
   .nav-item.open .nav-dropdown {
@@ -3136,11 +3164,11 @@ a {
   }
 
   .nav-dropdown a {
-    padding: 11px 14px 11px 16px;
-    font-size: 13px;
-    border-radius: 11px;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 12px;
     color: rgba(220, 228, 238, 0.96);
-    margin: 0 6px;
+    margin: 0;
     border: 1px solid transparent;
   }
 
@@ -3190,12 +3218,10 @@ a {
   .nav-mobile-actions {
     grid-template-columns: 1fr;
   }
-}
 
-@supports (padding: max(0px)) {
-  body {
-    padding-left: max(0px, env(safe-area-inset-left));
-    padding-right: max(0px, env(safe-area-inset-right));
+  .nav {
+    padding-right: 12px;
+    padding-left: 12px;
   }
 }
 
@@ -3226,41 +3252,43 @@ a {
   }
 }
 
-/* Footer — telefon: kompakt, ortalanmış sütun, linkler arası çizgi yok */
+/* Footer — telefon: tam genişlik, sol hizalı (dar orta sütun hissi yok) */
 @media (max-width: 640px) {
   .site-footer .footer-grid {
-    padding: 26px 0 18px;
+    padding: 28px 0 20px;
     gap: 0;
-    padding-left: max(22px, env(safe-area-inset-left, 0px));
-    padding-right: max(22px, env(safe-area-inset-right, 0px));
+    padding-left: clamp(16px, 4.5vw, 22px);
+    padding-right: clamp(16px, 4.5vw, 22px);
   }
 
   .site-footer .footer-grid > div:first-child {
-    max-width: min(100%, 360px);
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding-bottom: 20px;
-    margin-bottom: 6px;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-bottom: 22px;
+    margin-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .site-footer .footer-brand {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .site-footer .footer-desc,
   .site-footer .footer-note {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 52ch;
   }
 
   .site-footer .footer-links {
     grid-template-columns: 1fr;
     gap: 0;
-    max-width: min(100%, 360px);
-    margin-left: auto;
-    margin-right: auto;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
   }
 
   .site-footer .footer-links .footer-col {
@@ -3334,7 +3362,7 @@ a {
   }
 
   .site-footer .footer-bottom {
-    text-align: center;
+    text-align: left;
     padding-top: 16px;
     padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
     padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -3396,9 +3424,11 @@ a {
 
 /* FIXES – PROD SAFETY */
 
-/* Mobil menu layer fix */
-.nav {
-  z-index: 200;
+/* Masaüstü: dropdown katmanı; mobilde @media (768) içindeki z-index geçerli kalsın */
+@media (min-width: 769px) {
+  .nav {
+    z-index: 200;
+  }
 }
 
 /* Absolute menu anchor fix */
