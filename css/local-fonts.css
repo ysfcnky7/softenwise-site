@@ -1,0 +1,12 @@
+/*
+  Inter ismi: Önce yerelde yüklü Inter / Inter Variable kullanılır.
+  Self-hosted .woff2 yolu file:// açılışında tarayıcı CORS ile engeller; bu yüzden url(...) kullanılmaz.
+  http(s) üzerinde çalışırken gerçek Inter için sistem yığınına yakın görünüm: Segoe UI, Roboto vb.
+*/
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local("Inter Variable"), local("Inter");
+}

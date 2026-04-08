@@ -1,5 +1,6 @@
+# SoftenWise — https://softenwise.com/
 User-agent: *
 Allow: /
-Allow: /llms.txt
 
+# Önerilen tarama giriş noktası
 Sitemap: https://softenwise.com/sitemap.xml
