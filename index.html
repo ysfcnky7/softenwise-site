@@ -28,7 +28,11 @@
 
   <!-- CANONICAL -->
   <link rel="canonical" href="https://softenwise.com/">
+  <link rel="sitemap" type="application/xml" title="Site haritası" href="https://softenwise.com/sitemap.xml" />
   <link rel="alternate" type="text/plain" href="https://softenwise.com/llms.txt" title="LLMs index" />
+
+  <!-- Google Search Console: doğrulama meta etiketini buraya ekleyin -->
+  <!-- <meta name="google-site-verification" content="" /> -->
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -55,10 +59,10 @@
 
   <!-- FONT -->
   <link rel="preload" href="https://softenwise.com/images/clinic_image.png" as="image" fetchpriority="high" />
-  <link rel="stylesheet" href="css/local-fonts.css" />
+  <link rel="stylesheet" href="css/local-fonts.css?v=202604081" />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+  <!-- CSS — ?v= cache bust: scripts/apply-asset-version.ps1 ($AssetVersion) -->
+  <link rel="stylesheet" href="css/style.css?v=202604081" />
 
   <!-- JSON-LD (SEO) -->
   <script type="application/ld+json">
@@ -140,7 +144,7 @@
 
 <body>
   <a class="skip-link" href="#main">İçeriğe atla</a>
-  <script src="js/sprite-inject.js"></script>
+  <script src="js/sprite-inject.js?v=202604081"></script>
 
   <!-- HEADER -->
   <header class="site-header" id="header">
@@ -924,7 +928,7 @@
       © 2022–2026 SoftenWise · Tüm hakları saklıdır
     </div>
   </footer>
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=202604081" defer></script>
 </body>
 
 </html>

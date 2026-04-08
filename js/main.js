@@ -4,6 +4,9 @@ const nav = document.getElementById("nav");
 const header = document.getElementById("header");
 
 // ===== MOBILE MENU (ARIA + SAFE) =====
+/** Hamburger ≤767px; 768px (iPad mini vb.) masaüstü menü — tam ekran overlay tablet felaketini keser */
+const MOBILE_NAV_MAX = 767;
+
 if (menuBtn && nav) {
   const navItemsWithDropdown = nav.querySelectorAll(".nav-item.has-dropdown");
   const headerInner = header?.querySelector(".header-inner");
@@ -25,7 +28,7 @@ if (menuBtn && nav) {
   };
 
   const mountNavForMobileOverlay = () => {
-    if (window.innerWidth > 768) return;
+    if (window.innerWidth > MOBILE_NAV_MAX) return;
     if (nav.parentElement !== document.body) {
       document.body.appendChild(nav);
     }
@@ -33,18 +36,19 @@ if (menuBtn && nav) {
 
   /** İçerik üst boşluğu (padding-top). Hash/scroll sonrası getBoundingClientRect bazen sapıyor; clamp + menuBtn doğrulaması */
   const syncNavMobileTop = () => {
-    if (!header || window.innerWidth > 768 || !nav.classList.contains("open")) return;
-    const vh = window.visualViewport?.height ?? window.innerHeight;
+    if (!header || window.innerWidth > MOBILE_NAV_MAX || !nav.classList.contains("open")) return;
     const hb = header.getBoundingClientRect().bottom;
     const mb = menuBtn?.getBoundingClientRect?.().bottom ?? hb;
-    let y = Math.max(hb, mb);
-    if (!Number.isFinite(y) || y < 32) {
+    let y = Math.max(hb, mb) + 6;
+    if (!Number.isFinite(y) || y < 40) {
       const raw = getComputedStyle(document.documentElement).getPropertyValue("--header-height");
       const parsed = parseFloat(raw);
-      y = Number.isFinite(parsed) ? parsed + 12 : 84;
+      y = Number.isFinite(parsed) ? parsed + 14 : 86;
     }
-    const maxInset = Math.max(96, vh - 160);
-    y = Math.min(Math.max(y + 8, 56), maxInset);
+    /* Üst boşluk sadece header altı olmalı; vh-160 tavanı XR/iPad'te yüzlerce px boşluk ve siyah ekran hissi veriyordu */
+    const PAD_MIN = 52;
+    const PAD_MAX = 118;
+    y = Math.min(Math.max(y, PAD_MIN), PAD_MAX);
     document.documentElement.style.setProperty("--nav-mobile-offset-top", `${Math.round(y * 100) / 100}px`);
   };
 
@@ -68,7 +72,7 @@ if (menuBtn && nav) {
   };
 
   const setMenuState = (open) => {
-    const mobile = window.innerWidth <= 768;
+    const mobile = window.innerWidth <= MOBILE_NAV_MAX;
 
     if (open && mobile) {
       mountNavForMobileOverlay();
@@ -107,7 +111,7 @@ if (menuBtn && nav) {
   // Menü linkine tıklayınca kapat; aynı sayfa #hash için kilidi kaldırdıktan sonra kaydır
   nav.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", (e) => {
-      const mobile = window.innerWidth <= 768;
+      const mobile = window.innerWidth <= MOBILE_NAV_MAX;
       const hashId = getSamePageHashTargetId(a);
       if (mobile && hashId) {
         e.preventDefault();
@@ -138,7 +142,7 @@ if (menuBtn && nav) {
     if (!toggle) return;
 
     toggle.addEventListener("click", (e) => {
-      if (window.innerWidth > 768) return;
+      if (window.innerWidth > MOBILE_NAV_MAX) return;
       e.preventDefault();
 
       const willOpen = !item.classList.contains("open");
@@ -165,7 +169,7 @@ if (menuBtn && nav) {
 
   // Ekran büyüyünce kapat (CSS breakpoint ile uyumlu)
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > MOBILE_NAV_MAX) {
       clearNavMobileTop();
       setMenuState(false);
       closeAllDropdowns();
@@ -178,7 +182,7 @@ if (menuBtn && nav) {
 
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", () => {
-      if (nav.classList.contains("open") && window.innerWidth <= 768) syncNavMobileTop();
+      if (nav.classList.contains("open") && window.innerWidth <= MOBILE_NAV_MAX) syncNavMobileTop();
     });
   }
 }

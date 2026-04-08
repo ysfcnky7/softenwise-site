@@ -1,9 +1,24 @@
 # SoftenWise — https://softenwise.com/
+# Arama motorları: tüm herkese açık sayfalar taranabilir.
+
 User-agent: *
 Allow: /
 
-# Yapay zekâ / asistan tarayıcıları için site özeti (HTML site haritasının yerine geçmez)
+# İç notlar ve dağıtım scriptleri dizini indekslenmesin
+Disallow: /notes.txt
+Disallow: /scripts/
+
+# Yapay zekâ / asistan özet dosyası (site haritasının yerine geçmez)
 Allow: /llms.txt
 
-# Tarama giriş noktası
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Site haritası (Google Search Console’a da aynı URL’yi ekleyin)
 Sitemap: https://softenwise.com/sitemap.xml
