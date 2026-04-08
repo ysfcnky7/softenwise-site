@@ -4,8 +4,8 @@
   --ink-secondary: #a8b4c4;
 
   /* Marka logosu: koyu yeşil + koyu arayüzde okunur parlak ton */
-  --logo-green: #0e3d28;
-  --logo-green-on-dark: #8fd4ae;
+  --logo-green: #0e3a46;
+  --logo-green-on-dark: #0e3a46;
 
   /* RoofStacks tarzı gece yüzeyi (tüm sayfa) */
   --surface-night: #0a0b0e;
@@ -27,12 +27,12 @@
   --text-muted: #8b97a8;
 
   /* Marka: derin petrol + çelik-turkuaz (CTA gradyanı aynı aile) */
-  --accent: #2a5865;
-  --accent-2: #5e92a0;
-  --accent-deep: #1a3540;
-  --accent-soft: rgba(94, 146, 160, 0.16);
-  --accent-rgb: 42, 88, 101;
-  --accent-2-rgb: 94, 146, 160;
+  --accent: #0e3a46;
+  --accent-2: #0e3a46;
+  --accent-deep: #0e3a46;
+  --accent-soft: rgba(14, 58, 70, 0.16);
+  --accent-rgb: 14, 58, 70;
+  --accent-2-rgb: 14, 58, 70;
 
   --hero-bg-start: #0e1014;
   --hero-bg-mid: #12151c;
@@ -2896,6 +2896,14 @@ a {
 
   .menu-btn {
     display: block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .menu-btn:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(168, 220, 236, 0.25);
   }
 
   .nav-mobile-footer {

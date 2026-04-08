@@ -3,7 +3,7 @@ const path = require("path");
 
 const root = path.join(__dirname, "..");
 const svgPath = path.join(root, "icons", "ui-sprite.svg");
-const mainPath = path.join(root, "js", "main.js");
+const outPath = path.join(root, "js", "sprite-inject.js");
 
 const svg = fs.readFileSync(svgPath, "utf8");
 
@@ -33,13 +33,5 @@ const inject = `(function () {
 
 `;
 
-let main = fs.readFileSync(mainPath, "utf8");
-const marker = "// ===== SAFE SELECTORS =====";
-const idx = main.indexOf(marker);
-if (idx === -1) {
-  console.error("main.js missing marker, abort.");
-  process.exit(1);
-}
-main = inject + main.slice(idx);
-fs.writeFileSync(mainPath, main);
-console.log("main.js sprite inject güncellendi (icons/ui-sprite.svg ile senkron).");
+fs.writeFileSync(outPath, inject);
+console.log("js/sprite-inject.js guncellendi (icons/ui-sprite.svg ile senkron).");
