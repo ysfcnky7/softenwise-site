@@ -4,8 +4,12 @@ const nav = document.getElementById("nav");
 const header = document.getElementById("header");
 
 // ===== MOBILE MENU (ARIA + SAFE) =====
+/** Hamburger ≤767px; 768px (iPad mini vb.) masaüstü menü — tam ekran overlay tablet felaketini keser */
+const MOBILE_NAV_MAX = 767;
+
 if (menuBtn && nav) {
   const navItemsWithDropdown = nav.querySelectorAll(".nav-item.has-dropdown");
+  const headerInner = header?.querySelector(".header-inner");
 
   const closeAllDropdowns = () => {
     navItemsWithDropdown.forEach((item) => {
@@ -15,21 +19,122 @@ if (menuBtn && nav) {
     });
   };
 
-  const setMenuState = (open) => {
-    nav.classList.toggle("open", open);
-    menuBtn.setAttribute("aria-expanded", String(open));
-    document.body.classList.toggle("menu-open", open);
-    if (!open) closeAllDropdowns();
+  /** Sticky header içinde position:fixed bazı motorlarda bozuluyor; açık menüyü body'ye taşı */
+  const restoreNavToHeader = () => {
+    if (!headerInner) return;
+    if (nav.parentElement !== headerInner) {
+      headerInner.insertBefore(nav, menuBtn);
+    }
   };
 
-  // Toggle menu
-  menuBtn.addEventListener("click", () => {
+  const mountNavForMobileOverlay = () => {
+    if (window.innerWidth > MOBILE_NAV_MAX) return;
+    if (nav.parentElement !== document.body) {
+      document.body.appendChild(nav);
+    }
+  };
+
+  /** İçerik üst boşluğu (padding-top). Hash/scroll sonrası getBoundingClientRect bazen sapıyor; clamp + menuBtn doğrulaması */
+  const syncNavMobileTop = () => {
+    if (!header || window.innerWidth > MOBILE_NAV_MAX || !nav.classList.contains("open")) return;
+    const hb = header.getBoundingClientRect().bottom;
+    const mb = menuBtn?.getBoundingClientRect?.().bottom ?? hb;
+    let y = Math.max(hb, mb) + 6;
+    if (!Number.isFinite(y) || y < 40) {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue("--header-height");
+      const parsed = parseFloat(raw);
+      y = Number.isFinite(parsed) ? parsed + 14 : 86;
+    }
+    /* Üst boşluk sadece header altı olmalı; vh-160 tavanı XR/iPad'te yüzlerce px boşluk ve siyah ekran hissi veriyordu */
+    const PAD_MIN = 52;
+    const PAD_MAX = 118;
+    y = Math.min(Math.max(y, PAD_MIN), PAD_MAX);
+    document.documentElement.style.setProperty("--nav-mobile-offset-top", `${Math.round(y * 100) / 100}px`);
+  };
+
+  const clearNavMobileTop = () => {
+    document.documentElement.style.removeProperty("--nav-mobile-offset-top");
+  };
+
+  /** Aynı sayfa #anchor — position:fixed + scrollTo + tarayıcı hash kaydırması siyah/boş ekran yapabiliyor */
+  const getSamePageHashTargetId = (anchor) => {
+    const href = anchor.getAttribute("href");
+    if (!href || href === "#" || href.startsWith("javascript:")) return null;
+    try {
+      const target = new URL(anchor.href, window.location.href);
+      const here = new URL(window.location.href);
+      if (target.pathname !== here.pathname) return null;
+      if (!target.hash || target.hash.length <= 1) return null;
+      return decodeURIComponent(target.hash.slice(1));
+    } catch {
+      return null;
+    }
+  };
+
+  const setMenuState = (open) => {
+    const mobile = window.innerWidth <= MOBILE_NAV_MAX;
+
+    if (open && mobile) {
+      mountNavForMobileOverlay();
+      nav.classList.add("open");
+      menuBtn.setAttribute("aria-expanded", "true");
+      document.documentElement.classList.add("menu-open");
+      document.body.classList.add("menu-open");
+      requestAnimationFrame(() => {
+        syncNavMobileTop();
+        requestAnimationFrame(() => {
+          syncNavMobileTop();
+          requestAnimationFrame(syncNavMobileTop);
+        });
+      });
+      return;
+    }
+
+    nav.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    document.documentElement.classList.toggle("menu-open", open);
+    document.body.classList.toggle("menu-open", open);
+
+    if (!open) {
+      closeAllDropdowns();
+      clearNavMobileTop();
+      restoreNavToHeader();
+    }
+  };
+
+  // stopPropagation: tıklama document köküne kabarcıklanınca "dışarı tıklandı" ile çakışmasın (özellikle mobil)
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     setMenuState(!nav.classList.contains("open"));
   });
 
-  // Menü linkine tıklayınca kapat
+  // Menü linkine tıklayınca kapat; aynı sayfa #hash için kilidi kaldırdıktan sonra kaydır
   nav.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => setMenuState(false));
+    a.addEventListener("click", (e) => {
+      const mobile = window.innerWidth <= MOBILE_NAV_MAX;
+      const hashId = getSamePageHashTargetId(a);
+      if (mobile && hashId) {
+        e.preventDefault();
+        setMenuState(false);
+        const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const run = () => {
+          const el = document.getElementById(hashId);
+          if (el) {
+            el.scrollIntoView({ behavior: prefersReduce ? "auto" : "smooth", block: "start" });
+            try {
+              history.replaceState(null, "", `#${hashId}`);
+            } catch {
+              /* file:// vb. */
+            }
+          } else {
+            window.location.href = a.href;
+          }
+        };
+        requestAnimationFrame(() => requestAnimationFrame(run));
+        return;
+      }
+      setMenuState(false);
+    });
   });
 
   navItemsWithDropdown.forEach((item) => {
@@ -37,7 +142,7 @@ if (menuBtn && nav) {
     if (!toggle) return;
 
     toggle.addEventListener("click", (e) => {
-      if (window.innerWidth > 768) return;
+      if (window.innerWidth > MOBILE_NAV_MAX) return;
       e.preventDefault();
 
       const willOpen = !item.classList.contains("open");
@@ -50,9 +155,9 @@ if (menuBtn && nav) {
   // Dışarı tıklayınca kapat
   document.addEventListener("click", (e) => {
     if (!nav.classList.contains("open")) return;
-    if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
-      setMenuState(false);
-    }
+    const t = e.target;
+    if (nav.contains(t) || menuBtn.contains(t)) return;
+    setMenuState(false);
   });
 
   // ESC ile kapat
@@ -64,11 +169,22 @@ if (menuBtn && nav) {
 
   // Ekran büyüyünce kapat (CSS breakpoint ile uyumlu)
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > MOBILE_NAV_MAX) {
+      clearNavMobileTop();
       setMenuState(false);
       closeAllDropdowns();
+    } else if (!nav.classList.contains("open")) {
+      restoreNavToHeader();
+    } else {
+      syncNavMobileTop();
     }
   });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", () => {
+      if (nav.classList.contains("open") && window.innerWidth <= MOBILE_NAV_MAX) syncNavMobileTop();
+    });
+  }
 }
 
 // ===== ACTIVE NAV LINK =====
@@ -161,65 +277,60 @@ if (prefersReducedMotion) {
 const featuredProducts = [
   {
     name: "SoftenWise Clinic",
-    label: "Canlı",
     image: "images/clinic_image.png",
     imageAlt: "SoftenWise Clinic ürün görseli",
     imageMode: "cover",
     description:
-      "Klinik yönetimi için randevu, hasta, finans ve raporlama modüllerini tek panelde birleştirir.",
+      "Sağlıkta dijital dönüşümün yalın hali: randevudan hasta takibine, finanstan raporlamaya klinik süreçleri tek merkezden yönetin.",
     bullets: [
-      "11 dil ve çok ülkeli kullanım",
-      "Rol/yetki yönetimi ve audit log",
+      "Küresel standartlar: 11 dil, çok ülkeli altyapı",
+      "Veri güvenliği: yetki ve audit log",
       "15 gün ücretsiz deneme",
     ],
     cta: "Detaya git",
-    /* Ana vitrin: site içi ürün özeti; canlı ürün sitesi urunler sayfasında */
     detailUrl: "urunler.html#softenwise-clinic",
   },
   {
     name: "Envantra",
-    label: "Canlı",
     image: "images/envantra-logo.png",
     imageAlt: "Envantra logosu — stok, satış ve fatura yönetimi",
     imageMode: "contain",
     description:
-      "Stok, satış, fatura ve operasyonu tek sade ekrandan yönetin; iOS uygulaması ile uyumlu vitrin ve altyapı.",
+      "Stok, satış ve faturayı tek panelde toplayan envanter hattı; çoklu depo ve varyantlarla tezgahtan sahaya aynı görünürlük.",
     bullets: [
-      "Stok takibi ve kritik seviye yönetimi",
-      "Hızlı satış kaydı ve fatura akışı",
-      "Mobil odaklı, App Store uyumlu çizgi",
+      "Stok: kritik uyarılar, hareket ve depo görünürlüğü",
+      "Satış ve fatura: hızlı satır akışı, gün sonu özeti",
+      "Mobil: iOS vitrin + operasyon odaklı deneyim",
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#envantra",
   },
   {
     name: "Otomini",
-    label: "Canlı",
     image: "images/otomini-logo.webp",
     imageAlt: "Otomini logosu — ikinci el araç değerleme ve galeri",
     imageMode: "contain",
     description:
-      "İkinci el araç için anlık dijital değerleme, ekspertiz adımları ve güvenli galeri ilan akışı sunan platform.",
+      "İkinci elde güven: anlık değerleme, şeffaf ekspertiz ve profesyonel galeri vitrini.",
     bullets: [
-      "Marka / model / donanım ile hızlı değerleme akışı",
-      "Tramer ve parça bazlı ekspertiz görünümü",
-      "Galeride paylaşım ve ilan vitrini",
+      "Akıllı değerleme: marka, model, donanım",
+      "Şeffaf ekspertiz: tramer ve hasar özeti",
+      "İlan yönetimi: vitrinde öne çıkma",
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#otomini",
   },
   {
     name: "SoftenWise GeoMaps",
-    label: "Canlı",
     image: "images/geomaps_logo.png",
     imageAlt: "SoftenWise GeoMaps ürün logosu",
     imageMode: "contain",
     description:
-      "Lokasyon, saha operasyonu ve harita tabanlı takip için üretimde olan ürün ailesi; operasyon paneli ve entegrasyon odaklı.",
+      "Konuma dayalı süreçleri anlık izleyin ve optimize edin; saha için modüler takip ekosistemi.",
     bullets: [
-      "Canlı konum ve rota görünümü",
-      "Saha ekipleri için durum takibi",
-      "Kurumsal entegrasyon ve raporlama (proje bazlı)",
+      "Anlık takip: konum ve geçmiş rota",
+      "Operasyonel verimlilik: iş emri ve lokasyon",
+      "Modüler yapı: düzenli yeni özellikler",
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#geomaps",
@@ -294,11 +405,15 @@ if (
       </div>
     `;
 
+    const badgeHtml = product.label
+      ? `<span class="product-badge">${product.label}</span>`
+      : "";
+
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
         <h3 class="product-name">${product.name}</h3>
-        <span class="product-badge">${product.label}</span>
+        ${badgeHtml}
       </div>
       <p class="product-desc">${product.description}</p>
       <ul class="product-list">

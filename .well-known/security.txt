@@ -1,0 +1,6 @@
+Contact: mailto:info@softenwise.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: tr, en
+Canonical: https://softenwise.com/.well-known/security.txt
+
+# Güvenlik bildirimleri için iletişim: info@softenwise.com
