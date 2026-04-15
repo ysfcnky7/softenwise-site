@@ -1,934 +1,164 @@
 <!DOCTYPE html>
 <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Point Croissant resmi web sitesi." />
+    <title>Point Croissant | Cafe & Bakery</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="site-header"></header>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
-  <title>SoftenWise | Ölçeklenebilir Yazılım Sistemleri</title>
-
-  <!-- SEO META -->
-  <meta name="description"
-    content="SoftenWise; köklü kurumlar ve girişimler için yazılım geliştirme, siber güvenlik ve stratejik danışmanlıkla yüksek performanslı sistemler tasarlayan bir mühendislik merkezidir." />
-
-  <meta name="keywords"
-    content="özel yazılım, yazılım firması, web yazılım, mobil uygulama, kurumsal sistem, entegrasyon, otomasyon, api, panel, raporlama, yazılım geliştirme" />
-  <meta name="author" content="SoftenWise" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="theme-color" content="#0a0b0e" />
-  <meta name="publisher" content="SoftenWise" />
-  <meta name="geo.region" content="TR" />
-  <link rel="alternate" hreflang="tr" href="https://softenwise.com/" />
-  <link rel="alternate" hreflang="x-default" href="https://softenwise.com/" />
-
-  <link rel="icon" href="icons/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-
-  <!-- CANONICAL -->
-  <link rel="canonical" href="https://softenwise.com/">
-  <link rel="sitemap" type="application/xml" title="Site haritası" href="https://softenwise.com/sitemap.xml" />
-  <link rel="alternate" type="text/plain" href="https://softenwise.com/llms.txt" title="LLMs index" />
-
-  <!-- Google Search Console: doğrulama meta etiketini buraya ekleyin -->
-  <!-- <meta name="google-site-verification" content="" /> -->
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="SoftenWise" />
-  <meta property="og:title" content="SoftenWise | Ölçeklenebilir Yazılım Sistemleri" />
-  <meta property="og:description"
-    content="Hız, güvenlik ve mühendislik disiplini bir arada: ölçeklenebilir mimariler, bilgi güvenliği ve stratejik teknoloji çözümleri." />
-  <meta property="og:url" content="https://softenwise.com/" />
-  <meta property="og:image" content="https://softenwise.com/images/clinic_image.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="SoftenWise kurumsal yazılım çözümleri" />
-
-  <meta property="og:locale" content="tr_TR" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SoftenWise | Ölçeklenebilir Yazılım Sistemleri" />
-  <meta name="twitter:description" content="Dijital dönüşümde eşlik eden mühendislik merkezi: yazılım, siber güvenlik ve stratejik danışmanlık." />
-  <meta name="twitter:image" content="https://softenwise.com/images/clinic_image.png" />
-  <meta name="twitter:url" content="https://softenwise.com/" />
-  <meta name="twitter:image:alt" content="SoftenWise kurumsal yazılım çözümleri" />
-
-  <!-- FONT -->
-  <link rel="preload" href="https://softenwise.com/images/clinic_image.png" as="image" fetchpriority="high" />
-  <link rel="stylesheet" href="css/local-fonts.css?v=202604081" />
-
-  <!-- CSS — ?v= cache bust: scripts/apply-asset-version.ps1 ($AssetVersion) -->
-  <link rel="stylesheet" href="css/style.css?v=202604081" />
-
-  <!-- JSON-LD (SEO) -->
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": "https://softenwise.com/#organization",
-        "name": "SoftenWise",
-        "legalName": "SoftenWise",
-        "url": "https://softenwise.com/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://softenwise.com/icons/apple-touch-icon.png",
-          "width": 180,
-          "height": 180
-        },
-        "image": "https://softenwise.com/images/clinic_image.png",
-        "email": "info@softenwise.com",
-        "telephone": "+90 507 421 66 88",
-        "foundingDate": "2022",
-        "description": "SoftenWise; köklü kurumlar ve girişimler için yazılım geliştirme, siber güvenlik ve stratejik danışmanlıkla yüksek performanslı sistemler tasarlayan bir mühendislik merkezidir.",
-        "address": { "@type": "PostalAddress", "addressCountry": "TR" },
-        "areaServed": { "@type": "Country", "name": "Turkey" },
-        "knowsAbout": [
-          "özel yazılım geliştirme",
-          "kurumsal yazılım ve SaaS",
-          "mobil uygulama geliştirme",
-          "entegrasyon ve otomasyon",
-          "güvenlik ve teknik denetim",
-          "teknik danışmanlık",
-          "ürün geliştirme ve ölçeklenebilir mimari"
-        ],
-        "sameAs": [
-          "https://www.linkedin.com/in/softenwise-systems-4003a03b6/",
-          "https://www.instagram.com/softenwise.systems/"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer support",
-          "telephone": "+90 507 421 66 88",
-          "email": "info@softenwise.com",
-          "availableLanguage": ["tr", "en"],
-          "areaServed": "TR"
-        }
-      }
-    </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://softenwise.com/#website",
-    "name": "SoftenWise",
-    "url": "https://softenwise.com/",
-    "description": "Özel yazılım, mobil geliştirme, entegrasyon, güvenlik ve teknik danışmanlık hizmetleri sunan mühendislik merkezi.",
-    "inLanguage": "tr-TR",
-    "publisher": { "@id": "https://softenwise.com/#organization" },
-    "copyrightHolder": { "@id": "https://softenwise.com/#organization" }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://softenwise.com/",
-    "name": "SoftenWise Ana Sayfa",
-    "url": "https://softenwise.com/",
-    "description": "Ölçeklenebilir sistem mimarileri, bilgi güvenliği ve stratejik teknoloji çözümleri. Özel yazılım, mobil, entegrasyon ve güvenlik hizmetleri.",
-    "inLanguage": "tr-TR",
-    "isPartOf": { "@id": "https://softenwise.com/#website" },
-    "about": { "@id": "https://softenwise.com/#organization" },
-    "primaryImageOfPage": {
-      "@type": "ImageObject",
-      "url": "https://softenwise.com/images/clinic_image.png"
-    }
-  }
-  </script>
-</head>
-
-<body>
-  <a class="skip-link" href="#main">İçeriğe atla</a>
-  <script src="js/sprite-inject.js?v=202604081"></script>
-
-  <!-- HEADER -->
-  <header class="site-header" id="header">
-    <div class="container header-inner">
-      <a class="logo" href="https://softenwise.com/" aria-label="SoftenWise ana sayfa">
-        <span class="logo-text">SoftenWise</span>
-      </a>
-      <nav class="nav" id="nav" aria-label="Ana menü">
-        <div class="nav-item has-dropdown">
-          <a class="nav-main-link" href="#solutions">Hizmetler</a>
-          <button class="nav-parent-toggle" type="button" aria-label="Hizmetler alt menüsünü aç/kapat" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
-          <div class="nav-dropdown" aria-label="Hizmetler alt menü">
-            <a class="nav-dropdown-link" href="ozel-yazilim.html">
-              <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-code"/></svg></span>
-              <span class="nav-dd-body">
-                <span class="nav-dd-title">Özel Yazılım Geliştirme</span>
-                <span class="nav-dd-desc">Kuruma özel ürün ve platform geliştirme</span>
-              </span>
-            </a>
-            <a class="nav-dropdown-link" href="mobil-gelistirme.html">
-              <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-smartphone"/></svg></span>
-              <span class="nav-dd-body">
-                <span class="nav-dd-title">Mobil Geliştirme</span>
-                <span class="nav-dd-desc">Native ve hybrid mobil uygulama çözümleri</span>
-              </span>
-            </a>
-            <a class="nav-dropdown-link" href="entegrasyon-otomasyon.html">
-              <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-plug"/></svg></span>
-              <span class="nav-dd-body">
-                <span class="nav-dd-title">Entegrasyon & Otomasyon</span>
-                <span class="nav-dd-desc">Sistemler arası veri akışı ve süreç otomasyonu</span>
-              </span>
-            </a>
-            <a class="nav-dropdown-link" href="guvenlik-denetim.html">
-              <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-shield"/></svg></span>
-              <span class="nav-dd-body">
-                <span class="nav-dd-title">Güvenlik & Denetim</span>
-                <span class="nav-dd-desc">Risk analizi, uyum ve güvenlik değerlendirmesi</span>
-              </span>
-            </a>
-            <a class="nav-dropdown-link" href="teknik-danismanlik.html">
-              <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-compass"/></svg></span>
-              <span class="nav-dd-body">
-                <span class="nav-dd-title">Teknik Danışmanlık</span>
-                <span class="nav-dd-desc">Mimari karar, ölçeklenme ve yol haritası</span>
-              </span>
-            </a>
-          </div>
-        </div>
-        <a class="nav-main-link" href="urunler.html">Ürünler</a>
-        <a class="nav-main-link" href="academy.html">Academy</a>
-        <a class="nav-main-link" href="kariyer.html">Kariyer</a>
-        <a class="nav-main-link" href="girisim-ortakligi.html">Fikir/Yatırım</a>
-        <a class="nav-main-link" href="#references">Referanslar</a>
-        <a class="nav-main-link" href="#contact">İletişim</a>
-        <div class="nav-mobile-footer">
-          <p class="nav-mobile-footer-label">Hızlı iletişim</p>
-          <div class="nav-mobile-actions">
-            <a class="nav-mobile-btn" href="tel:+905074216688" aria-label="Telefonla ara">Telefonla ara</a>
-            <a class="nav-mobile-btn nav-mobile-btn--wa" href="https://wa.me/905074216688" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile yazın">WhatsApp</a>
-          </div>
-        </div>
-      </nav>
-
-      <button type="button" class="menu-btn" id="menuBtn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="nav">
-        <svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-menu"/></svg>
-      </button>
-    </div>
-  </header>
-
-  <main id="main">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div class="hero-text reveal">
-          <div class="eyebrow">Kurumsal ölçekteki ihtiyaçlarınız için hız, güvenlik ve mühendislik disiplini bir arada.</div>
-
-          <h1>
-            Sadece yazılım değil;<br />
-            <span class="hero-heading-accent">ölçeklenebilir sistem mimarileri, bilgi güvenliği ve stratejik teknoloji çözümleri</span>
-            üretiyoruz.
-          </h1>
-
-          <p>
-            SoftenWise; hem köklü kurumların hem de dinamik girişimlerin dijital dönüşüm yolculuğuna eşlik eden bir mühendislik merkezidir.
-            <strong>Yazılım geliştirme</strong>, <strong>siber güvenlik</strong> ve <strong>stratejik danışmanlık</strong> alanlarında yüksek performanslı sistemler tasarlıyoruz.
-          </p>
-
-          <div class="hero-meta">
-            <span>Performans bütçesi (Lighthouse odaklı)</span>
-            <span>CI/CD</span>
-            <span>Monitoring + Log</span>
-          </div>
-
+    <main>
+      <section class="hero" id="anasayfa">
+        <div class="overlay"></div>
+        <img src="assets/logo-point-croissant.webp" alt="Point Croissant logo" class="hero-image" />
+        <div class="container hero-content">
+          <img src="assets/logo-point-croissant.webp" alt="Point Croissant logo" class="hero-emblem reveal" />
+          <h1>Güne Lezzetli Bir Başlangıç</h1>
+          <p>Çıtır katmanlar, özel reçeteler ve özenle hazırlanan sunumlar. Her lokmada kaliteyi hissedin.</p>
           <div class="hero-actions">
-            <a href="#contact" class="btn-primary">
-              15 dk teknik değerlendirme talep et
-            </a>
-            <a href="#solutions" class="btn-ghost"> Ne çözüyoruz? </a>
+            <a class="btn" href="lezzetler.html">Lezzetleri Keşfet</a>
+            <a class="btn btn-ghost" href="#iletisim">Bize Ulaş</a>
           </div>
-
-          <div class="trust-row" aria-label="Teslim standartları">
-            <div class="trust-pill">
-              <span class="dot" aria-hidden="true"></span>
-              <span>Net kapsam & plan</span>
-            </div>
-            <div class="trust-pill">
-              <span class="dot" aria-hidden="true"></span>
-              <span>Operasyonel teslim</span>
-            </div>
-            <div class="trust-pill">
-              <span class="dot" aria-hidden="true"></span>
-              <span>Canlı sonrası destek</span>
-            </div>
+          <div class="hero-mini-stats reveal">
+            <div><strong data-target="12">0</strong><span>Yıllık Ustalık</span></div>
+            <div><strong data-target="40">0</strong><span>Özel Tarif</span></div>
+            <div><strong data-target="1200">0</strong><span>Günlük Servis</span></div>
           </div>
         </div>
+      </section>
 
-        <div class="hero-products reveal" aria-label="Yeni ürünler vitrini">
-          <section class="product-showcase" id="productShowcase" data-autoplay-ms="5000">
-            <header class="product-showcase-head product-showcase-head--row">
-              <span class="product-showcase-title">Ürünlerimiz</span>
-              <a class="product-showcase-all" href="urunler.html">Tümünü gör</a>
-            </header>
+      
 
-            <div class="product-track" id="productTrack" role="list" aria-live="polite"></div>
-
-            <footer class="product-showcase-footer">
-              <div class="product-dots" id="productDots" aria-label="Ürün seçimi"></div>
-
-              <div class="product-controls">
-                <button type="button" class="product-nav-btn" id="productPrev" aria-label="Önceki ürün"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-arrow-left"/></svg></button>
-                <button type="button" class="product-nav-btn" id="productNext" aria-label="Sonraki ürün"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-arrow-right"/></svg></button>
-              </div>
-            </footer>
-          </section>
+      <section class="section products">
+        <div class="container card cta-band">
+          <div>
+            <p class="eyebrow">Lezzet Sayfası</p>
+            <h2>İmza kruvasanlarımız</h2>
+            <p>Tüm ürünleri tek sayfada inceleyebilirsiniz.</p>
+          </div>
+          <a class="btn" href="lezzetler.html">Lezzet Sayfasına Git</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- TRUST STRIP -->
-    <section class="trust-strip">
-      <div class="container trust-grid">
-        <div class="trust-item">
-          <strong>Net Kapsam</strong>
-          <span>Tam analiz</span>
-        </div>
-        <div class="trust-item">
-          <strong>Şeffaf Süreç</strong>
-          <span>Demo & raporlama</span>
-        </div>
-        <div class="trust-item">
-          <strong>Operasyonel Teslim</strong>
-          <span>Log, izleme, bakım</span>
-        </div>
-        <div class="trust-item">
-          <strong>Uzun Vadeli Sahiplik</strong>
-          <span>Ürün ve operasyon birlikte yürür</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOLUTIONS -->
-    <section class="services" id="solutions">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-kicker reveal">Hizmetlerimiz</span>
-          <h2 class="reveal">Sektöre Özel, Sonuç Odaklı Çözümler</h2>
-          <p class="section-desc reveal">
-            Her hizmette teknik kapsam, teslim modeli ve ölçümlenebilir hedefleri netleştiriyoruz.
-          </p>
-        </header>
-
-        <div class="service-grid">
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Özel Yazılım Geliştirme</h3>
-            </div>
-            <div class="service-badge">Platform / SaaS / B2B Sistemler</div>
-            <p>İşletmenizin kendine has ihtiyaçlarını, standart paket yazılımlarla geçiştirmeyin. Karmaşık süreçlerinizi basitleştiren, yüksek trafik altında bile performansından ödün vermeyen ve işinizle birlikte büyüyen modüler platformlar inşa ediyoruz.</p>
-            <ul class="mini-list">
-              <li>Analizden canlıya kadar tek ekip</li>
-              <li>API-first ve ölçeklenebilir mimari</li>
-              <li>Performans ve güvenlik odaklı kod kalitesi</li>
-            </ul>
-            <div class="service-meta">Ortalama teslim: 6-14 hafta</div>
-            <div class="service-card-actions">
-              <a href="ozel-yazilim.html" class="btn-ghost">Hizmeti İncele</a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Mobil Geliştirme</h3>
-            </div>
-            <div class="service-badge">iOS / Android / Cross-Platform</div>
-            <p>Native ve hibrit teknolojiler kullanarak, hem iOS hem de Android dünyasında kullanıcı deneyimi yüksek, performans odaklı mobil uygulamalar geliştiriyoruz.</p>
-            <ul class="mini-list">
-              <li>Ürün stratejisi ve UX akışı planlama</li>
-              <li>Yüksek performanslı mobil altyapı</li>
-              <li>Store release, analytics ve canlı takip</li>
-            </ul>
-            <div class="service-meta">Ortalama teslim: 4-10 hafta</div>
-            <div class="service-card-actions">
-              <a href="mobil-gelistirme.html" class="btn-ghost">Hizmeti İncele</a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Entegrasyon & Otomasyon</h3>
-            </div>
-            <div class="service-badge">ERP / CRM / Ödeme / Lojistik</div>
-            <p>Verimliliği engelleyen kopuk sistemleri birbirine bağlıyoruz. Farklı platformlar arasındaki veri akışını otomatize ederek, manuel hata payını sıfıra indiriyor ve ekibinizin vaktini stratejik işlere odaklamasını sağlıyoruz.</p>
-            <ul class="mini-list">
-              <li>Gerçek zamanlı veri senkronizasyonu</li>
-              <li>Süreç otomasyonu ile iş gücü tasarrufu</li>
-              <li>Hata azalımı için kontrol katmanları</li>
-            </ul>
-            <div class="service-meta">Ortalama teslim: 3-8 hafta</div>
-            <div class="service-card-actions">
-              <a href="entegrasyon-otomasyon.html" class="btn-ghost">Hizmeti İncele</a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Güvenlik & Denetim</h3>
-            </div>
-            <div class="service-badge">Pentest / Uyum / Risk Analizi</div>
-            <p>Güvenlik bir seçenek değil, bir zorunluluktur. Sistemlerinizi siber tehditlere karşı zırhlandırırken, yasal uyumluluk ve teknik denetim süreçlerinde yanınızda yer alarak dijital varlıklarınızı koruma altına alıyoruz.</p>
-            <ul class="mini-list">
-              <li>Teknik risk haritası ve önceliklendirme</li>
-              <li>Zafiyet analizi ve aksiyon planı</li>
-              <li>Denetime hazır raporlama formatları</li>
-            </ul>
-            <div class="service-meta">Ortalama teslim: 2-6 hafta</div>
-            <div class="service-card-actions">
-              <a href="guvenlik-denetim.html" class="btn-ghost">Hizmeti İncele</a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Teknik Danışmanlık</h3>
-            </div>
-            <div class="service-badge">CTO-as-a-Service / Mimari Rehberlik</div>
-            <p>Mimari kararlar, teknoloji seçimi ve modernizasyon süreçlerinde teknik borçlarınızı azaltacak, veriye dayalı stratejik rehberlik sunuyoruz.</p>
-            <ul class="mini-list">
-              <li>Mevcut sistem analizi ve teknik borç raporu</li>
-              <li>Ölçeklenebilirlik ve maliyet optimizasyonu</li>
-              <li>Ekip süreci ve teslim kalitesi iyileştirme</li>
-            </ul>
-            <div class="service-meta">Danışmanlık periyodu: aylık / çeyreklik</div>
-            <div class="service-card-actions">
-              <a href="teknik-danismanlik.html" class="btn-ghost">Hizmeti İncele</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="projects-showcase" id="projects">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-kicker reveal">Projelerimiz</span>
-          <h2 class="reveal">Detaylı Vaka Formatında İş Sonuçları</h2>
-          <p class="section-desc reveal">
-            Sadece ne yaptığımızı değil, nasıl yaptığımızı ve iş sonucuna etkisini de açıkça paylaşıyoruz.
-          </p>
-        </header>
-
-        <div class="project-grid">
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-sector">Sektör: Seyahat Teknolojileri</span>
-              <h3>Rezervasyon ve fiyatlama altyapısının yeniden mimarisi</h3>
-            </div>
-            <p class="project-summary">
-              Yavaşlayan işlem akışlarını, mikro-servis tabanlı bir yapıya taşıyarak trafik artışına hazır hale getirdik.
-            </p>
-            <div class="project-columns">
-              <div>
-                <strong>Sorun</strong>
-                <p>Artan trafikle birlikte checkout adımında gecikme ve yarıda bırakma oranı yüksekti.</p>
-              </div>
-              <div>
-                <strong>Çözüm</strong>
-                <p>Önbellek, kuyruk yapısı ve servis ayrımı ile kritik adımlarda süreleri optimize ettik.</p>
-              </div>
-              <div>
-                <strong>Etkisi</strong>
-                <p>Daha hızlı işlem akışıyla operasyonel süreklilik ve dönüşüm performansı güçlendi.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-sector">Sektör: Finans</span>
-              <h3>Kurumsal entegrasyon ve raporlama platformu</h3>
-            </div>
-            <p class="project-summary">
-              Farklı birimlerdeki dağınık verileri tek panelde birleştirip karar alma sürecini hızlandırdık.
-            </p>
-            <div class="project-columns">
-              <div>
-                <strong>Sorun</strong>
-                <p>Raporlar manuel hazırlanıyor, departmanlar arası veri tutarsızlığı oluşuyordu.</p>
-              </div>
-              <div>
-                <strong>Çözüm</strong>
-                <p>ETL süreçleri, API bağlantıları ve rol bazlı panel ile tek doğruluk kaynağı oluşturduk.</p>
-              </div>
-              <div>
-                <strong>Etkisi</strong>
-                <p>Raporlama süreleri kısaldı, yönetim için anlık ve güvenilir görünüm sağlandı.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-sector">Sektör: Hizmet ve Operasyon</span>
-              <h3>Saha ekipleri için mobil operasyon uygulaması</h3>
-            </div>
-            <p class="project-summary">
-              Saha ve merkez arasındaki koordinasyonu tek mobil uygulamada topladık; süreçleri izlenebilir yaptık.
-            </p>
-            <div class="project-columns">
-              <div>
-                <strong>Sorun</strong>
-                <p>Görev atama, tamamlanma ve kalite kontrol adımları dağınık araçlarla ilerliyordu.</p>
-              </div>
-              <div>
-                <strong>Çözüm</strong>
-                <p>Offline destekli mobil akışlar, bildirimler ve anlık durum paneli tasarladık.</p>
-              </div>
-              <div>
-                <strong>Etkisi</strong>
-                <p>Operasyonel görünürlük arttı; ekipler arası iletişim ve teslim kalitesi standartlaştı.</p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ECOSYSTEM -->
-    <section class="ecosystem" id="ecosystem">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">SoftenWise Ekosistemi</h2>
-          <p class="section-desc reveal">
-            Sadece yazılım geliştirmiyoruz; eğitim, ekip büyütme ve yeni fikirlerin hayata geçmesi için uçtan uca bir ekosistem sunuyoruz.
-          </p>
-        </header>
-
-        <div class="service-grid">
-          <article class="service-card ecosystem-card ecosystem-card--academy reveal" id="academy">
-            <div class="card-top">
-              <h3>SoftenWise Academy</h3>
-            </div>
-            <div class="ecosystem-badge">Eğitim Programı</div>
-            <p>
-              Mühendislik disiplinini ve ölçeklenebilir mimariyi merkeze alan bir gelişim ekosistemi; teoriyi gerçek dünya projeleriyle birleştirerek üretime hazır ekipler yetiştiriyoruz.
-            </p>
-            <ul class="mini-list">
-              <li>Teknik müfredat: .NET, React, Vue, mobil ve DevOps</li>
-              <li>Proje tabanlı bootcamp, mentorluk ve code review</li>
-              <li>Kuruma özel kapalı devre gelişim programları</li>
-            </ul>
-            <div class="service-card-actions">
-              <a href="academy.html" class="btn-ghost">Academy Sayfasına Git</a>
-            </div>
-          </article>
-
-          <article class="service-card ecosystem-card ecosystem-card--career reveal" id="careers">
-            <div class="card-top">
-              <h3>Bizimle Çalış</h3>
-            </div>
-            <div class="ecosystem-badge">Kariyer Fırsatı</div>
-            <p>
-              Yüksek trafikli sistemlerde mimari kararlarda sorumluluk alın; performans ve ölçeklenebilirlik sorunlarını gerçek projelerde çözün. Derin teknik yetkinlik ve ölçülebilir üretim disiplini hedefleyen ekibe katılın.
-            </p>
-            <ul class="mini-list">
-              <li>Backend, frontend, mobil ve QA rolleri</li>
-              <li>Şeffaf değerlendirme, hızlı geri dönüş</li>
-              <li>Code review, mentorluk ve net kariyer görünürlüğü</li>
-            </ul>
-            <div class="service-card-actions">
-              <a href="kariyer.html" class="btn-ghost">Kariyer Sayfasına Git</a>
-            </div>
-          </article>
-
-          <article class="service-card ecosystem-card ecosystem-card--venture reveal" id="ventures">
-            <div class="card-top">
-              <h3>Fikir Ortaklığı & Melek Yatırım</h3>
-            </div>
-            <div class="ecosystem-badge">Girişim Hattı</div>
-            <p>
-              Teknik doğrulama ve MVP ile vizyonu sürdürülebilir iş modeline dönüştürüyoruz; ortaklık veya melek yatırımla gelir, ölçek ve pazar uyumunu netleştiren yol haritası sunuyoruz.
-            </p>
-            <ul class="mini-list">
-              <li>Fizibilite, MVP ve hızlı iterasyon</li>
-              <li>Ortaklık / teknik çözüm ortaklığı / melek yatırım</li>
-              <li>Şeffaf, ölçülebilir değerlendirme süreci</li>
-            </ul>
-            <div class="service-card-actions">
-              <a href="girisim-ortakligi.html" class="btn-ghost">Fikir/Yatırım Sayfasına Git</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="references" id="references">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Referanslar</h2>
-          <p class="section-desc reveal">
-            Farklı sektörlerde birlikte çalıştığımız kurumlar.
-          </p>
-        </header>
-
-        <div class="logo-marquee logo-marquee--dual reveal" aria-label="Referans logoları">
-          <div class="logo-marquee-rows">
-            <div class="logo-marquee-row logo-marquee-row--ltr">
-              <div class="logo-track">
-                <div class="logo-item">
-                  <a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo web sitesini yeni sekmede aç">
-                    <img src="images/reference/sharingoref.png" alt="Sharingo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-label="AytuCar web sitesini yeni sekmede aç">
-                    <img src="images/reference/aytucarref.png" alt="AytuCar logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-label="Aytu Otomotiv web sitesini yeni sekmede aç">
-                    <img src="images/reference/aytuotomotivref.png" alt="Aytu Otomotiv logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-label="Otomini web sitesini yeni sekmede aç">
-                    <img src="images/reference/otominiref.png" alt="Otomini logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-label="Jenesis web sitesini yeni sekmede aç">
-                    <img src="images/reference/jenesisref.png" alt="Jenesis logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/destclinicaref.jpg" alt="Dest Clinic logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="SVA Group demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-social-tourism.svg" alt="Social Tourism demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-nova-rent.svg" alt="Nova Rent demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-systems.svg" alt="NPT Systems demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-finance.svg" alt="NPT Finance demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="SVA Group demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/sharingoref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/aytucarref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/aytuotomotivref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/otominiref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/jenesisref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/destclinicaref.jpg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-social-tourism.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-nova-rent.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-systems.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-finance.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-              </div>
-            </div>
-            <div class="logo-marquee-row logo-marquee-row--rtl">
-              <div class="logo-track">
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="SVA Group demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-finance.svg" alt="NPT Finance demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-systems.svg" alt="NPT Systems demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-nova-rent.svg" alt="Nova Rent demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-social-tourism.svg" alt="Social Tourism demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="SVA Group demo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/destclinicaref.jpg" alt="Dest Clinic logosu" loading="lazy" decoding="async" width="220" height="72" />
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-label="Jenesis web sitesini yeni sekmede aç">
-                    <img src="images/reference/jenesisref.png" alt="Jenesis logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-label="Otomini web sitesini yeni sekmede aç">
-                    <img src="images/reference/otominiref.png" alt="Otomini logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-label="Aytu Otomotiv web sitesini yeni sekmede aç">
-                    <img src="images/reference/aytuotomotivref.png" alt="Aytu Otomotiv logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-label="AytuCar web sitesini yeni sekmede aç">
-                    <img src="images/reference/aytucarref.png" alt="AytuCar logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo web sitesini yeni sekmede aç">
-                    <img src="images/reference/sharingoref.png" alt="Sharingo logosu" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-finance.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-npt-systems.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-nova-rent.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-social-tourism.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/demo-sva-group.svg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <img src="images/reference/destclinicaref.jpg" alt="" loading="lazy" decoding="async" width="220" height="72" aria-hidden="true" />
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/jenesisref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/otominiref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/aytuotomotivref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/aytucarref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-                <div class="logo-item">
-                  <a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-                    <img src="images/reference/sharingoref.png" alt="" loading="lazy" decoding="async" width="220" height="72" />
-                  </a>
-                </div>
-              </div>
-            </div>
+      <section class="section gallery" id="galeri">
+        <div class="container">
+          <div class="gallery-head">
+            <p class="eyebrow">Galeri</p>
+            <h2>Lezzet Galerisi</h2>
+          </div>
+          <div class="gallery-filters" id="gallery-filters">
+            <button class="gallery-filter active" type="button" data-filter="all">Tümü</button>
+            <button class="gallery-filter" type="button" data-filter="tatli">Tatlı</button>
+            <button class="gallery-filter" type="button" data-filter="meyveli">Meyveli</button>
+            <button class="gallery-filter" type="button" data-filter="premium">Premium</button>
+          </div>
+          <div class="gallery-grid" id="gallery-grid">
+            <article class="gallery-item" data-category="tatli premium"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 1" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="tatli"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 2" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="tatli"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 3" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="premium"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 4" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="meyveli"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 5" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="meyveli premium"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 6" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="premium"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 7" loading="lazy" decoding="async" /></article>
+            <article class="gallery-item" data-category="meyveli"><img src="assets/logo-point-croissant.webp" alt="Point Croissant logo galeri 8" loading="lazy" decoding="async" /></article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="services" id="resources">
-      <div class="container">
-        <header class="section-head">
-          <h2 class="reveal">Rehberler & Kaynaklar</h2>
-          <p class="section-desc reveal">
-            Sık aranan yazılım konuları için hazırlanan detaylı içerikler.
-          </p>
-        </header>
-        <div class="service-grid">
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Yazılım Firması Nasıl Seçilir?</h3>
-            </div>
-            <p>Doğru teknoloji ortağını seçmek, projenizin kaderini belirler. Teklif değerlendirmeden teknik kalite kontrolüne kadar kritik kontrol listeleri.</p>
-            <div class="service-card-actions">
-              <a href="yazilim-firmasi-nasil-secilir.html" class="btn-ghost">Rehberi Aç</a>
-            </div>
-          </article>
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Özel Yazılım Maliyeti Rehberi</h3>
-            </div>
-            <p>Yazılım maliyetlerindeki belirsizliği azaltın. Kapsam analizi, bütçe planlama ve şeffaf süreç yürütme rehberimizde.</p>
-            <div class="service-card-actions">
-              <a href="ozel-yazilim-maliyeti.html" class="btn-ghost">Rehberi Aç</a>
-            </div>
-          </article>
-          <article class="service-card reveal">
-            <div class="card-top">
-              <h3>Mobil Uygulama Süreci</h3>
-            </div>
-            <p>Fikirden App Store/Google Play yayınına kadar mobil uygulama geliştirme adımları.</p>
-            <div class="service-card-actions">
-              <a href="mobil-uygulama-gelistirme-sureci.html" class="btn-ghost">Rehberi Aç</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+      
 
-    <!-- CONTACT -->
-    <!-- CTA -->
-    <section class="cta" id="contact">
-      <div class="container reveal">
-        <h2>
-          Sistemlerinizin mevcut kapasitesi hedeflerinize ulaşmak için yeterli mi?
-        </h2>
+      
 
-        <p>
-          Gelin, 15 dakikalık ücretsiz bir teknik değerlendirme ile potansiyel riskleri ve iyileştirme fırsatlarını birlikte belirleyelim.
-          Formu doldurabilir, dilerseniz telefon ve e-posta üzerinden de doğrudan bize ulaşabilirsiniz.
-        </p>
-
-
-        <div class="cta-points">
-          <div class="trust-pill">
-            <span class="dot" aria-hidden="true"></span>
-            <span>Ücretsiz & bağlayıcı değil</span>
-          </div>
-          <div class="trust-pill">
-            <span class="dot" aria-hidden="true"></span>
-            <span>Teknik gözle değerlendirme</span>
-          </div>
-          <div class="trust-pill">
-            <span class="dot" aria-hidden="true"></span>
-            <span>Net yol haritası</span>
+      <section class="section contact" id="iletisim">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-card reveal" id="siparis">
+              <div class="contact-head">
+                <div class="location-icon map-premium-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" role="presentation"><path d="M12 2c-3.87 0-7 3.13-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                </div>
+                <div>
+                  <h2>İletişim & Konum Bilgileri</h2>
+                </div>
+              </div>
+              <ul>
+                <li><strong>Konum:</strong> <span id="contact-address-text">Şirinyalı Mah. Lara Cd. No:128/A, Muratpaşa / Antalya</span></li>
+                <li><strong>Telefon:</strong> <a id="contact-phone-link" href="tel:+905323150777"><span id="contact-phone-text">+90 532 315 07 77</span></a></li>
+                <li><strong>E-posta:</strong> <a id="contact-email-link" href="mailto:hello@pointcroissant.com"><span id="contact-email-text">hello@pointcroissant.com</span></a></li>
+                <li><strong>WhatsApp:</strong> <a id="contact-whatsapp-link" href="https://wa.me/905323150777" target="_blank" rel="noopener noreferrer"><span id="contact-whatsapp-text">+90 532 315 07 77</span></a></li>
+              </ul>
+              <div class="contact-actions">
+                <a id="route-link" class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Sirinyali+Mah.+Lara+Cd.+No:128/A+Muratpasa+Antalya&travelmode=driving" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="margin-right:8px;fill:currentColor;vertical-align:middle;">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"></path>
+                  </svg>
+                  Konuma Git
+                </a>
+                <a class="btn contact-ghost-btn" id="contact-whatsapp-cta" href="https://wa.me/905323150777" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M19.11 17.31c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.08-1.27-.77-.69-1.29-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.92-.21-.51-.42-.44-.58-.45h-.49c-.17 0-.45.06-.68.32-.24.26-.9.88-.9 2.14s.92 2.47 1.05 2.64c.13.17 1.8 2.74 4.37 3.84.61.26 1.09.42 1.46.54.61.19 1.16.16 1.6.1.49-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.06-.11-.24-.17-.5-.3z"></path>
+                    <path d="M16.03 3.03c-7.16 0-12.98 5.82-12.98 12.98 0 2.28.59 4.51 1.72 6.47L3 29l6.68-1.75a12.98 12.98 0 0 0 6.35 1.64h.01c7.16 0 12.98-5.82 12.98-12.98S23.2 3.03 16.03 3.03zm0 23.7h-.01a10.78 10.78 0 0 1-5.49-1.5l-.39-.23-3.96 1.04 1.06-3.87-.25-.4a10.8 10.8 0 0 1-1.66-5.76c0-5.96 4.85-10.81 10.81-10.81 2.89 0 5.61 1.13 7.65 3.17a10.73 10.73 0 0 1 3.16 7.65c0 5.96-4.85 10.81-10.82 10.81z"></path>
+                  </svg>
+                  WhatsApp ile İletişim
+                </a>
+              </div>
+              <div class="contact-sub-actions">
+                <a class="btn contact-call-btn" id="contact-call-btn" href="tel:+905323150777">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.1.37 2.29.57 3.51.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.22.2 2.41.57 3.51a1 1 0 0 1-.25 1.01l-2.2 2.28z"></path>
+                  </svg>
+                  Hemen Ara
+                </a>
+              </div>
+            </div>
+            <form class="card request-form reveal contact-request-form" id="request-form">
+              <p class="eyebrow">Bize Yazın</p>
+              <h3>İstek / Dilek / Öneri Formu</h3>
+              <p>Görüşlerinizi bizimle paylaşın</p>
+              <label for="rf-name">Ad Soyad</label>
+              <input id="rf-name" name="name" type="text" required />
+              <label for="rf-email">E-posta</label>
+              <input id="rf-email" name="email" type="email" required />
+              <label for="rf-phone">Telefon</label>
+              <input id="rf-phone" name="phone" type="text" required />
+              <label for="rf-message">Mesaj</label>
+              <textarea id="rf-message" name="message" rows="5" required></textarea>
+              <div class="request-actions">
+                <button class="btn" type="submit">Gönder</button>
+              </div>
+              <small id="request-feedback"></small>
+            </form>
           </div>
         </div>
+      </section>
+    </main>
 
-        <p class="section-desc">Hızlı iletişim: <a href="tel:+905074216688">+90 507 421 66 88</a> · <a href="mailto:info@softenwise.com">info@softenwise.com</a></p>
-        <div class="cta-quick-actions">
-          <a class="cta-quick-btn" href="tel:+905074216688" aria-label="Telefonla ara">Telefonla ara</a>
-          <a class="cta-quick-btn cta-quick-btn--whatsapp" href="https://wa.me/905074216688" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile yazın">WhatsApp</a>
-        </div>
+    <footer class="footer-detailed" id="site-footer"></footer>
 
-        <form id="contactForm" class="contact-form" data-contact-form data-submit-label="15 Dakikalık Teknik Görüşme Talep Et">
-          <input type="hidden" name="_subject" value="SoftenWise – Yeni İletişim Talebi">
-          <input type="text" name="_gotcha" style="display:none">
-
-          <div class="form-group">
-            <input type="text" name="name" placeholder="Ad Soyad" required />
-          </div>
-
-          <div class="form-group">
-            <input type="email" name="email" placeholder="E-posta" required />
-          </div>
-
-          <div class="form-group">
-            <textarea name="message" placeholder="Kısaca ihtiyacınızı anlatın" rows="4" required></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary">
-            15 Dakikalık Teknik Görüşme Talep Et
-          </button>
-
-          <!-- BASARI MESAJI -->
-          <p id="formSuccess" style="display:none; margin-top:16px; color:#2a5865; font-weight:600;">
-            Talebinizi aldık. En kısa sürede sizinle iletişime geçeceğiz.
-          </p>
-        </form>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-            <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="footer-brand">
-          <strong class="footer-logo-text">SoftenWise</strong>
-        </div>
-
-        <p class="footer-desc">
-          Biz sadece yazılım ajansı değiliz; teknolojiye dayalı büyüme stratejileri geliştiren bir mühendislik ortağıyız.
-        </p>
-
-        <p class="footer-note">
-          Söz verdiğimiz takvime sadık kalıyor, teslimat sonrasında da sistemlerinizin sağlığını sürekli izleyerek yanınızda duruyoruz.
-        </p>
-      </div>
-
-      <div class="footer-links">
-        <div class="footer-col">
-          <div class="footer-title">Hizmetler</div>
-          <a href="ozel-yazilim.html">Özel Yazılım</a>
-          <a href="mobil-gelistirme.html">Mobil Geliştirme</a>
-          <a href="entegrasyon-otomasyon.html">Entegrasyon & Otomasyon</a>
-          <a href="guvenlik-denetim.html">Güvenlik & Denetim</a>
-          <a href="teknik-danismanlik.html">Teknik Danışmanlık</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">Ekosistem</div>
-          <a href="urunler.html">Ürünler</a>
-          <a href="academy.html">Academy</a>
-          <a href="kariyer.html">Kariyer</a>
-          <a href="girisim-ortakligi.html">Fikir Ortaklığı</a>
-          <a href="kaynaklar.html">Kaynaklar</a>
-          <a href="index.html#references">Referanslar</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">İletişim</div>
-          <a class="contact-link" href="tel:+905074216688"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg></span><span>+90 507 421 66 88</span></a>
-          <a class="contact-link" href="mailto:info@softenwise.com"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-mail"/></svg></span><span>info@softenwise.com</span></a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">Sosyal Medya</div>
-          <a class="social-link" href="https://www.linkedin.com/in/softenwise-systems-4003a03b6/" target="_blank" rel="noopener noreferrer"><span class="social-dot social-dot--linkedin" aria-hidden="true">in</span><span>LinkedIn</span></a>
-          <a class="social-link" href="https://www.instagram.com/softenwise.systems/" target="_blank" rel="noopener noreferrer"><span class="social-dot social-dot--instagram" aria-hidden="true">ig</span><span>Instagram</span></a>
-        </div>
-      </div>
+    <div class="floating-actions">
+      <a class="call-float" id="call-float-link" href="tel:+905323150777" aria-label="Telefon ile ara">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.1.37 2.29.57 3.51.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.22.2 2.41.57 3.51a1 1 0 0 1-.25 1.01l-2.2 2.28z"></path>
+        </svg>
+        Hemen Ara
+      </a>
+      <a class="whatsapp-float" id="whatsapp-float-link" href="https://wa.me/905323150777" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişime geç">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M19.11 17.31c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.08-1.27-.77-.69-1.29-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.92-.21-.51-.42-.44-.58-.45h-.49c-.17 0-.45.06-.68.32-.24.26-.9.88-.9 2.14s.92 2.47 1.05 2.64c.13.17 1.8 2.74 4.37 3.84.61.26 1.09.42 1.46.54.61.19 1.16.16 1.6.1.49-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.06-.11-.24-.17-.5-.3z"></path>
+          <path d="M16.03 3.03c-7.16 0-12.98 5.82-12.98 12.98 0 2.28.59 4.51 1.72 6.47L3 29l6.68-1.75a12.98 12.98 0 0 0 6.35 1.64h.01c7.16 0 12.98-5.82 12.98-12.98S23.2 3.03 16.03 3.03zm0 23.7h-.01a10.78 10.78 0 0 1-5.49-1.5l-.39-.23-3.96 1.04 1.06-3.87-.25-.4a10.8 10.8 0 0 1-1.66-5.76c0-5.96 4.85-10.81 10.81-10.81 2.89 0 5.61 1.13 7.65 3.17a10.73 10.73 0 0 1 3.16 7.65c0 5.96-4.85 10.81-10.82 10.81z"></path>
+        </svg>
+        WhatsApp
+      </a>
     </div>
-
-    <div class="container footer-bottom">
-      © 2022–2026 SoftenWise · Tüm hakları saklıdır
-    </div>
-  </footer>
-  <script src="js/main.js?v=202604081" defer></script>
-</body>
-
+    <script src="layout.js" defer></script>
+    <script src="cms-runtime.js" defer></script>
+    <script src="site-settings.js" defer></script>
+    <script src="catalog.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="share.js" defer></script>
+    <script src="request-form.js" defer></script>
+  </body>
 </html>

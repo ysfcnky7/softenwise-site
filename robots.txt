@@ -1,24 +1,7 @@
-# SoftenWise — https://softenwise.com/
-# Arama motorları: tüm herkese açık sayfalar taranabilir.
-
 User-agent: *
 Allow: /
 
-# İç notlar ve dağıtım scriptleri dizini indekslenmesin
-Disallow: /notes.txt
-Disallow: /scripts/
+# Admin panel should not be indexed
+Disallow: /admin.html
 
-# Yapay zekâ / asistan özet dosyası (site haritasının yerine geçmez)
-Allow: /llms.txt
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Site haritası (Google Search Console’a da aynı URL’yi ekleyin)
-Sitemap: https://softenwise.com/sitemap.xml
+Sitemap: https://pointcroissant.com/sitemap.xml
