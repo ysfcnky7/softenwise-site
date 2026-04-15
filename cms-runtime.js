@@ -1,3 +1,4 @@
+(() => {
 const CMS_KEY = "pc_cms_content_v1";
 const CMS_ADMIN_MODE_KEY = "pc_admin_mode_v1";
 const CMS_SCHEMA_KEY = "pc_cms_schema_v1";
@@ -142,3 +143,4 @@ const mountAdminToolbar = () => {
 ensureCmsSchema();
 applyCms();
 mountAdminToolbar();
+})();

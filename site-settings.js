@@ -1,3 +1,4 @@
+(() => {
 const SETTINGS_KEY = "pc_settings_v1";
 const toLocalized = (tr = "", en = "", ru = "") => ({ tr, en, ru });
 const normalizeLocalized = (value, fallback = "") => {
@@ -94,3 +95,4 @@ setHref(
   "route-link",
   `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(localizedMapQuery)}&travelmode=driving`
 );
+})();

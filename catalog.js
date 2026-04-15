@@ -20,6 +20,17 @@ const getLocalized = (value, lang) => {
   const normalized = normalizeLocalized(value);
   return normalized[lang] || normalized.tr || "";
 };
+const clampText = (value, max) => {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  return text.length > max ? `${text.slice(0, max - 1)}…` : text;
+};
+const escapeHtml = (value) =>
+  String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 const UI_FALLBACK = {
   tr: { featured: "Öne Çıkan", selection: "Seçki" },
   en: { featured: "Featured", selection: "Selection" },
@@ -67,7 +78,7 @@ const normalizeProduct = (item) => ({
   description: normalizeLocalized(item.description),
   price: Number(item.price || 0),
   tag: normalizeLocalized(item.tag),
-  image: String(item.image || DEFAULT_PRODUCT_IMAGE).trim()
+  image: normalizeLocalized(item.image, DEFAULT_PRODUCT_IMAGE)
 });
 
 const parseProducts = () => {
@@ -103,16 +114,22 @@ const renderFeaturedProducts = (products) => {
 
   grid.innerHTML = products
     .map(
-      (item) => `
+      (item) => {
+        const imageSrc = escapeHtml(getLocalized(item.image, lang) || DEFAULT_PRODUCT_IMAGE);
+        const name = escapeHtml(clampText(getLocalized(item.name, lang), 64));
+        const desc = escapeHtml(clampText(getLocalized(item.description, lang), 220));
+        const tag = escapeHtml(clampText(getLocalized(item.tag, lang) || fallback.selection, 26));
+        return `
       <article class="card product-card reveal">
-        <img class="product-media" src="${item.image || DEFAULT_PRODUCT_IMAGE}" alt="${getLocalized(item.name, lang)}" loading="lazy" decoding="async" />
-        <span class="tag">${getLocalized(item.tag, lang) || fallback.selection}</span>
-        <h3>${getLocalized(item.name, lang)}</h3>
-        <p>${getLocalized(item.description, lang)}</p>
+        <img class="product-media" src="${imageSrc}" alt="${name}" loading="lazy" decoding="async" />
+        <span class="tag">${tag}</span>
+        <h3 class="product-title">${name}</h3>
+        <p class="product-desc">${desc}</p>
         <p><strong>${formatPrice(item.price)}</strong></p>
         <a href="#iletisim">Detay Al</a>
       </article>
-    `
+    `;
+      }
     )
     .join("");
 };
@@ -136,15 +153,21 @@ const renderMenuProducts = (products) => {
 
     highlightGrid.innerHTML = highlighted
       .map(
-        (item) => `
+        (item) => {
+          const imageSrc = escapeHtml(getLocalized(item.image, lang) || DEFAULT_PRODUCT_IMAGE);
+          const name = escapeHtml(clampText(getLocalized(item.name, lang), 64));
+          const desc = escapeHtml(clampText(getLocalized(item.description, lang), 220));
+          const tag = escapeHtml(clampText(getLocalized(item.tag, lang) || fallback.featured, 26));
+          return `
         <article class="card menu-highlight-card reveal">
-          <img class="menu-highlight-media" src="${item.image || DEFAULT_PRODUCT_IMAGE}" alt="${getLocalized(item.name, lang)}" loading="lazy" decoding="async" />
-          <p class="menu-kicker">${getLocalized(item.tag, lang) || fallback.featured}</p>
-          <h3>${getLocalized(item.name, lang)}</h3>
-          <p>${getLocalized(item.description, lang)}</p>
+          <img class="menu-highlight-media" src="${imageSrc}" alt="${name}" loading="lazy" decoding="async" />
+          <p class="menu-kicker">${tag}</p>
+          <h3 class="menu-highlight-title">${name}</h3>
+          <p class="menu-highlight-desc">${desc}</p>
           <p class="menu-price-pill">${formatPrice(item.price)}</p>
         </article>
-      `
+      `;
+        }
       )
       .join("");
   }
@@ -181,13 +204,13 @@ const renderMenuProducts = (products) => {
               .map(
                 (item) => `
                 <article class="menu-item-card">
-                  <img class="menu-item-media" src="${item.image || DEFAULT_PRODUCT_IMAGE}" alt="${getLocalized(item.name, lang)}" loading="lazy" decoding="async" />
+                  <img class="menu-item-media" src="${escapeHtml(getLocalized(item.image, lang) || DEFAULT_PRODUCT_IMAGE)}" alt="${escapeHtml(clampText(getLocalized(item.name, lang), 64))}" loading="lazy" decoding="async" />
                   <div class="menu-item-top">
-                    <h4>${getLocalized(item.name, lang)}</h4>
+                    <h4 class="menu-item-title">${escapeHtml(clampText(getLocalized(item.name, lang), 64))}</h4>
                     <span class="menu-item-price">${formatPrice(item.price)}</span>
                   </div>
-                  <p>${getLocalized(item.description, lang)}</p>
-                  <small>${getLocalized(item.tag, lang) || fallback.selection}</small>
+                  <p class="menu-item-desc">${escapeHtml(clampText(getLocalized(item.description, lang), 220))}</p>
+                  <small>${escapeHtml(clampText(getLocalized(item.tag, lang) || fallback.selection, 26))}</small>
                 </article>
               `
               )

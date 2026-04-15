@@ -1,3 +1,4 @@
+(() => {
 const CMS_ADMIN_MODE_KEY = "pc_admin_mode_v1";
 const CMS_KEY = "pc_cms_content_v1";
 
@@ -6,9 +7,51 @@ const openEditorBtn = document.getElementById("cms-open-editor");
 const disableEditorBtn = document.getElementById("cms-disable-editor");
 const clearAllBtn = document.getElementById("cms-clear-all");
 const cmsFeedback = document.getElementById("cms-feedback");
+const cmsSummary = document.getElementById("cms-summary");
 
 const setFeedback = (text) => {
   if (cmsFeedback) cmsFeedback.textContent = text;
+};
+
+const renderCmsSummary = () => {
+  if (!cmsSummary) return;
+  let data = {};
+  try {
+    const raw = localStorage.getItem(CMS_KEY);
+    data = raw ? JSON.parse(raw) : {};
+  } catch {
+    data = {};
+  }
+
+  const entries = Object.entries(data).map(([page, records]) => ({
+    page,
+    count: records && typeof records === "object" ? Object.keys(records).length : 0
+  }));
+
+  if (!entries.length) {
+    cmsSummary.innerHTML = "<p>Kayıt bulunamadı.</p>";
+    return;
+  }
+
+  cmsSummary.innerHTML = `
+    <table class="menu-table">
+      <thead>
+        <tr><th>Sayfa</th><th>Kayıt</th></tr>
+      </thead>
+      <tbody>
+        ${entries
+          .map(
+            (item) => `
+          <tr>
+            <td>${item.page}</td>
+            <td>${item.count}</td>
+          </tr>
+        `
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
 };
 
 const getActiveLang = () => {
@@ -47,5 +90,9 @@ if (clearAllBtn) {
     if (!ok) return;
     localStorage.removeItem(CMS_KEY);
     setFeedback("Tüm sayfa içerik düzenlemeleri sıfırlandı.");
+    renderCmsSummary();
   });
 }
+
+renderCmsSummary();
+})();

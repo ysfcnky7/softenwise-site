@@ -1,3 +1,4 @@
+(() => {
 const requestForm = document.getElementById("request-form");
 const requestFeedback = document.getElementById("request-feedback");
 const requestSettingsRaw = localStorage.getItem("pc_settings_v1");
@@ -79,3 +80,4 @@ if (requestForm) {
     }
   });
 }
+})();
