@@ -193,6 +193,52 @@ a {
   color: var(--logo-green-on-dark);
 }
 
+/* Wordmark: metin + SVG (şeffaf, koyu header üzerinde) */
+.logo-wordmark {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.02em;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+  font-weight: 800;
+  font-size: 1.48rem;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--logo-green-on-dark);
+  text-transform: lowercase;
+}
+
+.site-header .logo-wordmark {
+  color: var(--logo-green-on-dark);
+}
+
+.logo-wordmark__t {
+  white-space: nowrap;
+}
+
+.logo-wordmark__o {
+  display: block;
+  height: 1.12em;
+  width: calc(1.12em * 50 / 108);
+  flex: 0 0 auto;
+  margin-inline: -0.01em -0.03em;
+  align-self: center;
+  position: relative;
+  top: 0.04em;
+}
+
+.logo-wordmark--footer {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--logo-green-on-dark);
+}
+
+.logo-wordmark--footer .logo-wordmark__o {
+  height: 1.08em;
+  width: calc(1.08em * 50 / 108);
+  top: 0.03em;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -2619,6 +2665,10 @@ a {
   .logo-text {
     font-size: 1.35rem;
   }
+
+  .site-header .logo-wordmark {
+    font-size: 1.35rem;
+  }
 }
 
 /* RESPONSIVE */
@@ -3782,6 +3832,10 @@ a {
   }
 
   .site-header .logo-text {
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  }
+
+  .site-header .logo-wordmark {
     font-size: clamp(1.05rem, 4.5vw, 1.35rem);
   }
 
