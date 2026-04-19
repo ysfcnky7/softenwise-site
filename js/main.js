@@ -321,19 +321,19 @@ const featuredProducts = [
     detailUrl: "urunler.html#otomini",
   },
   {
-    name: "SoftenWise GeoMaps",
-    image: "images/geomaps_logo.png",
-    imageAlt: "SoftenWise GeoMaps ürün logosu",
+    name: "SoftenWise Maps",
+    image: "images/softenwise-maps-logo.png",
+    imageAlt: "SoftenWise Maps ürün logosu",
     imageMode: "contain",
     description:
-      "Konuma dayalı süreçleri anlık izleyin ve optimize edin; saha için modüler takip ekosistemi.",
+      "Saha operasyonlarınızı tek panelden harita üzerinde izleyin, analiz edin ve yönetin; kurumsal CBS ve REST API.",
     bullets: [
-      "Anlık takip: konum ve geçmiş rota",
-      "Operasyonel verimlilik: iş emri ve lokasyon",
-      "Modüler yapı: düzenli yeni özellikler",
+      "Harita ve katman: çizim, odak, güvenli / yasaklı bölge",
+      "Rota ve analiz: OSRM tabanlı rota, mesafe matrisi, buffer",
+      "Çok kiracılı mimari: kiracı izolasyonu ve rol tabanlı erişim",
     ],
-    cta: "Detaya git",
-    detailUrl: "urunler.html#geomaps",
+    cta: "Ürün sitesine git",
+    detailUrl: "https://softenwisemaps.com/",
   },
 ];
 
