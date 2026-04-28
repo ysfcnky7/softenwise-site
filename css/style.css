@@ -1778,6 +1778,14 @@ body.menu-open .quick-contact {
   padding: 20px;
 }
 
+.product-tile-media--bloc {
+  background: linear-gradient(180deg, #0a1628 0%, #0f2740 100%);
+}
+
+.product-tile-media--bloc img {
+  padding: 24px;
+}
+
 .product-tile-body {
   padding: 20px 20px 22px;
   display: flex;
