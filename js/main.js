@@ -354,6 +354,22 @@ const featuredProducts = [
     cta: "Ürün sitesine git",
     detailUrl: "https://softenwisemaps.com/",
   },
+  {
+    name: "BLOC",
+    image: "images/bloc-logo.png",
+    imageAlt: "BLOC mobil uygulama logosu",
+    imageMode: "contain",
+    label: "Mobil uygulama",
+    description:
+      "Gayrimenkul ve topluluk odaklı deneyim: BLOC ile iOS ve Android’de portföy ve şehir tarafını modern, güven veren bir mobil uygulamada birleştirin.",
+    bullets: [
+      "App Store ve Google Play üzerinden indirilebilir",
+      "Gayrimenkul ve topluluk akışlarına uygun arayüz",
+      "SoftenWise mühendislik kalitesiyle geliştirildi",
+    ],
+    cta: "Detaya git",
+    detailUrl: "urunler.html#bloc",
+  },
 ];
 
 const productShowcase = document.getElementById("productShowcase");
