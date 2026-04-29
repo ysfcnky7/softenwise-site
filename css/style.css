@@ -1943,6 +1943,45 @@ body.menu-open .quick-contact {
   align-items: center;
 }
 
+/* Mağaza rozetleri (App Store / Google Play görünümü) */
+.store-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.product-tile-actions .store-badge-row {
+  flex: 1 1 100%;
+}
+
+.store-badge-link {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 6px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.store-badge-link:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.store-badge-link:focus-visible {
+  outline: 2px solid rgba(var(--accent-2-rgb), 0.85);
+  outline-offset: 3px;
+}
+
+.store-badge-link img {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+.store-badge-link--play img {
+  height: 44px;
+}
+
 .product-detail-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
