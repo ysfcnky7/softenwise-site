@@ -973,6 +973,27 @@ body.menu-open .quick-contact {
   transform: translateX(2px);
 }
 
+.product-card-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.product-card-footer .store-badge-row {
+  flex-wrap: wrap;
+}
+
+a.product-cta {
+  text-decoration: none;
+  color: var(--accent-2);
+}
+
+a.product-cta:hover {
+  color: var(--accent-deep);
+}
+
 .product-showcase-footer {
   display: flex;
   align-items: center;
@@ -1980,6 +2001,35 @@ body.menu-open .quick-contact {
 
 .store-badge-link--play img {
   height: 44px;
+}
+
+/* Rozetlerin yanında / altında: doğrudan Android ve iOS metin linkleri */
+.store-alt-links {
+  margin: 0;
+  flex: 1 1 100%;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.product-detail-cta-row .store-alt-links {
+  flex: 1 1 100%;
+}
+
+.store-alt-links a {
+  color: var(--accent-2);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.store-alt-links a:hover {
+  text-decoration: underline;
+}
+
+.store-alt-sep {
+  margin: 0 0.35em;
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .product-detail-grid {

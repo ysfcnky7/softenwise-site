@@ -369,6 +369,10 @@ const featuredProducts = [
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#bloc",
+    storeLinks: {
+      play: "https://play.google.com/store/search?q=BLOC%20SoftenWise&c=apps",
+      appStore: "https://apps.apple.com/tr/search?term=BLOC%20SoftenWise",
+    },
   },
 ];
 
@@ -397,11 +401,19 @@ if (
     item.setAttribute("aria-hidden", "true");
 
     const linkUrl = (product.detailUrl || product.url || "").trim();
-    const wrapperTag = linkUrl ? "a" : "div";
+    const sl = product.storeLinks;
+    const hasStoreLinks =
+      sl &&
+      typeof sl.play === "string" &&
+      sl.play.trim() &&
+      typeof sl.appStore === "string" &&
+      sl.appStore.trim();
+    const cardIsWholeLink = Boolean(linkUrl) && !hasStoreLinks;
+    const wrapperTag = cardIsWholeLink ? "a" : "div";
     const wrapper = document.createElement(wrapperTag);
     wrapper.className = "product-card";
 
-    if (linkUrl) {
+    if (cardIsWholeLink && linkUrl) {
       wrapper.href = linkUrl;
       const isExternal = /^https?:\/\//i.test(linkUrl);
       if (isExternal) {
@@ -414,7 +426,7 @@ if (
       } else {
         wrapper.setAttribute("aria-label", `${product.name} ürün detayına git`);
       }
-    } else {
+    } else if (!linkUrl) {
       item.classList.add("is-disabled");
     }
 
@@ -444,6 +456,27 @@ if (
       ? `<span class="product-badge">${product.label}</span>`
       : "";
 
+    const hrefAttr = (u) => String(u).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+
+    const footerHtml = hasStoreLinks
+      ? `<div class="product-card-footer">
+      <div class="store-badge-row">
+        <a class="store-badge-link store-badge-link--play" href="${hrefAttr(sl.play)}" target="_blank" rel="noopener noreferrer" aria-label="Google Play’de indir">
+          <img src="images/badge-google-play.svg?v=1" alt="" width="155" height="46" loading="lazy" decoding="async" />
+        </a>
+        <a class="store-badge-link" href="${hrefAttr(sl.appStore)}" target="_blank" rel="noopener noreferrer" aria-label="App Store’da indir">
+          <img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="lazy" decoding="async" />
+        </a>
+      </div>
+      <p class="store-alt-links">
+        <a href="${hrefAttr(sl.play)}" target="_blank" rel="noopener noreferrer">Android — Google Play</a>
+        <span class="store-alt-sep" aria-hidden="true">·</span>
+        <a href="${hrefAttr(sl.appStore)}" target="_blank" rel="noopener noreferrer">iOS — App Store</a>
+      </p>
+      <a class="product-cta" href="${hrefAttr(linkUrl)}">${product.cta}</a>
+    </div>`
+      : `<div class="product-cta">${product.cta}</div>`;
+
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
@@ -454,7 +487,7 @@ if (
       <ul class="product-list">
         ${product.bullets.map((bullet) => `<li>${bullet}</li>`).join("")}
       </ul>
-      <div class="product-cta">${product.cta}</div>
+      ${footerHtml}
     `;
 
     item.appendChild(wrapper);
