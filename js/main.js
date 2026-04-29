@@ -296,9 +296,9 @@ if (prefersReducedMotion) {
 const featuredProducts = [
   {
     name: "SoftenWise Clinic",
-    image: "images/clinic_image.png",
-    imageAlt: "SoftenWise Clinic ürün görseli",
-    imageMode: "cover",
+    image: "images/softenwise-clinic-logo.png",
+    imageAlt: "SoftenWise Clinic logosu",
+    imageMode: "contain",
     description:
       "Sağlıkta dijital dönüşümün yalın hali: randevudan hasta takibine, finanstan raporlamaya klinik süreçleri tek merkezden yönetin.",
     bullets: [
@@ -308,36 +308,6 @@ const featuredProducts = [
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#softenwise-clinic",
-  },
-  {
-    name: "Envantra",
-    image: "images/envantra-logo.png",
-    imageAlt: "Envantra logosu — stok, satış ve fatura yönetimi",
-    imageMode: "contain",
-    description:
-      "Stok, satış ve faturayı tek panelde toplayan envanter hattı; çoklu depo ve varyantlarla tezgahtan sahaya aynı görünürlük.",
-    bullets: [
-      "Stok: kritik uyarılar, hareket ve depo görünürlüğü",
-      "Satış ve fatura: hızlı satır akışı, gün sonu özeti",
-      "Mobil: iOS vitrin + operasyon odaklı deneyim",
-    ],
-    cta: "Detaya git",
-    detailUrl: "urunler.html#envantra",
-  },
-  {
-    name: "Otomini",
-    image: "images/otomini-logo.webp",
-    imageAlt: "Otomini logosu — ikinci el araç değerleme ve galeri",
-    imageMode: "contain",
-    description:
-      "İkinci elde güven: anlık değerleme, şeffaf ekspertiz ve profesyonel galeri vitrini.",
-    bullets: [
-      "Akıllı değerleme: marka, model, donanım",
-      "Şeffaf ekspertiz: tramer ve hasar özeti",
-      "İlan yönetimi: vitrinde öne çıkma",
-    ],
-    cta: "Detaya git",
-    detailUrl: "urunler.html#otomini",
   },
   {
     name: "SoftenWise Maps",
@@ -369,6 +339,46 @@ const featuredProducts = [
     ],
     cta: "Detaya git",
     detailUrl: "urunler.html#bloc",
+    storeLinks: {
+      play: "https://play.google.com/store/search?q=BLOC%20SoftenWise&c=apps",
+      appStore: "https://apps.apple.com/tr/search?term=BLOC%20SoftenWise",
+    },
+  },
+  {
+    name: "Otomini",
+    image: "images/otomini-logo.webp",
+    imageAlt: "Otomini logosu — ikinci el araç değerleme ve galeri",
+    imageMode: "contain",
+    description:
+      "İkinci elde güven: anlık değerleme, şeffaf ekspertiz ve profesyonel galeri vitrini.",
+    bullets: [
+      "Akıllı değerleme: marka, model, donanım",
+      "Şeffaf ekspertiz: tramer ve hasar özeti",
+      "İlan yönetimi: vitrinde öne çıkma",
+    ],
+    cta: "Detaya git",
+    detailUrl: "urunler.html#otomini",
+  },
+  {
+    name: "Envantra",
+    image: "images/envantra-logo.png",
+    imageAlt: "Envantra logosu — stok, satış ve fatura yönetimi",
+    imageMode: "contain",
+    label: "Mobil uygulama",
+    description:
+      "Stok, satış ve faturayı tek panelde toplayan envanter hattı; çoklu depo ve varyantlarla tezgahtan sahaya aynı görünürlük.",
+    bullets: [
+      "Stok: kritik uyarılar, hareket ve depo görünürlüğü",
+      "Satış ve fatura: hızlı satır akışı, gün sonu özeti",
+      "Mobil: iOS vitrin + operasyon odaklı deneyim",
+    ],
+    cta: "Detaya git",
+    detailUrl: "urunler.html#envantra",
+    storeLinks: {
+      play: "https://play.google.com/store/search?q=Envantra%20SoftenWise&c=apps",
+      appStore: "https://apps.apple.com/tr/search?term=Envantra%20SoftenWise",
+    },
+    storeLinksInactive: true,
   },
 ];
 
@@ -397,11 +407,19 @@ if (
     item.setAttribute("aria-hidden", "true");
 
     const linkUrl = (product.detailUrl || product.url || "").trim();
-    const wrapperTag = linkUrl ? "a" : "div";
+    const sl = product.storeLinks;
+    const hasStoreLinks =
+      sl &&
+      typeof sl.play === "string" &&
+      sl.play.trim() &&
+      typeof sl.appStore === "string" &&
+      sl.appStore.trim();
+    const cardIsWholeLink = Boolean(linkUrl) && !hasStoreLinks;
+    const wrapperTag = cardIsWholeLink ? "a" : "div";
     const wrapper = document.createElement(wrapperTag);
     wrapper.className = "product-card";
 
-    if (linkUrl) {
+    if (cardIsWholeLink && linkUrl) {
       wrapper.href = linkUrl;
       const isExternal = /^https?:\/\//i.test(linkUrl);
       if (isExternal) {
@@ -414,7 +432,7 @@ if (
       } else {
         wrapper.setAttribute("aria-label", `${product.name} ürün detayına git`);
       }
-    } else {
+    } else if (!linkUrl) {
       item.classList.add("is-disabled");
     }
 
@@ -444,6 +462,42 @@ if (
       ? `<span class="product-badge">${product.label}</span>`
       : "";
 
+    const hrefAttr = (u) => String(u).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+
+    let footerHtml;
+    if (hasStoreLinks) {
+      const storeFooterInactive = Boolean(product.storeLinksInactive);
+      const playBadgeImg = `<img src="images/badge-google-play.svg?v=1" alt="" width="155" height="46" loading="lazy" decoding="async" />`;
+      const appBadgeImg = `<img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="lazy" decoding="async" />`;
+      const playBadgeImgInactive = `<img src="images/badge-google-play.svg?v=1" alt="" width="155" height="46" loading="lazy" decoding="async" aria-hidden="true" />`;
+      const appBadgeImgInactive = `<img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="lazy" decoding="async" aria-hidden="true" />`;
+
+      const playBadge = storeFooterInactive
+        ? `<span class="store-badge-link store-badge-link--play store-badge-link--inactive" role="img" aria-label="Google Play — yakında">${playBadgeImgInactive}</span>`
+        : `<a class="store-badge-link store-badge-link--play" href="${hrefAttr(sl.play)}" target="_blank" rel="noopener noreferrer" aria-label="Google Play’de indir">${playBadgeImg}</a>`;
+      const appBadge = storeFooterInactive
+        ? `<span class="store-badge-link store-badge-link--inactive" role="img" aria-label="App Store — yakında">${appBadgeImgInactive}</span>`
+        : `<a class="store-badge-link" href="${hrefAttr(sl.appStore)}" target="_blank" rel="noopener noreferrer" aria-label="App Store’da indir">${appBadgeImg}</a>`;
+      const altLinksRow = storeFooterInactive
+        ? `<p class="store-alt-links store-alt-links--inactive"><span>Android — Google Play</span><span class="store-alt-sep" aria-hidden="true">·</span><span>iOS — App Store</span></p>`
+        : `<p class="store-alt-links">
+        <a href="${hrefAttr(sl.play)}" target="_blank" rel="noopener noreferrer">Android — Google Play</a>
+        <span class="store-alt-sep" aria-hidden="true">·</span>
+        <a href="${hrefAttr(sl.appStore)}" target="_blank" rel="noopener noreferrer">iOS — App Store</a>
+      </p>`;
+
+      footerHtml = `<div class="product-card-footer">
+      <div class="store-badge-row">
+        ${playBadge}
+        ${appBadge}
+      </div>
+      ${altLinksRow}
+      <a class="product-cta" href="${hrefAttr(linkUrl)}">${product.cta}</a>
+    </div>`;
+    } else {
+      footerHtml = `<div class="product-cta">${product.cta}</div>`;
+    }
+
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
@@ -454,7 +508,7 @@ if (
       <ul class="product-list">
         ${product.bullets.map((bullet) => `<li>${bullet}</li>`).join("")}
       </ul>
-      <div class="product-cta">${product.cta}</div>
+      ${footerHtml}
     `;
 
     item.appendChild(wrapper);
