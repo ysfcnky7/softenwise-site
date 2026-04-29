@@ -361,10 +361,10 @@ const featuredProducts = [
     imageMode: "contain",
     label: "Mobil uygulama",
     description:
-      "Gayrimenkul ve topluluk odaklı deneyim: BLOC ile iOS ve Android’de portföy ve şehir tarafını modern, güven veren bir mobil uygulamada birleştirin.",
+      "Topluluk ve sosyal akış odaklı mobil uygulama: BLOC ile iOS ve Android’de paylaşım, keşif ve etkileşimi modern bir arayüzde birleştirin.",
     bullets: [
       "App Store ve Google Play üzerinden indirilebilir",
-      "Gayrimenkul ve topluluk akışlarına uygun arayüz",
+      "Sosyal akış ve topluluk etkileşimine uygun arayüz",
       "SoftenWise mühendislik kalitesiyle geliştirildi",
     ],
     cta: "Detaya git",

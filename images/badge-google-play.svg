@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="155" height="46" viewBox="0 0 155 46" role="img" aria-hidden="true">
+  <title>Get it on Google Play</title>
+  <rect width="155" height="46" rx="6" fill="#000"/>
+  <!-- Google Play icon (four segments → play shape) -->
+  <g transform="translate(9 9)">
+    <path fill="#00D9FF" d="M0 0v28l14-14z"/>
+    <path fill="#00F076" d="M0 0l14 14 4-4V4z"/>
+    <path fill="#FFD500" d="M0 28l14-14-4-4v18z"/>
+    <path fill="#FF3A44" d="M18 10l10 4-10 4V10z"/>
+  </g>
+  <text x="46" y="18" fill="#a8a8a8" font-family="system-ui, Roboto, sans-serif" font-size="8" font-weight="500">GET IT ON</text>
+  <text x="46" y="32" fill="#fff" font-family="system-ui, Roboto, sans-serif" font-size="14" font-weight="500">Google Play</text>
+</svg>
