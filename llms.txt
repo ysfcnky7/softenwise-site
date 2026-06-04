@@ -15,7 +15,6 @@ https://softenwise.com/sitemap.xml
 
 ## Products
 - SoftenWise Clinic — https://softenwise.com/urunler.html#softenwise-clinic · https://softenwiseclinic.com/
-- Envantra (stok, satış, fatura) — https://softenwise.com/urunler.html#envantra · https://www.envantra.com/
 - Otomini (ikinci el araç, değerleme, galeri) — https://softenwise.com/urunler.html#otomini · https://otomini.com/
 - SoftenWise Maps (kurumsal CBS / harita) — https://softenwisemaps.com/ · https://softenwise.com/urunler.html#softenwise-maps
 - BLOC (topluluk / sosyal akış, iOS ve Android mobil uygulama) — https://softenwise.com/urunler.html#bloc

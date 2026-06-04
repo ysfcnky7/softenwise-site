@@ -359,27 +359,6 @@ const featuredProducts = [
     cta: "Detaya git",
     detailUrl: "urunler.html#otomini",
   },
-  {
-    name: "Envantra",
-    image: "images/envantra-logo.png",
-    imageAlt: "Envantra logosu — stok, satış ve fatura yönetimi",
-    imageMode: "contain",
-    label: "Mobil uygulama",
-    description:
-      "Stok, satış ve faturayı tek panelde toplayan envanter hattı; çoklu depo ve varyantlarla tezgahtan sahaya aynı görünürlük.",
-    bullets: [
-      "Stok: kritik uyarılar, hareket ve depo görünürlüğü",
-      "Satış ve fatura: hızlı satır akışı, gün sonu özeti",
-      "Mobil: iOS vitrin + operasyon odaklı deneyim",
-    ],
-    cta: "Detaya git",
-    detailUrl: "urunler.html#envantra",
-    storeLinks: {
-      play: "https://play.google.com/store/search?q=Envantra%20SoftenWise&c=apps",
-      appStore: "https://apps.apple.com/tr/search?term=Envantra%20SoftenWise",
-    },
-    storeLinksInactive: true,
-  },
 ];
 
 const productShowcase = document.getElementById("productShowcase");
