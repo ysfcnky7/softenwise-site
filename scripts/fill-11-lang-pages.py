@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCALES = ROOT / "js" / "locales.js"
 
 # Load DE/FR/ES/IT/NL/PT from partial module
-ns: dict = {}
+ns: dict = {"__file__": str(ROOT / "scripts" / "_packs_partial.py"), "__name__": "_packs_partial"}
 exec((ROOT / "scripts" / "_packs_partial.py").read_text(encoding="utf-8"), ns)
 DE, FR, ES, IT, NL, PT = ns["DE"], ns["FR"], ns["ES"], ns["IT"], ns["NL"], ns["PT"]
 
