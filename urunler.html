@@ -102,7 +102,7 @@
   </script>
 </head>
 
-<body class="page-product page-urunler">
+<body class="page-product page-urunler" data-i18n-title="urunler.title" data-i18n-desc="urunler.desc">
   <a class="skip-link" href="#main">İçeriğe atla</a>
   <script src="js/sprite-inject.js?v=202607163"></script>
   <header class="site-header" id="header">
@@ -221,15 +221,14 @@
   <main id="main">
     <section class="page-hero">
       <div class="container">
-        <p class="page-hero__brand">SoftenWise</p>
-        <h1 class="page-hero__title">Ürünler</h1>
-        <p class="page-hero__lead">
-          Klinikten haritaya, mobil uygulamaya: geliştirdiğimiz ürünleri burada topladık.
-          Özel yazılım veya entegrasyon için <a href="index.html#solutions">hizmetlerimize</a> bakın.
+        <p class="page-hero__brand" data-i18n="urunler.brand">SoftenWise</p>
+        <h1 class="page-hero__title" data-i18n="urunler.h1">Ürünler</h1>
+        <p class="page-hero__lead" data-i18n="urunler.lead" data-i18n-html>
+          Klinikten haritaya, mobil uygulamaya: geliştirdiğimiz ürünleri burada topladık. Özel yazılım veya entegrasyon için <a href="index.html#solutions">hizmetlerimize</a> bakın.
         </p>
         <div class="page-hero__actions">
-          <a href="#softenwise-clinic" class="btn-primary">Ürünleri incele</a>
-          <a href="index.html#contact" class="btn-ghost">Görüşme talep et</a>
+          <a href="#softenwise-clinic" class="btn-primary" data-i18n="urunler.cta1">Ürünleri inceleyin</a>
+          <a href="index.html#contact" class="btn-ghost" data-i18n="urunler.cta2">Görüşme talep et</a>
         </div>
       </div>
     </section>
@@ -237,10 +236,10 @@
     <section class="products-page" aria-labelledby="products-heading">
       <div class="container">
         <header class="section-head">
-          <h2 id="products-heading" class="reveal">Öne çıkanlar</h2>
+          <h2 id="products-heading" class="reveal" data-i18n="urunler.featured">Öne çıkanlar</h2>
         </header>
 
-        <nav class="product-jump reveal" aria-label="Ürün detay bölümlerine git">
+        <nav class="product-jump reveal" aria-label="Ürün detay bölümlerine git" data-i18n-attr="aria-label:urunler.jump">
           <a class="product-jump-link" href="#softenwise-clinic">
             <span class="product-jump-icon" aria-hidden="true">
               <img src="images/softenwise-clinic-logo.png" alt="" width="48" height="48" loading="eager" decoding="async" />
@@ -277,9 +276,9 @@
                 <img src="images/softenwise-clinic-logo.png" alt="" width="180" height="48" loading="lazy" decoding="async" />
               </div>
               <h3>SoftenWise Clinic</h3>
-              <p class="product-tile-desc">Randevudan finansa klinik süreçleri tek panelde yönetin.</p>
+              <p class="product-tile-desc" data-i18n="urunler.clinic.desc">Randevudan finansa klinik süreçleri tek panelde yönetin.</p>
               <div class="product-tile-actions">
-                <a class="btn-primary" href="#softenwise-clinic">Teknik detayları incele</a>
+                <a class="btn-primary" href="#softenwise-clinic" data-i18n="urunler.clinic.cta">Teknik detayları inceleyin</a>
               </div>
             </div>
           </article>
@@ -290,9 +289,9 @@
             </a>
             <div class="product-tile-body">
               <h3>Otomini</h3>
-              <p class="product-tile-desc">İkinci el araç değerleme, ekspertiz ve galeri vitrini.</p>
+              <p class="product-tile-desc" data-i18n="urunler.otomini.desc">İkinci el araç değerleme, ekspertiz ve galeri vitrini.</p>
               <div class="product-tile-actions">
-                <a class="btn-primary" href="#otomini">Teknik detayları incele</a>
+                <a class="btn-primary" href="#otomini" data-i18n="urunler.otomini.cta">Teknik detayları inceleyin</a>
               </div>
             </div>
           </article>
@@ -303,9 +302,9 @@
             </a>
             <div class="product-tile-body">
               <h3>SoftenWise Maps</h3>
-              <p class="product-tile-desc">Saha operasyonları için kurumsal CBS: harita, bölge, rota ve REST API.</p>
+              <p class="product-tile-desc" data-i18n="urunler.maps.desc">Saha operasyonları için kurumsal CBS: harita, bölge, rota ve REST API.</p>
               <div class="product-tile-actions">
-                <a class="btn-primary" href="#softenwise-maps">Özet ve bağlantılar</a>
+                <a class="btn-primary" href="#softenwise-maps" data-i18n="urunler.maps.cta">Özet ve bağlantılar</a>
               </div>
             </div>
           </article>
@@ -317,11 +316,11 @@
             <div class="product-tile-body">
               <div class="product-tile-head">
                 <h3>BLOC</h3>
-                <span class="product-tile-badge product-tile-badge--soft">Mobil uygulama</span>
+                <span class="product-tile-badge product-tile-badge--soft" data-i18n="urunler.bloc.badge">Mobil uygulama</span>
               </div>
-              <p class="product-tile-desc">Topluluk ve sosyal akış odaklı iOS / Android uygulaması.</p>
+              <p class="product-tile-desc" data-i18n="urunler.bloc.desc">Topluluk ve sosyal akış odaklı iOS / Android uygulaması.</p>
               <div class="product-tile-actions">
-                <a class="btn-primary" href="#bloc">Uygulama özeti</a>
+                <a class="btn-primary" href="#bloc" data-i18n="urunler.bloc.cta">Uygulama özeti</a>
               </div>
             </div>
           </article>
@@ -332,25 +331,25 @@
     <article class="product-detail" id="softenwise-clinic" aria-labelledby="clinic-detail-title">
       <div class="container">
         <header class="product-detail-head reveal">
-          <span class="section-kicker">Portföy</span>
+          <span class="section-kicker" data-i18n="urunler.kicker.portfolio">Portföy</span>
           <h2 id="clinic-detail-title">SoftenWise Clinic</h2>
-          <p class="product-detail-lead">
+          <p class="product-detail-lead" data-i18n="urunler.clinic.lead">
             Randevudan hasta takibine, finanstan raporlamaya: klinik süreçleri tek merkezden yöneten web paneli.
           </p>
           <div class="product-detail-cta-row">
-            <a class="btn-primary" href="https://softenwiseclinic.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
+            <a class="btn-primary" href="https://softenwiseclinic.com/" target="_blank" rel="noopener noreferrer" data-i18n="urunler.visit">Ürün sitesine gidin</a>
           </div>
         </header>
         <figure class="product-detail-media reveal">
           <img src="images/clinic_image.png" alt="SoftenWise Clinic arayüz ekran görüntüsü" width="960" height="540" loading="lazy" decoding="async" />
         </figure>
         <ul class="product-detail-list product-detail-list--compact reveal">
-          <li><strong>11 dil</strong> ve çok ülkeli altyapı; şube bazlı görünürlük</li>
-          <li>Hasta &amp; ziyaret, randevu, finans ve raporlama modülleri</li>
-          <li>Rol / yetki ayrımı ve <strong>audit log</strong> ile izlenebilirlik</li>
-          <li>Web tabanlı panel; SaaS veya müşteri bulutu seçenekleri</li>
-          <li><strong>15 gün ücretsiz deneme</strong> — softenwiseclinic.com</li>
-          <li>Poliklinikler, özel tıp merkezleri ve çok şubeli yapılar için</li>
+          <li data-i18n="urunler.clinic.b1" data-i18n-html><strong>11 dil</strong> ve çok ülkeli altyapı; şube bazlı görünürlük</li>
+          <li data-i18n="urunler.clinic.b2" data-i18n-html>Hasta &amp; ziyaret, randevu, finans ve raporlama modülleri</li>
+          <li data-i18n="urunler.clinic.b3" data-i18n-html>Rol / yetki ayrımı ve <strong>audit log</strong> ile izlenebilirlik</li>
+          <li data-i18n="urunler.clinic.b4" data-i18n-html>Web tabanlı panel; SaaS veya müşteri bulutu seçenekleri</li>
+          <li data-i18n="urunler.clinic.b5" data-i18n-html><strong>15 gün ücretsiz deneme</strong> — softenwiseclinic.com</li>
+          <li data-i18n="urunler.clinic.b6" data-i18n-html>Poliklinikler, özel tıp merkezleri ve çok şubeli yapılar için</li>
         </ul>
       </div>
     </article>
@@ -358,21 +357,21 @@
     <article class="product-detail" id="otomini" aria-labelledby="otomini-detail-title">
       <div class="container">
         <header class="product-detail-head reveal">
-          <span class="section-kicker">SoftenWise ekosistemi</span>
+          <span class="section-kicker" data-i18n="urunler.kicker.eco">SoftenWise ekosistemi</span>
           <h2 id="otomini-detail-title">Otomini</h2>
-          <p class="product-detail-lead">
+          <p class="product-detail-lead" data-i18n="urunler.otomini.lead">
             İkinci el araç ticaretinde güven odaklı süreç: anlık dijital değerleme, şeffaf ekspertiz ve profesyonel galeri vitrini.
           </p>
           <div class="product-detail-cta-row">
-            <a class="btn-primary" href="https://otomini.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
+            <a class="btn-primary" href="https://otomini.com/" target="_blank" rel="noopener noreferrer" data-i18n="urunler.visit">Ürün sitesine gidin</a>
           </div>
         </header>
         <ul class="product-detail-list product-detail-list--compact reveal">
-          <li><strong>Akıllı değerleme:</strong> marka, model ve donanım verileriyle saniyeler içinde ön değer</li>
-          <li><strong>Şeffaf ekspertiz:</strong> Tramer ve hasar özeti</li>
-          <li><strong>İlan yönetimi:</strong> Otomini vitrininde galeri odaklı sunum</li>
-          <li>İkinci el galeriler, bayi ağları ve alım-satım ekipleri için</li>
-          <li>SoftenWise mühendisliğiyle geliştirilen bağımsız ürün markası</li>
+          <li data-i18n="urunler.otomini.b1" data-i18n-html><strong>Akıllı değerleme:</strong> marka, model ve donanım verileriyle saniyeler içinde ön değer</li>
+          <li data-i18n="urunler.otomini.b2" data-i18n-html><strong>Şeffaf ekspertiz:</strong> Tramer ve hasar özeti</li>
+          <li data-i18n="urunler.otomini.b3" data-i18n-html><strong>İlan yönetimi:</strong> Otomini vitrininde galeri odaklı sunum</li>
+          <li data-i18n="urunler.otomini.b4" data-i18n-html>İkinci el galeriler, bayi ağları ve alım-satım ekipleri için</li>
+          <li data-i18n="urunler.otomini.b5" data-i18n-html>SoftenWise mühendisliğiyle geliştirilen bağımsız ürün markası</li>
         </ul>
       </div>
     </article>
@@ -380,22 +379,22 @@
     <article class="product-detail product-detail--alt" id="softenwise-maps" aria-labelledby="softenwise-maps-detail-title">
       <div class="container">
         <header class="product-detail-head reveal">
-          <span class="section-kicker">Portföy</span>
+          <span class="section-kicker" data-i18n="urunler.kicker.portfolio">Portföy</span>
           <h2 id="softenwise-maps-detail-title">SoftenWise Maps</h2>
-          <p class="product-detail-lead">
+          <p class="product-detail-lead" data-i18n="urunler.maps.lead" data-i18n-html>
             Saha operasyonlarını tek panelden izleyen kurumsal <strong>CBS</strong> ekosistemi: harita, bölge, rota, raporlama ve REST API.
           </p>
           <div class="product-detail-cta-row">
-            <a class="btn-primary" href="https://softenwisemaps.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
+            <a class="btn-primary" href="https://softenwisemaps.com/" target="_blank" rel="noopener noreferrer" data-i18n="urunler.visit">Ürün sitesine gidin</a>
           </div>
         </header>
         <ul class="product-detail-list product-detail-list--compact reveal">
-          <li><strong>Tek panel:</strong> harita, katman ağacı, çizim araçları; adres / koordinat ile canlı odak</li>
-          <li>Güvenli ve yasaklı bölgeler (poligon); versiyonlu değişiklik kaydı</li>
-          <li>Geocode, rota, mesafe matrisi; GeoJSON / KML ve <strong>REST API</strong> entegrasyonu</li>
-          <li>XYZ karo, Nominatim, WMS / WMTS; Google Maps Platform veya kurum içi harita servisleri</li>
-          <li>Çok kiracılı mimari, rol tabanlı erişim; OpenAPI / Redoc dokümantasyonu</li>
-          <li>Saha, lojistik ve bölge planlaması için tasarlandı</li>
+          <li data-i18n="urunler.maps.b1" data-i18n-html><strong>Tek panel:</strong> harita, katman ağacı, çizim araçları; adres / koordinat ile canlı odak</li>
+          <li data-i18n="urunler.maps.b2" data-i18n-html>Güvenli ve yasaklı bölgeler (poligon); versiyonlu değişiklik kaydı</li>
+          <li data-i18n="urunler.maps.b3" data-i18n-html>Geocode, rota, mesafe matrisi; GeoJSON / KML ve <strong>REST API</strong> entegrasyonu</li>
+          <li data-i18n="urunler.maps.b4" data-i18n-html>XYZ karo, Nominatim, WMS / WMTS; Google Maps Platform veya kurum içi harita servisleri</li>
+          <li data-i18n="urunler.maps.b5" data-i18n-html>Çok kiracılı mimari, rol tabanlı erişim; OpenAPI / Redoc dokümantasyonu</li>
+          <li data-i18n="urunler.maps.b6" data-i18n-html>Saha, lojistik ve bölge planlaması için tasarlandı</li>
         </ul>
       </div>
     </article>
@@ -403,10 +402,10 @@
     <article class="product-detail" id="bloc" aria-labelledby="bloc-detail-title">
       <div class="container">
         <header class="product-detail-head reveal">
-          <span class="section-kicker">SoftenWise ekosistemi</span>
+          <span class="section-kicker" data-i18n="urunler.kicker.eco">SoftenWise ekosistemi</span>
           <h2 id="bloc-detail-title">BLOC</h2>
           <p class="product-detail-lead">
-            Topluluk ve sosyal akış odaklı <strong>iOS ve Android</strong> mobil uygulama; paylaşım, keşif ve etkileşim tek çatıda.
+            <span data-i18n="urunler.bloc.lead" data-i18n-html>Topluluk ve sosyal akış odaklı <strong>iOS ve Android</strong> mobil uygulama; paylaşım, keşif ve etkileşim tek çatıda.</span>
           </p>
           <div class="product-detail-cta-row">
             <div class="store-badge-row">
@@ -442,8 +441,8 @@
 
     <section class="cta contact-band" id="contact">
       <div class="container reveal">
-        <h2>Ürün görüşmesi</h2>
-        <p>Demo, lisans veya kuruma özel kapsam için kısa bir teknik görüşme planlayalım.</p>
+        <h2><span data-i18n="common.contact.h2">Ürün görüşmesi</span></h2>
+        <p><span data-i18n="common.contact.p">Demo, lisans veya kuruma özel kapsam için kısa bir teknik görüşme planlayalım.</span></p>
         <div class="contact-band__links">
           <a href="tel:+905421846595">+90 542 184 65 95</a>
           <a href="mailto:info@softenwise.com">info@softenwise.com</a>
@@ -453,10 +452,10 @@
           <input type="hidden" name="_subject" value="SoftenWise – Ürün Görüşme Talebi">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-group">
-            <input type="text" name="name" placeholder="Ad Soyad" required />
+            <input type="text" name="name" placeholder="Ad Soyad" data-i18n-attr="placeholder:common.contact.name" required />
           </div>
           <div class="form-group">
-            <input type="email" name="email" placeholder="E-posta" required />
+            <input type="email" name="email" placeholder="E-posta" data-i18n-attr="placeholder:common.contact.email" required />
           </div>
           <div class="form-group">
             <textarea name="message" placeholder="Hangi ürün / ihtiyaç?" rows="4" required></textarea>
@@ -527,8 +526,8 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/locales.js?v=202607170"></script>
-  <script src="js/i18n.js?v=202607170"></script>
+  <script src="js/locales.js?v=202607173"></script>
+  <script src="js/i18n.js?v=202607173"></script>
   <script src="js/main.js?v=202607172" defer></script>
 </body>
 

@@ -85,7 +85,7 @@
   }
   </script>
 </head>
-<body class="page-service">
+<body class="page-service" data-i18n-title="svc.mobile.title">
   <a class="skip-link" href="#main">İçeriğe atla</a>
   <script src="js/sprite-inject.js?v=202607163"></script>
   <header class="site-header" id="header">
@@ -204,12 +204,12 @@
 
     <section class="page-hero">
       <div class="container">
-        <p class="page-hero__brand">Mobil Geliştirme</p>
-        <h1 class="page-hero__title">Mobil Geliştirme</h1>
-        <p class="page-hero__lead">iOS ve Android için native ve hybrid mobil uygulamaları ürün odaklı şekilde, mağaza yayınından canlı izlemeye kadar birlikte götürüyoruz.</p>
+        <p class="page-hero__brand" data-i18n="svc.mobile.brand">Mobil Geliştirme</p>
+        <h1 class="page-hero__title" data-i18n="svc.mobile.h1">Mobil Geliştirme</h1>
+        <p class="page-hero__lead" data-i18n="svc.mobile.lead">iOS ve Android için native ve hybrid mobil uygulamaları ürün odaklı şekilde, mağaza yayınından canlı izlemeye kadar birlikte götürüyoruz.</p>
         <div class="page-hero__actions">
           <a href="#contact" class="btn-primary">Mobil Proje Görüşmesi</a>
-          <a href="index.html#solutions" class="btn-ghost">Hizmetlere Dön</a>
+          <a href="index.html#solutions" class="btn-ghost" data-i18n="common.cta.back_services">Hizmetlere dön</a>
         </div>
         <figure class="page-hero__media reveal">
           <img src="images/mobile-native-hybrid.svg" alt="Native ve hybrid mobil uygulama geliştirme görseli" loading="lazy" decoding="async" width="1200" height="800" />
@@ -237,7 +237,7 @@
     <section class="section-editorial">
       <div class="container section-editorial__inner">
         <div class="section-head reveal">
-          <p class="section-kicker">Detaylı Bakış</p>
+          <p class="section-kicker" data-i18n="common.detail">Detaylı bakış</p>
           <h2>Mobil üründe hız kadar kalite de kritik</h2>
         </div>
         <p class="reveal">Mobil geliştirme hizmetimizde ilk adım, ürünün gerçek kullanım senaryosunu netleştirmektir. Kullanıcı uygulamayı hangi sıklıkla açacak, hangi akışta terk edecek, hangi adımda dönüşüm bekleniyor gibi kritik noktaları tanımlıyoruz.</p>
@@ -249,7 +249,7 @@
     <section class="step-rail">
       <div class="container">
         <div class="section-head reveal">
-          <p class="section-kicker">Süreç</p>
+          <p class="section-kicker" data-i18n="common.process">Süreç</p>
           <h2>Nasıl ilerliyoruz?</h2>
         </div>
         <article class="step-rail__item reveal">
@@ -278,7 +278,7 @@
     <section class="related-rail">
       <div class="container">
         <div class="section-head reveal">
-          <p class="section-kicker">Devamı</p>
+          <p class="section-kicker" data-i18n="common.more">Devamı</p>
           <h2>İlgili hizmetler ve kaynaklar</h2>
         </div>
         <a class="related-rail__link reveal" href="entegrasyon-otomasyon.html">
@@ -298,8 +298,8 @@
 
     <section class="cta contact-band" id="contact">
       <div class="container reveal">
-        <h2>Mobil ürününüzü birlikte çıkalım</h2>
-        <p>Bu alan mobil geliştirme talepleri içindir. Formu doldurabilir ya da telefon, e-posta veya WhatsApp üzerinden doğrudan bize ulaşabilirsiniz.</p>
+        <h2><span data-i18n="common.contact.h2">Mobil ürününüzü birlikte çıkalım</span></h2>
+        <p><span data-i18n="common.contact.p">Bu alan mobil geliştirme talepleri içindir. Formu doldurabilir ya da telefon, e-posta veya WhatsApp üzerinden doğrudan bize ulaşabilirsiniz.</span></p>
         <p class="contact-band__links">
           <a href="tel:+905421846595">+90 542 184 65 95</a>
           <a href="mailto:info@softenwise.com">info@softenwise.com</a>
@@ -308,8 +308,8 @@
         <form class="contact-form" data-contact-form data-submit-label="Mobil Talep Gönder">
           <input type="hidden" name="_subject" value="Mobil Geliştirme - Yeni Talep">
           <input type="text" name="_gotcha" style="display:none">
-          <div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" required /></div>
-          <div class="form-group"><input type="email" name="email" placeholder="E-posta" required /></div>
+          <div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" data-i18n-attr="placeholder:common.contact.name" required /></div>
+          <div class="form-group"><input type="email" name="email" placeholder="E-posta" data-i18n-attr="placeholder:common.contact.email" required /></div>
           <div class="form-group"><textarea name="message" placeholder="Mobil projenizi kısaca anlatın" rows="4" required></textarea></div>
           <button type="submit" class="btn-primary">Mobil Talep Gönder</button>
           <p class="form-success" style="display:none; margin-top:16px; color:#2a5865; font-weight:600;">Talebiniz alındı. Ekibimiz sizinle iletişime geçecek.</p>
@@ -379,8 +379,8 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/locales.js?v=202607170"></script>
-  <script src="js/i18n.js?v=202607170"></script>
+  <script src="js/locales.js?v=202607173"></script>
+  <script src="js/i18n.js?v=202607173"></script>
   <script src="js/main.js?v=202607172" defer></script>
 </body>
 </html>

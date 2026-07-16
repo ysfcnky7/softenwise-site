@@ -85,7 +85,7 @@
   }
   </script>
 </head>
-<body class="page-service">
+<body class="page-service" data-i18n-title="svc.consult.title">
   <a class="skip-link" href="#main">İçeriğe atla</a>
   <script src="js/sprite-inject.js?v=202607163"></script>
   <header class="site-header" id="header">
@@ -204,12 +204,12 @@
 
     <section class="page-hero">
       <div class="container">
-        <p class="page-hero__brand">Teknik Danışmanlık</p>
-        <h1 class="page-hero__title">Teknik Danışmanlık</h1>
-        <p class="page-hero__lead">Ürün ve ekip ölçeklenirken teknik borç üretmeden ilerlemeniz için mimari karar, refactor ve ölçeklenme konularında net danışmanlık sunuyoruz.</p>
+        <p class="page-hero__brand" data-i18n="svc.consult.brand">Teknik Danışmanlık</p>
+        <h1 class="page-hero__title" data-i18n="svc.consult.h1">Teknik Danışmanlık</h1>
+        <p class="page-hero__lead" data-i18n="svc.consult.lead">Ürün ve ekip ölçeklenirken teknik borç üretmeden ilerlemeniz için mimari karar, refactor ve ölçeklenme konularında net danışmanlık sunuyoruz.</p>
         <div class="page-hero__actions">
           <a href="#contact" class="btn-primary">Danışmanlık Görüşmesi</a>
-          <a href="index.html#solutions" class="btn-ghost">Hizmetlere Dön</a>
+          <a href="index.html#solutions" class="btn-ghost" data-i18n="common.cta.back_services">Hizmetlere dön</a>
         </div>
         <figure class="page-hero__media reveal">
           <img src="images/photo-1526378722484-bd91ca387e72.jpeg" alt="Teknik danışmanlık kapsamında mimari değerlendirme" loading="lazy" decoding="async" width="1200" height="800" />
@@ -237,7 +237,7 @@
     <section class="section-editorial">
       <div class="container section-editorial__inner">
         <div class="section-head reveal">
-          <p class="section-kicker">Detaylı Bakış</p>
+          <p class="section-kicker" data-i18n="common.detail">Detaylı bakış</p>
           <h2>Mimari kararlarınızı hızla netleştiriyoruz</h2>
         </div>
         <p class="reveal">Birçok ekipte sorun kod yazamamak değil, doğru teknik kararı doğru zamanda verememektir. Bu hizmette önce mevcut mimariyi, ekip çalışma ritmini, teknik borç seviyesini ve ürün hedeflerini birlikte değerlendiriyoruz; "ne yapalım?" sorusunu genel tavsiyelerle değil, somut öncelik listesiyle cevaplıyoruz.</p>
@@ -249,7 +249,7 @@
     <section class="step-rail">
       <div class="container">
         <div class="section-head reveal">
-          <p class="section-kicker">Süreç</p>
+          <p class="section-kicker" data-i18n="common.process">Süreç</p>
           <h2>Çalışma modeli</h2>
         </div>
         <article class="step-rail__item reveal">
@@ -278,7 +278,7 @@
     <section class="related-rail">
       <div class="container">
         <div class="section-head reveal">
-          <p class="section-kicker">Devamı</p>
+          <p class="section-kicker" data-i18n="common.more">Devamı</p>
           <h2>İlgili hizmetler ve kaynaklar</h2>
         </div>
         <a class="related-rail__link reveal" href="ozel-yazilim.html">
@@ -298,8 +298,8 @@
 
     <section class="cta contact-band" id="contact">
       <div class="container reveal">
-        <h2>Teknik kararlarınızı birlikte netleştirelim</h2>
-        <p>Bu alan teknik danışmanlık talepleri içindir. Formu doldurabilir ya da telefon, e-posta veya WhatsApp üzerinden doğrudan bize ulaşabilirsiniz.</p>
+        <h2><span data-i18n="common.contact.h2">Teknik kararlarınızı birlikte netleştirelim</span></h2>
+        <p><span data-i18n="common.contact.p">Bu alan teknik danışmanlık talepleri içindir. Formu doldurabilir ya da telefon, e-posta veya WhatsApp üzerinden doğrudan bize ulaşabilirsiniz.</span></p>
         <p class="contact-band__links">
           <a href="tel:+905421846595">+90 542 184 65 95</a>
           <a href="mailto:info@softenwise.com">info@softenwise.com</a>
@@ -308,8 +308,8 @@
         <form class="contact-form" data-contact-form data-submit-label="Danışmanlık Talebi Gönder">
           <input type="hidden" name="_subject" value="Teknik Danismanlik - Yeni Talep">
           <input type="text" name="_gotcha" style="display:none">
-          <div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" required /></div>
-          <div class="form-group"><input type="email" name="email" placeholder="E-posta" required /></div>
+          <div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" data-i18n-attr="placeholder:common.contact.name" required /></div>
+          <div class="form-group"><input type="email" name="email" placeholder="E-posta" data-i18n-attr="placeholder:common.contact.email" required /></div>
           <div class="form-group"><textarea name="message" placeholder="Teknik ihtiyacınızı yazın" rows="4" required></textarea></div>
           <button type="submit" class="btn-primary">Danışmanlık Talebi Gönder</button>
           <p class="form-success" style="display:none; margin-top:16px; color:#2a5865; font-weight:600;">Talebiniz alındı. Ekibimiz sizinle iletişime geçecek.</p>
@@ -379,8 +379,8 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/locales.js?v=202607170"></script>
-  <script src="js/i18n.js?v=202607170"></script>
+  <script src="js/locales.js?v=202607173"></script>
+  <script src="js/i18n.js?v=202607173"></script>
   <script src="js/main.js?v=202607172" defer></script>
 </body>
 </html>

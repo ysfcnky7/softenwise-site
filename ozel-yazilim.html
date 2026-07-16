@@ -85,7 +85,7 @@
   }
   </script>
 </head>
-<body class="page-service">
+<body class="page-service" data-i18n-title="svc.custom.title">
   <a class="skip-link" href="#main">İçeriğe atla</a>
   <script src="js/sprite-inject.js?v=202607163"></script>
   <header class="site-header" id="header">
@@ -204,12 +204,12 @@
 
     <section class="page-hero">
       <div class="container">
-        <p class="page-hero__brand">Yazılım Geliştirme</p>
-        <h1 class="page-hero__title">Özel Yazılım Geliştirme</h1>
-        <p class="page-hero__lead">Standart paket yazılımların sınırlarını aşıp, karmaşık süreçlerinizi basitleştiren ve işinizle birlikte büyüyen modüler platformlar inşa ediyoruz.</p>
+        <p class="page-hero__brand" data-i18n="svc.custom.brand">Yazılım Geliştirme</p>
+        <h1 class="page-hero__title" data-i18n="svc.custom.h1">Özel Yazılım Geliştirme</h1>
+        <p class="page-hero__lead" data-i18n="svc.custom.lead">Standart paket yazılımların sınırlarını aşıp, karmaşık süreçlerinizi basitleştiren ve işinizle birlikte büyüyen modüler platformlar inşa ediyoruz.</p>
         <div class="page-hero__actions">
-          <a href="#contact" class="btn-primary">Proje Görüşmesi Al</a>
-          <a href="index.html#solutions" class="btn-ghost">Hizmetlere Dön</a>
+          <a href="#contact" class="btn-primary" data-i18n="common.cta.project">Proje görüşmesi alın</a>
+          <a href="index.html#solutions" class="btn-ghost" data-i18n="common.cta.back_services">Hizmetlere dön</a>
         </div>
       </div>
     </section>
@@ -234,7 +234,7 @@
     <section class="section-editorial">
       <div class="container section-editorial__inner">
         <div class="section-head reveal">
-          <p class="section-kicker">Detaylı Bakış</p>
+          <p class="section-kicker" data-i18n="common.detail">Detaylı bakış</p>
           <h2>Ürün ve mühendislik aynı akışta ilerler</h2>
         </div>
         <p class="reveal">Bu hizmette sadece yazılım kodlamıyoruz; önce işin gelir modeli, operasyon yükü, kullanıcı yolculuğu ve ekip yapısını birlikte analiz ediyoruz. Hangi modülün önce çıkması gerektiği, hangi entegrasyonun kritik olduğu ve hangi teknik riskin teslim süresini etkilediği en baştan netleşiyor.</p>
@@ -246,7 +246,7 @@
     <section class="step-rail">
       <div class="container">
         <div class="section-head reveal">
-          <p class="section-kicker">Süreç</p>
+          <p class="section-kicker" data-i18n="common.process">Süreç</p>
           <h2>Uygulama süreci</h2>
         </div>
         <article class="step-rail__item reveal">
@@ -275,7 +275,7 @@
     <section class="related-rail">
       <div class="container">
         <div class="section-head reveal">
-          <p class="section-kicker">Devamı</p>
+          <p class="section-kicker" data-i18n="common.more">Devamı</p>
           <h2>İlgili hizmetler ve kaynaklar</h2>
         </div>
         <a class="related-rail__link reveal" href="mobil-gelistirme.html">
@@ -295,8 +295,8 @@
 
     <section class="cta contact-band" id="contact">
       <div class="container reveal">
-        <h2>Özel yazılım projenizi birlikte planlayalım</h2>
-        <p>Bu alan özel yazılım talepleri içindir. Formu doldurabilir ya da telefon, e-posta veya WhatsApp üzerinden doğrudan bize ulaşabilirsiniz.</p>
+        <h2><span data-i18n="common.contact.h2">Özel yazılım projenizi birlikte planlayalım</span></h2>
+        <p><span data-i18n="common.contact.p">Bu alan özel yazılım talepleri içindir. Formu doldurabilir ya da telefon, e-posta veya WhatsApp üzerinden doğrudan bize ulaşabilirsiniz.</span></p>
         <p class="contact-band__links">
           <a href="tel:+905421846595">+90 542 184 65 95</a>
           <a href="mailto:info@softenwise.com">info@softenwise.com</a>
@@ -305,10 +305,10 @@
         <form class="contact-form" data-contact-form data-submit-label="Proje Talebi Gönder">
           <input type="hidden" name="_subject" value="Özel Yazılım - Yeni Talep">
           <input type="text" name="_gotcha" style="display:none">
-          <div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" required /></div>
-          <div class="form-group"><input type="email" name="email" placeholder="E-posta" required /></div>
-          <div class="form-group"><textarea name="message" placeholder="Projenizi kısaca anlatın" rows="4" required></textarea></div>
-          <button type="submit" class="btn-primary">Proje Talebi Gönder</button>
+          <div class="form-group"><input type="text" name="name" placeholder="Ad Soyad" data-i18n-attr="placeholder:common.contact.name" required /></div>
+          <div class="form-group"><input type="email" name="email" placeholder="E-posta" data-i18n-attr="placeholder:common.contact.email" required /></div>
+          <div class="form-group"><textarea name="message" placeholder="Projeniz hakkında kısa bir özet" data-i18n-attr="placeholder:common.contact.message" rows="4" required></textarea></div>
+          <button type="submit" class="btn-primary" data-i18n="common.cta.send">Talebi gönder</button>
           <p class="form-success" style="display:none; margin-top:16px; color:#2a5865; font-weight:600;">Talebiniz alındı. Ekibimiz sizinle iletişime geçecek.</p>
         </form>
       </div>
@@ -376,8 +376,8 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/locales.js?v=202607170"></script>
-  <script src="js/i18n.js?v=202607170"></script>
+  <script src="js/locales.js?v=202607173"></script>
+  <script src="js/i18n.js?v=202607173"></script>
   <script src="js/main.js?v=202607172" defer></script>
 </body>
 </html>

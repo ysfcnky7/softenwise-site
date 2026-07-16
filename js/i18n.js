@@ -40,9 +40,10 @@
   }
 
   function t(lang, key) {
-    const pack = dict[lang] || dict.tr || {};
-    const fallback = dict.tr || {};
-    return pack[key] ?? fallback[key] ?? key;
+    const pack = dict[lang] || {};
+    const en = dict.en || {};
+    const tr = dict.tr || {};
+    return pack[key] ?? en[key] ?? tr[key] ?? key;
   }
 
   function applyAttr(el, lang) {
