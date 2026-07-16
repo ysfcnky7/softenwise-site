@@ -24,7 +24,7 @@
 
   function resolveLang(raw) {
     const code = String(raw || "").toLowerCase().slice(0, 2);
-    return META[code] ? code : "tr";
+    return META[code] ? code : "en";
   }
 
   function getInitialLang() {
@@ -35,8 +35,8 @@
     const params = new URLSearchParams(window.location.search);
     const q = params.get("lang");
     if (q && META[resolveLang(q)]) return resolveLang(q);
-    const nav = (navigator.language || "tr").slice(0, 2).toLowerCase();
-    return META[nav] ? nav : "tr";
+    // First visit: English by default
+    return "en";
   }
 
   function t(lang, key) {

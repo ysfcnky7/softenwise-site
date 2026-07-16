@@ -324,6 +324,21 @@ h2,
   opacity: 1 !important;
 }
 
+.logo-strip .logo-item {
+  background: color-mix(in srgb, var(--paper) 70%, #e8eaec) !important;
+  border-color: var(--border) !important;
+}
+
+.logo-strip .logo-item img {
+  opacity: 0.82 !important;
+  filter: none !important;
+  transition: opacity 0.35s var(--ease-out-expo);
+}
+
+.logo-strip .logo-item:hover img {
+  opacity: 1 !important;
+}
+
 /* —— Service index: hairline editorial —— */
 .service-index__list {
   border-top: 1px solid var(--border-strong) !important;
