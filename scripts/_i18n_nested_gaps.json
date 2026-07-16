@@ -1,0 +1,176 @@
+[
+  {
+    "page": "academy.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0025\">Kariyer</span> <span data-i18n=\"gap.0026\">Academy mezunları için ekosistem içi kariyer fırsatları</span>",
+    "plain": "Kariyer Academy mezunları için ekosistem içi kariyer fırsatları"
+  },
+  {
+    "page": "academy.html",
+    "tag": "a",
+    "html": "<span>Kaynaklar</span> <span data-i18n=\"gap.0027\">Rehberler ve teknik içerikler</span>",
+    "plain": "Kaynaklar Rehberler ve teknik içerikler"
+  },
+  {
+    "page": "entegrasyon-otomasyon.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0051\" data-i18n-html>Güvenlik & Denetim</span> <span data-i18n=\"gap.0052\">Risk analizi, uyum ve güvenlik değerlendirmesi</span>",
+    "plain": "Güvenlik & Denetim Risk analizi, uyum ve güvenlik değerlendirmesi"
+  },
+  {
+    "page": "entegrasyon-otomasyon.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0053\">Teknik Danışmanlık</span> <span data-i18n=\"gap.0054\">Mimari karar, ölçeklenme ve yol haritası</span>",
+    "plain": "Teknik Danışmanlık Mimari karar, ölçeklenme ve yol haritası"
+  },
+  {
+    "page": "entegrasyon-otomasyon.html",
+    "tag": "a",
+    "html": "<span>Rehber</span> <span data-i18n=\"gap.0055\">Yazılım firması nasıl seçilir?</span>",
+    "plain": "Rehber Yazılım firması nasıl seçilir?"
+  },
+  {
+    "page": "guvenlik-denetim.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0099\">Özel Yazılım Geliştirme</span> <span data-i18n=\"gap.0100\">Kuruma özel ürün ve platform geliştirme</span>",
+    "plain": "Özel Yazılım Geliştirme Kuruma özel ürün ve platform geliştirme"
+  },
+  {
+    "page": "index.html",
+    "tag": "li",
+    "html": "<a href=\"ozel-yazilim.html\"> <span class=\"service-index__title\" data-i18n=\"home.svc.custom\">Özel Yazılım Geliştirme</span> <span class=\"service-index__desc\" data-i18n=\"home.svc.custom.desc\">Platform, SaaS ve B2B sistemler — işinizle birlikte büyüyen modüler mimari.</span> <span class=\"service-index__arrow\" aria-hidden=\"true\">→</span> </a>",
+    "plain": "Özel Yazılım Geliştirme Platform, SaaS ve B2B sistemler — işinizle birlikte büyüyen modüler mimari. →"
+  },
+  {
+    "page": "index.html",
+    "tag": "li",
+    "html": "<a href=\"mobil-gelistirme.html\"> <span class=\"service-index__title\" data-i18n=\"home.svc.mobile\">Mobil Geliştirme</span> <span class=\"service-index__desc\" data-i18n=\"home.svc.mobile.desc\">iOS ve Android için native ve hybrid uygulamalar.</span> <span class=\"service-index__arrow\" aria-hidden=\"true\">→</span> </a>",
+    "plain": "Mobil Geliştirme iOS ve Android için native ve hybrid uygulamalar. →"
+  },
+  {
+    "page": "index.html",
+    "tag": "li",
+    "html": "<a href=\"entegrasyon-otomasyon.html\"> <span class=\"service-index__title\" data-i18n=\"home.svc.integ\">Entegrasyon ve Otomasyon</span> <span class=\"service-index__desc\" data-i18n=\"home.svc.integ.desc\">ERP, CRM, ödeme ve lojistik sistemleri arasında güvenilir veri akışı.</span> <span class=\"service-index__arrow\" aria-hidden=\"true\">→</span> </a>",
+    "plain": "Entegrasyon ve Otomasyon ERP, CRM, ödeme ve lojistik sistemleri arasında güvenilir veri akışı. →"
+  },
+  {
+    "page": "index.html",
+    "tag": "li",
+    "html": "<a href=\"guvenlik-denetim.html\"> <span class=\"service-index__title\" data-i18n=\"home.svc.sec\">Güvenlik ve Denetim</span> <span class=\"service-index__desc\" data-i18n=\"home.svc.sec.desc\">Risk analizi, uyumluluk ve teknik güvenlik değerlendirmesi.</span> <span class=\"service-index__arrow\" aria-hidden=\"true\">→</span> </a>",
+    "plain": "Güvenlik ve Denetim Risk analizi, uyumluluk ve teknik güvenlik değerlendirmesi. →"
+  },
+  {
+    "page": "index.html",
+    "tag": "li",
+    "html": "<a href=\"teknik-danismanlik.html\"> <span class=\"service-index__title\" data-i18n=\"home.svc.consult\">Teknik Danışmanlık</span> <span class=\"service-index__desc\" data-i18n=\"home.svc.consult.desc\">Mimari kararlar, ölçeklenme ve teknoloji yol haritası.</span> <span class=\"service-index__arrow\" aria-hidden=\"true\">→</span> </a>",
+    "plain": "Teknik Danışmanlık Mimari kararlar, ölçeklenme ve teknoloji yol haritası. →"
+  },
+  {
+    "page": "index.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"home.case.otomini\">Otomini — ikinci el değerleme ve galeri</span> <span data-i18n=\"home.case.otomini.meta\">SoftenWise ürünü</span>",
+    "plain": "Otomini — ikinci el değerleme ve galeri SoftenWise ürünü"
+  },
+  {
+    "page": "index.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"home.case.maps\">SoftenWise Maps — saha CBS ve harita API</span> <span data-i18n=\"home.case.maps.meta\">Kurumsal ürün</span>",
+    "plain": "SoftenWise Maps — saha CBS ve harita API Kurumsal ürün"
+  },
+  {
+    "page": "index.html",
+    "tag": "a",
+    "html": "<span class=\"products-band__visual\"> <img src=\"images/clinic_image.png\" alt=\"\" width=\"640\" height=\"360\" loading=\"lazy\" decoding=\"async\" /> </span> <img class=\"products-band__logo\" src=\"images/softenwise-clinic-logo.png\" alt=\"\" width=\"200\" height=\"52\" loading=\"lazy\" decoding=\"async\" /> <strong data-i18n=\"gap.0103\">SoftenWise Clinic</strong> <span data-i18n=\"home.prod.clinic\">Klinik ve sağlık operasyonları için dijital platform.</span>",
+    "plain": "SoftenWise Clinic Klinik ve sağlık operasyonları için dijital platform."
+  },
+  {
+    "page": "index.html",
+    "tag": "a",
+    "html": "<span class=\"products-band__visual products-band__visual--logo\"> <img src=\"images/softenwise-maps-logo.png\" alt=\"\" width=\"280\" height=\"120\" loading=\"lazy\" decoding=\"async\" /> </span> <strong data-i18n=\"gap.0104\">SoftenWise Maps</strong> <span data-i18n=\"home.prod.maps\">Konum ve harita tabanlı operasyon araçları.</span>",
+    "plain": "SoftenWise Maps Konum ve harita tabanlı operasyon araçları."
+  },
+  {
+    "page": "index.html",
+    "tag": "a",
+    "html": "<span class=\"products-band__visual products-band__visual--logo\"> <img src=\"images/otomini-logo.webp\" alt=\"\" width=\"280\" height=\"120\" loading=\"lazy\" decoding=\"async\" /> </span> <strong data-i18n=\"gap.0105\">Otomini</strong> <span data-i18n=\"home.prod.otomini\">Otomotiv ve filo süreçleri için dijital çözümler.</span>",
+    "plain": "Otomini Otomotiv ve filo süreçleri için dijital çözümler."
+  },
+  {
+    "page": "index.html",
+    "tag": "p",
+    "html": "<span data-i18n=\"home.contact.success\">Talebinizi aldık. En kısa sürede dönüş yapacağız.</span>",
+    "plain": "Talebinizi aldık. En kısa sürede dönüş yapacağız."
+  },
+  {
+    "page": "kariyer.html",
+    "tag": "a",
+    "html": "<span>Backend Developer</span> <span data-i18n=\"gap.0109\">Karmaşık iş mantıklarını ve yüksek performanslı API'leri kurgulayın</span>",
+    "plain": "Backend Developer Karmaşık iş mantıklarını ve yüksek performanslı API'leri kurgulayın"
+  },
+  {
+    "page": "kariyer.html",
+    "tag": "a",
+    "html": "<span>Frontend / React Developer</span> <span data-i18n=\"gap.0110\">Modern UI/UX pratiklerini performanslı arayüzlere dönüştürün</span>",
+    "plain": "Frontend / React Developer Modern UI/UX pratiklerini performanslı arayüzlere dönüştürün"
+  },
+  {
+    "page": "kariyer.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0111\">Mobile Developer (Native/Hybrid)</span> <span data-i18n=\"gap.0112\">iOS ve Android dünyasında kullanıcı deneyimi yüksek uygulamalar geliştirin</span>",
+    "plain": "Mobile Developer (Native/Hybrid) iOS ve Android dünyasında kullanıcı deneyimi yüksek uygulamalar geliştirin"
+  },
+  {
+    "page": "kariyer.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0113\" data-i18n-html>QA &amp; Test Automation</span> <span data-i18n=\"gap.0114\">Hata payını minimize eden, sürdürülebilir test otomasyon sistemleri kurun</span>",
+    "plain": "QA &amp; Test Automation Hata payını minimize eden, sürdürülebilir test otomasyon sistemleri kurun"
+  },
+  {
+    "page": "kaynaklar.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0133\">Yazılım Firması Nasıl Seçilir?</span> <span data-i18n=\"gap.0134\">Tekliften teknik kaliteye kadar kritik kontrol listeleri</span>",
+    "plain": "Yazılım Firması Nasıl Seçilir? Tekliften teknik kaliteye kadar kritik kontrol listeleri"
+  },
+  {
+    "page": "kaynaklar.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0135\">Özel Yazılım Maliyeti Nasıl Hesaplanır?</span> <span data-i18n=\"gap.0136\">Kapsam analizi, bütçe ve şeffaf süreç planlama rehberi</span>",
+    "plain": "Özel Yazılım Maliyeti Nasıl Hesaplanır? Kapsam analizi, bütçe ve şeffaf süreç planlama rehberi"
+  },
+  {
+    "page": "kaynaklar.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0137\">Mobil Uygulama Geliştirme Süreci</span> <span data-i18n=\"gap.0138\">Fikirden mağaza yayınına kadar sprint odaklı mobil proje akışı</span>",
+    "plain": "Mobil Uygulama Geliştirme Süreci Fikirden mağaza yayınına kadar sprint odaklı mobil proje akışı"
+  },
+  {
+    "page": "mobil-gelistirme.html",
+    "tag": "a",
+    "html": "<span>Entegrasyon & Otomasyon</span> <span data-i18n=\"gap.0158\">Sistemler arası veri akışı ve süreç otomasyonu</span>",
+    "plain": "Entegrasyon & Otomasyon Sistemler arası veri akışı ve süreç otomasyonu"
+  },
+  {
+    "page": "mobil-gelistirme.html",
+    "tag": "a",
+    "html": "<span>Rehber</span> <span data-i18n=\"gap.0159\">Mobil uygulama geliştirme süreci</span>",
+    "plain": "Rehber Mobil uygulama geliştirme süreci"
+  },
+  {
+    "page": "mobil-uygulama-gelistirme-sureci.html",
+    "tag": "a",
+    "html": "<span data-i18n=\"gap.0167\">Mobil Geliştirme</span> <span data-i18n=\"gap.0168\">Native ve hybrid mobil uygulama çözümleri</span>",
+    "plain": "Mobil Geliştirme Native ve hybrid mobil uygulama çözümleri"
+  },
+  {
+    "page": "mobil-uygulama-gelistirme-sureci.html",
+    "tag": "a",
+    "html": "<span>Rehber</span> <span data-i18n=\"gap.0169\">Özel yazılım maliyeti nasıl hesaplanır?</span>",
+    "plain": "Rehber Özel yazılım maliyeti nasıl hesaplanır?"
+  },
+  {
+    "page": "urunler.html",
+    "tag": "p",
+    "html": "<span data-i18n=\"urunler.bloc.lead\" data-i18n-html>Topluluk ve sosyal akış odaklı <strong data-i18n=\"gap.0226\">iOS ve Android</strong> mobil uygulama; paylaşım, keşif ve etkileşim tek çatıda.</span>",
+    "plain": "Topluluk ve sosyal akış odaklı iOS ve Android mobil uygulama; paylaşım, keşif ve etkileşim tek çatıda."
+  }
+]

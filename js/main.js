@@ -13,6 +13,7 @@ if (menuBtn && nav) {
   const closeAllDropdowns = () => {
     navItemsWithDropdown.forEach((item) => {
       item.classList.remove("open");
+      item.classList.remove("is-hover");
       const toggle = item.querySelector(".nav-parent-toggle");
       if (toggle) toggle.setAttribute("aria-expanded", "false");
     });
@@ -150,6 +151,42 @@ if (menuBtn && nav) {
 
   navItemsWithDropdown.forEach((item) => {
     const toggle = item.querySelector(".nav-parent-toggle");
+    let closeTimer = null;
+
+    const clearCloseTimer = () => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+    };
+
+    const openDesktopHover = () => {
+      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      clearCloseTimer();
+      navItemsWithDropdown.forEach((other) => {
+        if (other !== item) other.classList.remove("is-hover");
+      });
+      item.classList.add("is-hover");
+    };
+
+    const scheduleDesktopClose = () => {
+      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      clearCloseTimer();
+      closeTimer = setTimeout(() => {
+        item.classList.remove("is-hover");
+        closeTimer = null;
+      }, 320);
+    };
+
+    item.addEventListener("mouseenter", openDesktopHover);
+    item.addEventListener("mouseleave", scheduleDesktopClose);
+    item.addEventListener("focusin", openDesktopHover);
+    item.addEventListener("focusout", (e) => {
+      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      if (item.contains(e.relatedTarget)) return;
+      scheduleDesktopClose();
+    });
+
     if (!toggle) return;
 
     toggle.addEventListener("click", (e) => {
@@ -225,19 +262,26 @@ if (activeNav) {
   if (servicePages.includes(page)) {
     setActive(activeNav.querySelector(`.nav-dropdown a[href="${page}"]`));
     setActive(activeNav.querySelector('.nav-main-link[href*="solutions"]'));
+  } else if (page === "urunler.html") {
+    setActive(activeNav.querySelector('.nav-main-link[href="urunler.html"]'));
   } else if (
     page === "kariyer.html" ||
     page === "academy.html" ||
     page === "girisim-ortakligi.html" ||
-    page === "urunler.html"
+    page === "kaynaklar.html" ||
+    page === "yazilim-firmasi-nasil-secilir.html" ||
+    page === "ozel-yazilim-maliyeti.html" ||
+    page === "mobil-uygulama-gelistirme-sureci.html"
   ) {
-    setActive(activeNav.querySelector(`.nav-main-link[href="${page}"]`));
+    setActive(activeNav.querySelector('.nav-main-link[href="kaynaklar.html"]'));
+    setActive(activeNav.querySelector(`.nav-dropdown a[href="${page}"]`));
   } else if (page === "index.html" && window.location.hash) {
     const hashLink = activeNav.querySelector(`.nav-main-link[href="${window.location.hash}"]`);
     setActive(hashLink);
-  } else {
-    setActive(activeNav.querySelector('.nav-main-link[href*="solutions"]'));
+  } else if (page === "index.html" || page === "404.html") {
+    /* ana sayfa / 404 — varsayılan aktif yok */
   }
+  /* diğer bilinmeyen sayfalar: yanlışlıkla Hizmetler aktif etme */
 }
 
 // ===== HEADER SHADOW (CSS CLASS BASED) =====
@@ -282,6 +326,7 @@ if (prefersReducedMotion) {
       // Üst kahraman alanı: ilk boyamada görünür olsun (LCP / IO gecikmesi yok)
       if (
         el.classList.contains("hero-text") ||
+        el.classList.contains("hero-copy") ||
         el.classList.contains("hero-products")
       ) {
         el.classList.add("active");
@@ -289,6 +334,35 @@ if (prefersReducedMotion) {
       }
       io.observe(el);
     });
+  }
+}
+
+// ===== PRODUCT JUMP ACTIVE STATE (urunler) =====
+const productJump = document.querySelector(".product-jump");
+if (productJump) {
+  const jumpLinks = [...productJump.querySelectorAll(".product-jump-link[href^='#']")];
+  const sections = jumpLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  if (sections.length) {
+    const setJumpActive = (id) => {
+      jumpLinks.forEach((link) => {
+        link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+      });
+    };
+
+    const jumpIo = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]?.target?.id) setJumpActive(visible[0].target.id);
+      },
+      { rootMargin: "-30% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] }
+    );
+
+    sections.forEach((section) => jumpIo.observe(section));
   }
 }
 
