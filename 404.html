@@ -12,18 +12,13 @@
   <link rel="canonical" href="https://softenwise.com/404.html" />
   <link rel="sitemap" type="application/xml" title="Site haritası" href="https://softenwise.com/sitemap.xml" />
   <link rel="alternate" type="text/plain" href="https://softenwise.com/llms.txt" title="SoftenWise LLM indeksi" />
-  <link rel="stylesheet" href="css/local-fonts.css?v=202604081" />
-  <link rel="stylesheet" href="css/style.css?v=202604228" />
-  <style>
-    .err404 { min-height: calc(70vh - var(--header-height)); display: grid; place-items: center; padding: 40px 20px 56px; text-align: center; }
-    .err404 h1 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 12px; color: var(--text-main); }
-    .err404 p { color: var(--text-muted); max-width: 40ch; margin: 0 auto 24px; line-height: 1.6; }
-    .err404 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-  </style>
+  <link rel="stylesheet" href="css/local-fonts.css?v=202607167" />
+  <link rel="stylesheet" href="css/style.css?v=202607169" />
+  <link rel="stylesheet" href="css/softenwise.css?v=202607169" />
 </head>
 <body>
   <a class="skip-link" href="#main">İçeriğe atla</a>
-  <script src="js/sprite-inject.js?v=202604081"></script>
+  <script src="js/sprite-inject.js?v=202607163"></script>
   <header class="site-header" id="header">
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="SoftenWise ana sayfa">
@@ -72,12 +67,38 @@
           </div>
         </div>
         <a class="nav-main-link" href="urunler.html">Ürünler</a>
-        <a class="nav-main-link" href="academy.html">Academy</a>
-        <a class="nav-main-link" href="kariyer.html">Kariyer</a>
-        <a class="nav-main-link" href="girisim-ortakligi.html">Fikir/Yatırım</a>
-        <a class="nav-main-link" href="kaynaklar.html">Kaynaklar</a>
+        <div class="nav-item has-dropdown">
+          <a class="nav-main-link" href="kaynaklar.html">Şirket</a>
+          <button class="nav-parent-toggle" type="button" aria-label="Şirket alt menüsünü aç/kapat" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
+          <div class="nav-dropdown" aria-label="Şirket alt menü">
+            <a class="nav-dropdown-link" href="academy.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Academy</span>
+                <span class="nav-dd-desc">Eğitim ve gelişim programları</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="kariyer.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Kariyer</span>
+                <span class="nav-dd-desc">Açık roller ve ekibe katılım</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="girisim-ortakligi.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Fikir Ortaklığı</span>
+                <span class="nav-dd-desc">Girişim ve melek yatırım hattı</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="kaynaklar.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Kaynaklar</span>
+                <span class="nav-dd-desc">Rehberler ve içerikler</span>
+              </span>
+            </a>
+          </div>
+        </div>
         <a class="nav-main-link" href="index.html#references">Referanslar</a>
-        <a class="nav-main-link" href="index.html#contact">İletişim</a>
+        <a class="nav-main-link nav-main-link--cta" href="index.html#contact">İletişim</a>
         <div class="nav-mobile-footer">
           <p class="nav-mobile-footer-label">Hızlı iletişim</p>
           <div class="nav-mobile-actions">
@@ -94,15 +115,26 @@
   </header>
 
 
-  <main class="err404" id="main">
-    <div>
-      <h1>Sayfa bulunamadı</h1>
-      <p>Bu adres artık yok veya yanlış yazılmış olabilir. Ana sayfadan devam edebilirsiniz.</p>
-      <div class="btn-row">
-        <a class="btn-primary" href="https://softenwise.com/">Ana sayfa</a>
-        <a class="btn-ghost" href="https://softenwise.com/urunler.html">Ürünler</a>
+
+
+
+
+
+
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="page-hero__brand">SoftenWise</p>
+        <h1 class="page-hero__title">404 — Sayfa bulunamadı</h1>
+        <p class="page-hero__lead">Bu adres artık yok veya yanlış yazılmış olabilir; ana sayfadan, hizmetlerimizden veya kaynaklarımızdan devam edebilirsiniz.</p>
+        <div class="page-hero__actions">
+          <a class="btn-primary" href="index.html">Ana Sayfa</a>
+          <a class="btn-ghost" href="index.html#solutions">Hizmetler</a>
+          <a class="btn-ghost" href="kaynaklar.html">Kaynaklar</a>
+        </div>
       </div>
-    </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -112,11 +144,7 @@
         </div>
 
         <p class="footer-desc">
-          Biz sadece yazılım ajansı değiliz; teknolojiye dayalı büyüme stratejileri geliştiren bir mühendislik ortağıyız.
-        </p>
-
-        <p class="footer-note">
-          Söz verdiğimiz takvime sadık kalıyor, teslimat sonrasında da sistemlerinizin sağlığını sürekli izleyerek yanınızda duruyoruz.
+          SoftenWise — kurumlara ve girişimlere ölçeklenebilir yazılım, güvenlik ve teknik danışmanlık.
         </p>
       </div>
 
@@ -131,7 +159,7 @@
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">Ekosistem</div>
+          <div class="footer-title">Şirket</div>
           <a href="urunler.html">Ürünler</a>
           <a href="academy.html">Academy</a>
           <a href="kariyer.html">Kariyer</a>
@@ -144,12 +172,13 @@
           <div class="footer-title">İletişim</div>
           <a class="contact-link" href="tel:+905421846595"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg></span><span>+90 542 184 65 95</span></a>
           <a class="contact-link" href="mailto:info@softenwise.com"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-mail"/></svg></span><span>info@softenwise.com</span></a>
+          <a class="contact-link" href="https://wa.me/905421846595" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">Sosyal Medya</div>
-          <a class="social-link" href="https://www.linkedin.com/in/softenwise-systems-4003a03b6/" target="_blank" rel="noopener noreferrer"><span class="social-dot social-dot--linkedin" aria-hidden="true">in</span><span>LinkedIn</span></a>
-          <a class="social-link" href="https://www.instagram.com/softenwise.systems/" target="_blank" rel="noopener noreferrer"><span class="social-dot social-dot--instagram" aria-hidden="true">ig</span><span>Instagram</span></a>
+          <div class="footer-title">Sosyal</div>
+          <a href="https://www.linkedin.com/in/softenwise-systems-4003a03b6/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.instagram.com/softenwise.systems/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </div>
     </div>
@@ -168,6 +197,6 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/main.js?v=202604225" defer></script>
+  <script src="js/main.js?v=202607167" defer></script>
 </body>
 </html>

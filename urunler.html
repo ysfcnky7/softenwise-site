@@ -42,8 +42,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
-  <link rel="stylesheet" href="css/local-fonts.css?v=202604081" />
-  <link rel="stylesheet" href="css/style.css?v=202604298" />
+  <link rel="stylesheet" href="css/local-fonts.css?v=202607167" />
+  <link rel="stylesheet" href="css/style.css?v=202607169" />
+  <link rel="stylesheet" href="css/softenwise.css?v=202607169" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -101,9 +102,9 @@
   </script>
 </head>
 
-<body class="page-urunler">
+<body class="page-product page-urunler">
   <a class="skip-link" href="#main">İçeriğe atla</a>
-  <script src="js/sprite-inject.js?v=202604081"></script>
+  <script src="js/sprite-inject.js?v=202607163"></script>
   <header class="site-header" id="header">
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="SoftenWise ana sayfa">
@@ -152,12 +153,38 @@
           </div>
         </div>
         <a class="nav-main-link" href="urunler.html">Ürünler</a>
-        <a class="nav-main-link" href="academy.html">Academy</a>
-        <a class="nav-main-link" href="kariyer.html">Kariyer</a>
-        <a class="nav-main-link" href="girisim-ortakligi.html">Fikir/Yatırım</a>
-        <a class="nav-main-link" href="kaynaklar.html">Kaynaklar</a>
+        <div class="nav-item has-dropdown">
+          <a class="nav-main-link" href="kaynaklar.html">Şirket</a>
+          <button class="nav-parent-toggle" type="button" aria-label="Şirket alt menüsünü aç/kapat" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
+          <div class="nav-dropdown" aria-label="Şirket alt menü">
+            <a class="nav-dropdown-link" href="academy.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Academy</span>
+                <span class="nav-dd-desc">Eğitim ve gelişim programları</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="kariyer.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Kariyer</span>
+                <span class="nav-dd-desc">Açık roller ve ekibe katılım</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="girisim-ortakligi.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Fikir Ortaklığı</span>
+                <span class="nav-dd-desc">Girişim ve melek yatırım hattı</span>
+              </span>
+            </a>
+            <a class="nav-dropdown-link" href="kaynaklar.html">
+              <span class="nav-dd-body">
+                <span class="nav-dd-title">Kaynaklar</span>
+                <span class="nav-dd-desc">Rehberler ve içerikler</span>
+              </span>
+            </a>
+          </div>
+        </div>
         <a class="nav-main-link" href="index.html#references">Referanslar</a>
-        <a class="nav-main-link" href="index.html#contact">İletişim</a>
+        <a class="nav-main-link nav-main-link--cta" href="index.html#contact">İletişim</a>
         <div class="nav-mobile-footer">
           <p class="nav-mobile-footer-label">Hızlı iletişim</p>
           <div class="nav-mobile-actions">
@@ -181,22 +208,26 @@
 
 
 
+
+
+
+
+
+
+
+
   <main id="main">
-    <section class="hero">
+    <section class="page-hero">
       <div class="container">
-        <div class="hero-text reveal">
-          <div class="eyebrow">Ürünler</div>
-          <h1>Ürün Ekosistemimiz</h1>
-          <p>
-            Klinikten haritaya, mobil uygulamaya: geliştirdiğimiz ürünleri burada kısaca topladık.
-            Özel yazılım veya entegrasyon da gerekiyorsa <a href="index.html#solutions">Hizmetler</a> sayfasına geçebilirsiniz.
-          </p>
-          <div class="hero-actions">
-            <a href="#softenwise-clinic" class="btn-primary">SoftenWise Clinic</a>
-            <a href="#otomini" class="btn-ghost">Otomini</a>
-            <a href="#softenwise-maps" class="btn-ghost">SoftenWise Maps</a>
-            <a href="#bloc" class="btn-ghost">BLOC</a>
-          </div>
+        <p class="page-hero__brand">SoftenWise</p>
+        <h1 class="page-hero__title">Ürünler</h1>
+        <p class="page-hero__lead">
+          Klinikten haritaya, mobil uygulamaya: geliştirdiğimiz ürünleri burada topladık.
+          Özel yazılım veya entegrasyon için <a href="index.html#solutions">hizmetlerimize</a> bakın.
+        </p>
+        <div class="page-hero__actions">
+          <a href="#softenwise-clinic" class="btn-primary">Ürünleri incele</a>
+          <a href="index.html#contact" class="btn-ghost">Görüşme talep et</a>
         </div>
       </div>
     </section>
@@ -236,110 +267,59 @@
 
         <div class="products-page-grid">
           <article class="product-tile reveal">
-            <div class="product-tile-media product-tile-media--contain">
-              <img src="images/softenwise-clinic-logo.png" alt="SoftenWise Clinic logosu" width="640" height="360" loading="lazy" decoding="async" />
-            </div>
+            <a class="product-tile-media" href="#softenwise-clinic">
+              <img src="images/clinic_image.png" alt="SoftenWise Clinic arayüz görseli" width="960" height="540" loading="lazy" decoding="async" />
+            </a>
             <div class="product-tile-body">
-              <div class="product-tile-head">
-                <h3>SoftenWise Clinic</h3>
+              <div class="product-tile-brand">
+                <img src="images/softenwise-clinic-logo.png" alt="" width="180" height="48" loading="lazy" decoding="async" />
               </div>
-              <p class="product-tile-desc">Sağlık operasyonlarında dijital dönüşümün en yalın hali: randevudan hasta takibine, finanstan raporlamaya kadar klinik süreçlerinizi tek merkezden, kesintisiz yönetin.</p>
-              <ul class="product-tile-list">
-                <li><strong>Küresel standartlar:</strong> 11 dil ve çok ülkeli altyapı; operasyonunuzu sınırları aşan bir çizgide taşıyın.</li>
-                <li><strong>Veri güvenliği:</strong> Detaylı yetkilendirme ve audit log ile her işlemin izini sürün, veriyi kontrol altında tutun.</li>
-                <li><strong>Ücretsiz deneme:</strong> Tüm yetenekleri 15 gün ücretsiz deneyimleyerek iş akışınıza ne kattığını görün.</li>
-              </ul>
+              <h3>SoftenWise Clinic</h3>
+              <p class="product-tile-desc">Randevudan finansa klinik süreçleri tek panelde yönetin.</p>
               <div class="product-tile-actions">
                 <a class="btn-primary" href="#softenwise-clinic">Teknik detayları incele</a>
-                <a class="btn-ghost" href="https://softenwiseclinic.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
-                <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
               </div>
             </div>
           </article>
 
           <article class="product-tile reveal">
-            <div class="product-tile-media product-tile-media--contain">
-              <img src="images/otomini-logo.webp" alt="Otomini logosu" width="640" height="360" loading="lazy" decoding="async" />
-            </div>
+            <a class="product-tile-media product-tile-media--logo" href="#otomini">
+              <img src="images/otomini-logo.webp" alt="Otomini logosu" width="320" height="160" loading="lazy" decoding="async" />
+            </a>
             <div class="product-tile-body">
-              <div class="product-tile-head">
-                <h3>Otomini</h3>
-              </div>
-              <p class="product-tile-desc">
-                İkinci el araç ticaretinde güven odaklı süreç: anlık dijital değerleme, şeffaf ekspertiz ve profesyonel galeri vitriniyle alım-satımı dijitalleştirin.
-              </p>
-              <ul class="product-tile-list">
-                <li><strong>Akıllı değerleme:</strong> Marka, model ve donanım verileriyle aracın gerçek değerine saniyeler içinde yaklaşın.</li>
-                <li><strong>Şeffaf ekspertiz:</strong> Tramer ve hasarı anlaşılır bir özetle gösterin, güveni pekiştirin.</li>
-                <li><strong>İlan yönetimi:</strong> Araçları Otomini vitrininde öne çıkarıp doğru alıcıya hızla ulaşın.</li>
-              </ul>
+              <h3>Otomini</h3>
+              <p class="product-tile-desc">İkinci el araç değerleme, ekspertiz ve galeri vitrini.</p>
               <div class="product-tile-actions">
                 <a class="btn-primary" href="#otomini">Teknik detayları incele</a>
-                <a class="btn-ghost" href="https://otomini.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
-                <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
               </div>
             </div>
           </article>
 
           <article class="product-tile reveal">
-            <div class="product-tile-media product-tile-media--contain">
-              <img src="images/softenwise-maps-logo.png" alt="SoftenWise Maps logosu" width="640" height="360" loading="lazy" decoding="async" />
-            </div>
+            <a class="product-tile-media product-tile-media--logo" href="#softenwise-maps">
+              <img src="images/softenwise-maps-logo.png" alt="SoftenWise Maps logosu" width="320" height="160" loading="lazy" decoding="async" />
+            </a>
             <div class="product-tile-body">
-              <div class="product-tile-head">
-                <h3>SoftenWise Maps</h3>
-              </div>
-              <p class="product-tile-desc">
-                Karmaşık saha operasyonlarınızı tek panelden izlemenizi, analiz etmenizi ve yönetmenizi sağlayan kurumsal
-                <strong>CBS</strong> (coğrafi bilgi sistemi) ekosistemi; harita, güvenli ve yasaklı bölgeler, rota, raporlama ve
-                <strong>REST API</strong> ile entegrasyona hazır.
-              </p>
-              <ul class="product-tile-list">
-                <li><strong>Tek panel:</strong> katman ağacı, adres / koordinat odaklama, çizim ve versiyonlu poligon yönetimi.</li>
-                <li><strong>Analiz:</strong> mesafe ve alan ölçümü, buffer (tampon), GeoJSON / KML içe ve dışa aktarım.</li>
-                <li><strong>Kurumsal ölçek:</strong> çok kiracılı mimari, rol ve yetki; gözlemlenebilirlik ve güvenli yazılım pratikleri.</li>
-              </ul>
+              <h3>SoftenWise Maps</h3>
+              <p class="product-tile-desc">Saha operasyonları için kurumsal CBS: harita, bölge, rota ve REST API.</p>
               <div class="product-tile-actions">
                 <a class="btn-primary" href="#softenwise-maps">Özet ve bağlantılar</a>
-                <a class="btn-ghost" href="https://softenwisemaps.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
-                <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
               </div>
             </div>
           </article>
 
           <article class="product-tile reveal">
-            <div class="product-tile-media product-tile-media--contain product-tile-media--bloc">
-              <img src="images/bloc-logo.png" alt="BLOC mobil uygulama logosu" width="640" height="360" loading="lazy" decoding="async" />
-            </div>
+            <a class="product-tile-media product-tile-media--bloc" href="#bloc">
+              <img src="images/bloc-logo.png" alt="BLOC mobil uygulama logosu" width="280" height="280" loading="lazy" decoding="async" />
+            </a>
             <div class="product-tile-body">
               <div class="product-tile-head">
                 <h3>BLOC</h3>
                 <span class="product-tile-badge product-tile-badge--soft">Mobil uygulama</span>
               </div>
-              <p class="product-tile-desc">
-                <strong>BLOC</strong>, topluluk ve sosyal akış odaklı bir mobil uygulamadır; iOS ve Android’de paylaşım, keşif ve etkileşimi modern, güven veren bir arayüzle bir araya getirir.
-              </p>
-              <ul class="product-tile-list">
-                <li><strong>Mobil ürün:</strong> App Store ve Google Play üzerinden indirilebilir; telefon ve tablette tutarlı deneyim.</li>
-                <li><strong>Sosyal akış ve topluluk:</strong> İçerik akışları ve etkileşim odaklı yapı; kullanıcıları mobilde topluluk etrafında buluşturmayı hedefler.</li>
-                <li><strong>Premium deneyim:</strong> Kurumsal kalite ve güven mesajına uygun sade, okunaklı ekran düzeni.</li>
-              </ul>
+              <p class="product-tile-desc">Topluluk ve sosyal akış odaklı iOS / Android uygulaması.</p>
               <div class="product-tile-actions">
                 <a class="btn-primary" href="#bloc">Uygulama özeti</a>
-                <div class="store-badge-row">
-                  <a class="store-badge-link store-badge-link--play" href="https://play.google.com/store/search?q=BLOC%20SoftenWise&amp;c=apps" target="_blank" rel="noopener noreferrer" aria-label="Google Play’de indir">
-                    <img src="images/badge-google-play.svg?v=1" alt="" width="155" height="46" loading="lazy" decoding="async" />
-                  </a>
-                  <a class="store-badge-link" href="https://apps.apple.com/tr/search?term=BLOC%20SoftenWise" target="_blank" rel="noopener noreferrer" aria-label="App Store’da indir">
-                    <img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="lazy" decoding="async" />
-                  </a>
-                </div>
-                <p class="store-alt-links">
-                  <a href="https://play.google.com/store/search?q=BLOC%20SoftenWise&amp;c=apps" target="_blank" rel="noopener noreferrer">Android — Google Play</a>
-                  <span class="store-alt-sep" aria-hidden="true">·</span>
-                  <a href="https://apps.apple.com/tr/search?term=BLOC%20SoftenWise" target="_blank" rel="noopener noreferrer">iOS — App Store</a>
-                </p>
-                <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
               </div>
             </div>
           </article>
@@ -351,74 +331,25 @@
       <div class="container">
         <header class="product-detail-head reveal">
           <span class="section-kicker">Portföy</span>
-          <h2 id="clinic-detail-title">SoftenWise Clinic — ürün tekniği ve kapsam</h2>
+          <h2 id="clinic-detail-title">SoftenWise Clinic</h2>
           <p class="product-detail-lead">
-            Sağlık operasyonlarında dijital dönüşümün en yalın hali: randevudan hasta takibine, finanstan raporlamaya kadar klinik süreçlerinizi tek merkezden, kesintisiz yönetin.
+            Randevudan hasta takibine, finanstan raporlamaya: klinik süreçleri tek merkezden yöneten web paneli.
           </p>
           <div class="product-detail-cta-row">
             <a class="btn-primary" href="https://softenwiseclinic.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
-            <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
           </div>
         </header>
-
-        <section class="product-detail-wide reveal" aria-labelledby="clinic-highlights">
-          <h3 id="clinic-highlights">Öne çıkanlar</h3>
-          <ul class="product-detail-list">
-            <li><strong>Küresel standartlar:</strong> 11 dil ve çok ülkeli altyapı; operasyonunuzu sınırları aşan bir çizgide taşıyın.</li>
-            <li><strong>Veri güvenliği:</strong> Detaylı yetkilendirme ve audit log ile her işlemin izini sürün, veriyi kontrol altında tutun.</li>
-            <li><strong>Ücretsiz deneme:</strong> Tüm yetenekleri 15 gün ücretsiz deneyimleyerek iş akışınıza ne kattığını görün.</li>
-          </ul>
-        </section>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="clinic-who">
-            <h3 id="clinic-who">Kimler için?</h3>
-            <ul class="product-detail-list">
-              <li>Tek veya çok şubeli poliklinikler, özel tıp merkezleri</li>
-              <li>Farklı ülkelerde hizmet veren veya çok dilli ekip yöneten yapılar</li>
-              <li>Randevu ve mali süreçleri merkezden izlemek isteyen yönetim ekipleri</li>
-            </ul>
-          </section>
-          <section class="product-detail-block" aria-labelledby="clinic-modules">
-            <h3 id="clinic-modules">Temel modül alanları</h3>
-            <ul class="product-detail-list">
-              <li><strong>Hasta &amp; ziyaret:</strong> kayıt, anamnez / süreç takibi, şube bazlı görünürlük</li>
-              <li><strong>Randevu:</strong> takvim, çakışma azaltma, personel / oda / kaynak eşlemesi</li>
-              <li><strong>Finans:</strong> ödeme ve hizmet kalemleri, kasa / tahsilat akışları, rapor export</li>
-              <li><strong>Raporlama:</strong> operasyon ve yönetim özetleri; rol bazlı dashboard mantığı</li>
-              <li><strong>Dil &amp; yerelleştirme:</strong> arayüz ve içerik tarafında çok dil; ülke / para birimi esnekliği</li>
-            </ul>
-          </section>
-        </div>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="clinic-security">
-            <h3 id="clinic-security">Güvenlik, yetki ve uyum düşüncesi</h3>
-            <p class="product-detail-text">
-              Klinik verisi hassas veri sınıfındadır. Ürün; <strong>rol ve yetki</strong> ayrımı, kritik işlemler için izlenebilirlik ve
-              <strong>audit log</strong> yaklaşımıyla tasarlanır. KVKK ve kurum içi bilgi güvenliği politikalarınızla örtüşecek şekilde
-              erişim modeli ve saklama politikaları müşteri ile birlikte netleştirilir; gerekirse SoftenWise güvenlik danışmanlığı ile eşleştirilir.
-            </p>
-          </section>
-          <section class="product-detail-block" aria-labelledby="clinic-tech">
-            <h3 id="clinic-tech">Teknik özet</h3>
-            <ul class="product-detail-list">
-              <li><strong>Uygulama tipi:</strong> web tabanlı panel; tarayıcıdan erişim, merkezi güncelleme</li>
-              <li><strong>Ölçeklenme:</strong> şube ve kullanıcı sayısı büyüdükçe yatay kapasite planı</li>
-              <li><strong>Entegrasyon:</strong> muhasebe, SMS / e-posta, ödeme veya kurum içi API ihtiyaçları proje bazlı ele alınır</li>
-              <li><strong>Barındırma:</strong> SaaS modeli ve müşteri bulutu seçenekleri teklif aşamasında netleştirilir</li>
-            </ul>
-          </section>
-        </div>
-
-        <section class="product-detail-wide reveal" aria-labelledby="clinic-trial">
-          <h3 id="clinic-trial">Deneme ve canlıya geçiş</h3>
-          <p class="product-detail-text">
-            <strong>15 gün ücretsiz deneme</strong> ve ürün tanıtımı için <a href="https://softenwiseclinic.com/" target="_blank" rel="noopener noreferrer">softenwiseclinic.com</a>
-            üzerinden ilerleyebilirsiniz. Kurumsal SSO, özel rapor, veri göçü veya çok şube kurulumu gibi ihtiyaçlar için doğrudan
-            <a href="index.html#contact">SoftenWise iletişim</a> hattından teknik görüşme talep etmek daha hızlı sonuç verir.
-          </p>
-        </section>
+        <figure class="product-detail-media reveal">
+          <img src="images/clinic_image.png" alt="SoftenWise Clinic arayüz ekran görüntüsü" width="960" height="540" loading="lazy" decoding="async" />
+        </figure>
+        <ul class="product-detail-list product-detail-list--compact reveal">
+          <li><strong>11 dil</strong> ve çok ülkeli altyapı; şube bazlı görünürlük</li>
+          <li>Hasta &amp; ziyaret, randevu, finans ve raporlama modülleri</li>
+          <li>Rol / yetki ayrımı ve <strong>audit log</strong> ile izlenebilirlik</li>
+          <li>Web tabanlı panel; SaaS veya müşteri bulutu seçenekleri</li>
+          <li><strong>15 gün ücretsiz deneme</strong> — softenwiseclinic.com</li>
+          <li>Poliklinikler, özel tıp merkezleri ve çok şubeli yapılar için</li>
+        </ul>
       </div>
     </article>
 
@@ -426,46 +357,21 @@
       <div class="container">
         <header class="product-detail-head reveal">
           <span class="section-kicker">SoftenWise ekosistemi</span>
-          <h2 id="otomini-detail-title">Otomini — ikinci el araç değerleme ve galeri platformu</h2>
+          <h2 id="otomini-detail-title">Otomini</h2>
           <p class="product-detail-lead">
-            <a href="https://otomini.com/" target="_blank" rel="noopener noreferrer">Otomini</a>,
-            ikinci el araç ticaretinde güven odaklı süreç sunar: anlık dijital değerleme, şeffaf ekspertiz ve profesyonel galeri vitriniyle alım-satımı dijitalleştirirsiniz.
+            İkinci el araç ticaretinde güven odaklı süreç: anlık dijital değerleme, şeffaf ekspertiz ve profesyonel galeri vitrini.
           </p>
           <div class="product-detail-cta-row">
             <a class="btn-primary" href="https://otomini.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
-            <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
           </div>
         </header>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="otomini-value">
-            <h3 id="otomini-value">Temel yetenekler</h3>
-            <ul class="product-detail-list">
-              <li><strong>Akıllı değerleme:</strong> Marka, model ve donanım verileriyle aracın gerçek değerine saniyeler içinde yaklaşın.</li>
-              <li><strong>Şeffaf ekspertiz:</strong> Tramer ve hasarı anlaşılır bir özetle gösterin, güveni pekiştirin.</li>
-              <li><strong>İlan yönetimi:</strong> Araçları Otomini vitrininde öne çıkarıp doğru alıcıya hızla ulaşın.</li>
-            </ul>
-          </section>
-          <section class="product-detail-block" aria-labelledby="otomini-who">
-            <h3 id="otomini-who">Kimler için?</h3>
-            <ul class="product-detail-list">
-              <li>İkinci el galeriler ve bayi ağları</li>
-              <li>Hızlı ön değerleme isteyen alım satım ekipleri</li>
-              <li>İlan kalitesi ve güven mesajını ölçeklemek isteyen markalar</li>
-            </ul>
-          </section>
-        </div>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="otomini-tech">
-            <h3 id="otomini-tech">Teknik ilişki</h3>
-            <p class="product-detail-text">
-              Otomini, SoftenWise mühendislik disipliniyle geliştirilen <strong>bağımsız bir ürün markasıdır</strong>.
-              Özel entegrasyon, kurumsal raporlama veya beyaz etiket gereksinimleri için
-              <a href="index.html#contact">SoftenWise iletişim</a> üzerinden teknik görüşme talep edebilirsiniz.
-            </p>
-          </section>
-        </div>
+        <ul class="product-detail-list product-detail-list--compact reveal">
+          <li><strong>Akıllı değerleme:</strong> marka, model ve donanım verileriyle saniyeler içinde ön değer</li>
+          <li><strong>Şeffaf ekspertiz:</strong> Tramer ve hasar özeti</li>
+          <li><strong>İlan yönetimi:</strong> Otomini vitrininde galeri odaklı sunum</li>
+          <li>İkinci el galeriler, bayi ağları ve alım-satım ekipleri için</li>
+          <li>SoftenWise mühendisliğiyle geliştirilen bağımsız ürün markası</li>
+        </ul>
       </div>
     </article>
 
@@ -473,69 +379,22 @@
       <div class="container">
         <header class="product-detail-head reveal">
           <span class="section-kicker">Portföy</span>
-          <h2 id="softenwise-maps-detail-title">SoftenWise Maps — operasyonel gücünüzü haritaya taşıyın</h2>
+          <h2 id="softenwise-maps-detail-title">SoftenWise Maps</h2>
           <p class="product-detail-lead">
-            <a href="https://softenwisemaps.com/" target="_blank" rel="noopener noreferrer">SoftenWise Maps</a>,
-            karmaşık saha operasyonlarınızı tek panelden izlemenizi, analiz etmenizi ve yönetmenizi sağlayan kurumsal bir
-            <strong>CBS</strong> ekosistemidir. Harita sunumu, geocode, rota, mesafe matrisi, güvenli ve yasaklı bölgeler,
-            katman ağacı ve raporlama; ihtiyaç duyduğunuzda Google Maps Platform veya kurum içi harita servisleriyle birlikte
-            yapılandırılabilir. Tam kapsam, API listesi ve dokümantasyon için ürün sitesine gidin; kurulum ve lisans için
-            <a href="index.html#contact">SoftenWise iletişim</a>.
+            Saha operasyonlarını tek panelden izleyen kurumsal <strong>CBS</strong> ekosistemi: harita, bölge, rota, raporlama ve REST API.
           </p>
           <div class="product-detail-cta-row">
             <a class="btn-primary" href="https://softenwisemaps.com/" target="_blank" rel="noopener noreferrer">Ürün sitesine git</a>
-            <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
-            <a class="btn-ghost" href="index.html#solutions">Entegrasyon ve özel proje</a>
           </div>
         </header>
-
-        <section class="product-detail-wide reveal" aria-labelledby="softenwise-maps-highlights">
-          <h3 id="softenwise-maps-highlights">Öne çıkanlar</h3>
-          <ul class="product-detail-list">
-            <li><strong>Tek panel:</strong> harita, analiz ve rapor; adres / koordinat ile canlı odak; katman ağacı ve çizim araçları.</li>
-            <li><strong>Bölge ve versiyon:</strong> güvenli ve yasaklı alanları poligon olarak yönetme; değişikliklerin versiyonlu kaydı.</li>
-            <li><strong>REST API:</strong> harita ayarları, rota, geocode, güvenli bölgeler, katman ağacı ve entegrasyon kataloğu (<code>GET /api/maps/integration-catalog</code>).</li>
-          </ul>
-        </section>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="softenwise-maps-use">
-            <h3 id="softenwise-maps-use">Hedef kullanım senaryoları</h3>
-            <ul class="product-detail-list">
-              <li>Saha operasyonu, bölge planlaması, lojistik ve yer seçimi; haritada görünür kararlar</li>
-              <li>Güvenli / yasaklı bölge kuralları, rota ve mesafe matrisi ile saha planlaması</li>
-              <li>Mevcut kurum sistemleri ile GeoJSON / KML ve REST üzerinden veri alışverişi</li>
-            </ul>
-          </section>
-          <section class="product-detail-block" aria-labelledby="softenwise-maps-modules">
-            <h3 id="softenwise-maps-modules">Ürün yüzeyi (yüksek seviye)</h3>
-            <ul class="product-detail-list">
-              <li><strong>Harita ve veri:</strong> yapılandırılabilir karo (XYZ), Nominatim araması; WMS / WMTS ile kurumsal altlıklar</li>
-              <li><strong>Analiz:</strong> ölçüm, buffer, poligon geçmişi; POI ve raporlama hatları</li>
-              <li><strong>Güvenlik:</strong> çok kiracılı mimari, kiracı izolasyonu, rol tabanlı erişim</li>
-              <li><strong>Dokümantasyon:</strong> ürün sitesinde OpenAPI (Swagger), Redoc (<code>/docs</code>) ve kurulum özeti</li>
-            </ul>
-          </section>
-        </div>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="softenwise-maps-ops">
-            <h3 id="softenwise-maps-ops">Operasyon ve güncellemeler</h3>
-            <p class="product-detail-text">
-              SoftenWise Maps, üretim ortamında kullanılan sürümlerle sunulur; hata düzeltmeleri ve güvenlik güncellemeleri düzenli olarak
-              dağıtılır. Sağlık uçları (<code>/health</code>, <code>/health/ready</code>) ve gözlemlenebilirlik pratikleri kurumsal işletmeye uygundur.
-              Kuruma özel veri paketleri ve entegrasyonlar proje kapsamında planlanır.
-            </p>
-          </section>
-          <section class="product-detail-block" aria-labelledby="softenwise-maps-why">
-            <h3 id="softenwise-maps-why">Neden ayrı bir ürün hattı?</h3>
-            <p class="product-detail-text">
-              Coğrafi veri ve harita deneyimi; performans, güvenlik ve lisans sınırları açısından ayrı mühendislik disiplini gerektirir.
-              SoftenWise Maps; SoftenWise Clinic veya Otomini gibi dikeylerden bağımsız olarak
-              <strong>CBS ve harita API</strong> kararlarını tek çatıda toplar. Kurumsal müşteriler için ürünler birlikte de, ayrı da konumlandırılabilir.
-            </p>
-          </section>
-        </div>
+        <ul class="product-detail-list product-detail-list--compact reveal">
+          <li><strong>Tek panel:</strong> harita, katman ağacı, çizim araçları; adres / koordinat ile canlı odak</li>
+          <li>Güvenli ve yasaklı bölgeler (poligon); versiyonlu değişiklik kaydı</li>
+          <li>Geocode, rota, mesafe matrisi; GeoJSON / KML ve <strong>REST API</strong> entegrasyonu</li>
+          <li>XYZ karo, Nominatim, WMS / WMTS; Google Maps Platform veya kurum içi harita servisleri</li>
+          <li>Çok kiracılı mimari, rol tabanlı erişim; OpenAPI / Redoc dokümantasyonu</li>
+          <li>Saha, lojistik ve bölge planlaması için tasarlandı</li>
+        </ul>
       </div>
     </article>
 
@@ -543,9 +402,9 @@
       <div class="container">
         <header class="product-detail-head reveal">
           <span class="section-kicker">SoftenWise ekosistemi</span>
-          <h2 id="bloc-detail-title">BLOC — topluluk ve sosyal akış için mobil uygulama</h2>
+          <h2 id="bloc-detail-title">BLOC</h2>
           <p class="product-detail-lead">
-            <strong>BLOC</strong>, SoftenWise mühendisliğiyle geliştirilen <strong>iOS ve Android</strong> mobil uygulamasıdır. Topluluk merkezli sosyal deneyimi tek çatıda sunar; paylaşım, keşif ve etkileşimi ön planda tutar.
+            Topluluk ve sosyal akış odaklı <strong>iOS ve Android</strong> mobil uygulama; paylaşım, keşif ve etkileşim tek çatıda.
           </p>
           <div class="product-detail-cta-row">
             <div class="store-badge-row">
@@ -556,80 +415,52 @@
                 <img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="eager" decoding="async" />
               </a>
             </div>
-            <p class="store-alt-links">
-              <a href="https://play.google.com/store/search?q=BLOC%20SoftenWise&amp;c=apps" target="_blank" rel="noopener noreferrer">Android — Google Play</a>
-              <span class="store-alt-sep" aria-hidden="true">·</span>
-              <a href="https://apps.apple.com/tr/search?term=BLOC%20SoftenWise" target="_blank" rel="noopener noreferrer">iOS — App Store</a>
-            </p>
-            <a class="btn-ghost" href="index.html#contact">Kurumsal görüşme — teklif al</a>
           </div>
         </header>
-
-        <section class="product-detail-wide reveal" aria-labelledby="bloc-highlights">
-          <h3 id="bloc-highlights">Öne çıkanlar</h3>
-          <ul class="product-detail-list">
-            <li><strong>Mobil öncelikli ürün:</strong> App Store ve Google Play dağıtımına uygun sürümleme ve mağaza beklentileri gözetilir.</li>
-            <li><strong>Sosyal akış odağı:</strong> Akış, bildirimler ve topluluk etkileşimine uygun sade, anlaşılır bilgi sunumu.</li>
-            <li><strong>Kurumsal çizgi:</strong> SoftenWise kalite ve güvenlik pratikleriyle uyumlu geliştirme disiplini.</li>
-          </ul>
-        </section>
-
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="bloc-who">
-            <h3 id="bloc-who">Kimler için?</h3>
-            <ul class="product-detail-list">
-              <li>Sosyal ve topluluk odaklı mobil ürün geliştiren markalar</li>
-              <li>İçerik ve etkileşimi mobilde büyütmek isteyen ekipler</li>
-              <li>iOS ve Android’de tek marka deneyimi arayan iş ortakları</li>
-            </ul>
-          </section>
-          <section class="product-detail-block" aria-labelledby="bloc-tech">
-            <h3 id="bloc-tech">Teknik ilişki</h3>
-            <p class="product-detail-text">
-              BLOC, SoftenWise ürün portföyünde <strong>mobil uygulama</strong> hattında konumlanır; web panelli ürünlerden bağımsız olarak mağaza üzerinden son kullanıcıya ulaşır.
-              Özel entegrasyon, kurumsal lisans veya beyaz etiket ihtiyaçları için
-              <a href="index.html#contact">SoftenWise iletişim</a> üzerinden teknik görüşme talep edebilirsiniz.
-            </p>
-          </section>
-        </div>
+        <ul class="product-detail-list product-detail-list--compact reveal">
+          <li>App Store ve Google Play dağıtımına uygun mobil öncelikli ürün</li>
+          <li>Sosyal akış: paylaşım, keşif, bildirimler ve topluluk etkileşimi</li>
+          <li>iOS ve Android’de tek marka deneyimi</li>
+          <li>SoftenWise kalite ve güvenlik pratikleriyle geliştirildi</li>
+          <li>Web panelli ürünlerden bağımsız; mağaza üzerinden son kullanıcıya ulaşır</li>
+        </ul>
       </div>
     </article>
 
-    <section class="products-page" aria-labelledby="product-approach-title">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-kicker reveal">Nasıl çalışıyoruz?</span>
-          <h2 id="product-approach-title" class="reveal">Ürün yaklaşımımız</h2>
-          <p class="section-desc reveal">
-            Bizim için ürün, tek başına bir ekran değil; randevu kuyruğundan saha rotasına kadar işin gerçekten döndüğü yerde duran bir parça.
-            Bu yüzden analizi baştan yapıyor, geliştirmeyi şeffaf yürütüyor ve canlıya çıktıktan sonra da yanınızda kalmayı normal karşılıyoruz.
-          </p>
+    <section class="section-editorial" aria-labelledby="product-approach-title">
+      <div class="container section-editorial__inner">
+        <header class="section-head reveal">
+          <span class="section-kicker">Nasıl çalışıyoruz?</span>
+          <h2 id="product-approach-title">Ürün yaklaşımımız</h2>
         </header>
-        <div class="product-detail-grid reveal">
-          <section class="product-detail-block" aria-labelledby="approach-analysis">
-            <h3 id="approach-analysis">Önce netleştiriyoruz</h3>
-            <p class="product-detail-text">İhtiyacı dinleyip "ne yapılabilir"i birlikte çerçeveliyoruz; teknik kurgu, böylece sürprize değil operasyona oturuyor.</p>
-          </section>
-          <section class="product-detail-block" aria-labelledby="approach-transparent">
-            <h3 id="approach-transparent">Arada kaynamıyor</h3>
-            <p class="product-detail-text">Ara demolar ve düzenli paylaşımla ilerlemeyi görünür tutuyoruz; siz de sürecin içinde kaldığınızı hissediyorsunuz.</p>
-          </section>
-          <section class="product-detail-block" aria-labelledby="approach-support">
-            <h3 id="approach-support">Teslim sonrası da varız</h3>
-            <p class="product-detail-text">Canlıya alıp çekilmiyoruz; izleme, bakım ve geliştirme tarafında uzun soluklu ortaklık hedefliyoruz.</p>
-          </section>
+        <p class="reveal">Ürün, tek başına bir ekran değil; işin gerçekten döndüğü yerde duran bir parça. Analizi baştan yapıyor, geliştirmeyi şeffaf yürütüyor ve canlıya çıktıktan sonra da yanınızda kalmayı normal karşılıyoruz.</p>
+        <p class="reveal">Clinic’ten SoftenWise Maps ve BLOC’a kadar her hat sahada veya mobilde kullanılıyor. Mimari, entegrasyon veya kurumsal kapsam için <a href="#contact">bize yazmanız</a> yeterli.</p>
+      </div>
+    </section>
+
+    <section class="cta contact-band" id="contact">
+      <div class="container reveal">
+        <h2>Ürün görüşmesi</h2>
+        <p>Demo, lisans veya kuruma özel kapsam için kısa bir teknik görüşme planlayalım.</p>
+        <div class="contact-band__links">
+          <a href="tel:+905421846595">+90 542 184 65 95</a>
+          <a href="mailto:info@softenwise.com">info@softenwise.com</a>
+          <a href="https://wa.me/905421846595" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </div>
-        <section class="product-detail-wide reveal" aria-labelledby="product-vision-note">
-          <h3 id="product-vision-note">Sadece kod yazmıyoruz</h3>
-          <p class="product-detail-text">
-            Her ürün, bir iş modelinin dijitalleşmiş hali: Clinic’ten SoftenWise Maps ve BLOC’a kadar hepsi sahada, operasyon hattında veya mobil mağazada kullanılıyor ve işi daha ölçülebilir kılıyor.
-            Mimariyi, entegrasyonu veya kuruma özel kapsamı konuşmak isterseniz <a href="index.html#contact">bize yazmanız</a> yeterli — teknik detayı birlikte açarız.
-          </p>
-        </section>
-        <section class="product-detail-wide reveal" aria-labelledby="product-roadmap-teaser">
-          <h3 id="product-roadmap-teaser">Geliştirilmekte olan çözümler</h3>
-          <p class="product-detail-text">Ekip, verimlilik ve saha deneyimini iyileştirecek yeni hatlar üzerinde çalışıyor; yakında vitrine ekleyeceğimiz ürünler için sayfayı ve duyuruları takip edebilirsiniz.</p>
-        </section>
+        <form class="contact-form" data-contact-form data-submit-label="Görüşme talep et">
+          <input type="hidden" name="_subject" value="SoftenWise – Ürün Görüşme Talebi">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Ad Soyad" required />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="E-posta" required />
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Hangi ürün / ihtiyaç?" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Görüşme talep et</button>
+        </form>
       </div>
     </section>
   </main>
@@ -641,11 +472,7 @@
         </div>
 
         <p class="footer-desc">
-          Biz sadece yazılım ajansı değiliz; teknolojiye dayalı büyüme stratejileri geliştiren bir mühendislik ortağıyız.
-        </p>
-
-        <p class="footer-note">
-          Söz verdiğimiz takvime sadık kalıyor, teslimat sonrasında da sistemlerinizin sağlığını sürekli izleyerek yanınızda duruyoruz.
+          SoftenWise — kurumlara ve girişimlere ölçeklenebilir yazılım, güvenlik ve teknik danışmanlık.
         </p>
       </div>
 
@@ -660,7 +487,7 @@
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">Ekosistem</div>
+          <div class="footer-title">Şirket</div>
           <a href="urunler.html">Ürünler</a>
           <a href="academy.html">Academy</a>
           <a href="kariyer.html">Kariyer</a>
@@ -673,12 +500,13 @@
           <div class="footer-title">İletişim</div>
           <a class="contact-link" href="tel:+905421846595"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg></span><span>+90 542 184 65 95</span></a>
           <a class="contact-link" href="mailto:info@softenwise.com"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-mail"/></svg></span><span>info@softenwise.com</span></a>
+          <a class="contact-link" href="https://wa.me/905421846595" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">Sosyal Medya</div>
-          <a class="social-link" href="https://www.linkedin.com/in/softenwise-systems-4003a03b6/" target="_blank" rel="noopener noreferrer"><span class="social-dot social-dot--linkedin" aria-hidden="true">in</span><span>LinkedIn</span></a>
-          <a class="social-link" href="https://www.instagram.com/softenwise.systems/" target="_blank" rel="noopener noreferrer"><span class="social-dot social-dot--instagram" aria-hidden="true">ig</span><span>Instagram</span></a>
+          <div class="footer-title">Sosyal</div>
+          <a href="https://www.linkedin.com/in/softenwise-systems-4003a03b6/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.instagram.com/softenwise.systems/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </div>
     </div>
@@ -697,7 +525,7 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/main.js?v=202604302" defer></script>
+  <script src="js/main.js?v=202607167" defer></script>
 </body>
 
 </html>
