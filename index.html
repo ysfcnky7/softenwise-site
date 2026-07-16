@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <title>SoftenWise | Ölçeklenebilir Yazılım Sistemleri</title>
+  <title>SoftenWise | Kurumsal Yazılım Sistemleri</title>
 
   <!-- SEO META -->
   <meta name="description"
-    content="SoftenWise; köklü kurumlar ve girişimler için yazılım geliştirme, siber güvenlik ve stratejik danışmanlıkla yüksek performanslı sistemler tasarlayan bir mühendislik merkezidir." />
+    content="SoftenWise; kurumlar ve girişimler için özel yazılım, mobil uygulama, entegrasyon, güvenlik ve teknik danışmanlık sunan bir mühendislik şirketidir." />
 
   <meta name="keywords"
     content="özel yazılım, yazılım firması, web yazılım, mobil uygulama, kurumsal sistem, entegrasyon, otomasyon, api, panel, raporlama, yazılım geliştirme" />
@@ -19,7 +19,17 @@
   <meta name="theme-color" content="#0e3a46" />
   <meta name="publisher" content="SoftenWise" />
   <meta name="geo.region" content="TR" />
-  <link rel="alternate" hreflang="tr" href="https://softenwise.com/" />
+  <link rel="alternate" hreflang="tr" href="https://softenwise.com/?lang=tr" />
+  <link rel="alternate" hreflang="en" href="https://softenwise.com/?lang=en" />
+  <link rel="alternate" hreflang="de" href="https://softenwise.com/?lang=de" />
+  <link rel="alternate" hreflang="fr" href="https://softenwise.com/?lang=fr" />
+  <link rel="alternate" hreflang="ar" href="https://softenwise.com/?lang=ar" />
+  <link rel="alternate" hreflang="ru" href="https://softenwise.com/?lang=ru" />
+  <link rel="alternate" hreflang="es" href="https://softenwise.com/?lang=es" />
+  <link rel="alternate" hreflang="it" href="https://softenwise.com/?lang=it" />
+  <link rel="alternate" hreflang="nl" href="https://softenwise.com/?lang=nl" />
+  <link rel="alternate" hreflang="pt" href="https://softenwise.com/?lang=pt" />
+  <link rel="alternate" hreflang="az" href="https://softenwise.com/?lang=az" />
   <link rel="alternate" hreflang="x-default" href="https://softenwise.com/" />
 
   <link rel="icon" href="icons/favicon.ico">
@@ -66,8 +76,8 @@
   <link rel="stylesheet" href="css/local-fonts.css?v=202607167" />
 
   <!-- CSS — ?v= cache bust: scripts/apply-asset-version.ps1 ($AssetVersion) -->
-  <link rel="stylesheet" href="css/style.css?v=202607169" />
-  <link rel="stylesheet" href="css/softenwise.css?v=202607169" />
+  <link rel="stylesheet" href="css/style.css?v=202607170" />
+  <link rel="stylesheet" href="css/softenwise.css?v=202607172" />
 
   <!-- JSON-LD (SEO) -->
   <script type="application/ld+json">
@@ -109,8 +119,8 @@
           "contactType": "customer support",
           "telephone": "+90 542 184 65 95",
           "email": "info@softenwise.com",
-          "availableLanguage": ["tr", "en"],
-          "areaServed": "TR"
+          "availableLanguage": ["tr", "en", "de", "fr", "ar", "ru", "es", "it", "nl", "pt", "az"],
+          "areaServed": "Worldwide"
         }
       }
     </script>
@@ -147,105 +157,107 @@
   </script>
 </head>
 
-<body class="page-home">
-  <a class="skip-link" href="#main">İçeriğe atla</a>
+<body class="page-home" data-i18n-title="meta.title" data-i18n-desc="meta.desc">
+  <a class="skip-link" href="#main" data-i18n="skip">İçeriğe atla</a>
   <script src="js/sprite-inject.js?v=202607163"></script>
 
   <!-- HEADER -->
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a class="logo" href="index.html" aria-label="SoftenWise ana sayfa">
+      <a class="logo" href="index.html" aria-label="SoftenWise ana sayfa" data-i18n-attr="aria-label:logo.home">
         <img class="logo-img" src="images/softenwise-wordmark.png" alt="" width="823" height="132" decoding="async" />
       </a>
-      <nav class="nav" id="nav" aria-label="Ana menü">
+      <nav class="nav" id="nav" aria-label="Ana menü" data-i18n-attr="aria-label:nav.aria">
         <div class="nav-item has-dropdown">
-          <a class="nav-main-link" href="#solutions">Hizmetler</a>
-          <button class="nav-parent-toggle" type="button" aria-label="Hizmetler alt menüsünü aç/kapat" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
+          <a class="nav-main-link" href="#solutions" data-i18n="nav.services">Hizmetler</a>
+          <button class="nav-parent-toggle" type="button" aria-label="Hizmetler alt menüsünü aç/kapat" data-i18n-attr="aria-label:nav.services.toggle" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
           <div class="nav-dropdown" aria-label="Hizmetler alt menü">
             <a class="nav-dropdown-link" href="ozel-yazilim.html">
               <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-code"/></svg></span>
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Özel Yazılım Geliştirme</span>
-                <span class="nav-dd-desc">Kuruma özel ürün ve platform geliştirme</span>
+                <span class="nav-dd-title" data-i18n="nav.custom">Özel Yazılım Geliştirme</span>
+                <span class="nav-dd-desc" data-i18n="nav.custom.desc">Kuruma özel ürün ve platform geliştirme</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="mobil-gelistirme.html">
               <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-smartphone"/></svg></span>
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Mobil Geliştirme</span>
-                <span class="nav-dd-desc">Native ve hybrid mobil uygulama çözümleri</span>
+                <span class="nav-dd-title" data-i18n="nav.mobile">Mobil Geliştirme</span>
+                <span class="nav-dd-desc" data-i18n="nav.mobile.desc">Native ve hybrid mobil uygulama çözümleri</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="entegrasyon-otomasyon.html">
               <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-plug"/></svg></span>
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Entegrasyon & Otomasyon</span>
-                <span class="nav-dd-desc">Sistemler arası veri akışı ve süreç otomasyonu</span>
+                <span class="nav-dd-title" data-i18n="nav.integ">Entegrasyon ve Otomasyon</span>
+                <span class="nav-dd-desc" data-i18n="nav.integ.desc">Sistemler arası veri akışı ve süreç otomasyonu</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="guvenlik-denetim.html">
               <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-shield"/></svg></span>
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Güvenlik & Denetim</span>
-                <span class="nav-dd-desc">Risk analizi, uyum ve güvenlik değerlendirmesi</span>
+                <span class="nav-dd-title" data-i18n="nav.sec">Güvenlik ve Denetim</span>
+                <span class="nav-dd-desc" data-i18n="nav.sec.desc">Risk analizi, uyum ve güvenlik değerlendirmesi</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="teknik-danismanlik.html">
               <span class="nav-dd-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-compass"/></svg></span>
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Teknik Danışmanlık</span>
-                <span class="nav-dd-desc">Mimari karar, ölçeklenme ve yol haritası</span>
+                <span class="nav-dd-title" data-i18n="nav.consult">Teknik Danışmanlık</span>
+                <span class="nav-dd-desc" data-i18n="nav.consult.desc">Mimari karar, ölçeklenme ve yol haritası</span>
               </span>
             </a>
           </div>
         </div>
-        <a class="nav-main-link" href="urunler.html">Ürünler</a>
+        <a class="nav-main-link" href="urunler.html" data-i18n="nav.products">Ürünler</a>
         <div class="nav-item has-dropdown">
-          <a class="nav-main-link" href="kaynaklar.html">Şirket</a>
-          <button class="nav-parent-toggle" type="button" aria-label="Şirket alt menüsünü aç/kapat" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
+          <a class="nav-main-link" href="kaynaklar.html" data-i18n="nav.company">Şirket</a>
+          <button class="nav-parent-toggle" type="button" aria-label="Şirket alt menüsünü aç/kapat" data-i18n-attr="aria-label:nav.company.toggle" aria-expanded="false"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-chevron-down"/></svg></button>
           <div class="nav-dropdown" aria-label="Şirket alt menü">
             <a class="nav-dropdown-link" href="academy.html">
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Academy</span>
-                <span class="nav-dd-desc">Eğitim ve gelişim programları</span>
+                <span class="nav-dd-title" data-i18n="nav.academy">Academy</span>
+                <span class="nav-dd-desc" data-i18n="nav.academy.desc">Eğitim ve gelişim programları</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="kariyer.html">
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Kariyer</span>
-                <span class="nav-dd-desc">Açık roller ve ekibe katılım</span>
+                <span class="nav-dd-title" data-i18n="nav.career">Kariyer</span>
+                <span class="nav-dd-desc" data-i18n="nav.career.desc">Açık pozisyonlar ve ekibe katılım</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="girisim-ortakligi.html">
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Fikir Ortaklığı</span>
-                <span class="nav-dd-desc">Girişim ve melek yatırım hattı</span>
+                <span class="nav-dd-title" data-i18n="nav.partner">Fikir Ortaklığı</span>
+                <span class="nav-dd-desc" data-i18n="nav.partner.desc">Girişim ve yatırım iş birliği</span>
               </span>
             </a>
             <a class="nav-dropdown-link" href="kaynaklar.html">
               <span class="nav-dd-body">
-                <span class="nav-dd-title">Kaynaklar</span>
-                <span class="nav-dd-desc">Rehberler ve içerikler</span>
+                <span class="nav-dd-title" data-i18n="nav.resources">Kaynaklar</span>
+                <span class="nav-dd-desc" data-i18n="nav.resources.desc">Rehberler ve içerikler</span>
               </span>
             </a>
           </div>
         </div>
-        <a class="nav-main-link" href="#references">Referanslar</a>
-        <a class="nav-main-link nav-main-link--cta" href="#contact">İletişim</a>
+        <a class="nav-main-link" href="#references" data-i18n="nav.refs">Referanslar</a>
+        <a class="nav-main-link nav-main-link--cta" href="#contact" data-i18n="nav.contact">İletişim</a>
         <div class="nav-mobile-footer">
-          <p class="nav-mobile-footer-label">Hızlı iletişim</p>
+          <p class="nav-mobile-footer-label" data-i18n="nav.quick">Hızlı iletişim</p>
           <div class="nav-mobile-actions">
-            <a class="nav-mobile-btn" href="tel:+905421846595" aria-label="Telefonla ara">Telefonla ara</a>
-            <a class="nav-mobile-btn nav-mobile-btn--wa" href="https://wa.me/905421846595" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile yazın">WhatsApp</a>
+            <a class="nav-mobile-btn" href="tel:+905421846595" aria-label="Telefonla ara" data-i18n="nav.call" data-i18n-attr="aria-label:nav.call">Telefonla ara</a>
+            <a class="nav-mobile-btn nav-mobile-btn--wa" href="https://wa.me/905421846595" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile yazın" data-i18n-attr="aria-label:quick.wa">WhatsApp</a>
           </div>
         </div>
       </nav>
 
-      <button type="button" class="menu-btn" id="menuBtn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="nav">
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="Menüyü aç/kapat" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="nav">
         <svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-menu"/></svg>
       </button>
     </div>
   </header>
+
+
 
 
 
@@ -271,14 +283,13 @@
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <p class="hero-brand">SoftenWise</p>
-          <h1>Yazılımı teslim ederiz. Sistemi büyütürüz.</h1>
-          <p>
-            Özel yazılım, mobil, entegrasyon ve güvenlik —
-            kapsam net, süreç şeffaf, canlı sonrası destek dahil.
+          <h1 data-i18n="home.hero.h1">Kurumsal yazılım sistemleri tasarlıyor ve hayata geçiriyoruz.</h1>
+          <p data-i18n="home.hero.p">
+            Özel yazılım, mobil uygulama, entegrasyon ve güvenlik alanlarında net kapsam, şeffaf süreç ve canlı sonrası destek sunuyoruz.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn-primary">15 dk görüşme ayarla</a>
-            <a href="#solutions" class="btn-ghost">Ne yapıyoruz?</a>
+            <a href="#contact" class="btn-primary" data-i18n="home.hero.cta">Görüşme planlayın</a>
+            <a href="#solutions" class="btn-ghost" data-i18n="home.hero.ghost">Hizmetlerimiz</a>
           </div>
         </div>
       </div>
@@ -286,7 +297,7 @@
 
     <section class="logo-strip" id="references" aria-label="Referanslar">
       <div class="container">
-        <p class="logo-strip__label">Seçilmiş referanslar</p>
+        <p class="logo-strip__label" data-i18n="home.refs.label">Seçilmiş referanslar</p>
         <div class="logo-strip__row reveal">
           <a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" aria-label="Point Croissant">
             <img src="images/reference/pointcroissantref.png" alt="Point Croissant" width="220" height="72" loading="lazy" decoding="async" />
@@ -316,43 +327,43 @@
     <section class="service-index" id="solutions">
       <div class="container">
         <header class="section-head">
-          <span class="section-kicker reveal">Hizmetler</span>
-          <h2 class="reveal">Beş hatta net teslim</h2>
-          <p class="section-desc reveal">Her işte kapsam, takvim ve ölçülebilir çıktıyı baştan kilitleriz.</p>
+          <span class="section-kicker reveal" data-i18n="home.svc.kicker">Hizmetler</span>
+          <h2 class="reveal" data-i18n="home.svc.h2">Sunduğumuz hizmetler</h2>
+          <p class="section-desc reveal" data-i18n="home.svc.desc">Her projede kapsam, zaman planı ve teslim kriterlerini baştan tanımlıyoruz.</p>
         </header>
         <ul class="service-index__list">
           <li class="service-index__item service-index__item--featured reveal">
             <a href="ozel-yazilim.html">
-              <span class="service-index__title">Özel Yazılım Geliştirme</span>
-              <span class="service-index__desc">Platform, SaaS ve B2B sistemler — işinizle birlikte büyüyen modüler mimari.</span>
+              <span class="service-index__title" data-i18n="home.svc.custom">Özel Yazılım Geliştirme</span>
+              <span class="service-index__desc" data-i18n="home.svc.custom.desc">Platform, SaaS ve B2B sistemler — işinizle birlikte büyüyen modüler mimari.</span>
               <span class="service-index__arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li class="service-index__item reveal">
             <a href="mobil-gelistirme.html">
-              <span class="service-index__title">Mobil Geliştirme</span>
-              <span class="service-index__desc">iOS ve Android için native / hybrid uygulamalar.</span>
+              <span class="service-index__title" data-i18n="home.svc.mobile">Mobil Geliştirme</span>
+              <span class="service-index__desc" data-i18n="home.svc.mobile.desc">iOS ve Android için native ve hybrid uygulamalar.</span>
               <span class="service-index__arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li class="service-index__item reveal">
             <a href="entegrasyon-otomasyon.html">
-              <span class="service-index__title">Entegrasyon & Otomasyon</span>
-              <span class="service-index__desc">ERP, CRM, ödeme ve lojistik sistemleri arasında veri akışı.</span>
+              <span class="service-index__title" data-i18n="home.svc.integ">Entegrasyon ve Otomasyon</span>
+              <span class="service-index__desc" data-i18n="home.svc.integ.desc">ERP, CRM, ödeme ve lojistik sistemleri arasında güvenilir veri akışı.</span>
               <span class="service-index__arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li class="service-index__item reveal">
             <a href="guvenlik-denetim.html">
-              <span class="service-index__title">Güvenlik & Denetim</span>
-              <span class="service-index__desc">Risk analizi, uyum ve teknik güvenlik değerlendirmesi.</span>
+              <span class="service-index__title" data-i18n="home.svc.sec">Güvenlik ve Denetim</span>
+              <span class="service-index__desc" data-i18n="home.svc.sec.desc">Risk analizi, uyumluluk ve teknik güvenlik değerlendirmesi.</span>
               <span class="service-index__arrow" aria-hidden="true">→</span>
             </a>
           </li>
           <li class="service-index__item reveal">
             <a href="teknik-danismanlik.html">
-              <span class="service-index__title">Teknik Danışmanlık</span>
-              <span class="service-index__desc">Mimari karar, ölçeklenme ve teknoloji yol haritası.</span>
+              <span class="service-index__title" data-i18n="home.svc.consult">Teknik Danışmanlık</span>
+              <span class="service-index__desc" data-i18n="home.svc.consult.desc">Mimari kararlar, ölçeklenme ve teknoloji yol haritası.</span>
               <span class="service-index__arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -363,51 +374,50 @@
     <section class="case-feature" id="projects">
       <div class="container">
         <header class="section-head">
-          <span class="section-kicker reveal">Seçilmiş iş</span>
-          <h2 class="reveal">İsim koyduğumuz işler</h2>
-          <p class="section-desc reveal">Ürünlerimiz ve referanslarımız — NDA’daki projeler kapalı kalır.</p>
+          <span class="section-kicker reveal" data-i18n="home.case.kicker">Projeler</span>
+          <h2 class="reveal" data-i18n="home.case.h2">Seçilmiş çalışmalar</h2>
+          <p class="section-desc reveal" data-i18n="home.case.desc">Ürün portföyümüz ve referanslarımız. Gizlilik sözleşmesi kapsamındaki projeler paylaşılmaz.</p>
         </header>
         <div class="case-feature__grid reveal">
           <div>
             <figure class="case-feature__media">
               <img src="images/clinic_image.png" alt="SoftenWise Clinic ürün arayüzü" width="960" height="540" loading="lazy" decoding="async" />
             </figure>
-            <p class="case-feature__sector">Ürün · SoftenWise Clinic</p>
-            <h3 class="case-feature__title">Klinik operasyonu tek panelde</h3>
-            <p class="case-feature__summary">
-              Randevu, hasta takibi, finans ve çok dilli operasyonu SoftenWise Clinic’te birleştirdik;
-              referanslarımız arasında Dest Clinic yer alıyor.
+            <p class="case-feature__sector" data-i18n="home.case.sector">Ürün · SoftenWise Clinic</p>
+            <h3 class="case-feature__title" data-i18n="home.case.title">Klinik operasyonunu tek panelde yönetin</h3>
+            <p class="case-feature__summary" data-i18n="home.case.summary">
+              Randevu, hasta takibi, finans ve çok dilli operasyonu SoftenWise Clinic üzerinde birleştirdik. Referanslarımız arasında Dest Clinic yer almaktadır.
             </p>
             <div class="case-feature__cols">
               <div>
-                <strong>Sorun</strong>
-                <p>Şube ve finans süreçleri dağınık araçlarda; yönetim görünürlüğü zayıftı.</p>
+                <strong data-i18n="home.case.problem">Sorun</strong>
+                <p data-i18n="home.case.problem.p">Şube ve finans süreçleri dağınık araçlarda ilerliyordu; yönetim görünürlüğü sınırlıydı.</p>
               </div>
               <div>
-                <strong>Çözüm</strong>
-                <p>Rol bazlı web panel, audit log, çok dil ve şube görünürlüğü.</p>
+                <strong data-i18n="home.case.solution">Çözüm</strong>
+                <p data-i18n="home.case.solution.p">Rol bazlı web paneli, denetim kaydı, çok dil desteği ve şube görünürlüğü.</p>
               </div>
               <div>
-                <strong>Etki</strong>
-                <p>Operasyon tek ekrandan; 15 gün denemeden canlıya net yol.</p>
+                <strong data-i18n="home.case.impact">Sonuç</strong>
+                <p data-i18n="home.case.impact.p">Operasyon tek ekrandan yönetilir; deneme sürecinden canlıya net bir geçiş yolu.</p>
               </div>
             </div>
-            <p class="case-feature__cta"><a href="urunler.html#softenwise-clinic" class="btn-ghost">Clinic’i incele</a></p>
+            <p class="case-feature__cta"><a href="urunler.html#softenwise-clinic" class="btn-ghost"><span data-i18n="home.case.cta">Clinic ürününü inceleyin</span></a></p>
           </div>
           <div class="case-feature__more" aria-label="Diğer örnekler">
             <a href="urunler.html#otomini">
-              <span>Otomini — ikinci el değerleme &amp; galeri</span>
-              <span>SoftenWise ürünü</span>
+              <span data-i18n="home.case.otomini">Otomini — ikinci el değerleme ve galeri</span>
+              <span data-i18n="home.case.otomini.meta">SoftenWise ürünü</span>
             </a>
             <a href="urunler.html#softenwise-maps">
-              <span>SoftenWise Maps — saha CBS / harita API</span>
-              <span>Kurumsal ürün</span>
+              <span data-i18n="home.case.maps">SoftenWise Maps — saha CBS ve harita API</span>
+              <span data-i18n="home.case.maps.meta">Kurumsal ürün</span>
             </a>
             <a href="#references">
-              <span>Point Croissant · Sharingo · Aytu · Jenesis</span>
-              <span>Referanslar</span>
+              <span data-i18n="home.case.refs">Point Croissant · Sharingo · Aytu · Jenesis</span>
+              <span data-i18n="home.case.refs.meta">Referanslar</span>
             </a>
-            <p class="case-feature__cta"><a href="#contact" class="btn-primary">Projeni konuşalım</a></p>
+            <p class="case-feature__cta"><a href="#contact" class="btn-primary" data-i18n="home.case.talk">Projenizi konuşalım</a></p>
           </div>
         </div>
       </div>
@@ -416,9 +426,9 @@
     <section class="products-band" id="products">
       <div class="container">
         <header class="section-head">
-          <span class="section-kicker reveal">Ürünler</span>
-          <h2 class="reveal">Kendi ürünlerimiz</h2>
-          <p class="section-desc reveal">Klinik, harita ve otomotiv — canlıda çalışan SoftenWise hatları.</p>
+          <span class="section-kicker reveal" data-i18n="home.prod.kicker">Ürünler</span>
+          <h2 class="reveal" data-i18n="home.prod.h2">SoftenWise ürünleri</h2>
+          <p class="section-desc reveal" data-i18n="home.prod.desc">Klinik yönetimi, harita operasyonu ve otomotiv çözümleri — canlıda kullanılan ürün hatlarımız.</p>
         </header>
         <div class="products-band__grid">
           <a class="products-band__item reveal" href="urunler.html#softenwise-clinic">
@@ -427,44 +437,44 @@
             </span>
             <img class="products-band__logo" src="images/softenwise-clinic-logo.png" alt="" width="200" height="52" loading="lazy" decoding="async" />
             <strong>SoftenWise Clinic</strong>
-            <span>Klinik ve sağlık operasyonları için dijital platform.</span>
+            <span data-i18n="home.prod.clinic">Klinik ve sağlık operasyonları için dijital platform.</span>
           </a>
           <a class="products-band__item reveal" href="urunler.html#softenwise-maps">
             <span class="products-band__visual products-band__visual--logo">
               <img src="images/softenwise-maps-logo.png" alt="" width="280" height="120" loading="lazy" decoding="async" />
             </span>
             <strong>SoftenWise Maps</strong>
-            <span>Konum ve harita tabanlı operasyon araçları.</span>
+            <span data-i18n="home.prod.maps">Konum ve harita tabanlı operasyon araçları.</span>
           </a>
           <a class="products-band__item reveal" href="urunler.html#otomini">
             <span class="products-band__visual products-band__visual--logo">
               <img src="images/otomini-logo.webp" alt="" width="280" height="120" loading="lazy" decoding="async" />
             </span>
             <strong>Otomini</strong>
-            <span>Otomotiv ve filo süreçleri için dijital çözümler.</span>
+            <span data-i18n="home.prod.otomini">Otomotiv ve filo süreçleri için dijital çözümler.</span>
           </a>
         </div>
-        <p class="products-band__more"><a href="urunler.html" class="btn-ghost">Tüm ürünleri incele</a></p>
+        <p class="products-band__more"><a href="urunler.html" class="btn-ghost" data-i18n="home.prod.more">Tüm ürünleri inceleyin</a></p>
       </div>
     </section>
 
     <section class="resources-links" id="resources">
       <div class="container">
-        <span class="section-kicker">Rehberler</span>
+        <span class="section-kicker" data-i18n="home.res.kicker">Rehberler</span>
         <div class="resources-links__row">
-          <a href="yazilim-firmasi-nasil-secilir.html">Yazılım firması nasıl seçilir?</a>
-          <a href="ozel-yazilim-maliyeti.html">Özel yazılım maliyeti</a>
-          <a href="mobil-uygulama-gelistirme-sureci.html">Mobil uygulama süreci</a>
-          <a href="kaynaklar.html">Tüm kaynaklar →</a>
+          <a href="yazilim-firmasi-nasil-secilir.html" data-i18n="home.res.firm">Yazılım firması nasıl seçilir?</a>
+          <a href="ozel-yazilim-maliyeti.html" data-i18n="home.res.cost">Özel yazılım maliyeti</a>
+          <a href="mobil-uygulama-gelistirme-sureci.html" data-i18n="home.res.mobile">Mobil uygulama süreci</a>
+          <a href="kaynaklar.html" data-i18n="home.res.all">Tüm kaynaklar →</a>
         </div>
       </div>
     </section>
 
     <section class="cta contact-band" id="contact">
       <div class="container reveal">
-        <h2>15 dakikada netleştirelim</h2>
-        <p>
-          Risk, kapsam ve bir sonraki adım — bağlayıcı değil, net bir çıkış.
+        <h2 data-i18n="home.contact.h2">Projenizi birlikte değerlendirelim</h2>
+        <p data-i18n="home.contact.p">
+          Kapsam, zaman planı ve bir sonraki adımı netleştirmek için kısa bir teknik görüşme planlayabilirsiniz.
         </p>
         <div class="contact-band__links">
           <a href="tel:+905421846595">+90 542 184 65 95</a>
@@ -475,17 +485,17 @@
           <input type="hidden" name="_subject" value="SoftenWise – Yeni İletişim Talebi">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-group">
-            <input type="text" name="name" placeholder="Ad Soyad" required />
+            <input type="text" name="name" placeholder="Ad Soyad" data-i18n-attr="placeholder:home.contact.name" required />
           </div>
           <div class="form-group">
-            <input type="email" name="email" placeholder="E-posta" required />
+            <input type="email" name="email" placeholder="E-posta" data-i18n-attr="placeholder:home.contact.email" required />
           </div>
           <div class="form-group">
-            <textarea name="message" placeholder="Ne üzerinde çalışıyorsunuz?" rows="4" required></textarea>
+            <textarea name="message" placeholder="Projeniz hakkında kısa bir özet" data-i18n-attr="placeholder:home.contact.message" rows="4" required></textarea>
           </div>
-          <button type="submit" class="btn-primary">Görüşme iste</button>
+          <button type="submit" class="btn-primary" data-i18n="home.contact.submit">Görüşme talebi gönder</button>
           <p id="formSuccess" style="display:none; margin-top:16px; color:var(--accent-2); font-weight:600;">
-            Talebinizi aldık. En kısa sürede dönüyoruz.
+            <span data-i18n="home.contact.success">Talebinizi aldık. En kısa sürede dönüş yapacağız.</span>
           </p>
         </form>
       </div>
@@ -500,40 +510,40 @@
           <img class="logo-img logo-img--footer" src="images/softenwise-wordmark.png" alt="" width="823" height="132" decoding="async" />
         </div>
 
-        <p class="footer-desc">
+        <p class="footer-desc" data-i18n="footer.desc">
           SoftenWise — kurumlara ve girişimlere ölçeklenebilir yazılım, güvenlik ve teknik danışmanlık.
         </p>
       </div>
 
       <div class="footer-links">
         <div class="footer-col">
-          <div class="footer-title">Hizmetler</div>
-          <a href="ozel-yazilim.html">Özel Yazılım</a>
-          <a href="mobil-gelistirme.html">Mobil Geliştirme</a>
-          <a href="entegrasyon-otomasyon.html">Entegrasyon & Otomasyon</a>
-          <a href="guvenlik-denetim.html">Güvenlik & Denetim</a>
-          <a href="teknik-danismanlik.html">Teknik Danışmanlık</a>
+          <div class="footer-title" data-i18n="footer.services">Hizmetler</div>
+          <a href="ozel-yazilim.html" data-i18n="footer.custom">Özel Yazılım</a>
+          <a href="mobil-gelistirme.html" data-i18n="footer.mobile">Mobil Geliştirme</a>
+          <a href="entegrasyon-otomasyon.html" data-i18n="footer.integ">Entegrasyon ve Otomasyon</a>
+          <a href="guvenlik-denetim.html" data-i18n="footer.sec">Güvenlik ve Denetim</a>
+          <a href="teknik-danismanlik.html" data-i18n="footer.consult">Teknik Danışmanlık</a>
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">Şirket</div>
-          <a href="urunler.html">Ürünler</a>
-          <a href="academy.html">Academy</a>
-          <a href="kariyer.html">Kariyer</a>
-          <a href="girisim-ortakligi.html">Fikir Ortaklığı</a>
-          <a href="kaynaklar.html">Kaynaklar</a>
-          <a href="index.html#references">Referanslar</a>
+          <div class="footer-title" data-i18n="footer.company">Şirket</div>
+          <a href="urunler.html" data-i18n="footer.products">Ürünler</a>
+          <a href="academy.html" data-i18n="footer.academy">Academy</a>
+          <a href="kariyer.html" data-i18n="footer.career">Kariyer</a>
+          <a href="girisim-ortakligi.html" data-i18n="footer.partner">Fikir Ortaklığı</a>
+          <a href="kaynaklar.html" data-i18n="footer.resources">Kaynaklar</a>
+          <a href="index.html#references" data-i18n="footer.refs">Referanslar</a>
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">İletişim</div>
+          <div class="footer-title" data-i18n="footer.contact">İletişim</div>
           <a class="contact-link" href="tel:+905421846595"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg></span><span>+90 542 184 65 95</span></a>
           <a class="contact-link" href="mailto:info@softenwise.com"><span class="contact-icon" aria-hidden="true"><svg class="sw-icon" aria-hidden="true" focusable="false"><use href="#sw-mail"/></svg></span><span>info@softenwise.com</span></a>
           <a class="contact-link" href="https://wa.me/905421846595" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </div>
 
         <div class="footer-col">
-          <div class="footer-title">Sosyal</div>
+          <div class="footer-title" data-i18n="footer.social">Sosyal</div>
           <a href="https://www.linkedin.com/in/softenwise-systems-4003a03b6/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://www.instagram.com/softenwise.systems/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
@@ -541,7 +551,7 @@
     </div>
 
     <div class="container footer-bottom">
-      © 2022–2026 SoftenWise · Tüm hakları saklıdır
+      <span data-i18n="footer.copy">© 2022–2026 SoftenWise · Tüm hakları saklıdır</span>
     </div>
   </footer>
   <div class="quick-contact" role="navigation" aria-label="Hızlı iletişim">
@@ -554,7 +564,9 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/main.js?v=202607167" defer></script>
+  <script src="js/locales.js?v=202607170"></script>
+  <script src="js/i18n.js?v=202607170"></script>
+  <script src="js/main.js?v=202607172" defer></script>
 </body>
 
 </html>

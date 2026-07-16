@@ -5130,7 +5130,8 @@ a.product-cta:hover {
   }
 
   .logo-strip__row img {
-    height: 28px;
+    height: 40px;
+    max-width: 140px;
   }
 
   .related-rail__link {

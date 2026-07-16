@@ -146,7 +146,9 @@ h2,
   display: none !important;
 }
 
-.nav-main-link--cta {
+/* Must beat .nav > a specificity or CTA text stays dark on dark */
+.nav > a.nav-main-link--cta,
+.nav a.nav-main-link--cta {
   background: var(--accent) !important;
   color: #fff !important;
   border-radius: var(--r-sm) !important;
@@ -155,8 +157,13 @@ h2,
   letter-spacing: 0.01em !important;
 }
 
-.nav-main-link--cta:hover {
+.nav > a.nav-main-link--cta:hover,
+.nav > a.nav-main-link--cta:focus-visible,
+.nav a.nav-main-link--cta:hover,
+.nav a.nav-main-link--cta:focus-visible,
+.nav a.nav-main-link--cta.is-active {
   background: var(--accent-2) !important;
+  color: #fff !important;
 }
 
 .nav-dropdown {
@@ -165,6 +172,31 @@ h2,
   box-shadow: 0 18px 48px rgba(8, 42, 51, 0.1) !important;
   background: #fff !important;
   padding: 8px !important;
+}
+
+/* Desktop: keep dropdown reachable — no dead gap + linger class */
+@media (min-width: 901px) {
+  .nav-item.has-dropdown::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 14px;
+    z-index: 219;
+  }
+
+  .nav-dropdown {
+    top: calc(100% + 6px) !important;
+    z-index: 220 !important;
+  }
+
+  .nav-item:hover .nav-dropdown,
+  .nav-item.is-hover .nav-dropdown,
+  .nav-item:focus-within .nav-dropdown {
+    display: grid !important;
+    gap: 2px;
+  }
 }
 
 /* —— Buttons —— */
@@ -895,4 +927,93 @@ h2,
 .products-band__visual--logo img {
   max-width: 82% !important;
   max-height: 88px !important;
+}
+
+/* Language switcher */
+.lang-switch-mount {
+  display: flex;
+  align-items: center;
+  margin-inline-end: 8px;
+}
+
+.lang-switch {
+  position: relative;
+  z-index: 40;
+}
+
+.lang-switch__btn {
+  min-width: 44px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: #fff;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.lang-switch__btn:hover,
+.lang-switch.is-open .lang-switch__btn {
+  border-color: var(--accent);
+}
+
+.lang-switch__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  max-height: min(70vh, 420px);
+  overflow: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: 0 16px 40px rgba(14, 58, 70, 0.14);
+}
+
+html.is-rtl .lang-switch__menu {
+  right: auto;
+  left: 0;
+}
+
+.lang-switch__option {
+  display: block;
+  width: 100%;
+  text-align: start;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.lang-switch__option:hover,
+.lang-switch__option.is-active {
+  background: var(--bg-soft, #f3f6f7);
+}
+
+.hero.hero--home .lang-switch__btn {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .lang-switch-mount {
+    margin-inline-end: 4px;
+  }
+  .lang-switch__btn {
+    min-width: 40px;
+    height: 34px;
+    font-size: 0.72rem;
+  }
 }

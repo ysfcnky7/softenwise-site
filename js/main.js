@@ -13,6 +13,7 @@ if (menuBtn && nav) {
   const closeAllDropdowns = () => {
     navItemsWithDropdown.forEach((item) => {
       item.classList.remove("open");
+      item.classList.remove("is-hover");
       const toggle = item.querySelector(".nav-parent-toggle");
       if (toggle) toggle.setAttribute("aria-expanded", "false");
     });
@@ -150,6 +151,42 @@ if (menuBtn && nav) {
 
   navItemsWithDropdown.forEach((item) => {
     const toggle = item.querySelector(".nav-parent-toggle");
+    let closeTimer = null;
+
+    const clearCloseTimer = () => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+    };
+
+    const openDesktopHover = () => {
+      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      clearCloseTimer();
+      navItemsWithDropdown.forEach((other) => {
+        if (other !== item) other.classList.remove("is-hover");
+      });
+      item.classList.add("is-hover");
+    };
+
+    const scheduleDesktopClose = () => {
+      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      clearCloseTimer();
+      closeTimer = setTimeout(() => {
+        item.classList.remove("is-hover");
+        closeTimer = null;
+      }, 320);
+    };
+
+    item.addEventListener("mouseenter", openDesktopHover);
+    item.addEventListener("mouseleave", scheduleDesktopClose);
+    item.addEventListener("focusin", openDesktopHover);
+    item.addEventListener("focusout", (e) => {
+      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      if (item.contains(e.relatedTarget)) return;
+      scheduleDesktopClose();
+    });
+
     if (!toggle) return;
 
     toggle.addEventListener("click", (e) => {
