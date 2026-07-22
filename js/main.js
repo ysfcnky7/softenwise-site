@@ -4,8 +4,14 @@ const nav = document.getElementById("nav");
 const header = document.getElementById("header");
 
 // ===== MOBILE MENU (ARIA + SAFE) =====
-/** 768-900 aralığında da nav sıkışmasını önlemek için mobil menü kullan */
+/** 768–900 aralığında nav sıkışmasını önlemek için mobil menü; yatay telefonda genişlik >900 olsa da menü kalsın */
 const MOBILE_NAV_MAX = 900;
+const MOBILE_NAV_LANDSCAPE_MAX = 960;
+const MOBILE_NAV_LANDSCAPE_HEIGHT = 520;
+
+const isMobileNavViewport = () =>
+  window.innerWidth <= MOBILE_NAV_MAX ||
+  (window.innerHeight <= MOBILE_NAV_LANDSCAPE_HEIGHT && window.innerWidth <= MOBILE_NAV_LANDSCAPE_MAX);
 
 if (menuBtn && nav) {
   const navItemsWithDropdown = nav.querySelectorAll(".nav-item.has-dropdown");
@@ -30,7 +36,7 @@ if (menuBtn && nav) {
   };
 
   const mountNavForMobileOverlay = () => {
-    if (window.innerWidth > MOBILE_NAV_MAX) return;
+    if (!isMobileNavViewport()) return;
     if (nav.parentElement !== document.body) {
       document.body.appendChild(nav);
     }
@@ -38,18 +44,19 @@ if (menuBtn && nav) {
 
   /** İçerik üst boşluğu (padding-top). Hash/scroll sonrası getBoundingClientRect bazen sapıyor; clamp + menuBtn doğrulaması */
   const syncNavMobileTop = () => {
-    if (!header || window.innerWidth > MOBILE_NAV_MAX || !nav.classList.contains("open")) return;
+    if (!header || !isMobileNavViewport() || !nav.classList.contains("open")) return;
+    const headerHeight = header.offsetHeight || header.getBoundingClientRect().height;
     const hb = header.getBoundingClientRect().bottom;
     const mb = menuBtn?.getBoundingClientRect?.().bottom ?? hb;
-    let y = Math.max(hb, mb) + 6;
+    let y = Math.max(hb, mb, headerHeight) + 8;
     if (!Number.isFinite(y) || y < 40) {
       const raw = getComputedStyle(document.documentElement).getPropertyValue("--header-height");
       const parsed = parseFloat(raw);
-      y = Number.isFinite(parsed) ? parsed + 14 : 86;
+      y = Number.isFinite(parsed) ? parsed + 16 : 88;
     }
-    /* Üst boşluk sadece header altı olmalı; vh-160 tavanı XR/iPad'te yüzlerce px boşluk ve siyah ekran hissi veriyordu */
-    const PAD_MIN = 52;
-    const PAD_MAX = 118;
+    const landscape = window.innerHeight <= 520;
+    const PAD_MIN = landscape ? 56 : 60;
+    const PAD_MAX = landscape ? 92 : 124;
     y = Math.min(Math.max(y, PAD_MIN), PAD_MAX);
     document.documentElement.style.setProperty("--nav-mobile-offset-top", `${Math.round(y * 100) / 100}px`);
   };
@@ -87,7 +94,7 @@ if (menuBtn && nav) {
   };
 
   const openMenuUi = () => {
-    const mobile = window.innerWidth <= MOBILE_NAV_MAX;
+    const mobile = isMobileNavViewport();
     if (mobile) {
       mountNavForMobileOverlay();
     }
@@ -114,6 +121,20 @@ if (menuBtn && nav) {
     closeMenuUi();
   };
 
+  const toggleMobileDropdown = (item, e) => {
+    if (!isMobileNavViewport()) return false;
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const toggle = item.querySelector(".nav-parent-toggle");
+    const willOpen = !item.classList.contains("open");
+    closeAllDropdowns();
+    item.classList.toggle("open", willOpen);
+    if (toggle) toggle.setAttribute("aria-expanded", String(willOpen));
+    return true;
+  };
+
   // stopPropagation: tıklama document köküne kabarcıklanınca "dışarı tıklandı" ile çakışmasın (özellikle mobil)
   menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -123,7 +144,15 @@ if (menuBtn && nav) {
   // Menü linkine tıklayınca kapat; aynı sayfa #hash için kilidi kaldırdıktan sonra kaydır
   nav.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", (e) => {
-      const mobile = window.innerWidth <= MOBILE_NAV_MAX;
+      const mobile = isMobileNavViewport();
+      const parentItem = a.closest(".nav-item.has-dropdown");
+      const mainLink = parentItem?.querySelector(":scope > .nav-main-link");
+
+      if (mobile && parentItem && a === mainLink) {
+        toggleMobileDropdown(parentItem, e);
+        return;
+      }
+
       const hashId = getSamePageHashTargetId(a);
       if (mobile && hashId) {
         e.preventDefault();
@@ -161,7 +190,7 @@ if (menuBtn && nav) {
     };
 
     const openDesktopHover = () => {
-      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      if (!isMobileNavViewport()) return;
       clearCloseTimer();
       navItemsWithDropdown.forEach((other) => {
         if (other !== item) other.classList.remove("is-hover");
@@ -170,7 +199,7 @@ if (menuBtn && nav) {
     };
 
     const scheduleDesktopClose = () => {
-      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      if (!isMobileNavViewport()) return;
       clearCloseTimer();
       closeTimer = setTimeout(() => {
         item.classList.remove("is-hover");
@@ -182,7 +211,7 @@ if (menuBtn && nav) {
     item.addEventListener("mouseleave", scheduleDesktopClose);
     item.addEventListener("focusin", openDesktopHover);
     item.addEventListener("focusout", (e) => {
-      if (window.innerWidth <= MOBILE_NAV_MAX) return;
+      if (!isMobileNavViewport()) return;
       if (item.contains(e.relatedTarget)) return;
       scheduleDesktopClose();
     });
@@ -190,14 +219,7 @@ if (menuBtn && nav) {
     if (!toggle) return;
 
     toggle.addEventListener("click", (e) => {
-      if (window.innerWidth > MOBILE_NAV_MAX) return;
-      e.preventDefault();
-      e.stopPropagation();
-
-      const willOpen = !item.classList.contains("open");
-      closeAllDropdowns();
-      item.classList.toggle("open", willOpen);
-      toggle.setAttribute("aria-expanded", String(willOpen));
+      toggleMobileDropdown(item, e);
     });
   });
 
@@ -218,7 +240,7 @@ if (menuBtn && nav) {
 
   // Ekran büyüyünce kapat (CSS breakpoint ile uyumlu)
   window.addEventListener("resize", () => {
-    if (window.innerWidth > MOBILE_NAV_MAX) {
+    if (!isMobileNavViewport()) {
       clearNavMobileTop();
       setMenuState(false);
       closeAllDropdowns();
@@ -231,7 +253,7 @@ if (menuBtn && nav) {
 
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", () => {
-      if (nav.classList.contains("open") && window.innerWidth <= MOBILE_NAV_MAX) syncNavMobileTop();
+      if (nav.classList.contains("open") && isMobileNavViewport()) syncNavMobileTop();
     });
   }
 

@@ -391,10 +391,16 @@ h2,
   transition: color 0.2s ease, padding-left 0.25s var(--ease-out-expo);
 }
 
-.case-feature__more a:hover {
-  color: var(--accent-2);
-  padding-left: 4px;
-}
+  .case-feature__more a:hover {
+    color: var(--accent-2);
+    padding-left: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .case-feature__more a:hover {
+      padding-left: 0;
+    }
+  }
 
 /* —— Products band —— */
 .products-band__item {
@@ -446,14 +452,17 @@ h2,
 }
 
 .contact-band__links {
-  gap: 10px 28px !important;
-  margin-bottom: 36px !important;
+  gap: 10px !important;
+  margin-bottom: 28px !important;
   font-size: 0.92rem !important;
 }
 
+.contact-band__chip {
+  border-color: rgba(14, 58, 70, 0.12) !important;
+}
+
 .contact-band__links a {
-  border-bottom-color: rgba(14, 58, 70, 0.22) !important;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  border-bottom: none !important;
 }
 
 .contact-form {
@@ -1022,13 +1031,56 @@ html.is-rtl .lang-switch__menu {
   color: #fff;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), ((max-height: 520px) and (max-width: 960px)) {
+  .nav-item.has-dropdown > a,
+  .nav-item.has-dropdown > .nav-main-link {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 15px 8px 15px 20px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .nav-item.has-dropdown > .nav-parent-toggle {
+    position: static !important;
+    display: inline-flex !important;
+    grid-area: nav-toggle !important;
+    margin: 0 !important;
+    transform: none !important;
+    flex-shrink: 0 !important;
+  }
+
+  .nav-item.open .nav-parent-toggle .sw-icon {
+    transform: rotate(180deg);
+  }
+
   .lang-switch-mount {
     margin-inline-end: 4px;
   }
   .lang-switch__btn {
-    min-width: 40px;
-    height: 34px;
+    min-width: 44px;
+    min-height: 44px;
+    height: 44px;
     font-size: 0.72rem;
+  }
+
+  .nav .nav-mobile-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .nav .nav-mobile-btn--wa,
+  .nav a.nav-mobile-btn--wa {
+    background: linear-gradient(145deg, #064a42 0%, #075e54 50%, #0a6b54 100%) !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18) !important;
+  }
+
+  .nav .nav-mobile-btn--wa:hover,
+  .nav a.nav-mobile-btn--wa:hover {
+    background: linear-gradient(145deg, #075e54 0%, #0a6b54 50%, #0c7659 100%) !important;
+    color: #fff !important;
   }
 }
