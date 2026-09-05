@@ -429,7 +429,7 @@ const featuredProducts = [
     description:
       "Topluluk ve sosyal akış odaklı mobil uygulama: BLOC ile iOS ve Android’de paylaşım, keşif ve etkileşimi modern bir arayüzde birleştirin.",
     bullets: [
-      "App Store ve Google Play üzerinden indirilebilir",
+      "App Store ve Google Play’de aranabilir (mağaza arama bağlantısı)",
       "Sosyal akış ve topluluk etkileşimine uygun arayüz",
       "SoftenWise mühendislik kalitesiyle geliştirildi",
     ],
@@ -664,6 +664,16 @@ if (
 // ===== CONTACT FORMS (MULTI PAGE SUPPORT) =====
 const contactForms = document.querySelectorAll("[data-contact-form]");
 
+const i18nText = (key, fallback) => {
+  try {
+    if (window.SW_I18N && typeof window.SW_I18N.t === "function") {
+      const v = window.SW_I18N.t(key);
+      if (v && v !== key) return v;
+    }
+  } catch (_) {}
+  return fallback;
+};
+
 const createHumanCheck = (form) => {
   const wrapper = document.createElement("div");
   wrapper.className = "human-check";
@@ -681,7 +691,8 @@ const createHumanCheck = (form) => {
   input.id = inputId;
   input.inputMode = "numeric";
   input.className = "human-check-input";
-  input.placeholder = "Sonuç";
+  input.placeholder = i18nText("form.human.placeholder", "Sonuç");
+  input.setAttribute("aria-label", i18nText("form.human.aria", "Doğrulama sonucu"));
   input.required = true;
   input.autocomplete = "off";
   input.min = "0";
@@ -733,20 +744,24 @@ contactForms.forEach((form) => {
 
     const elapsedMs = Date.now() - startedAt;
     if (elapsedMs < 4000) {
-      alert("Lütfen formu dikkatlice doldurup tekrar deneyin.");
+      alert(i18nText("form.err.slow", "Lütfen formu dikkatlice doldurup tekrar deneyin."));
       return;
     }
 
     if (!humanCheck.validate()) {
-      alert("Doğrulama yanıtı hatalı. Lütfen tekrar deneyin.");
+      alert(i18nText("form.err.human", "Doğrulama yanıtı hatalı. Lütfen tekrar deneyin."));
       humanCheck.input.focus();
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = "Gönderiliyor...";
+    submitBtn.textContent = i18nText("form.sending", "Gönderiliyor...");
 
     const formData = new FormData(form);
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller
+      ? setTimeout(() => controller.abort(), 20000)
+      : null;
 
     try {
       const response = await fetch(endpoint, {
@@ -755,6 +770,7 @@ contactForms.forEach((form) => {
         headers: {
           Accept: "application/json",
         },
+        signal: controller ? controller.signal : undefined,
       });
 
       if (response.ok) {
@@ -766,19 +782,58 @@ contactForms.forEach((form) => {
           document.getElementById("formSuccess");
         if (successMsg) successMsg.style.display = "block";
 
-        submitBtn.textContent = "Talep Alındı";
+        submitBtn.textContent = i18nText("form.received", "Talep Alındı");
       } else {
-        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+        alert(i18nText("form.err.generic", "Bir hata oluştu. Lütfen tekrar deneyin."));
         submitBtn.disabled = false;
         submitBtn.textContent = defaultLabel;
       }
     } catch (error) {
-      alert("Bağlantı hatası. Lütfen tekrar deneyin.");
+      alert(i18nText("form.err.network", "Bağlantı hatası. Lütfen tekrar deneyin."));
       submitBtn.disabled = false;
       submitBtn.textContent = defaultLabel;
+    } finally {
+      if (timeoutId) clearTimeout(timeoutId);
     }
   });
 });
+
+// ===== COOKIE / LOCAL STORAGE NOTICE (no ad trackers) =====
+(() => {
+  const KEY = "sw-cookie-ack";
+  try {
+    if (localStorage.getItem(KEY) === "1") return;
+  } catch (_) {
+    return;
+  }
+
+  const bar = document.createElement("div");
+  bar.className = "cookie-notice";
+  bar.setAttribute("role", "dialog");
+  bar.setAttribute("aria-live", "polite");
+  bar.innerHTML = `
+    <p>${i18nText(
+      "cookie.notice",
+      "Bu sitede reklam çerezi yok. Dil tercihi cihazınızda saklanır. Ayrıntılar için gizlilik ve çerez metinlerine bakın."
+    )}
+      <a href="cerez-politikasi.html">${i18nText("footer.cookies", "Çerez Politikası")}</a>
+      ·
+      <a href="gizlilik.html">${i18nText("footer.privacy", "Gizlilik")}</a>
+    </p>
+    <div class="cookie-notice__actions">
+      <button type="button" class="cookie-notice__btn">${i18nText("cookie.accept", "Anladım")}</button>
+    </div>
+  `;
+  document.body.appendChild(bar);
+  requestAnimationFrame(() => bar.classList.add("is-visible"));
+  bar.querySelector("button")?.addEventListener("click", () => {
+    try {
+      localStorage.setItem(KEY, "1");
+    } catch (_) {}
+    bar.classList.remove("is-visible");
+    bar.remove();
+  });
+})();
 
 // ===== SERVICE CATEGORY FILTER =====
 const serviceFilterButtons = document.querySelectorAll("[data-service-filter]");
