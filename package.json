@@ -9,7 +9,7 @@
     "sync:layout": "node scripts/apply-softenwise-delivery.mjs",
     "generate:legal": "node scripts/generate-legal-pages.mjs",
     "check:mobile": "node scripts/mobile-compat-check.mjs",
-    "audit:checklist": "node scripts/audit-softenwise-checklist.mjs"
+    "audit:checklist": "node scripts/audit-item-by-item.mjs"
   },
   "engines": {
     "node": ">=18"

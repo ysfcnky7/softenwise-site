@@ -41,3 +41,9 @@ scripts/_web_relevant_items.txt
 scripts/_dump_items.js
 scripts/_probe.js
 scripts/_append_css.js
+
+# Ops notes must not ship with static site
+notes.txt
+
+docs/OPS_NOTES.local.md
+notes.txt

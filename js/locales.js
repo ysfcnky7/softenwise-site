@@ -1,6 +1,12 @@
 /* SoftenWise locales — full site coverage */
 window.SW_LOCALES = {
   "tr": {
+    "footer.privacy.short": "Gizlilik",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Çerezler",
+    "product.soon": "Yakında",
+    "career.role": "Başvurduğunuz rol",
+    "partner.idea": "Fikir / proje adı",
     "footer.legal": "Yasal",
     "footer.privacy": "Gizlilik Politikası",
     "footer.kvkk": "KVKK Aydınlatma",
@@ -592,6 +598,12 @@ window.SW_LOCALES = {
     "attr.020": "Teknik danışmanlık kapsamında mimari değerlendirme"
   },
   "en": {
+    "footer.privacy.short": "Privacy",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookies",
+    "product.soon": "Coming soon",
+    "career.role": "Role you are applying for",
+    "partner.idea": "Idea / project name",
     "footer.legal": "Legal",
     "footer.privacy": "Privacy Policy",
     "footer.kvkk": "Privacy Notice (TR)",
@@ -1183,6 +1195,12 @@ window.SW_LOCALES = {
     "attr.020": "Architecture assessment within technical advisory"
   },
   "de": {
+    "footer.privacy.short": "Datenschutz",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookies",
+    "product.soon": "Demnächst",
+    "career.role": "Beworbene Rolle",
+    "partner.idea": "Idee / Projektname",
     "footer.legal": "Rechtliches",
     "footer.privacy": "Datenschutz",
     "footer.kvkk": "KVKK-Hinweis",
@@ -1774,6 +1792,12 @@ window.SW_LOCALES = {
     "attr.020": "Architekturbewertung im Rahmen technischer Beratung"
   },
   "fr": {
+    "footer.privacy.short": "Confidentialité",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookies",
+    "product.soon": "Bientôt",
+    "career.role": "Poste visé",
+    "partner.idea": "Idée / nom du projet",
     "footer.legal": "Mentions",
     "footer.privacy": "Confidentialité",
     "footer.kvkk": "Avis KVKK",
@@ -2365,6 +2389,12 @@ window.SW_LOCALES = {
     "attr.020": "Évaluation d’architecture dans le conseil technique"
   },
   "ar": {
+    "footer.privacy.short": "الخصوصية",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "الكوكيز",
+    "product.soon": "قريبًا",
+    "career.role": "الدور المتقدم له",
+    "partner.idea": "اسم الفكرة / المشروع",
     "footer.legal": "قانوني",
     "footer.privacy": "الخصوصية",
     "footer.kvkk": "إشعار KVKK",
@@ -2956,6 +2986,12 @@ window.SW_LOCALES = {
     "attr.020": "تقييم معماري ضمن الاستشارات التقنية"
   },
   "ru": {
+    "footer.privacy.short": "Конфиденц.",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookie",
+    "product.soon": "Скоро",
+    "career.role": "Желаемая роль",
+    "partner.idea": "Название идеи",
     "footer.legal": "Правовая информация",
     "footer.privacy": "Конфиденциальность",
     "footer.kvkk": "Уведомление KVKK",
@@ -3547,6 +3583,12 @@ window.SW_LOCALES = {
     "attr.020": "Оценка архитектуры в рамках технического консалтинга"
   },
   "es": {
+    "footer.privacy.short": "Privacidad",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookies",
+    "product.soon": "Pronto",
+    "career.role": "Puesto",
+    "partner.idea": "Idea / proyecto",
     "footer.legal": "Legal",
     "footer.privacy": "Privacidad",
     "footer.kvkk": "Aviso KVKK",
@@ -4138,6 +4180,12 @@ window.SW_LOCALES = {
     "attr.020": "Evaluación de arquitectura en asesoría técnica"
   },
   "it": {
+    "footer.privacy.short": "Privacy",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookie",
+    "product.soon": "Presto",
+    "career.role": "Ruolo",
+    "partner.idea": "Idea / progetto",
     "footer.legal": "Legale",
     "footer.privacy": "Privacy",
     "footer.kvkk": "Informativa KVKK",
@@ -4729,6 +4777,12 @@ window.SW_LOCALES = {
     "attr.020": "Valutazione architetturale nella consulenza tecnica"
   },
   "nl": {
+    "footer.privacy.short": "Privacy",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookies",
+    "product.soon": "Binnenkort",
+    "career.role": "Functie",
+    "partner.idea": "Idee / project",
     "footer.legal": "Juridisch",
     "footer.privacy": "Privacy",
     "footer.kvkk": "KVKK-kennisgeving",
@@ -5320,6 +5374,12 @@ window.SW_LOCALES = {
     "attr.020": "Architectuurbeoordeling binnen technisch advies"
   },
   "pt": {
+    "footer.privacy.short": "Privacidade",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Cookies",
+    "product.soon": "Em breve",
+    "career.role": "Função",
+    "partner.idea": "Ideia / projeto",
     "footer.legal": "Legal",
     "footer.privacy": "Privacidade",
     "footer.kvkk": "Aviso KVKK",
@@ -5911,6 +5971,12 @@ window.SW_LOCALES = {
     "attr.020": "Avaliação de arquitetura em consultoria técnica"
   },
   "az": {
+    "footer.privacy.short": "Məxfilik",
+    "footer.kvkk.short": "KVKK",
+    "footer.cookies.short": "Kukilər",
+    "product.soon": "Tezliklə",
+    "career.role": "Müraciət olunan rol",
+    "partner.idea": "Fikir / layihə adı",
     "footer.legal": "Hüquqi",
     "footer.privacy": "Məxfilik",
     "footer.kvkk": "KVKK bildirişi",

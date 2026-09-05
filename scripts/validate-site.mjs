@@ -87,6 +87,26 @@ for (const name of fs.readdirSync(ROOT).filter((f) => f.endsWith(".html"))) {
   }
 }
 
+if (!fs.existsSync(path.join(ROOT, "notes.txt"))) ok("notes.txt not in publish root");
+else fail("notes.txt still present");
+if (fs.existsSync(path.join(ROOT, "LICENSE"))) ok("LICENSE");
+else fail("LICENSE missing");
+if (/gizlilik\.html/.test(fs.readFileSync(path.join(ROOT, "404.html"), "utf8"))) ok("404 legal footer");
+else fail("404 missing legal links");
+const contactPages = fs
+  .readdirSync(ROOT)
+  .filter((f) => f.endsWith(".html"))
+  .filter((f) => fs.readFileSync(path.join(ROOT, f), "utf8").includes("data-contact-form"));
+for (const f of contactPages) {
+  const t = fs.readFileSync(path.join(ROOT, f), "utf8");
+  if (t.includes("form-label") && /id="field-name"/.test(t)) ok(`${f} form labels`);
+  else fail(`${f} form labels`);
+}
+if (!/alert\(i18nText\("form\.err/.test(mainJs) && mainJs.includes("form-error")) ok("inline form errors");
+else fail("form still uses alert for errors");
+if (/z-index:\s*1300/.test(fs.readFileSync(path.join(ROOT, "css/style.css"), "utf8"))) ok("cookie z-index");
+else fail("cookie z-index");
+
 if (errors.length) {
   console.error(`\n${errors.length} failure(s)`);
   process.exit(1);

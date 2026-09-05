@@ -43,6 +43,8 @@ Bu site sunucu tarafı `.env` gerektirmez. Form uç noktası istemci tarafında 
 - `_headers` — cache + güvenlik başlıkları
 - `.well-known/security.txt`
 
-## İletişim
+## Bağımlılık güncelleme
 
-info@softenwise.com · +90 542 184 65 95
+- `npm outdated` / `npm audit` en az üç ayda bir (veya PR öncesi).
+- Bitbucket Pipeline `npm ci` + `npm run validate` kırık bağımlılıkta trunk’a düşmeyi engeller.
+- Playwright yalnızca mobil kontrol scripti içindir; tarayıcı indirmeden validate çalışır.

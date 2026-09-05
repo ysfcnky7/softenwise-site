@@ -1,5 +1,9 @@
 # SoftenWise site runbook (canlı operasyon)
 
+## Kesinti bildirimi
+
+Müşteri / ziyaretçi bilgilendirme kanalı: `info@softenwise.com` ve site ana sayfa / WhatsApp hattı (+90 542 184 65 95). Status page yok; kesintide e-posta + WhatsApp ile haber verilir (SEV benzeri: kritik form/HTTPS / DNS).
+
 ## Yayın
 
 1. Değişiklikleri gözden geçir; müşteri medyasını ezme.

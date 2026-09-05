@@ -529,7 +529,7 @@ if (
     `
       : `
       <div class="product-media">
-        <div class="product-media-placeholder">${product.name}<br />Yakında</div>
+        <div class="product-media-placeholder">${product.name}<br />${(window.SW_I18N && window.SW_I18N.t("product.soon")) || "Yakında"}</div>
       </div>
     `;
 
@@ -731,25 +731,49 @@ contactForms.forEach((form) => {
   const submitBtn = form.querySelector("button[type='submit']");
   if (!submitBtn) return;
 
-  const defaultLabel =
-    form.dataset.submitLabel || submitBtn.textContent.trim() || "Gönder";
+  const labelSnapshot = submitBtn.textContent.trim();
+  const getSubmitLabel = () => {
+    const key = submitBtn.getAttribute("data-i18n");
+    if (key) return i18nText(key, labelSnapshot);
+    return form.dataset.submitLabel || labelSnapshot || i18nText("form.send", "Gönder");
+  };
   const endpoint = form.dataset.endpoint || "https://formspree.io/f/xldqyewl";
   const startedAt = Date.now();
+
+  let errorEl = form.querySelector(".form-error");
+  if (!errorEl) {
+    errorEl = document.createElement("p");
+    errorEl.className = "form-error";
+    errorEl.setAttribute("role", "alert");
+    errorEl.setAttribute("aria-live", "assertive");
+    errorEl.hidden = true;
+    submitBtn.after(errorEl);
+  }
+
+  const showError = (msg) => {
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+  };
+  const clearError = () => {
+    errorEl.textContent = "";
+    errorEl.hidden = true;
+  };
 
   const humanCheck = createHumanCheck(form);
   submitBtn.before(humanCheck.element);
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    clearError();
 
     const elapsedMs = Date.now() - startedAt;
     if (elapsedMs < 4000) {
-      alert(i18nText("form.err.slow", "Lütfen formu dikkatlice doldurup tekrar deneyin."));
+      showError(i18nText("form.err.slow", "Lütfen formu dikkatlice doldurup tekrar deneyin."));
       return;
     }
 
     if (!humanCheck.validate()) {
-      alert(i18nText("form.err.human", "Doğrulama yanıtı hatalı. Lütfen tekrar deneyin."));
+      showError(i18nText("form.err.human", "Doğrulama yanıtı hatalı. Lütfen tekrar deneyin."));
       humanCheck.input.focus();
       return;
     }
@@ -784,14 +808,14 @@ contactForms.forEach((form) => {
 
         submitBtn.textContent = i18nText("form.received", "Talep Alındı");
       } else {
-        alert(i18nText("form.err.generic", "Bir hata oluştu. Lütfen tekrar deneyin."));
+        showError(i18nText("form.err.generic", "Bir hata oluştu. Lütfen tekrar deneyin."));
         submitBtn.disabled = false;
-        submitBtn.textContent = defaultLabel;
+        submitBtn.textContent = getSubmitLabel();
       }
     } catch (error) {
-      alert(i18nText("form.err.network", "Bağlantı hatası. Lütfen tekrar deneyin."));
+      showError(i18nText("form.err.network", "Bağlantı hatası. Lütfen tekrar deneyin."));
       submitBtn.disabled = false;
-      submitBtn.textContent = defaultLabel;
+      submitBtn.textContent = getSubmitLabel();
     } finally {
       if (timeoutId) clearTimeout(timeoutId);
     }
@@ -807,6 +831,7 @@ contactForms.forEach((form) => {
     return;
   }
 
+  document.documentElement.classList.add("cookie-notice-open");
   const bar = document.createElement("div");
   bar.className = "cookie-notice";
   bar.setAttribute("role", "dialog");
@@ -816,9 +841,9 @@ contactForms.forEach((form) => {
       "cookie.notice",
       "Bu sitede reklam çerezi yok. Dil tercihi cihazınızda saklanır. Ayrıntılar için gizlilik ve çerez metinlerine bakın."
     )}
-      <a href="cerez-politikasi.html">${i18nText("footer.cookies", "Çerez Politikası")}</a>
+      <a href="cerez-politikasi.html">${i18nText("footer.cookies.short", "Çerezler")}</a>
       ·
-      <a href="gizlilik.html">${i18nText("footer.privacy", "Gizlilik")}</a>
+      <a href="gizlilik.html">${i18nText("footer.privacy.short", "Gizlilik")}</a>
     </p>
     <div class="cookie-notice__actions">
       <button type="button" class="cookie-notice__btn">${i18nText("cookie.accept", "Anladım")}</button>
@@ -830,6 +855,7 @@ contactForms.forEach((form) => {
     try {
       localStorage.setItem(KEY, "1");
     } catch (_) {}
+    document.documentElement.classList.remove("cookie-notice-open");
     bar.classList.remove("is-visible");
     bar.remove();
   });
