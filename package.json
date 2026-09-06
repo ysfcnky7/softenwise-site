@@ -1,0 +1,20 @@
+{
+  "name": "softenwise-commercial-web-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SoftenWise static commercial website (HTML/CSS/JS)",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-site.mjs",
+    "sync:layout": "node scripts/apply-softenwise-delivery.mjs",
+    "generate:legal": "node scripts/generate-legal-pages.mjs",
+    "check:mobile": "node scripts/mobile-compat-check.mjs",
+    "audit:checklist": "node scripts/audit-item-by-item.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

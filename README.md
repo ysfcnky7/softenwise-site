@@ -1,29 +1,50 @@
-# README #
+# SoftenWise Commercial Website
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Statik kurumsal web sitesi: HTML, CSS, vanilla JS. Canlı: [softenwise.com](https://softenwise.com/)
 
-### What is this repository for? ###
+## Gereksinimler
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+- Node.js 18+ (doğrulama / Playwright mobil kontrolü için)
+- Statik barındırma (Natro / Codeflare / Netlify uyumlu `_headers`)
 
-### How do I get set up? ###
+## Kurulum
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+```bash
+npm ci
+```
 
-### Contribution guidelines ###
+Statik önizleme (örnek):
 
-* Writing tests
-* Code review
-* Other guidelines
+```bash
+npx --yes serve .
+```
 
-### Who do I talk to? ###
+## Komutlar
 
-* Repo owner or admin
-* Other community or team contact
+| Komut | Açıklama |
+|-------|----------|
+| `npm run validate` | HTML bütünlüğü, yasal sayfalar, güvenlik başlıkları, form başarı mesajları |
+| `npm run generate:legal` | Gizlilik / KVKK / çerez sayfalarını üretir |
+| `npm run sync:layout` | Partial header/footer’ı tüm HTML’lere uygular |
+| `npm run check:mobile` | Playwright mobil uyumluluk kontrolü |
+| `npm run audit:checklist` | SoftenWise checklist PASS/FAIL/N/A raporu |
+
+Asset cache bust: `scripts/apply-asset-version.ps1`
+
+## Ortam
+
+Bu site sunucu tarafı `.env` gerektirmez. Form uç noktası istemci tarafında Formspree ID’sidir (`js/main.js`). Gizli anahtar commit etmeyin; `.env` / `.env.local` yok sayılır.
+
+## Yapı
+
+- `*.html` — sayfalar
+- `partials/` — ortak header/footer/quick-contact
+- `css/`, `js/`, `images/`, `fonts/`, `icons/`
+- `_headers` — cache + güvenlik başlıkları
+- `.well-known/security.txt`
+
+## Bağımlılık güncelleme
+
+- `npm outdated` / `npm audit` en az üç ayda bir (veya PR öncesi).
+- Bitbucket Pipeline `npm ci` + `npm run validate` kırık bağımlılıkta trunk’a düşmeyi engeller.
+- Playwright yalnızca mobil kontrol scripti içindir; tarayıcı indirmeden validate çalışır.

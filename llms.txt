@@ -33,6 +33,9 @@ https://softenwise.com/sitemap.xml
 - https://softenwise.com/yazilim-firmasi-nasil-secilir.html
 - https://softenwise.com/ozel-yazilim-maliyeti.html
 - https://softenwise.com/mobil-uygulama-gelistirme-sureci.html
+- https://softenwise.com/gizlilik.html
+- https://softenwise.com/kvkk.html
+- https://softenwise.com/cerez-politikasi.html
 
 ## Contact
 - Email: info@softenwise.com
