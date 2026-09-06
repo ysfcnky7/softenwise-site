@@ -287,6 +287,7 @@ if (activeNav) {
   } else if (page === "urunler.html") {
     setActive(activeNav.querySelector('.nav-main-link[href="urunler.html"]'));
   } else if (
+    page === "hakkimizda.html" ||
     page === "kariyer.html" ||
     page === "academy.html" ||
     page === "girisim-ortakligi.html" ||
@@ -295,7 +296,7 @@ if (activeNav) {
     page === "ozel-yazilim-maliyeti.html" ||
     page === "mobil-uygulama-gelistirme-sureci.html"
   ) {
-    setActive(activeNav.querySelector('.nav-main-link[href="kaynaklar.html"]'));
+    setActive(activeNav.querySelector('.nav-main-link[href="hakkimizda.html"]'));
     setActive(activeNav.querySelector(`.nav-dropdown a[href="${page}"]`));
   } else if (page === "index.html" && window.location.hash) {
     const hashLink = activeNav.querySelector(`.nav-main-link[href="${window.location.hash}"]`);

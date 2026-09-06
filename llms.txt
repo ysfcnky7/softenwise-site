@@ -26,6 +26,7 @@ https://softenwise.com/sitemap.xml
 - https://softenwise.com/guvenlik-denetim.html
 - https://softenwise.com/teknik-danismanlik.html
 - https://softenwise.com/urunler.html
+- https://softenwise.com/hakkimizda.html
 - https://softenwise.com/academy.html
 - https://softenwise.com/kariyer.html
 - https://softenwise.com/girisim-ortakligi.html
