@@ -1,0 +1,1016 @@
+
+## S1 | 01 — Altyapı | Derleme, sözdizimi, klasör ve müşteri dosyası ezilmeme
+S1.1| Her kod değişikliğinden sonra o hedefin build / compile / typecheck (ve varsa lint error) komutu çalışmalı; kırmızı bırakıp sonraki maddeye geçmek FAIL.
+S1.2| Sözdizimi ve bariz derleme hataları (eksik parantez, import, tip, paket) o maddede kapanmalı. «IDE kırmızı, sonra bakarız» YASAK.
+S1.3| Kök ve kaynak ağacı okunaklı olmalı: kod, paylaşılan kit, config ayrı; rastgele kök yığını veya kopya klasör FAIL — düzenle, içeriği silerek «temizleme» YASAK.
+S1.4| Müşteriye ait içerik (metin, görsel, PDF, Excel, dump, upload, tenant data) kod/şablon güncellemesinde ezilmemeli. Aynı klasörde olsa bile üzerine yazma.
+S1.5| Müşteri varlıkları koddan ayrı dursun (content/, data/customer/, public/uploads/, docs/musteri/ veya projedeki eşdeğer). Yoksa ayır veya dokümante et; mevcut dosyayı silme.
+S1.6| .env, .env.local, keystore, google-services, sertifika, yerel yedek şablon kopyası ile overwrite edilmemeli.
+S1.7| Toplu yazım (scaffold, generate, prettier-all, dosya yeniden kur) öncesi müşteri-özel ve secret yolları listele; onlara dokunma.
+S1.8| Yeni dosya adı mevcut müşteri dosyasını gaspetmesin; çakışmada atla, rename etme veya yanına yaz. Merge = içeriği koru.
+S1.9| Build çıktısı (dist/build/bin) ve bağımlılık (node_modules) müşteri medyası ile karışmasın; bunlar kaynak sanılıp silinmesin.
+
+## S2 | 01 — Altyapı | Çevre ve Konfigürasyon Yönetimi (Environment Config)
+S2.1| Ortam Ayrımı: Geliştirme (Dev), Test (Staging) ve Canlı (Production) ortamlarının veritabanı, URL ve servis uç noktalarının kesin olarak ayrılması.
+S2.2| Gizli Değişken Güvenliği: Ortam değişkenlerinin build sürecine sızmasının engellenmesi ve güvenli saklanması.
+S2.3| Konfigürasyon Doğrulama: Uygulama ilk açıldığında eksik bir ortam değişkeni varsa sistemin güvenli bir şekilde durması.
+
+## S3 | 01 — Altyapı | Modüler Konfigürasyon ve Ortam Yönetimi
+S3.1| dev / staging / production env dosyaları ayrılsın; production key development'a gömülmesin.
+S3.2| Zorunlu env eksikse Production fail-fast, Development anlamlı varsayılan veya mock kullansın.
+S3.3| .env.example güncel olsun; gerçek secret commit edilmesin.
+S3.4| Feature flag varsa uzak config'den gelsin; kodda kalıcı if-debug ormanına dönmesin.
+S3.5| Aynı binary test/prod key seçimini ortam değişkeniyle yapsın.
+
+## S4 | 01 — Altyapı | Geliştirici Deneyimi ve Dokümantasyon (Developer Experience)
+S4.1| HTTP API / backend varsa uçlar Swagger, OpenAPI, Scalar, NSwag, Redoc veya eşdeğer ile güncel belgelensin. API yoksa (statik site, yalnızca mobil+hazır BaaS belgesi, vs.) N/A — Swagger uydurma.
+S4.2| Kod Standardı ve Linting: Projede ortak bir kod yazım stilinin (Prettier, ESLint, EditorConfig) otomatik olarak uygulanması.
+S4.3| README ve Kurulum Rehberi: Projeyi dışarıdan gelen bir geliştiricinin tek komutla ayağa kaldırabilmesi için güncel rehberler.
+S4.4| Branch ve Git Yönetimi: Git akış kurallarının (Git Flow, Conventional Commits) ekip içinde düzenli uygulanması.
+S4.5| Lockfile commit edilsin (package-lock / yarn.lock / pnpm-lock / packages.lock.json / go.sum / Cargo.lock / poetry.lock). Paket yönetici varken lock yoksa FAIL.
+S4.6| Main/trunk'a giden yolda lint veya test kapısı olsun (CI ve/veya pre-commit). Kapı yoksa ve kırık kod girebiliyorsa FAIL.
+
+## S5 | 01 — Altyapı | Yazılım omurgası: kilit, konteyner, sağlık, zaman, kuyruk
+S5.1| Paket yöneticisi varsa kilit dosyası (lockfile) depoda ve kurulum onu kullansın. Lock'suz «her seferinde başka sürüm» FAIL.
+S5.2| CI veya pre-commit'te secret tarama (gitleaks / GitHub secret scanning / eşdeğer). Secret bulunduysa düzelt; history notu yaz. Exploit/PoC yok.
+S5.3| Konteyner kullanılıyorsa: Dockerfile (mümkünse multi-stage, non-root), .dockerignore, lokal compose veya eşdeğer ile ayağa kalkış. Konteyner yoksa N/A.
+S5.4| Backend/API varsa sağlık uçları ayrılsın: liveness (süreç ayakta) ve readiness (DB/kuyruk hazır). Tek sahte 200 her bağımlılığa PASS değil.
+S5.5| Uzun ömürlü süreç varsa zarif kapanış (SIGTERM/stop): yeni istek alma, in-flight bitir, bağlantıyı kapat. Serverless-only N/A.
+S5.6| Tarih-saat saklama kanonik olsun (tercihen UTC); arayüz kullanıcı dilimine çevirsin; DST kırılmasın. Tarih yoksa N/A.
+S5.7| Zamanlanmış iş (cron / hangfire / quart / celery beat / eşdeğer) varsa tek lider veya kilit, hata logu, takılı iş görünür olsun. Yoksa N/A.
+S5.8| Kuyruk varsa retry (backoff) + dead-letter; zehirli mesaj kuyruğu sonsuz döngüye sokmasın. Kuyruk yoksa N/A.
+S5.9| Dış HTTP: timeout zorunlu, retry sınırlı. Gerekirse circuit breaker. Sonsuz retry FAIL. Dış çağrı yoksa N/A.
+S5.10| HTTP API varsa kırıcı değişiklikte versiyon (URL veya header) veya belgelenmiş geriye dönük politika. API yoksa N/A.
+
+## S6 | 01 — Altyapı | Modüler Mimari ve Feature-First Yapısı
+S6.1| Özellikler feature-first klasörlensin (feature/auth, feature/settings vb.); çapraz feature import döngüsü olmasın.
+S6.2| Her feature'ın dışarı açılan public API'si (index/barrel) net olsun; iç dosyalar dışarıdan import edilmesin.
+S6.3| Paylaşılan UI kit / theme / http istemcisi shared katmanda dursun; iş kuralı shared'e sızmasın.
+S6.4| Yeni ekran eklemek mevcut feature'ı bozmadan mümkün olsun; navigasyon kaydı tek yerden yapılsın.
+S6.5| Ölü / kullanılmayan feature klasörleri ve dairesel bağımlılıklar raporlanıp temizlensin.
+
+## S7 | 01 — Altyapı | Global State Yönetimi ve Context Optimizasyonu
+S7.1| Tek bir 'god' context/store olmasın; state domain bazında ayrılsın (auth, session, settings, cache).
+S7.2| Sık değişen sunucu verisi global state'e gömülmesin; query/cache katmanı kullanılsın.
+S7.3| Persist edilen state beyaz liste ile sınırlı olsun (token hariç gereksiz PII persist edilmesin).
+S7.4| Abonelik/selector ile gereksiz re-render önlensin; tüm ağacı dinleyen tek provider olmasın.
+S7.5| Logout / hesap silme tüm client state'i temizlesin (bellek + persist).
+
+## S8 | 01 — Altyapı | Ağ katmanı, HTTP istemcisi ve token (Axios zorunlu değil)
+S8.1| HTTP istemcisinde tek refresh kuyruğu olsun; 401 sonrası token bir kez yenilenip istekler tekrar densin.
+S8.2| Timeout, retry ve ağ hatası kullanıcıya teknik stack yerine anlaşılır mesajla yansıtsın.
+S8.3| Authorization header yalnızca güvenli istemciden eklensin; log'a yazılmasın.
+S8.4| Base URL ve ortam (dev/staging/prod) env'den gelsin; hardcoded production URL olmasın.
+S8.5| İptal edilen (unmount) istekler state'i bozmasın.
+
+## S9 | 01 — Altyapı | Veritabanı Migrasyon Yönetimi
+S9.1| Şema değişiklikleri migration ile gitsin; production'da elle SQL'e bel bağlanmasın.
+S9.2| Migration geri alınabilir veya ileri-only politikası belgelensin.
+S9.3| Kırıcı migration öncesi yedek / expand-contract planı olsun.
+S9.4| Dev ve prod migration sırası aynı olsun; drift kontrol edilsin.
+S9.5| Seed/data backfill idempotent olsun.
+S9.6| Sık okunan liste/sorgu yollarında bariz N+1 ve eksik index üretimde şişirmesin; yavaş uç gerekçesiz bırakılmasın. DB yoksa N/A.
+
+## S10 | 01 — Altyapı | Native Modül Entegrasyonları
+S10.1| Native/config plugin bağımlılıkları (kamera, bildirim, satın alma vb.) mevcut yığına uygun kaydedilsin.
+S10.2| İzin metinleri ve native config (Info.plist / AndroidManifest / app config) kodla çelişmesin.
+S10.3| Native modül yoksa veya web/hedef desteklemiyorsa kontrollü fallback / N/A aksın; uygulama çökmesin.
+S10.4| Native köprü hataları kullanıcıya anlaşılır mesaj, log'a teknik detay olarak düşsün.
+S10.5| Sürüm yükseltmede kırılan native API'ler için uyumluluk notu ve test listesi olsun.
+
+## S11 | 01 — Altyapı | Görünür yazılım maddeleri: HTTPS, limit, MFA, RLS, bot, SBOM, izleme
+S11.1| Production web/API HTTPS (ve mümkünse HSTS). Cleartext üretim FAIL. Localhost belgelenir. Web/API yoksa N/A.
+S11.2| Kritik uçlarda rate limit: giriş, OTP, kayıt, şifre sıfır, ödeme, webhook. Limitsiz açık form FAIL.
+S11.3| Yüksek yetki / admin için MFA (TOTP veya WebAuthn/eşdeğer). Admin yoksa veya iç tek kullanıcı belgelenmişse N/A.
+S11.4| Çok kiracı / organizasyon varsa veri izolasyonu (RLS, tenantId her sorguda, veya eşdeğer). Tek kiracı N/A.
+S11.5| Açık kayıt, iletişim, yorum, ödeme öncesi: bot koruması (CAPTCHA/Turnstile/honeypot + hız). İç ağ veya davetiye-only N/A.
+S11.6| Kurumsal SSO / SAML / OIDC iddiası varsa giriş çalışır; yoksa N/A — SSO uydurma.
+S11.7| LICENSE (veya eşdeğer) + üçüncü parti lisans/NOTICE veya SBOM. GPL/copyleft bulaşması bilinçli ve yazılı.
+S11.8| Bağımlılık güncelleme süreci: Dependabot/Renovate/eşdeğer veya belgelenmiş takvim. Hiç yoksa FAIL.
+S11.9| Birden fazla geliştirici varsa CODEOWNERS veya zorunlu PR incelemesi. Tek kişi N/A.
+S11.10| İstek kimliği (correlation/request id) log ve cevapta; mümkünse tracing (OpenTelemetry/eşdeğer). Id yoksa FAIL.
+S11.11| Kesinti haberi: status page veya banner/e-posta/SMS kanalı belgelensin. Müşteri nasıl öğrenir yazılsın.
+S11.12| Testler birbirini ezmesin: fixture, izole veritabanı/şema, paralel güvenli. Test yoksa N/A değil: en az bir izolasyon notu veya tek-thread.
+S11.13| Canlıda acil kapatma: remote config, kill switch veya feature flag ile kritik yol kapanabilsin. Yoksa belgele neden tek binary.
+S11.14| Bulut/SaaS harcama alarmı (eşik). Faturalı sağlayıcı yoksa N/A.
+S11.15| HTTP API varsa Swagger/OpenAPI (veya Scalar/Redoc/NSwag) kodla çelişmesin. Production'da kimliksiz tam şema + secret sızmasın (dev/internal ayrı veya auth arkasında). API yoksa N/A.
+S11.16| CI'da test veya lint kapısı kırıkken main/trunk'a düşmesin. CI yoksa ve tek kişiyse en az lokal komut README'de.
+
+## S12 | 01 — Altyapı | Kalan yazılım maddeleri: para, yönlendirme, yedek tatbikat, e-posta kimliği
+S12.1| Para/fiyat varsa tutar float olmasın: kuruş/minor unit veya belgelenmiş decimal. Yuvarlama kuralı yazılsın. Ödeme/fiyat yoksa N/A.
+S12.2| Oluşturma/ödeme/webhook POST tekrarında çift işlem olmasın (Idempotency-Key veya eşdeğer). Bu uç yoksa N/A.
+S12.3| Yönlendirme parametresi (returnUrl / next / redirect) varsa allowlist — açık yönlendirme yok. OAuth/sihirli link varsa aynı. Böyle parametre yoksa N/A.
+S12.4| Production'da varsayılan admin, demo/admin şifre, açık debug endpoint olmasın. Bu tür giriş/debug yoksa N/A.
+S12.5| Hassas veri dururken şifreli olsun (disk/DB/sağlayıcı at-rest). Yalnızca geçici local ve secret yoksa N/A + gerekçe.
+S12.6| Yedek varsa geri yükleme en az bir kez denenmiş veya tarihli tatbikat planı olsun. Yedek yoksa ve veri varsa FAIL.
+S12.7| Dışarıya açık ürün/API varsa SECURITY.md veya /.well-known/security.txt ile iletişim. İç/tek kişi araç N/A.
+S12.8| Kişisel veri işleniyorsa DPA / alt işleyen listesi veya eşdeğer sözleşme notu. İşlenmiyorsa N/A.
+S12.9| Destek kullanıcısı gibi giriş (impersonation) varsa her sefer audit log. Bu yetki yoksa N/A — gizlice ekleme.
+S12.10| Giden e-posta varsa: SPF + DKIM + DMARC ve List-Unsubscribe. E-posta yoksa N/A.
+S12.11| Mobil istemci varsa min sürüm / zorunlu güncelleme yolu. Yalnızca web N/A.
+S12.12| CI workflow üçüncü parti eylemi pin'li olsun (commit SHA) veya eşdeğer tedarik kilidi. CI yoksa N/A.
+S12.13| Git'e büyük medya/müşteri ikili dosya sokma; LFS veya object storage. Yoksa N/A.
+S12.14| Testte gerçek PII veya prod dump olmasın; maskele / sentetik. Test yoksa bu madde N/A değil: seed'e bak.
+S12.15| Kullanıcı arayüzü varsa çöküş yakalansın (error boundary / global hata). Beyaz ekran FAIL. Yalnızca API, UI yoksa N/A.
+S12.16| Dosya/arşiv yükleme varsa zip-bomb ve path traversal (..) engeli. Upload yoksa N/A.
+S12.17| 429 yanıtında Retry-After (veya eşdeğer). Rate limit yoksa N/A.
+S12.18| Kritik bağımlı düşünce mümkünse degraded / salt-okunur; tüm süreç ölmüyorsa belgele. Tek parçalı araç N/A.
+S12.19| Feature flag / remote config ölüleri envanter veya silinsin. Flag yoksa N/A.
+S12.20| Canlı müşteri/sistem varsa olay: kime haber (kanal/telefon) + basit SEV veya eşdeğer. İç deneme / henüz canlı yoksa N/A.
+S12.21| HTTP API varsa Swagger/OpenAPI veya eşdeğer (Scalar/Redoc/NSwag) ekip için çalışır olsun. API yoksa N/A. Production'da herkese açık şema ancak kasıtlıdır ve secret içermez.
+
+## S13 | 02 — Kimlik ve Kayıt | Kimlik Doğrulama ve Oturum Yönetimi
+S13.1| Kimlik Doğrulama ve Oturum Yönetimi (Auth & Session)
+S13.2| Kayıt Olma (Registration): E-posta/şifre veya sosyal medya ile sorunsuz hesap oluşturulabilmesi.
+S13.3| Şifre Politikası: Güçlü şifre kurallarının (özel karakter, büyük/küçük harf, uzunluk) zorunlu tutulması.
+S13.4| Giriş / Çıkış (Login/Logout): Doğru bilgilerle giriş, yanlış bilgilerle anlamlı hata mesajı alınması ve oturum kapatma işlemlerinin güvenli çalışması.
+S13.5| Şifremi Unuttum: E-posta ile güvenli şifre sıfırlama bağlantısı / kodu gönderimi ve akışın tamamlanması.
+S13.6| Oturum Zaman Aşımı (Session Timeout): Uzun süre hareketsiz kalındığında oturumun güvenli bir şekilde sonlandırılması.
+S13.7| Token Güvenliği: Erişim ve yenileme token'larının (Access/Refresh Token) güvenli alanlarda saklanması.
+S13.8| E-posta ile kayıt/giriş varsa e-posta doğrulama (link veya kod) tamamlanmadan hassas işlem açılmamalı; yoksa gerekçeli N/A.
+S13.9| Sosyal / OAuth / OIDC varsa: state, redirect URI allowlist, public client'ta PKCE. Bu giriş yoksa N/A. Secret'ı istemciye gömme.
+S13.10| Çerez tabanlı oturum varsa CSRF koruması (anti-forgery token veya SameSite=Strict + güvenli akış). Yalnızca Bearer header ise N/A.
+
+## S14 | 02 — Kimlik ve Kayıt | Kullanıcı Oturum Sürekliliği
+S14.1| Uygulama öldürülüp açılınca oturum politikaya uygun devam etsin veya güvenli login'e dönsün.
+S14.2| Refresh token rotasyonu ve eşzamanlı isteklerde tek yenileme olsun.
+S14.3| Başka cihazda logout/revocation bu cihaza yansıtsın (mümkünse).
+S14.4| Session timeout kullanıcıya anlaşılır şekilde uygulansın.
+S14.5| Biyometri ile açılış, mevcut session politikasıyla çelişmesin.
+
+## S15 | 02 — Kimlik ve Kayıt | Açık rıza, IP loglama, yaş kapısı ve destek kanalı
+S15.1| `UserConsents` veya eşdeğer tablo: Id, UserId, DocumentType, IPAddress, CreatedAt, Version. Index ve migration olsun.
+S15.2| Kayıt/onay anında IP sunucuda belirlensin (proxy-aware). İstemcinin gönderdiği IP'ye güvenilmesin. Kullanıcı + rıza aynı transaction'da yazılsın.
+S15.3| Kayıt ekranında varsayılanı işaretsiz zorunlu onay kutusu; Kullanım Koşulları ve Gizlilik metinleri tıklanınca tam açılsın. Belge tipi ve versiyon ayrı satırlara yazılsın.
+S15.4| Politika versiyonu değişince yeniden onay istensin; eski versiyon kaydı silinmeden saklansın.
+S15.5| Uygulama yaş sınırı gerektiriyorsa (mağaza 17+/18+ vb.) doğum tarihi veya yaş kapısı kayıtta zorunlu olsun; sınır altı hesap oluşmasın. Gerekmiyorsa N/A.
+S15.6| Destek iletişim kanalı olsun (`POST /support` veya eşdeğer + form). Validasyon, rate-limit, girişli kullanıcıda UserId. Başka destek kanalı varsa ikinci kopya ekleme; yoksa ekle, varsa bağla.
+
+## S16 | 02 — Kimlik ve Kayıt | Ortam bazlı SMS ve e-posta bildirimleri
+S16.1| SMS ve e-posta soyut bir bildirim arayüzünden gitsin (OTP, şifre sıfırlama, doğrulama). Controller içine provider çağrısı gömülmesin.
+S16.2| Development: kodlar console/logger'a yazılsın; gerçek SMS/e-posta HTTP isteği atılmasın.
+S16.3| Production: SMS ve e-posta gerçek sağlayıcıya gitsin (ör. Netgsm/Twilio, SendGrid/SES veya eşdeğer). Seçim env ile olsun; ürün adına kilitlenmesin.
+S16.4| Anahtarlar env'de olsun. Production'da zorunlu env yoksa fail-fast; Development'ta mock.
+S16.5| OTP: süre, tek kullanımlık, deneme limiti, rate-limit ve E.164 telefon formatı uygulansın. Telefon yoksa e-posta OTP N/A değil, e-posta yolu doğrulansın.
+S16.6| .env.example / appsettings placeholder güncel olsun; gerçek key commit edilmesin.
+
+## S17 | 02 — Kimlik ve Kayıt | Güvenli Yerel Depolama ve Şifreleme
+S17.1| Access/refresh token ve sırlar Keychain/Keystore veya eşdeğer secure storage'da tutulsun; düz AsyncStorage/localStorage olmasın.
+S17.2| Secure storage anahtar isimleri ve migration (reinstall, OS upgrade) belgelensin.
+S17.3| Debug log, crash rapor ve analytics'e token/OTP/şifre düşmesin.
+S17.4| Uygulama silme / logout secure storage'ı temizlesin.
+S17.5| Root/jailbreak tespit ediliyorsa politika tanımlı olsun (uyarı veya kısıtlama); yoksa N/A.
+
+## S18 | 02 — Kimlik ve Kayıt | Biyometrik Kimlik Doğrulama
+S18.1| Biyometri yalnızca cihaz destekliyorsa açılsın; destek yoksa PIN/şifre fallback sunulsun.
+S18.2| Biyometri başarısız/kilitlenmede hesap kilitlenmesin; anlamlı yeniden deneme aksın.
+S18.3| Hassas işlem (ödeme, hesap silme) için biyometri + yeniden doğrulama politikası net olsun.
+S18.4| Biyometrik sırlar (token, şifre) OS prompt'una veya log'a yazılmasın.
+S18.5| Kullanıcı biyometriyi kapatırsa sonraki açılışta şifre/PIN ile devam edebilsin.
+
+## S19 | 02 — Kimlik ve Kayıt | Kullanıcı Profili ve Hesap Ayarları
+S19.1| Kullanıcı Profili ve Hesap Ayarları
+S19.2| Profil Düzenleme: Ad, görsel, iletişim bilgileri ve kişisel tercihlerin güncellenebilmesi.
+S19.3| Görsel Yükleme Sınırları: Dosya türü, boyut sınırı ve maksimum görsel adedi kısıtlamalarının çalışması.
+S19.4| Hesap Silme / Dondurma: Kullanıcının verileriyle birlikte hesabını kalıcı olarak silebilmesi veya dondurabilmesi.
+S19.5| Gizlilik ve Tercihler: Bildirim izinleri, tema (Dark/Light mode) ve dil ayarlarının kalıcı olarak saklanması.
+
+## S20 | 02 — Kimlik ve Kayıt | Kilitli profil alanları ve keşif / arama filtreleri
+S20.1| Kayıt veya kurulumda toplanan, sonradan suistimal için değiştirilmemesi gereken alanlar kilitlensin. Örnek: cinsiyet, hedef kitle, hesap tipi, rol. Uygulamada böyle alan yoksa N/A.
+S20.2| Kilitli alanlar DTO ve profil güncelleme API'sinden çıksın veya yok sayılsın. Kullanıcı değiştirmeye çalışırsa 403 + açıklayıcı mesaj. Değişiklik yalnızca yetkili admin/support ile ve audit log ile olsun.
+S20.3| Liste / arama / öneri sorgusu (varsa) silinmiş hesapları (`IsDeleted` veya eşdeğer) dışlasın.
+S20.4| Liste / arama / öneri sorgusu (varsa) dondurulmuş hesapları (`IsFrozen` veya eşdeğer) dışlasın.
+S20.5| Karşılıklı tercih uyumu varsa (ör. hedef kitle / cinsiyet / rol) hizalanmayan kayıtlar listelenmesin. Tercih modeli yoksa N/A.
+S20.6| Mevcut kayıtlara geçiş için migration ve güvenli default stratejisi yazılsın; production verisi sessizce yanlış eşleşmesin.
+
+## S21 | 02 — Kimlik ve Kayıt | Cihaz Donanım İzinleri ve Yönetimi (Permissions)
+S21.1| Kamera, mikrofon, konum (hassas/yaklaşık), Bluetooth, depolama ve bildirim izinlerinin yönetilmesi.
+S21.2| Kullanıcının izinleri reddetmesi veya kalıcı olarak engellemesi durumunda yaşanacak UX akışlarının optimize edilmesi.
+S21.3| Pre-permission (Ön Bilgilendirme) Ekranları: Sistem izni istemeden önce kullanıcının neden bu izne ihtiyaç duyulduğunu açıklayan dostane pop-up'lar.
+S21.4| Reddedilme Senaryoları: İzin reddedildiğinde uygulamanın kritik fonksiyonlarının bozulmaması, alternatif akışların sunulması.
+S21.5| Sistem Ayarlarına Yönlendirme: Kullanıcı kalıcı olarak reddettiğinde ("Don't ask again") doğrudan uygulama ayarları sayfasına (Settings) yönlendiren akışlar.
+
+## S22 | 02 — Kimlik ve Kayıt | Çoklu Hesap Yönetimi
+S22.1| Çoklu hesap yoksa N/A.
+S22.2| Varsa hesap değiştirince token, cache ve mesaj state'i karışmasın.
+S22.3| Hesap A'nın verisi hesap B ekranında flash etmesin.
+S22.4| Son kullanılan hesap güvenli şekilde hatırlansın.
+S22.5| Tüm hesaplardan çıkış tek tek veya toplu net olsun.
+
+## S23 | 02 — Kimlik ve Kayıt | İlk açılış ve bırakmama (30–60 saniye)
+S23.1| Değer görülmeden kayıt duvarı olmasın. Mümkünse önce ürünü gör, sonra kayıt. Zorunlu auth ise N/A ve gerekçe yaz.
+S23.2| Açılışta peş peşe çoklu izin (kamera, konum, bildirim, rehber vb.) istenmesin. İzin, ilgili eylem anında ve gerekçeyle çıksın.
+S23.3| İlk ana ekran boş olmasın: örnek içerik, net ilk eylem veya rehberli boş durum olsun.
+S23.4| Onboarding kısa ve atlanabilir olsun (uzun slayt dizisi kullanıcıyı düşürmesin).
+S23.5| İlk karede paywall + gizli/kapatması zor X olmasın. Kapatma tuşu görünür ve basılabilir olsun.
+S23.6| Soğuk açılış makul sürede bitsin; splash/spinner sonsuz dönmesin, timeout + hata yolu olsun.
+S23.7| İlk gün, kullanıcı değer görmeden push gönderilmesin (reklam gibi algılanır).
+S23.8| İnternet yokken uygulama çökmesin veya beyaz ekranda kalmasın; çevrimdışı mesaj veya önbellek.
+S23.9| İlk dakika hunisi ölçülsün (açıldı → kayıt/izin → ilk eylem). Ölçülmeyen düşüş tahminle kapatılmasın.
+
+## S24 | 03 — İş Kuralları ve Keşif | Veri Akışı, İş Mantığı ve Çekirdek Özellikler
+S24.1| İş Kuralları (Business Logic): Uygulamanın temelini oluşturan kısıtlamaların ve koşulların hatasız çalışması.
+S24.2| Sınır Durumları (Edge Cases): Sıfır veri, maksimum veri, çok uzun metinler veya özel karakter girişlerinde sistemin çökmemesi.
+S24.3| Veritabanı Tutarlılığı: Yapılan değişikliklerin (ekleme, güncelleme, silme) veritabanına anlık ve doğru şekilde yansıması.
+S24.4| Eşzamanlılık (Concurrency): Aynı anda birden fazla istek atıldığında (örneğin arka arkaya çift tıklama) mükerrer işlem oluşmaması.
+
+## S25 | 03 — İş Kuralları ve Keşif | Rol, organizasyon ve yönetim paneli
+S25.1| Rol ve izin matrisi belgelensin (kullanıcı, yönetici, operatör vb.). Rol yoksa N/A.
+S25.2| Yetki yalnızca arayüzde gizlenmesin; API aynı rol kontrolünü yapsın.
+S25.3| Yönetim paneli varsa giriş zorunlu olsun. Kim / ne / ne zaman audit log tutulsun. Panel yoksa N/A.
+S25.4| Organizasyon, şube veya kiracı ayrımı varsa A tarafı B'nin verisini görmesin.
+S25.5| Süper admin ile günlük operasyon hesabı ayrılsın; paylaşılan tek root olmasın.
+
+## S26 | 03 — İş Kuralları ve Keşif | Arama, Filtreleme ve Sıralama (Search & Filter)
+S26.1| Arama Performansı: Arama çubuğuna yazılan kelimelere göre anlık veya hızlı sonuç listelenmesi.
+S26.2| Gelişmiş Filtreler: Çoklu kriterlere (kategori, tarih, mesafe, fiyat aralığı vb.) göre sonuçların daraltılabilmesi.
+S26.3| Sıralama Seçenekleri: Sonuçların "En yeni", "En popüler" veya "Alfabetik" gibi kriterlere göre sıralanabilmesi.
+S26.4| Arama Geçmişi: Kullanıcının daha önceki aramalarının hatırlanması ve öneri olarak sunulması.
+
+## S27 | 03 — İş Kuralları ve Keşif | Arama yarıçapı, engel, şikayet ve admin inceleme
+S27.1| Mesafe/yarıçap kullanan arama varsa hardcoded sabit kalksın; kullanıcının ayar değeri (min/max clamp, birim) sorguya bağlansın. Mesafe yoksa N/A.
+S27.2| Konum kullanan aramada güncel veya zaman damgalı son konum kullanılsın; izin yoksa anlamlı boş/uyarı durumu.
+S27.3| `POST` engelleme ve `POST` şikayet ayrı endpoint olsun. Şikayet otomatik engel yapmasın. Self-block yasak; engel idempotent olsun.
+S27.4| Şikayette zorunlu reason (spam, taciz, sahte, uygunsuz, diğer) ve opsiyonel not olsun.
+S27.5| Admin şikayet listesi (sayfalama, filtre) ve çözüm aksiyonu (incele, reddet, uyar, askıya al/ban) yetkisiz kullanıcıya kapalı olsun.
+S27.6| Engel varsa engellenen kayıtlar arama, öneri ve mesaj adaylarından karşılıklı çıksın. Engel yoksa N/A — keşif/dating uydurma.
+
+## S28 | 03 — İş Kuralları ve Keşif | Harita, Konum Servisleri ve Geofencing
+S28.1| Konum izni kullanılmadan önce gerekçe gösterilsin; reddedilirse konum gerektirmeyen akış bozulmasın.
+S28.2| Hassas/kesin konum yerine mümkünse yaklaşık konum kullanılsın; UI'da gereksiz kesin koordinat gösterilmesin.
+S28.3| Son bilinen konum zaman damgalı olsun; eski konumla yanlış mesafe hesaplanmasın.
+S28.4| Konum güncelleme sıklığı bataryayı tüketmeyecek şekilde ayarlansın; arka plan konumu yoksa N/A.
+S28.5| Keşif/arama mesafesi kullanıcının yarıçap/ayar değeriyle bağlansın; hardcoded yarıçap olmasın. Konum yoksa N/A.
+
+## S29 | 03 — İş Kuralları ve Keşif | İçerik ve Moderasyon (Content & Moderation)
+S29.1| Kötüye Kullanım Bildirimi (Report): Kullanıcıların uygunsuz profilleri, mesajları veya içerikleri şikayet edebileceği mekanizma.
+S29.2| Engelleme Sistemi: Bir kullanıcının başka bir kullanıcıyı engellemesi durumunda tüm etkileşimlerin (mesaj, eşleşme, görünürlük) tamamen kesilmesi.
+S29.3| Otomatik Filtreleme: Küfür, hakaret veya yasaklı kelimelerin metin alanlarında otomatik olarak sansürlenmesi veya engellenmesi.
+S29.4| Yönetici Paneli (Admin Dashboard): Şikayetlerin incelenmesi, kullanıcıların banlanabilmesi veya içeriklerin yönetilmesi için güvenli bir panel.
+
+## S30 | 03 — İş Kuralları ve Keşif | Yüklenen medya: MIME, EXIF, depolama ve moderasyon
+S30.1| Yüklemede uzantıya değil MIME + magic-byte bakılsın. İzinli türler (ör. jpeg/png/webp) dışındakiler 400.
+S30.2| EXIF/GPS/cihaz metadata strip edilsin; ardından boyut limiti ve sıkıştırma uygulansın.
+S30.3| Production'da nesne depolama (S3, Cloudinary veya eşdeğer) env ile; Development yerel fallback olabilir. Public URL kontrollü (signed/CDN).
+S30.4| Kullanıcı üretimi görsel/video varsa sunucu veya 3. parti moderasyon (NSFW/yasadışı) politikası tanımlı olsun. Yoksa N/A ve gerekçe yazılsın.
+S30.5| Dosya boyutu kotası, virüs/zararlı tarama veya en az content-type allowlist + max byte uygulansın.
+
+## S31 | 03 — İş Kuralları ve Keşif | Kapsamlı Medya Yönetimi ve Sıkıştırma
+S31.1| Kamera/galeri seçiminde max boyut, çözünürlük ve adet limitleri uygulansın.
+S31.2| Yüklemeden önce sıkıştırma yapılsın; bellek şişmesi ve timeout önlensin.
+S31.3| İzin reddinde alternatif (dosya seçmeden devam / sonra ekle) sunulsun.
+S31.4| Bozuk, çok büyük veya desteklenmeyen dosyada uygulama çökmesin; kullanıcıya net hata.
+S31.5| Geçici dosyalar işlem bitince silinsin.
+
+## S32 | 03 — İş Kuralları ve Keşif | Gerçek Zamanlı Sistemler ve Ölçeklenebilirlik (Real-time)
+S32.1| Bağlantı Kopması ve Yeniden Bağlanma: WebSocket veya SignalR bağlantılarının internet kesintilerinde otomatik olarak yeniden kurulması.
+S32.2| Yük Dengeleme (Load Balancing): Artan trafik karşısında sunucu yükünün birden fazlaインスタans (örnek) arasında dengelenmesi.
+S32.3| Veritabanı Havuzlanması (Connection Pooling): Veritabanı bağlantı limitlerinin aşılmaması için bağlantı havuzlarının optimize edilmesi.
+S32.4| Bellek Yönetimi (Caching): Sık kullanılan verilerin Redis gibi bellek tabanlı sistemlerde saklanarak sunucu yükünün hafifletilmesi.
+
+## S33 | 03 — İş Kuralları ve Keşif | WebSocket ve Canlı Veri Akış Kanalları
+S33.1| Bağlantı kopunca üstel backoff ile yeniden bağlansın; sonsuz sıkı döngü olmasın.
+S33.2| Socket auth (token) bağlanırken doğrulansın; token yenilenince socket de yenilensin.
+S33.3| Arka plana alınca gereksiz açık bağlantı kapatılsın veya politika belgelensin.
+S33.4| Gelen event'ler idempotent işlensin; mükerrer mesaj UI'yı bozmasın.
+S33.5| Realtime yoksa N/A.
+
+## S34 | 03 — İş Kuralları ve Keşif | GraphQL ve RESTful Hibrit Mimarisi
+S34.1| REST ve GraphQL birlikte varsa auth, hata ve tarih formatı tek sözleşmeye bağlansın.
+S34.2| Aynı iş kuralı iki ayrı endpoint'te çelişmesin; kaynak of truth belgelensin.
+S34.3| Schema/DTO kırıcı değişiklikler eski istemciyi patlatmasın (versioning veya geriye uyum).
+S34.4| Hata gövdesi (validation, 401, 403, 404, 409, 500) istemcide tutarlı map edilsin.
+S34.5| Kullanılmayan ikinci protokol varsa N/A; zorla eklenmesin.
+
+## S35 | 03 — İş Kuralları ve Keşif | Dış sistem entegrasyonu ve otomasyon
+S35.1| ERP, CRM, ödeme, kargo veya benzeri dış API varsa timeout, retry ve idempotent olsun. Yoksa N/A.
+S35.2| Dış sistem anahtarı yalnızca sunucuda dursun; istemciye gömülmesin.
+S35.3| Gelen webhook/olay imza doğrulasın ve mükerrer teslimatta iki kez işlenmesin.
+S35.4| Dış sistem düşünce kullanıcıya anlaşılır durum; kuyruk veya manuel telafi belgelensin.
+S35.5| Staging, dış sistemin test/sandbox ortamına bağlansın; production verisi testte kullanılmasın.
+
+## S36 | 03 — İş Kuralları ve Keşif | Çevrimdışı ve Zayıf Ağ Deneyimi (Offline & Poor Network)
+S36.1| Çevrimdışı Mod: İnternet bağlantısı koptuğunda uygulamanın çökmemesi, önbellekteki verileri gösterebilmesi.
+S36.2| Bağlantı Kurtarma: İnternet geri geldiğinde verilerin otomatik olarak senkronize edilmesi.
+S36.3| Zayıf Ağ Simülasyonu: 3G veya düşük hızlı bağlantılarda uygulamanın nasıl davrandığının test edilmesi.
+S36.4| İstek Zaman Aşımı (Timeout): Sunucudan geç gelen veya yanıt vermeyen istekler için kullanıcıya "Bağlantı zaman aşımına uğradı" uyarısının gösterilmesi.
+
+## S37 | 03 — İş Kuralları ve Keşif | Çevrimdışı Veri Senkronizasyon Kuyruğu
+S37.1| Offline yapılan yazma işlemleri kuyruğa alınsın; online olunca sırayla ve idempotent işlensin.
+S37.2| Çakışma (aynı kayıt iki yerde değişti) için politika tanımlı olsun.
+S37.3| Kuyruk boyutu ve TTL sınırlı olsun; sonsuz şişmesin.
+S37.4| Kullanıcı kuyruktaki bekleyen işi görebilsin veya en azından kayıp olmadığını anlasın.
+S37.5| Offline yazma yoksa N/A.
+
+## S38 | 03 — İş Kuralları ve Keşif | Çoklu Cihaz ve Senkronizasyon (Cross-Device Sync)
+S38.1| Oturum Senkronizasyonu: Kullanıcı aynı hesaba başka bir cihazdan girdiğinde verilerin ve tercihin eş zamanlı güncellenmesi.
+S38.2| Farklı Ekran Oranları: Uygulama arayüzünün küçük telefonlardan dev tabletlere kadar her ekranda orantılı durması.
+S38.3| Yönelim (Orientation) Desteği: Cihaz dikey (portrait) veya yatay (landscape) konuma getirildiğinde tasarımın çökmemesi ve akışın bozulmaması.
+S38.4| Bulut Senkronizasyonu: Yerel olarak yapılan değişikliklerin anında bulut veritabanına yansıtılması.
+
+## S39 | 04 — Arayüz ve Deneyim | Kullanıcı Arayüzü ve Deneyim (UI/UX)
+S39.1| Responsive / Uyumluluk: Farklı ekran boyutlarında, çözünürlüklerde ve cihazlarda (telefon, tablet vb.) bozulma olmaması.
+S39.2| Yüklenme Durumları (Loaders): Veri çekilirken veya işlem yapılırken kullanıcıya dönen animasyonlar veya iskelet ekranlar (Skeleton loaders).
+S39.3| Boş Durumlar (Empty States): Listede hiç veri olmadığında kullanıcıya rehberlik eden şık boş ekran tasarımları.
+S39.4| Hata Mesajları: Kullanıcı dostu, net ve yönlendirici hata bildirimleri (teknik hata kodları yerine anlaşılır dil).
+S39.5| Navigasyon ve Akış: Geri tuşu davranışları, sayfa geçişleri ve yönlendirmelerin mantıklı ve akıcı olması.
+
+## S40 | 04 — Arayüz ve Deneyim | Kapsamlı Form Yönetimi ve Validasyon
+S40.1| Tüm formlar şema/validasyon ile doğrulansın (client + server aynı kurallar).
+S40.2| Alan hataları ilgili input'ta gösterilsin; submit sonrası scroll/focus doğru alana gitsin.
+S40.3| Çift submit engellensin; gönderim sırasında buton kilitli olsun.
+S40.4| Klavye, sonraki alan ve return tuşu mobil formda kırılmasın.
+S40.5| Hassas alanlar (şifre, kart, OTP) autocomplete/maske politikasına uygun olsun.
+
+## S41 | 04 — Arayüz ve Deneyim | Dinamik Form Oluşturucu
+S41.1| Dinamik form şeması sunucudan geliyorsa client validation server ile uyumlu olsun.
+S41.2| Bilinmeyen alan tipi uygulamayı çökertmesin.
+S41.3| Zorunlu/koşullu alanlar (A seçilince B açılsın) doğru çalışsın.
+S41.4| Dinamik form yoksa N/A; statik formlar 66'ya bırakılsın.
+S41.5| Şema versiyonu uyumsuzsa kullanıcıya kırık form yerine hata/upgrade mesajı.
+
+## S42 | 04 — Arayüz ve Deneyim | Gelişmiş Skeleton ve Yükleme Durumları
+S42.1| Veri beklerken skeleton/loader, hata ve boş durum üçlüsü her liste/ekranda olsun.
+S42.2| Skeleton gerçek layout'a yakın olsun; layout shift yapmasın.
+S42.3| Yenileme (pull-to-refresh) ve ilk yükleme görsel olarak ayrışsın.
+S42.4| Timeout/hata sonrası tekrar dene aksiyonu olsun.
+S42.5| Loader sonsuz dönmesin; üst sınır ve hata yolu tanımlı olsun.
+
+## S43 | 04 — Arayüz ve Deneyim | Optimizasyonlu Liste Bileşenleri
+S43.1| Liste bileşenleri key, getItemLayout/eşdeğer ve windowing ile akıcı kaydırılsın.
+S43.2| Boş liste ve tek elemanlı liste bozulmasın.
+S43.3| Pagination / infinite scroll çift sayfa çekmesin; son sayfa net bitsin.
+S43.4| Öğe silme/ekleme scroll konumunu rastgele sıfırlamasın.
+S43.5| Görsel içeren satırlarda boyutsuz image layout zıplatmasın.
+
+## S44 | 04 — Arayüz ve Deneyim | Animasyon ve Mikro Etkileşim Mimarisi
+S44.1| Animasyonlar native driver / eşdeğer ile yapılsın; JS thread'i kilitlemesin.
+S44.2| Erişilebilirlik 'reduce motion' açıksa ağır animasyonlar kısalsın veya kapansın.
+S44.3| Ekran çıkışında animasyon timer'ları iptal edilsin.
+S44.4| Mikro etkileşimler (buton, toast, modal) tutarlı süre/easing kullansın.
+S44.5| Düşük cihazlarda animasyon yüzünden jank varsa sadeleştirme yolu olsun.
+
+## S45 | 04 — Arayüz ve Deneyim | Tema Yönetimi ve Dinamik Renkler
+S45.1| Tema (açık/koyu/sistem) kalıcı olsun; flash of wrong theme olmasın.
+S45.2| Renkler hardcoded hex dağınık olmasın; token/theme'den gelsin.
+S45.3| Kontrast metin/arka plan için okunabilir kalsın.
+S45.4| Durum renkleri (başarı/hata/uyarı) hem temada tanımlı olsun.
+S45.5| Sistem tema değişince açık ekranlar güncellensin.
+
+## S46 | 04 — Arayüz ve Deneyim | Erişilebilirlik (Accessibility - a11y)
+S46.1| Erişilebilirlik (Accessibility - a11y)
+S46.2| Ekran Okuyucu Desteği: Görme engelli kullanıcılar için arayüz elemanlarının etiketlenmesi (VoiceOver / TalkBack).
+S46.3| Yazı Boyutu Uyumu: Cihazın genel sistem yazı boyutu büyütüldüğünde uygulamanın buna uyum sağlaması.
+S46.4| Renk Kontrastı: Metinlerin arka planla olan renk kontrastının okunabilir standartlarda olması.
+S46.5| Dokunma Alanları: Buton ve tıklanabilir alanların mobil cihazlarda parmakla rahatça dokunulabilecek büyüklükte olması.
+
+## S47 | 04 — Arayüz ve Deneyim | Kapsamlı Erişilebilirlik Desteği
+S47.1| Etkileşimli öğelerde accessibilityLabel / role / hint olsun; ikon-only buton isimsiz kalmasın.
+S47.2| TalkBack/VoiceOver ile ana akış tamamlanabilsin.
+S47.3| Dokunma alanları en az ~44pt olsun; üst üste binmesin.
+S47.4| Renk tek başına anlam taşımasın (hata sadece kırmızı olmasın).
+S47.5| Font ölçeği büyüyünce metin kesilmesin veya kontrollü ellipsis + erişim olsun.
+
+## S48 | 04 — Arayüz ve Deneyim | Cila ve cihaz uyumu (yayın izleri)
+S48.1| Boş liste/ekranlarda metin + yönlendirici eylem olsun; sessiz boş sayfa kalmasın.
+S48.2| Tüm arayüz varsayılan tek iskelet renginde (ör. aynı mavi) kalmasın; marka renkleri uygulansın.
+S48.3| Hata metni jenerik 'Bir sorun oluştu' olmasın; ekrana/bağlama özel ve sonraki adım versin.
+S48.4| Yükleme göstergesi sonsuz olmasın; süre dolunca hata veya yeniden dene.
+S48.5| Klavye açıkken input, birincil buton veya hata mesajı örtülmesin.
+S48.6| Sistem geri tuşu / jesti her yığında beklenen yere dönsün; ölü olmasın.
+S48.7| Karanlık modda beyaz patlama, okunmayan kontrast veya yanlış ikon olmasın.
+S48.8| Çentik, status bar, home indicator (safe area) altında yazı/buton kesilmesin.
+S48.9| Lorem ipsum, TODO, placeholder kopya ve sahte içerik yayında kalmasın.
+S48.10| Kritik silme/ödeme/çıkışta onay diyalogu olsun (Vazgeç + net Sil).
+S48.11| Dokunma alanı parmakla rahat olsun; uygun yerde hafif haptic olsun, yoksa N/A.
+S48.12| Mağaza/uygulama ikonu varsayılan şablon (iskelet/robot/placeholder) olmasın.
+
+## S49 | 04 — Arayüz ve Deneyim | Dizayn: kayma, üst üste binme, taşma, renk ve hizalama
+S49.1| Üst üste binme olmasın: modal, dropdown, tooltip, toast, sabit header/footer içeriği veya birbirini örtmesin. z-index rastgele şişmesin. UI yoksa N/A.
+S49.2| Kayma / layout shift: font, görsel, banner, çerez şeridi, iskelet→içerik geçişi sayfayı zıplatmasın; yer ayrılsın. Ölçülemiyorsa en az kritik ekranda gözle.
+S49.3| Taşma: yazı/buton/ikon kutudan çıksın veya overflow ile kesilip anlamsız kalmasın. Yatay istenmeyen scroll FAIL. Uzun TR/DE metin aynı kural.
+S49.4| Hizalama: kart, form label/input, tablo kolon, ikon+metin aynı ızgarada; rastgele margin yığını FAIL.
+S49.5| Renk uyumu: birincil/ikincil/hata/uyarı/arka plan token'dan; ekranda marka dışı rastgele hex, neon, okunmayan gri FAIL. Tema maddesiyle çelişmesin, burada görünen uyum kontrol edilir.
+S49.6| Tipografi: en fazla 2-3 font rolü (başlık/gövde/etiket); satır yüksekliği okunur; karışık 6 font veya ezilmiş satır FAIL.
+S49.7| Uzun içerik: ellipsis veya satır kırılması kasıtlı; buton metni iki dilde de taşmasın, ikon üzerine binmesin.
+S49.8| Liste/grid: son satır kesik, boşluk dengesiz, görsel oranı bozulmuş (ezilmiş/uzamış) olmasın.
+S49.9| Sabit alt bar / FAB / klavye: birincil eylem veya hata metni örtülmesin (cila klavye maddesini tekrarla, burada kayma+örtme).
+S49.10| Animasyon layout'u bozmasın: titreme, overlap, kaydırınca zıplama yok. Animasyon yoksa N/A.
+S49.11| Kırık görsel: 0 boyut, alt metin boşluğu çökerten, farklı DPR'de bulanık veya taşan ikon FAIL.
+S49.12| Açık/koyu ve marka: aynı ekranda karışık tema lekesi (beyaz ada, siyah ada) olmasın.
+
+## S50 | 04 — Arayüz ve Deneyim | Web sitesi: yüzde yüz duyarlı (responsive) teslim
+S50.1| Web varsa telefon (dar), tablet ve masaüstü genişlikte aynı kritik iş bozulmadan yürümeli. Yatay istenmeyen kaydırma, kesilen menü veya okunmayan metin kabul edilmez. Web yoksa N/A. Müşteriye: Site her ekranda düzgün çalışmalı; yalnızca bilgisayarda iyi görünüp telefonda bozulması teslim değildir.
+S50.2| Kırılımlar (breakpoint) projede tanımlı olsun; ara genişlikte (ör. 400–700px) gizli taşma veya üst üste binme kalmasın. Müşteriye: Tablet ve büyük telefon da kontrol edilir, yalnızca iki uç değil.
+S50.3| Görseller ve medya oranı bozulmadan ölçeklenmeli; ezilme, taşma, 0 yükseklik olmamalı. Müşteriye: Fotoğraf ve banner her cihazda düzgün durmalı.
+S50.4| Form ve tablolar dar ekranda kullanılabilir olsun (kaydırma kasıtlı ve anlaşılır, etiket kaybolmasın). Form yoksa N/A. Müşteriye: Telefondan form doldurulabilmeli.
+S50.5| Gezinme: masaüstünde tam menü, dar ekranda erişilebilir menü; açık menü içeriği örtüp tıklanamaz bırakmasın. Müşteriye: Telefonda menü kaybolmamalı veya içeriği kilitlememeli.
+S50.6| Dokunma: birincil düğmeler parmakla rahat; yan yana iki küçük hedef birbirine binmesin. Müşteriye: Düğmeler telefonda kolay basılmalı.
+S50.7| Yatay (landscape) web’de kritik metin kesilmesin; zorunlu değilse N/A değil, en az giriş ve ana sayfa. Müşteriye: Telefonu yan çevirince sayfa kırılmamalı.
+S50.8| Yazı boyutu sistem büyütülünce (erişilebilirlik) taşma ve örtme olmamalı. Müşteriye: Büyük yazı açıkken sayfa dağılmamalı.
+S50.9| Çerez şeridi, sohbet balonu, sabit bar dar ekranda birincil içeriği ve gönder düğmesini kapatmasın. Müşteriye: Altta açılan şerit ‘Gönder’i gizlememeli.
+S50.10| Yazdırma/PDF veya gömülü panel varsa o da taşmamalı; yoksa N/A. Müşteriye: Varsa çıktı da okunaklı olmalı.
+
+## S51 | 04 — Arayüz ve Deneyim | Dizayn taraması: sistem, tutarsızlık ve görsel saçmalık
+S51.1| Tasarım ölçüleri tek aile olsun (boşluk 4/8 veya projenin token’ı, köşe, gölge). Rastgele 7px/13px/22px ve 8 farklı radius FAIL. UI yoksa N/A. Müşteriye: Ekranlar aynı elden çıkmış görünmeli; dikiş yerleri belli olmamalı.
+S51.2| Aynı iş aynı bileşen: birincil/ikincil düğme, alan yüksekliği, kart padding’i sayfalar arasında zıplamasın. Üç türlü ‘Kaydet’ düğmesi FAIL. Müşteriye: Her sayfada düğmeler ve formlar tanıdık durmalı.
+S51.3| İkon tek set ve hizalı (kalınlık, dolu/çizgi, boyut). Emoji + 3 ikon paketi + kaymış ikon+yazı FAIL. Müşteriye: İkonlar oyuncak kutusundan rastgele seçilmiş gibi durmamalı.
+S51.4| Ham çerçeve görünümü kalmasın (varsayılan mavi link, iskelet tema, ‘lorem’, stok mor). Marka renk ve yazı tipi uygulanmalı. Müşteriye: Hazır şablon haliyle teslim edilmez.
+S51.5| Durum renkleri tutarlı: başarı / uyarı / hata / bilgi karışmasın; yalnızca renkle anlam verilmesin (ikon veya metin). Müşteriye: Kırmızı bazen uyarı bazen marka olmamalı.
+S51.6| Etkileşim: odak halkası, hover (işaretçi cihaz), basılı, devre dışı halleri tanımlı. Masaüstünde tıklanır durmayan link veya yalnızca hover’a kilitli iş FAIL. Müşteriye: Ne tıklanır, ne tıklanmaz belli olmalı.
+S51.7| Üst bilgi, alt bilgi ve menü sayfalar arasında aynı aile; bir sayfada farklı logo, farklı yükseklik, farklı aralık FAIL. Müşteriye: Gezinme her yerde aynı kurumsal duruşta olmalı.
+S51.8| Yoğunluk: ne nefes almayan sıkışıklık ne boş çöl. Komşu kartlarda farklı iç boşluk FAIL. Müşteriye: Ne iç içe yığılmış ne de dağınık durmalı.
+S51.9| Metin hiyerarşisi: başlık / alt başlık / gövde ayrımı; her satır aynı punto ve kalınlıkta bağırmasın. Masaüstünde satır aşırı uzun duvar olmasın. Müşteriye: Okuyan göz nereye bakacağını bilmeli.
+S51.10| Logo ve görseller keskin, orantılı, doğru zeminde; pikselli, ezilmiş, ters renk logo FAIL. Müşteriye: Marka işareti ucuz görünmemeli.
+S51.11| Yayın kalıntısı yok: lorem, TODO, ‘test’, debug çerçeve, #000 kutu, sahte isim, konsol çıktısı ekranda. Müşteriye: Taslak izi müşteriye gösterilmez.
+S51.12| Kaydırma saçmalığı: çift kaydırma, gövde + iç panel kilit, mobil 100vh ile altın kesilmesi. Müşteriye: Sayfa titrememeli, içerik çubuğun altında kaybolmamalı.
+S51.13| Pencere (modal/çekmece): arka plan kaymasın, küçük ekranda kesilmesin, kapatma belli olsun. Modal yoksa N/A. Müşteriye: Açılan pencere sıkışmış veya kapanmaz olmamalı.
+S51.14| Tablo, etiket (chip) ve rozet stili tek; her ekranda farklı kutu FAIL. Bu bileşen yoksa N/A. Müşteriye: Liste ve etiketler aynı dilde konuşmalı.
+S51.15| Mikro metin kurumsal ve tek hitap (sen/siz karışmasın); ‘click here’, TR+EN aynı düğmede, yarım cümle FAIL. Müşteriye: Yazılar müşteriye söylenecek dilde, tutarlı olmalı.
+S51.16| Hareket: süs animasyon layout’u bozmasın; sistem ‘azaltılmış hareket’ varsa saygı. Animasyon yoksa N/A. Müşteriye: Ekran zıplamamalı, göz yormamalı.
+S51.17| Tarama yöntemi (zorunlu): kritik 5–8 ekranı gez (açılış, giriş, ana iş, form, boş, hata). Her saçmalığı madde madde yaz, tek tek kapat. ‘Genel olarak iyi’ YASAK. Müşteriye: Tasarımcı gözüyle gezilmiş teslim; tek ekranlık vitrin değil.
+
+## S52 | 04 — Arayüz ve Deneyim | Dizayn uyumu: tek dil, tek sistem, bütün ürün
+S52.1| Tek ürün kimliği: açılış, giriş, ana iş, ayarlar ve boş/hata ekranı aynı üründen çıkmış görünsün. Üç farklı ‘site’ hissi FAIL. UI yoksa N/A. Müşteriye: Her ekran aynı kurumun yüzü olmalı.
+S52.2| Yazı ölçeği kapalı set: başlık / alt başlık / gövde / etiket (ve gerekirse sayı). On bir rastgele punto yok. Müşteriye: Yazılar bir aile; her kutu kendi puntoşu seçmemeli.
+S52.3| Renk kapalı set: nötrler + bir vurgu + semantik (başarı/hata/uyarı). Dört vurgu rengi yarışıyorsa FAIL. Müşteriye: Marka rengi net; gökkuşağı değil.
+S52.4| Yükseklik dili tek: ya ince çizgi ya gölge; 2–3 katman yeter (kart, açılır, pencere). z-index çorbası ve 6 çeşit gölge FAIL. Müşteriye: Katmanlar sakin ve okunur olmalı.
+S52.5| Sayfa kalıpları: liste, detay, form, ayar aynı iskelet (kenar boşluğu, başlık konumu, birincil eylem yeri). Her sayfa sıfırdan uydurulmasın. Müşteriye: Yeni sayfa da tanıdık gelmeli.
+S52.6| Izgara ve genişlik: içerik max-width / kolon kuralı belli; bir sayfa 720, diğeri 1600, öbürü kenarsız rastgele olmasın. Tam geniş görsel kasıtlıysa işaretli. Müşteriye: Sayfa hizası bozulmamalı.
+S52.7| Dikey ritim: bölümler arası boşluk aynı merdivenden (ör. s/m/l). Bir ekranda 8px sonra 64px sonra 11px FAIL. Müşteriye: Nefes alış düzenli olmalı.
+S52.8| Görsel dili tek: foto kırpımı, köşe, kaplama aynı aile. Düz ikon + 3D + stok kolaj + karikatür karışmasın. Görsel yoksa N/A. Müşteriye: Resimler aynı stüdyodan çıkmış gibi durmalı.
+S52.9| Boş / hata / başarı görselleri aynı dilde (veya yalnızca tipografi). Her durum başka clipart FAIL. Müşteriye: ‘Kayıt yok’ ve ‘Hata’ da ürüne ait olmalı.
+S52.10| Hareket ailesi: süre ve easing tek set (ör. 150/250/400ms). Her animasyon başka hızda zıplamasın. Animasyon yoksa N/A. Müşteriye: Geçişler sakin ve aynı karakterde olmalı.
+S52.11| Açık ve koyu (varsa) çift: her yüzeyin eşi olsun; koyuda unutulmuş beyaz ada kalmasın. Tek tema N/A. Müşteriye: Karanlık mod sonradan yapıştırılmış durmamalı.
+S52.12| İlk üç saniye (açılış / kahraman / splash) geri kalanla aynı ürün. Vitrin ayrı, içerisi ayrı FAIL. Müşteriye: İlk bakış ile içerisi birbirini tutmalı.
+S52.13| Harita, grafik, takvim, editör varsa çerçeveleri ürüne uyumlu; ham üçüncü parti hali kalmasın. Yoksa N/A. Müşteriye: Gömülü araç da aynı kıyafeti giymeli.
+S52.14| E-posta, PDF, push, mağaza görseli varsa aynı renk/yazı/logo ailesi. Bu çıktı yoksa N/A. Müşteriye: Dışarı giden evrak da aynı kurum olmalı.
+S52.15| Uyum kararı (zorunlu): 6 kritik ekranı yan yana koy (zihnen veya görüntü). Aynı ürün mü? Değilse FAIL listesi yaz, tek tek kapat. Beğeni bahanesiyle atlama. Müşteriye: Bütün, parçaların toplamından tutarlı durmalı.
+
+## S53 | 05 — Bildirim ve Destek | Bildirimler ve İletişim (Notifications)
+S53.1| Push Bildirimleri: Cihazlara bildirimlerin zamanında ve doğru içerikle ulaşması.
+S53.2| Uygulama İçi Bildirimler: Önemli olayların uygulama içinde rozet (badge) veya liste olarak gösterilmesi.
+S53.3| E-posta / SMS Entegrasyonları: Sistem tarafından gönderilen bilgilendirme e-postalarının tasarımı ve iletildiği adrese hatasız varması.
+
+## S54 | 05 — Bildirim ve Destek | Push Notification Servisleri ve Arka Plan İşlemleri
+S54.1| Cihaz token'ı izin alındıktan sonra backend'e kaydedilsin; logout'ta silinsin veya geçersiz kılınsın.
+S54.2| Ön plan / arka plan / killed durumda bildirim tıklanınca doğru ekrana gitsin.
+S54.3| Bildirim izni reddinde uygulama çekirdek akışı çalışmaya devam etsin.
+S54.4| Kullanıcı tercihleri (sessiz saat, kanal, tip) hem cihazda hem sunucuda tutarlı uygulansın.
+S54.5| Token yenileme ve çoklu cihaz senaryosunda mükerrer/yanlış cihaza bildirim gitmesin.
+
+## S55 | 05 — Bildirim ve Destek | E-posta ve İletişim Altyapısı (Transactional Email)
+S55.1| E-posta ve İletişim Altyapısı (Transactional Messaging)
+S55.2| Şablon Tasarımları: Sistem e-postalarının (Hoş geldin, şifre sıfırlama, bülten) kurumsal kimliğe ve mobil tasarıma uygun olması.
+S55.3| E-posta İletim Oranı (Deliverability): Gönderilen e-postaların kullanıcıların "Spam" klasörüne düşmeden doğrudan gelen kutusuna ulaşması (SPF/DKIM ayarları).
+S55.4| Abonelikten Ayrılma (Unsubscribe): Pazarlama veya bildirim maillerinde kullanıcıların tek tıkla listeden çıkabilmesi.
+S55.5| SMS / OTP Doğrulama: Telefon numarası doğrulama gereken durumlarda tek kullanımlık şifrelerin (OTP) saniyeler içinde iletilmesi.
+
+## S56 | 05 — Bildirim ve Destek | Destek, Yardım ve Geri Bildirim (Support & Feedback)
+S56.1| İletişim / Destek Formu: Kullanıcıların uygulama içinden sorun bildirebileceği veya destek alabileceği alan.
+S56.2| SSS (FAQ): Sıkça sorulan soruların ve çözüm adımlarının yer aldığı rehber sayfa.
+S56.3| Uygulama İçi Değerlendirme: Kullanıcılara belirli bir başarı hikayesinden sonra App Store / Google Play puanlama pop-up'ının gösterilmesi.
+S56.4| Sosyal Medya / Web Linkleri: Resmi web sitesi ve sosyal medya hesaplarına yönlendiren bağlantılar.
+
+## S57 | 05 — Bildirim ve Destek | Kullanıcı Geri Bildirim Modulu
+S57.1| Geri bildirim / şikayet / destek formu validasyonlu ve rate-limit'li olsun.
+S57.2| Gönderim başarı ve hata durumu kullanıcıya gösterilsin.
+S57.3| Ekran görüntüsü/log ekleniyorsa PII uyarısı ve rıza olsun.
+S57.4| Girişli kullanıcıda UserId bağlansın; girişsizde e-posta zorunlu olsun.
+S57.5| Destek formu yoksa N/A değil; en az mailto veya /support eşdeğeri tanımlı olsun.
+
+## S58 | 05 — Bildirim ve Destek | Derin Bağlantı (Deep Linking) ve Evrensel Bağlantılar
+S58.1| Custom scheme ve / veya universal-app link (iOS/Android) tanımlı ve doğrulanmış olsun.
+S58.2| Soğuk açılışta deep link kaybolmasın; auth gerektiren link login sonrası hedefe dönsün.
+S58.3| Süresi dolmuş, yetkisiz veya bozuk link kullanıcıyı kırık ekrana düşürmesin.
+S58.4| Bildirim, e-posta/SMS ve paylaşım linkleri aynı router üzerinden çözülsün.
+S58.5| UAT/prod için ayrı link domain/scheme kargaşası olmasın; config'den gelsin.
+
+## S59 | 06 — Dil ve Yerelleştirme | Yerelleştirme ve Dil Desteği (Localization)
+S59.1| Dil Değişimi: Uygulama dili değiştirildiğinde tüm metinlerin eksiksiz ve doğru şekilde çevrilmesi.
+S59.2| RTL (Sağdan Sola) Desteği: Arapça gibi sağdan sola yazılan dillerde arayüz yerleşiminin otomatik uyarlanması.
+S59.3| Tarih, Saat ve Para Birimi: Tarih formatlarının ve sayısal değerlerin yerel standartlara göre gösterilmesi.
+
+## S60 | 06 — Dil ve Yerelleştirme | Çoklu Dil ve RTL Desteği
+S60.1| Dil değişince tüm görünür metinler (tab, hata, boş durum, sistem diyaloğu metinleri) güncellensin.
+S60.2| RTL dillerde layout, ikon yönü ve kaydırma yönü aynalansın; kırık overlap olmasın.
+S60.3| Tarih, sayı, yüzde ve para formatı seçilen locale'e göre gösterilsin.
+S60.4| Eksik çeviri ham key göstermesin; İngilizce'ye düşsün (TR/ana dil key'i varken EN'e zorlanmasın).
+S60.5| Dil tercihi kalıcı olsun; yeniden açılışta sıfırlanmasın.
+
+## S61 | 06 — Dil ve Yerelleştirme | Globalleşme (i18n) & Yerelleştirme
+S61.1| Desteklenen her locale için dil dosyası yüklensin; eksik dosya uygulamayı çökertmesin.
+S61.2| Çoğul, interpolation ve nested key'ler tüm dillerde aynı şemayı kullansın.
+S61.3| AR, FR, DE, ES, JA, PT, RU, ZH ve diğer ikincil dillerde eksik key İngilizce'ye düşsün.
+S61.4| Ana dil (ör. TR) ve EN first-class kalsın; ana dil key'i varken EN'e düşülmesin.
+S61.5| Ham çeviri anahtarı (settings.title) kullanıcıya görünmesin.
+S61.6| Yeni ekran eklenince çeviri key'i hardcoded string olarak bırakılmasın.
+
+## S62 | 06 — Dil ve Yerelleştirme | i18n eksik çeviri fallback
+S62.1| i18n `fallbackLng` (veya eşdeğer) İngilizce olsun. Eksik key UI'yı kırmasın.
+S62.2| İkincil dillerde (AR, FR, DE, ES, JA, PT, RU, ZH ve diğerleri) olmayan key EN'e düşsün.
+S62.3| Ana dil ve EN dosyasında key varken gereksiz fallback olmasın.
+S62.4| Kritik ekranlar için eksik key taraması yapılsın; rapor üretilsin, runtime crash olmasın.
+
+## S63 | 06 — Dil ve Yerelleştirme | Saat, takvim, para birimi ve dil kaymaları
+S63.1| Saat: saklama kanonik (UTC/offset); gösterim kullanıcının dilimi. «Kayıt 15:00, listede 18:00» tipi kayma FAIL. Tarih yoksa N/A.
+S63.2| Takvim günü kaymasın: YYYY-MM-DD'yi UTC gece yarısı parse edip bir gün geri/ileri atma. Doğum günü, randevu, fatura tarihi aynı kural.
+S63.3| 12/24 saat ve AM/PM locale'e uygun; karışık TR metin + US saat FAIL.
+S63.4| Haftanın ilk günü ve takvim locale (Pzt/Paz) kullanıcı diline uysun. Takvim yoksa N/A.
+S63.5| Göreli zaman («5 dk önce») seçilen dilde; ham EN kalmasın. Bu format yoksa N/A.
+S63.6| Seyahat / cihaz dilimi değişince geçmiş kayıtlar yanlış güne kaymasın; gösterim dilimi net olsun.
+S63.7| Para: binlik ve ondalık ayırıcı locale ile (TR 1.234,56 / US 1,234.56) karışmasın. Sembol yeri (10 ₺ vs $10) locale kuralına uysun. Para yoksa N/A.
+S63.8| Aynı ekranda tarih TR + para US + sayı karışık locale olmasın; tek locale kaynağı.
+S63.9| Gösterilen fiyat ile ödenen/çekilen tutar ve para birimi aynı olsun; kur anı varsa yazılsın. Ödeme yoksa N/A.
+S63.10| Sıfır, negatif, büyük tutar (milyon) taşmadan ve yanlış yuvarlanmadan görünsün. Float görünen 9.999999 FAIL.
+S63.11| Para/tarih input: kullanıcı locale yazışını kabul et, sunucuya kanonik gönder. Parse «1.000»i bin veya ondalık diye yanlış yutmasın.
+S63.12| Dil değişince layout kırılsın: uzun çeviri (DE) buton/taşma/üst üste. Kısa dil (EN) boşluk patlamasın.
+S63.13| Kesik çeviri, ham key (home.title), iki dilin karıştığı cümle FAIL. Tek dil ürün N/A değil: o dilde hardcode tutarlı olsun.
+S63.14| E-posta, PDF, fatura, push aynı saat/para/dil kurallarını kullansın; uygulamada doğru, belgede yanlış FAIL. Bu çıktı yoksa N/A.
+S63.15| RTL açıksa (veya eklenecekse) kayma/üst üste; ikon oku ters. RTL yok ve plan yoksa N/A.
+S63.16| Sayısal sıralama ve filtre (tarih, fiyat) locale parse hatasıyla yanlış sırada olmasın.
+
+## S64 | 07 — Güvenlik ve Yasal | Güvenlik ve Gizlilik (Security & Compliance)
+S64.1| SSL / HTTPS Denetimi: Tüm ağ trafiğinin şifrelenmiş bağlantı üzerinden yapılması.
+S64.2| Girdi Doğrulama (Sanitization / Validation): SQL Injection, XSS ve zararlı kod enjeksiyonlarına karşı tüm form girişlerinin filtrelenmesi.
+S64.3| Yetkilendirme Kontrolleri (Authorization): Normal bir kullanıcının, yetkisiz bir API endpoint'ine veya yönetici paneline erişememesi.
+S64.4| Hassas Veri Gizliliği: Şifrelerin ve kişisel verilerin düz metin (plaintext) olarak saklanmaması, hashlenmesi.
+
+## S65 | 07 — Güvenlik ve Yasal | Veri Gizliliği ve Uyumluluk (Privacy & Compliance)
+S65.1| Çerez ve İzin Yönetimi (GDPR / KVKK): Kullanıcılardan çerez ve veri işleme izinlerinin yasalara uygun şekilde alınması.
+S65.2| Gizlilik Politikası Erişimi: Sözleşme ve gizlilik metinlerinin uygulama içinde kolayca okunabilmesi.
+S65.3| Veri Taçınabilirliği: Kullanıcının sistemdeki tüm verilerini (JSON/CSV formatında) tek tıkla indirebilmesi.
+S65.4| Unutulma Hakkı: Hesabını silen bir kullanıcının kişisel verilerinin sistemden tamamen temizlenmesi.
+
+## S66 | 07 — Güvenlik ve Yasal | Veri Güvenliği ve Kriptografi (Cryptography)
+S66.1| Şifreleme (Hashing & Encryption): Kullanıcı şifrelerinin güvenli algoritmalarla (Argon2 / BCrypt) hashlenerek saklanması.
+S66.2| Hassas Veri Maskeleme: Kredi kartı, telefon numarası veya kimlik gibi hassas bilgilerin ekranlarda ve loglarda maskelenerek gösterilmesi.
+S66.3| API Güvenlik Anahtarları: Gizli anahtarların (API Keys, Secret Tokens) kaynak kodda açıkta bırakılmayıp çevresel değişkenlerde (Environment Variables) tutulması.
+S66.4| Sertifika Sabitleme (Certificate Pinning): Mobil uygulamalarda Man-in-the-Middle (MITM) saldırılarını önlemek için sunucu SSL sertifikasının doğrulanması.
+S66.5| Geliştirici Deneyimi ve Dokümantasyon (Developer
+
+## S67 | 07 — Güvenlik ve Yasal | Finansal ve Yasal Uyumluluk (Legal & Financial)
+S67.1| Kullanım Koşulları ve Sözleşmeler: Güncel kullanıcı sözleşmesi, gizlilik ve çerez politikalarının uygulama içinde erişilebilir olması.
+S67.2| Vergi ve Fatura Uyumluluğu: Dijital satışlarda veya aboneliklerde yerel vergi mevzuatına uygun faturalandırma altyapısı.
+S67.3| Yaş Sınırı Doğrulama: Uygulamanın niteliğine göre (örneğin 18+) yaş doğrulama adımlarının yasalara uygun işletilmesi.
+S67.4| Telif Hakları: Kullanılan fontların, ikonların, görsellerin ve kütüphanelerin lisans türlerine uyulması.
+
+## S68 | 07 — Güvenlik ve Yasal | Yasal ve Politik Uyumluluk (KVKK / GDPR)
+S68.1| KVKK (Kişisel Verilerin Korunması Kanunu), GDPR ve mobil mağaza yönergelerine (App Store / Google Play Guidelines) tam uyumluluk sağlamak.
+S68.2| Kullanıcı verilerinin toplanması, işlenmesi, saklanması ve imha edilmesi süreçlerini yasal çerçeveye oturtmak.
+S68.3| Aydınlatma Metinleri ve Açık Rıza: Kayıt ekranlarında zorunlu onay kutuları (unchecked by default), metinlere doğrudan bağlantılar.
+S68.4| Çerez ve Takip Politikaları: Analitik, reklam ve çerez kullanımı için kullanıcıya açık tercih sunulması.
+S68.5| Veri Gizliliği ve Şeffaflık: Hangi verilerin toplandığının gizlilik politikasında net bir şekilde ifade edilmesi.
+S68.6| Mağaza Kuralları Uyumluluğu: Apple ve Google'ın gizlilik etiketi (App Privacy / Data Safety) beyanlarının birebir uyuşması.
+S68.7| Kullanıcı kendi verisini dışa aktarabilmeli (JSON/CSV veya eşdeğer) — KVKK/GDPR taşınabilirlik. Hesap yoksa veya B2B-only belgelenmişse N/A.
+S68.8| Silme politikası net olsun: yumuşak silme vs kalıcı; ilişkiler (FK) ve yedek/log. «Sil» deyince yarım kayıt bırakma. Hesap silme maddesiyle çelişmesin.
+
+## S69 | 07 — Güvenlik ve Yasal | Güvenlik Duvarı ve SSL Pinning
+S69.1| Production API yalnızca HTTPS kullansın; cleartext traffic kapalı olsun.
+S69.2| İstemci certificate/SSL pinning (veya eşdeğer) Production'da açık, Development'ta gevşetilebilir olsun.
+S69.3| Pin rotasyonu (yedek pin) belgelensin; tek pin expire olunca uygulama kilitlenmesin.
+S69.4| Proxy/debug build hariç MITM ile istek geçmesin.
+S69.5| Web-only hedefte pinning yoksa N/A; en az HSTS/HTTPS zorunlu olsun.
+
+## S70 | 07 — Güvenlik ve Yasal | Güvenlik Prosedürleri Uygulama İçin
+S70.1| **Secrets Extraction:** Extract all hardcoded credentials, API keys, JWT secrets, connection strings, and private keys into `.env` files.
+S70.2| **Git History Purging:** Sanitize Git history using `git filter-repo` or `BFG Repo-Cleaner` if any `.env` or secret was ever committed.
+S70.3| **Environment Security:** Ensure `.env*`, `*.pem`, `*.key`, `*.keystore`, and `google-services.json` are strictly added to `.gitignore`.
+S70.4| **Client-Side Secret Shielding:** Never store or expose private API keys (e.g., Stripe Secret Key, AWS Access Key, database credentials) inside Web or Mobile client-side code. Use dedicated backend proxy endpoints for external integrations.
+S70.5| **Password Hashing:** Hash passwords using Argon2id or bcrypt (minimum work factor 12). Never use MD5, SHA-1, or plain SHA-256.
+S70.6| **JWT Security & Rotation:** Use short-lived Access Tokens (e.g., 15 mins) and long-lived, single-use Refresh Tokens with automatic token rotation and revocation list in Redis.
+S70.7| **Cookie Hardening:** Set cookies with `HttpOnly`, `Secure`, `SameSite=Strict`, and explicit `Domain`/`Path` attributes.
+S70.8| **Rate Limiting & Brute-Force Protection:** Implement IP-based and user-based Rate Limiting (Redis Sliding Window or Token Bucket) on critical routes (`/login`, `/register`, `/forgot-password`, `/verify-otp`, `/reset-password`).
+S70.9| **Multi-Factor Authentication (MFA/2FA):** Enforce TOTP / WebAuthn support for elevated actions and administrative accounts.
+S70.10| **Account Lockout:** Temporarily lock accounts after N consecutive failed login attempts to prevent brute-force attacks.
+S70.11| **Session Termination & Invalidation:** Invalidate server-side sessions instantly on logout, password change, or suspicious activity.
+S70.12| **Account Deletion (GDPR/KVKK Compliance):** Ensure "Delete Account" permanently purges or anonymizes all user PII from Primary DB, Redis Caches, S3 Buckets, and 3rd-party analytics.
+S70.13| **Server-Side Authorization (BOLA/IDOR):** Validate user ownership and resource context strictly on the backend API layer. Never trust client-provided IDs without verifying if `request.user.id == resource.owner_id`.
+S70.14| **RBAC & ABAC:** Enforce Role-Based Access Control and Attribute-Based Access Control on administrative, financial, and management endpoints.
+S70.15| **Private Storage & Storage ACLs:** Keep cloud buckets (AWS S3, Azure Blob) private by default. Access files via time-limited Signed URLs / Pre-signed GET-PUT operations.
+S70.16| **Mass Assignment Protection:** Use DTOs (Data Transfer Objects) / White-listing on incoming requests to prevent model binding pollution (e.g., users setting `isAdmin = true`).
+S70.17| **Strict Schema Validation:** Validate incoming request payloads, headers, query parameters, and route params using strict schemas (Zod, FluentValidation, Joi, Dantic). Reject extra/unknown properties.
+S70.18| **SQL Injection & NoSQLi Protection:** Use Parameterized Queries or ORM (EF Core, Prisma, Dapper, TypeORM) exclusively. Prohibit raw dynamic string concatenation inside raw database queries.
+S70.19| **XSS & Contextual Output Encoding:** Escape all user-generated content rendered in HTML/React DOM. Sanitize HTML input with DOMPurify if HTML rendering is mandatory.
+S70.20| Enforce file extension whitelisting (never trust user file extensions).
+S70.21| Validate file headers / magic bytes (e.g., check PNG signature `89 50 4E 47`).
+S70.22| Enforce maximum file size limits on reverse proxy and app layers.
+S70.23| Strip EXIF / GPS metadata from uploaded images.
+S70.24| Store files using UUID-generated filenames outside the web root directory.
+S70.25| **SSRF (Server-Side Request Forgery) Mitigation:** Validate and whitelist destination URLs before making outbound HTTP requests from the server. Block internal IP ranges (`127.0.0.1`, `10.0.0.0/8`, `192.168.0.0/16`, AWS IMDS `169.254.169.254`).
+S70.26| **TLS & HTTPS Enforcement:** Enforce HTTPS strictly across all environments. Redirect HTTP traffic to HTTPS with HSTS (`Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`).
+S70.27| **Strict CORS Policy:** Lock down CORS policies. Disable wildcard origins (`*`) in production. Specify exact trusted domain origins, allowed headers, and HTTP methods.
+S70.28| **HTTP Security Headers:** Inject essential headers on all responses:
+S70.29| `Content-Security-Policy (CSP)`
+S70.30| `X-Frame-Options: DENY` (Clickjacking protection)
+S70.31| `X-Content-Type-Options: nosniff` (MIME-sniffing protection)
+S70.32| `Referrer-Policy: strict-origin-when-cross-origin`
+S70.33| `Permissions-Policy` (Restrict camera, microphone, geolocation APIs)
+S70.34| **Webhook Signature Verification:** Validate incoming webhooks (Stripe, GitHub, payment gateways) using HMAC-SHA256 signatures before processing payloads.
+S70.35| **Reverse Proxy & WAF:** Place backend services behind a Web Application Firewall (Cloudflare, AWS WAF) to filter DDoS, bad bots, and malicious payloads.
+S70.36| **Production Error Masking:** Suppress detailed stack traces, internal paths, database exceptions, and framework details in production. Return generic standardized error responses (e.g., `{"error": "An unexpected error occurred"}`).
+S70.37| **Log Sanitization & PII Filtering:** Mask or scrub sensitive data (Passwords, Credit Card numbers, JWTs, Access Tokens, Social Security numbers) before writing to application logs.
+S70.38| **Audit Logging:** Record security events (failed logins, privilege escalation, password resets, key rotation, admin actions) with timestamps, IP addresses, and user IDs.
+S70.39| **Billing & Cost Monitoring Alerts:** Configure automated cost threshold alerts on AWS, GCP, Cloudflare, and Sentry to detect and mitigate L7 DDoS and resource exhaustion attacks.
+S70.40| **Dependency Vulnerability Audits:** Run automated dependency vulnerability scans (`npm audit`, `dotnet list package --vulnerable`, Snyk, Trivy) and eliminate critical/high vulnerabilities.
+S70.41| **Secure Local Storage:** Never store sensitive user tokens, JWTs, or encryption keys in `AsyncStorage`, `localStorage`, or unencrypted SQLite databases. Use `expo-secure-store`, iOS Keychain, or Android EncryptedSharedPreferences / Keystore.
+S70.42| **Certificate Pinning (SSL Pinning):** Implement SSL/TLS Certificate Pinning on mobile network layers to prevent Man-in-the-Middle (MitM) interception on untrusted networks (public Wi-Fi).
+S70.43| **Jailbreak / Root Detection:** Detect compromised mobile operating systems (Jailbroken iOS / Rooted Android) and block execution or disable sensitive features.
+S70.44| **Code Obfuscation & Binary Protection:** Obfuscate JS bundles, enable ProGuard/R8 for Android, and strip debugging symbols before generating App Store / Google Play release builds.
+S70.45| **Screen Capture & Overlay Protection:** Disable screenshot/screen recording capabilities on sensitive views (e.g., payment, personal identity, credentials screens).
+S70.46| **Biometric Authentication:** Secure local app opening with FaceID / TouchID / Biometric Prompt integrated with native hardware keystores.
+S70.47| **Automated Static Analysis (SAST):** Run SAST tools (SonarQube, Semgrep) to identify code-level security issues during CI/CD builds.
+S70.48| **Dynamic Application Security Testing (DAST):** Test live APIs and web surfaces with tools like OWASP ZAP or Burp Suite.
+S70.49| Saldırı PoC / exploit / payload YAZMA. Yalnızca kodda koruma var mı bak: SQLi parametre, IDOR yetki, auth bypass, tehlikeli yükleme, XSS kaçış. Yoksa düzelt. Kanıt: dosya yolu.
+S70.50| SQLi: ham string birleştirme var mı kontrol et; varsa parameterized/ORM yap. Payload/exploit yazma.
+S70.51| IDOR: istemci ID'sine güvenilen uç var mı bak; sunucuda sahiplik kontrolü ekle. Başkasının kaydını çekme denemesi/PoC yok.
+S70.52| Auth bypass: korumasız admin/ödeme ucu var mı bak; düzelt. Token sahtekarlığı denemesi yazma.
+S70.53| Yükleme varsa uzantı + magic byte + boyut; kabuk yükleme denemesi yazma.
+S70.54| XSS: kullanıcı metni kaçışsız render ediliyor mu bak; düzelt. Script enjekte etme.
+
+## S71 | 07 — Güvenlik ve Yasal | Yayın güvenlik kapanışı
+S71.1| API anahtarı, secret ve live key istemci koduna veya repoya gömülü olmasın; env'den okunsun.
+S71.2| .env veya key git geçmişine girdiyse temizleme planı belgelensin. Yoksa N/A.
+S71.3| Satır/nesne yetkisi (RLS veya eşdeğer) açık olsun. Anon/public key ile başkasının kaydı okunamasın.
+S71.4| Yetki kararı yalnızca sunucuda verilsin; istemci 'isAdmin=true' ile yetki kazanmasın.
+S71.5| Giriş, OTP ve şifre denemesine rate-limit / kilit koyulsun.
+S71.6| Tüm girdiler doğrulansın; yükleme tür/boyut ile sınırlı olsun.
+S71.7| Production CORS allowlist olsun; '*' açık bırakılmasın. Web yoksa N/A.
+S71.8| Güvenlik başlıkları (HSTS, frame, CSP veya platform eşdeğeri) Production'da olsun.
+S71.9| Tüm trafik HTTPS; cleartext kapalı.
+S71.10| Şifre hash'li saklansın. Çerez varsa Secure / HttpOnly / SameSite.
+S71.11| Production hata yanıtı stack, SQL, yol ve secret sızdırmasın.
+S71.12| Log ve crash raporundan token, şifre, OTP, kart, yetki header temizlensin.
+S71.13| Veritabanı sorguları parametreli olsun; XSS için çıktı kaçırılsın.
+S71.14| Webhook endpoint imza/secret doğrulamadan iş yapmasın.
+S71.15| Admin panel ve yönetim API'si role + giriş zorunlu olsun; login'siz açık kalmasın.
+S71.16| Bağımlılık/paket denetimi (bilinen zafiyet taraması) yapılsın.
+S71.17| Otomatik yedek ve geri yükleme yolu belgelensin.
+S71.18| Hesap sil / unutulma hakkı veriyi gerçekten silsin veya anonimleştirsin; sadece gizlemesin.
+S71.19| Bulut/sağlayıcı harcama uyarısı kurulu olsun (ani fatura şişmesi).
+S71.20| Yetkisiz erişim ve IDOR için savunma kontrolü yap; exploit veya saldırı tarifi yazma.
+
+## S72 | 08 — Ödeme ve Abonelik | Ödeme ve Abonelik Yönetimi (Billing & Subscriptions)
+S72.1| Ödeme ve Abonelik Yönetimi (Billing & Monetization)
+S72.2| Abonelik Planları: Farklı paketlerin (Ücretsiz, Premium vb.) özelliklerinin ve fiyatlandırmalarının net olarak listelenmesi.
+S72.3| Mağaza Entegrasyonları: Mobil platformlar (App Store / Google Play) içi satın alma veya güvenli dış ödeme (Stripe, Iyzico vb.) entegrasyonlarının çalışması.
+S72.4| Yenileme ve İptal: Otomatik yenileme döngülerinin doğru çalışması ve kullanıcıların aboneliklerini kolayca iptal edebilmesi.
+S72.5| Fatura / Dekont: Yapılan işlemler sonrasında kullanıcılara bilgilendirme e-postası veya makbuz gönderilmesi.
+
+## S73 | 08 — Ödeme ve Abonelik | Uygulama İçi Satın Alma
+S73.1| Mağaza IAP ürün id'leri env/config'den gelsin; hardcoded test id production'da olmasın.
+S73.2| Satın alma, restore ve entitlement kontrolü çalışsın; offline satın alma kuyruğu belgelensin.
+S73.3| Sunucu tarafı doğrulama veya webhook olmadan yalnızca istemciye güvenilmesin.
+S73.4| Hata (iptal, ödeme başarısız, already owned) kullanıcıya doğru yansıtsın.
+S73.5| IAP yoksa N/A.
+
+## S74 | 08 — Ödeme ve Abonelik | Abonelik, paywall ve webhook ortamı
+S74.1| İstemci IAP/paywall SDK'sı (RevenueCat veya mağaza native / eşdeğer) açılışta env key ile initialize edilsin. Hardcoded key yasak. IAP yoksa N/A.
+S74.2| Backend webhook veya sunucu doğrulama endpoint'i secret/imza kontrol etmeden iş yapmasın.
+S74.3| Satın alma, yenileme, iptal, bitiş ve fatura sorunu kullanıcı yetki state'ine idempotent yazılsın.
+S74.4| Restore, grace period ve sandbox/prod key ayrımı çalışsın. Production build test key kullanmasın.
+S74.5| Paywall metni ve offering listesi SDK/mağaza fiyatıyla uyumlu olsun; sahte fiyat yazılmasın.
+
+## S75 | 08 — Ödeme ve Abonelik | Uluslararası Para Birimi ve Kur Dönüşümleri
+S75.1| Para birimi locale ve mağaza bölgesine göre gösterilsin; yanlış kurla fiyat yazılmasın.
+S75.2| IAP fiyatı mağazadan gelen localized price ile gösterilsin; elle çevrilmesin.
+S75.3| Ondalık ayırıcı ve sembol locale'e uygun olsun.
+S75.4| Çoklu para birimi yoksa N/A.
+S75.5| Vergi/KDV gösterimi yasal metinle çelişmesin.
+
+## S76 | 08 — Ödeme ve Abonelik | Abonelik İptal, Geri Ödeme ve Win-Back Senaryoları
+S76.1| Uygulama içi satın alma (IAP) ve abonelik iptal süreçlerinin yönetilmesi, kullanıcı kaybını (churn) azaltmak için win-back stratejilerinin uygulanması.
+S76.2| İptal Akışı ve Win-back: Kullanıcı aboneliğini iptal etmek istediğinde özel indirimler, dondurma seçenekleri veya ek avantajlar sunarak elde tutma (retention) denemeleri.
+S76.3| Mağaza Yönlendirmeleri: Apple ve Google abonelik yönetim sayfalarına doğrudan yönlendirme linkleri ve bilgilendirmeler.
+S76.4| Geri Ödeme (Refund) Süreçleri: Kullanıcıların iade talepleri için uygulama içinden mağazaların destek sayfalarına yönlendirilmesi ve bilgilendirme metinleri.
+
+## S77 | 09 — Log, Analitik ve Performans | Hata Yönetimi ve Loglama (Logging & Error Handling)
+S77.1| İstemci Tarafı Logları: Uygulama çökmelerinin (Crash) anlık olarak takip edilebilmesi için hata raporlama araçlarının entegrasyonu.
+S77.2| Sunucu Tarafı Logları: Backend tarafında oluşan hataların detaylı bir şekilde kaydedilmesi ve incelenebilmesi.
+S77.3| 404 ve 500 Sayfaları: Olmayan sayfalarda veya sunucu hatalarında kullanıcıyı yönlendiren özel hata sayfaları.
+
+## S78 | 09 — Log, Analitik ve Performans | Gelişmiş Loglama Araçları
+S78.1| Log seviyeleri (debug/info/error) ortama göre ayrılsın; Production'da debug PII olmasın.
+S78.2| Correlation / request id ile istemci ve sunucu logu bağlanabilsin.
+S78.3| Log sink (dosya, stdout, APM) secret içermesin.
+S78.4| PII maskeleme (e-posta, telefon, token) uygulansın.
+S78.5| Log patlaması (döngüde error) önlensin.
+
+## S79 | 09 — Log, Analitik ve Performans | Analitik ve Kullanıcı Takibi (Analytics & Tracking)
+S79.1| Olay Takibi (Event Tracking): Kullanıcının butonlara tıklama, sayfa değiştirme gibi ana eylemlerinin analitik araçlarına (Mixpanel, Google Analytics vb.) düşmesi.
+S79.2| Hata İzleme (Crash Reporting): Uygulama çökmelerinin stack trace detaylarıyla birlikte anlık raporlanması (Sentry, Bugsnag vb.).
+S79.3| Performans Metrikleri: Sayfa açılış süreleri ve API yanıt sürelerinin ölçülmesi.
+S79.4| Anonimleştirme: Takip verilerinin kullanıcı gizliliğini ihlal etmeyecek şekilde toplanması.
+
+## S80 | 09 — Log, Analitik ve Performans | Analitik ve Kullanıcı Davranışları
+S80.1| Kritik olaylar (kayıt, satın alma, hata, izin reddi) tek analitik katmandan gitsin.
+S80.2| PII ve sırlar event property olarak gitmesin.
+S80.3| Kullanıcı opt-out / ATT / rıza yoksa analitik çalışmasın.
+S80.4| Debug'da event'ler prod projesine düşmesin (ayrı key veya disabled).
+S80.5| Analitik yoksa N/A; sahte SDK eklenmesin.
+
+## S81 | 09 — Log, Analitik ve Performans | Kritik Hata Yakalama ve Crashlytics Entegrasyonu
+S81.1| JS ve native crash'ler bir crash aracıyla (Sentry, Crashlytics veya eşdeğer) Production'da raporlansın.
+S81.2| DSN/key env'den gelsin; Development'ta gürültü olmasın veya log-only olsun.
+S81.3| Sourcemap/debug file release ile eşleşsin; stack okunabilir olsun.
+S81.4| Token, şifre, OTP, yetki header'ı breadcrumb/log'a düşmesin.
+S81.5| Handled error ile crash ayrımı yapılsın; kullanıcıya jenerik hata, operasyona event id.
+
+## S82 | 09 — Log, Analitik ve Performans | Çökme raporlama (Sentry veya eşdeğer)
+S82.1| Backend Production'da Sentry veya eşdeğer APM/crash bağlı olsun. DSN env'den. Development kapalı veya log-only.
+S82.2| Mobil/web istemci Production'da aynı şekilde bağlı olsun. Release/dist eşleşsin.
+S82.3| PII ve sırlar (token, OTP, şifre, yetki header) scrub edilsin.
+S82.4| İkinci bir paralel çökme aracı eklenmesin; mevcut araç Production env ayrımına tamamlanarak kullanılsın.
+
+## S83 | 09 — Log, Analitik ve Performans | Performans Metrikleri ve APM
+S83.1| API latency ve crash-free oranı için APM veya eşdeğer metrik olsun.
+S83.2| Production'da örnekleme (sampling) maliyeti kontrol altında olsun.
+S83.3| Yavaş endpoint'ler için alert eşiği belgelensin.
+S83.4| APM'ye request body / Authorization yazılmasın.
+S83.5| APM yoksa en az sunucu log + istemci crash aracı N/A değil, 65/88 ile bağlansın.
+
+## S84 | 09 — Log, Analitik ve Performans | Performans ve Optimizasyon
+S84.1| Sayfa Yüklenme Hızları: Ekranların ve bileşenlerin makul sürede (milisaniyeler içinde) açılması.
+S84.2| Görsel Optimizasyonu: Büyük boyutlu görsellerin sıkıştırılarak veya uygun formatta (WebP vb.) sunulması.
+S84.3| Bellek ve CPU Kullanımı: Uygulamanın arka planda veya uzun süreli kullanımlarda cihazı aşırı yormaması / donma yapmaması.
+S84.4| Ağ İstekleri (Network): Gereksiz tekrarlayan API çağrılarının önlenmesi ve veri önbellekleme (Caching) mekanizmaları.
+
+## S85 | 09 — Log, Analitik ve Performans | Performans Profilleme ve Bellek Sızıntısı Analizi
+S85.1| Uzun listeler sanallaştırılsın; ilk açılışta tüm veri render edilmesin.
+S85.2| Unmount sonrası setState / listener sızıntısı olmasın.
+S85.3| Ağır ekranlarda gereksiz re-render ölçülüp azaltılsın.
+S85.4| Görsel bellek (büyük bitmap) için boyut sınırları uygulansın.
+S85.5| Profil (systrace / RN perf / eşdeğer) ile en az bir kritik ekran ölçülsün ve not edilsin.
+
+## S86 | 09 — Log, Analitik ve Performans | Görsel Önbellekleme Optimizasyonu
+S86.1| Görseller cache politikası (TTL, boyut kotası) ile tutulsun; disk doldurmasın.
+S86.2| Cache key URL + sürüm ile çakışmasın; eski kırık görsel sonsuz kalmasın.
+S86.3| Placeholder/hata görseli olsun; layout zıplamasın.
+S86.4| Gizli/özel görseller paylaşılan HTTP cache'e yazılmasın.
+S86.5| Logout cache'teki kullanıcıya özel görselleri temizlesin.
+
+## S87 | 09 — Log, Analitik ve Performans | Minify, sıkıştırma, paket ağırlığı ve aktarım şifresi
+S87.1| Production web/client çıktısı minify olmalı (JS/CSS/HTML veya yığının eşdeğeri: tree-shake + minify). Geliştirme build'inde minify zorunlu değil. Web/client yoksa N/A.
+S87.2| Statik ve API metin cevapları üretimde sıkıştırılmış gitmeli (gzip veya brotli veya eşdeğer). Minify var sıkıştırma yoksa FAIL. Sunucu bu hedefte yoksa N/A değil: CDN/hosting katmanında aç veya gerekçe yaz.
+S87.3| Ağır paket yok: kullanılmayan kütüphane, çift UI kit, ham sourcemap, sıkıştırılmamış megabayt vendor. İlk yükleme gerekçesiz şişmesin; lazy-load mümkünse ağır ekran sonraya kalsın.
+S87.4| Mobil binary / OTA / asset pack (varsa) dev asset, gereksiz video, public sourcemap ile şişmesin. Native/OTA yoksa N/A.
+S87.5| Gönder/al şifreli: API, upload, download, uygulama güncellemesi, websocket — HTTPS veya WSS (TLS). Cleartext http/ws production FAIL. Localhost dev belgelenir.
+S87.6| Paket yöneticisi ve artifact kaydı HTTPS (npm, NuGet, Maven, pub, pip, container registry). Insecure registry production'da yok.
+S87.7| Büyük JSON/liste/medya cevapları sayfalı veya sıkıştırılmış olmalı; tek seferde gerekçesiz çok megabayt FAIL. Bu API yoksa N/A.
+S87.8| Production'a açık sourcemap müşteri/iş kuralı sızdırmasın (yok veya private). Minify varken map herkese açıksa gizlilik riskini yaz; gerekmiyorsa kapat.
+S87.9| Ölç ve yaz: ana web bundle veya APK/IPA/indirilen paket boyutu. Bir önceki makul teslime göre saçma şişme veya sıkıştırılmamış teslim FAIL. Ölçülemeyen hedef N/A değil: en az bir sayı veya ağ paneli kanıtı.
+
+## S88 | 10 — Test ve QA | Otomasyon ve Test Süreçleri (CICD & Testing)
+S88.1| Birim Testleri (Unit Tests): İş mantığının ve kritik servislerin otomatik testlerden geçmesi.
+S88.2| Entegrasyon ve E2E Testleri: Kullanıcı akışlarının simüle edildiği uçtan uca testlerin otomatik koşulması.
+S88.3| Otomatik Build ve Dağıtım: Kod repoya atıldığında testlerin çalışıp staging/production ortamlarına otomatik çıkılması.
+S88.4| Kod Kalitesi (Linting / Formatting): Kod standartlarının otomatik araçlarla (ESLint, Prettier, SonarQube) denetlenmesi
+
+## S89 | 10 — Test ve QA | Kapsamlı Birim ve Entegrasyon Testleri
+S89.1| Kritik iş kuralları için birim test olsun (auth, ödeme yetkisi, silme, izin).
+S89.2| API sözleşmesi için entegrasyon testi veya contract testi olsun.
+S89.3| Testler gerçek secret/prod endpoint kullanmasın.
+S89.4| CI'da testler kırılınca build geçmesin.
+S89.5| Flaky testler izole edilip düzeltilsin; skip ile unutulmasın.
+
+## S90 | 10 — Test ve QA | E2E Otomasyon Testleri
+S90.1| En az bir kritik E2E senaryosu (kayıt/giriş → ana iş → sonuç) otomatik koşulabilsin.
+S90.2| E2E seçicileri kırılgan metin/xpath yerine testID/erişilebilirlik id kullansın.
+S90.3| E2E ortamı (test hesabı, mock paywall) prod verisini bozmasın.
+S90.4| YAML/spec dosyaları sözdizimi olarak geçerli olsun (Maestro veya mevcut araç).
+S90.5| E2E yoksa N/A değil; en az smoke spec iskeleti oluşturulsun.
+
+## S91 | 10 — Test ve QA | Sertifika pinning ve E2E spec doğrulama
+S91.1| Production API istemcisinde certificate/SSL pinning veya eşdeğer olsun; pin fail isteği düşürsün. Development gevşetilebilir. Pinning başka maddede varsa ikinci kez ekleme: yoksa ekle, varsa doğrula.
+S91.2| Yedek pin / rotasyon planı belgelensin.
+S91.3| E2E spec dosyaları (Maestro veya mevcut araç) sözdizimi geçerli ve çalıştırılabilir olsun.
+S91.4| Kritik smoke (giriş → ana iş → sonuç) E2E'de dursun. appId/env test-prod ayrılsın.
+
+## S92 | 10 — Test ve QA | Kullanılabilirlik ve Saha Testleri (Usability Testing)
+S92.1| Gerçek Cihaz Testleri: Uygulamanın yalnızca simülatörlerde değil, farklı marka ve model fiziksel telefonlarda (iOS ve Android) test edilmesi.
+S92.2| Pil ve Kaynak Tüketimi: Uygulamanın arka planda aşırı pil tüketip tüketmediğinin veya cihazı ısıtıp ısıtmadığının denetlenmesi.
+S92.3| Kullanıcı Geri Bildirim Döngüsü: Gerçek kullanıcıların yaşadığı sorunları kolayca iletebileceği pratik kanalların kurulması.
+S92.4| Beta Test Dağıtımı: Canlıya çıkmadan önce TestFlight (iOS) veya Google Play Internal Testing (Android) üzerinden kapalı beta gruplarıyla test edilmesi.
+
+## S93 | 10 — Test ve QA | Uçak Modu Testi
+S93.1| Cihazı uçak moduna alın ve tüm API isteklerinin/yükleme durumlarının sonsuz döngüye girmediğini, kullanıcıya uygun bir hata durumu veya yerel önbellek verisi sunduğunu doğrulayın.
+
+## S94 | 10 — Test ve QA | Soğuk Açılış Testi
+S94.1| Uygulamayı tamamen kapatın, süreci sonlandırın ve soğuk başlangıç süresini ölçün. Açılış süresinin 2 saniyeyi geçmediğinden emin olun.
+
+## S95 | 10 — Test ve QA | Karanlık Mod Testi
+S95.1| Sistem genelinde karanlık moda geçin ve tüm ekranlardaki UI renk token'larını kontrol edin. Beyaz parlama yapan view'ları tespit edip düzeltin.
+
+## S96 | 10 — Test ve QA | Büyük Yazı Boyutu Testi
+S96.1| Cihazın yazı tipi boyutunu maksimum seviyeye getirin. UI bileşenlerinde taşma veya üst üste binen metin elemanlarını optimize edin.
+
+## S97 | 10 — Test ve QA | Klavye Testi
+S97.1| Klavye açıldığında ilgili alanın doğru şekilde odaklanması ve ekranın klavye tarafından kapanmaması kontrol edilmeli.
+S97.2| iOS ve Android'de farklı klavye türleriyle (QWERTY, sayısal, e-posta vb.) girişler test edilmeli.
+S97.3| Klavye açılıp kapandığında form, butonlar ve scroll davranışı bozulmamalı.
+
+## S98 | 10 — Test ve QA | Yeni Kurulum Deneyimi
+S98.1| Uygulama temiz kurulumdan sonra ilk açılış/onboarding akışı baştan sona tamamlanmalı.
+S98.2| İlk açılışta gerekli izinler, varsayılan ayarlar ve başlangıç verileri doğru oluşturulmalı.
+S98.3| Uygulama daha önce hiç çalıştırılmamış cihaz durumunda crash, boş ekran veya hatalı state üretmemeli.
+
+## S99 | 10 — Test ve QA | Geri Tuşu Testi
+S99.1| Android cihazlarda her ekran hiyerarşisinde fiziksel/yazılımsal geri tuşunu test edin. Uygulamanın yanlışlıkla direkt kapanmadığını, stack'e göre geri gittiğini doğrulayın.
+
+## S100 | 10 — Test ve QA | Yatay Mod Testi
+S100.1| Yatay (landscape) yön desteklenen ekranlarda layout taşması ve kesilmesi olmamalı.
+S100.2| Dikey-yatay geçişinde navigation, form verileri ve UI state kaybolmamalı.
+S100.3| iOS ve Android'de farklı ekran oranlarında yatay mod davranışı doğrulanmalı.
+
+## S101 | 10 — Test ve QA | Silme Onayı Kontrolü
+S101.1| Kritik veri silme işlemlerinde kullanıcıya onay modalı gösterildiğinden ve yanlışlıkla veri kaybetmeyi önlemek için mekanizma bulunduğundan emin olun.
+
+## S102 | 10 — Test ve QA | Çevrimdışı Kayıt Testi
+S102.1| Ağ bağlantısı kesikken veri oluşturma/güncelleme senaryosu çalışmalı veya kullanıcıya açık bir offline mesajı verilmelidir.
+S102.2| Offline oluşturulan kayıtların kuyruklanması ve bağlantı geldiğinde güvenli senkronizasyonu doğrulanmalı.
+S102.3| Aynı kayıt birden fazla kez gönderilmemeli ve senkronizasyon çakışmaları kontrollü ele alınmalı.
+
+## S103 | 10 — Test ve QA | Hata Metinleri Kontrolü
+S103.1| Catch bloklarında ve API hata yönetiminde kullanıcıya sadece "Bir sorun oluştu" gibi soyut ifadeler yerine, ne yapması gerektiğini belirten açıklayıcı mesajlar gösterin.
+
+## S104 | 10 — Test ve QA | İzin Gerekçesi Kontrolü
+S104.1| Kamera, bildirim, konum gibi kritik izinleri istemeden önce kullanıcıya iznin neden gerekli olduğunu açıklayan bir ön diyalog gösterildiğini doğrulayın.
+
+## S105 | 10 — Test ve QA | Hesap Silme Adımı
+S105.1| Profil/Ayarlar ekranında hesabını kalıcı olarak silme işlevinin çalıştığını ve API ile entegre olduğunu kontrol edin.
+
+## S106 | 10 — Test ve QA | Paywall Metni Doğrulama
+S106.1| Abonelik/Ödeme ekranında fiyat, faturalandırma süresi ve otomatik yenileme koşullarının açıkça yazdığını doğrulayın.
+
+## S107 | 10 — Test ve QA | Çarpıyı Bulma Testi
+S107.1| Tam ekran reklam veya paywall pencerelerinde kapatma butonunun erişilebilir, yeterli büyüklükte ve çalışır durumda olduğunu kontrol edin.
+
+## S108 | 10 — Test ve QA | Isınma Testi
+S108.1| Uygulamayı şarjdan bağımsız şekilde 10 dakika boyunca yoğun senaryolarla çalıştırın. Aşırı CPU tüketimi ve ısınma yapan durumları profile edin.
+
+## S109 | 10 — Test ve QA | Kapladığı Yer Önbelek Kontrolü
+S109.1| Ayarlardan uygulamanın kapladığı depolama alanını inceleyin. Gereksiz cache birikimlerini önlemek için önbellek temizleme mekanizmalarının çalıştığını doğrulayın.
+
+## S110 | 10 — Test ve QA | Dil Değiştirme Testi
+S110.1| Cihaz dili değiştiğinde uygulamanın buna reaktif olarak uyum sağladığını, sabit kalan veya eksik çevrilen string kalmadığını kontrol edin.
+
+## S111 | 10 — Test ve QA | Usability Blind Test
+S111.1| İlk ekran açıldığında kullanıcının yönlendirme almadan ana aksiyona rahatça erişebileceği sezgisel bir arayüz kurgusunun olup olmadığını kontrol edin.
+
+## S112 | 10 — Test ve QA | Sil ve Baştan Kur
+S112.1| Uygulama kaldırılıp yeniden kurulduğunda eski local storage/cache/state kalıntıları temizlenmeli.
+S112.2| Temiz kurulum sonrası onboarding ve varsayılan ayarlar ilk kurulumdaki gibi çalışmalı.
+S112.3| Sunucu tarafındaki kullanıcı verileri ile cihazdaki yerel state birbirine yanlışlıkla karıştırılmamalı.
+S112.4| Logout, hesap silme ve reinstall sonrası hassas token/verilerin erişilebilir kalmadığı doğrulanmalı.
+
+## S113 | 10 — Test ve QA | Hedef platform test matrisi (yalnızca var olanlar)
+S113.1| İlk iş: hedef haritasını kanıtla (WEB / ANDROID telefon / ANDROID tablet / iOS telefon / iOS tablet / API). Yok olan her aile N/A; o aileye senaryo yazma.
+S113.2| Yalnızca VAR olan her hedef için detaylı senaryo listesi üret (adım adım). Web yoksa web senaryosu yok. iOS yoksa iOS senaryosu yok.
+S113.3| WEB varsa: soğuk açılış; desktop + tablet-web + mobil-web genişlik; ana iş 1 tur; form/routing; console kritik hata yok. Web yoksa bu madde N/A.
+S113.4| ANDROID telefon varsa: soğuk açılış; geri tuşu; klavye; izin; en az 2 ölçü veya 1 emu + breakpoint. Android yoksa N/A.
+S113.5| ANDROID tablet hedefi varsa: yatay ve dikey, taşma/dokunma. Tablet iddiası yoksa N/A — telefon testini tablete uydurma.
+S113.6| iOS uygulama varsa: iPhone safe area, geri jesti, klavye. iPad hedefi varsa ayrı senaryo. iOS yoksa N/A.
+S113.7| Native özellik (push, kamera, konum, IAP, biyometri) yalnız o kod varsa test et; yoksa N/A. Web-only projede native senaryo yazma.
+S113.8| Her üretilen senaryo için hedef adı + PASS/FAIL + ne yaptın. Eksik senaryo = bu modül bitmedi. Sonra kullanıcı beklemeden sonraki Sıra.
+
+## S114 | 11 — Yayın ve Mağaza | Dağıtım ve Yayın Öncesi (Deployment & Release)
+S114.1| Ortam Konfigürasyonları: Test, Staging ve Production ortam değişkenlerinin (Environment variables) birbirinden ayrılması.
+S114.2| Uçtan Uca (E2E) Smoke Test: En kritik kullanıcı senaryosunun (Kayıt ol -> İşlemi yap -> Sonucu gör) canlı ortamda son kez test edilmesi.
+S114.3| Yedekleme ve Geri Yükleme: Veritabanı yedekleme mekanizmalarının ve olası bir çöküş durumunda kurtarma senaryolarının hazır olması.
+
+## S115 | 11 — Yayın ve Mağaza | Sürüm Yönetimi ve Güncellemeler (Versioning)
+S115.1| Zorunlu Güncelleme: Kritik güvenlik veya altyapı değişikliklerinde eski sürüm kullanıcılarının güncellemeye yönlendirilmesi.
+S115.2| OTA (Over-The-Air) Güncellemeleri: Mobil uygulamalarda mağaza onayına gerek kalmadan küçük JS/UI güncellemelerinin hızlıca yansıtılması (örn. Expo Updates).
+S115.3| Uygulama İçi Sürüm Bilgisi: Ayarlar veya hakkımda sayfasında aktif uygulama versiyon numarasının gösterilmesi.
+S115.4| Geriye Dönük Uyumluluk: Yeni çıkan backend API değişikliklerinin eski mobil sürümleri patlatmaması.
+
+## S116 | 11 — Yayın ve Mağaza | CI-CD Pipeline ve Otomatik Dağıtım
+S116.1| PR/main push'ta lint + test + build otomatik koşsun.
+S116.2| Secret'lar CI değişkeninde olsun; repoda olmasın.
+S116.3| Staging ve production deploy ayrı onay/kapı ile ayrılsın.
+S116.4| Başarısız pipeline kırık artifact yayınlamasın.
+S116.5| Sürüm numarası ve changelog pipeline'dan üretilebilsin veya belgelensin.
+
+## S117 | 11 — Yayın ve Mağaza | Mağaza Hazırlığı
+S117.1| iOS/Android imzalama, bundle id / application id ve sürüm numarası mağaza kaydıyla eşleşsin.
+S117.2| Privacy Nutrition / Data Safety beyanı gerçek SDK ve veri akışıyla birebir olsun.
+S117.3| Yaş derecesi, içerik hakkı ve izin gerekçeleri mağaza formunda doğru işaretlensin.
+S117.4| Release build'de debug menü, test paywall ve staging URL kalmasın.
+S117.5| Mağaza ekran görüntüsü ve mevcut UI sürümü uyumlu olsun.
+S117.6| Reviewer için demo hesap / not alanı güncel olsun.
+
+## S118 | 11 — Yayın ve Mağaza | Uygulama Mobil Tanıtım
+S118.1| App Store ve Google Play için uygulama adı, kısa açıklama, uzun açıklama ve kategori bilgileri doğrulanmalı.
+S118.2| Uygulama ikonları, ekran görüntüleri ve tanıtım görselleri doğru boyutlarda ve güncel sürümle uyumlu olmalı.
+S118.3| Tanıtım ekranları uygulamanın gerçek özelliklerini göstermeli; yanıltıcı veya uygulanmayan özellik iddiaları bulunmamalı.
+S118.4| iOS ve Android mağaza sayfalarında kullanılan metinler, marka dili ve ürün adı tutarlı olmalı.
+S118.5| Onboarding ve uygulama içi tanıtım akışı kullanıcıyı gereksiz yere engellemeden ana değeri açıkça anlatmalı.
+S118.6| Demo/test hesapları, deep linkler ve mağaza önizlemelerinde kullanılan bağlantılar çalışır durumda olmalı.
+S118.7| Gizlilik, izin ve veri kullanımı açıklamaları gerçek uygulama davranışıyla birebir uyumlu olmalı.
+S118.8| Release build ile mağaza görselleri arasında sürüm/arayüz uyumsuzluğu bulunmadığı kontrol edilmeli.
+
+## S119 | 11 — Yayın ve Mağaza | Uygulama mağazası: App Store ve Play kurallarına tam uyum
+S119.1| iOS uygulaması varsa yürürlükteki App Store inceleme kurallarıyla çelişen davranış bırakılmamalı (yanıltıcı açıklama, çalışmayan özellik, inceleme hesabı yok, gerekçesiz izin). iOS yoksa N/A. Müşteriye: Apple’ın reddedeceği haller kapatılır; mağaza şansı bilinçli bırakılmaz.
+S119.2| Android uygulaması varsa Play politikası: Data safety gerçeğe uyumlu, hedef API güncel, arka plan konum/fotoğraf izni yalnızca gerçekten kullanılıyorsa. Android yoksa N/A. Müşteriye: Google Play’in gizlilik ve izin formları uygulamayla birebir olmalı.
+S119.3| Hesap oluşturma varsa uygulama içinden hesap silme veya eşdeğer kalıcı yok etme yolu, mağaza kuralına uygun görünür olmalı. Hesap yoksa N/A. Müşteriye: Kayıt varsa kullanıcı hesabını silebilmeli; aksi halde mağaza reddi riski vardır.
+S119.4| Dijital ürün / abonelik varsa mağaza içi satın alma kuralları (IAP / Play Billing) çiğnenmesin; yalnızca web’e kaçırma varsa gerekçe ve yönergeye uygunluk yazılsın. IAP yoksa N/A. Müşteriye: Ücretli dijital içerik mağaza kuralına aykırı satılmamalı.
+S119.5| İzin metinleri gerçek kullanım anında ve anlaşılır; kullanılmayan kamera/konum/rehber istenmesin. Müşteriye: Kullanılmayan izni açmak hem kullanıcıyı güvensiz bırakır hem mağaza riskidir.
+S119.6| Gizlilik politikası URL’si mağazada ve uygulamada açılmalı; beyan (Privacy Nutrition / Data Safety) gerçek SDK’larla çelişmemeli. Müşteriye: Mağazadaki gizlilik kutuları yalan söylememeli.
+S119.7| İnceleme (review) hesabı, not ve sürüm açıklaması güncel; ilk açılışta çökme, sonsuz giriş duvarı veya boş ekran olmamalı. Müşteriye: İnceleyen kişi uygulamayı açıp işi görebilmeli.
+S119.8| Mağaza görseli, açıklama ve kategori gerçek ürünü anlatsın; olmayan özellik vaat edilmesin. Müşteriye: Vitrin ile ürün aynı olmalı; yanıltıcı vitrin hem itibar hem red riskidir.
+S119.9| Yaş derecesi, sağlık/finans/kumar/çocuk içerik beyanı gerçekle uyumlu olsun. Bu kategori yoksa N/A. Müşteriye: Yanlış yaş/kategori beyanı yayını durdurabilir.
+S119.10| Web-only projede bu modülün tamamı N/A — mağaza kuralı uydurulmaz. Hem web hem uygulama varsa yalnızca uygulama maddeleri işlenir.
+
+## S120 | 11 — Yayın ve Mağaza | Bakım Modu ve Sunucu Kesinti Senaryoları (Maintenance Mode)
+S120.1| Planlı sunucu bakımları veya acil kesintiler sırasında uygulamanın kararlı çalışması ve kullanıcı deneyiminin yönetilmesi.
+S120.2| Bakım Modu Ekranı: API yanıtlarında özel bir durum kodu (örn. 503 Maintenance) alındığında uygulamanın kilitlenmeyip şık bir "Bakımdayız" ekranı göstermesi.
+S120.3| Dinamik Durum Kontrolü: Uygulama açılışında merkezi bir endpoint üzerinden bakım durumunun ve tahmini bitiş süresinin kontrol edilmesi.
+S120.4| Çevrimdışı / Hata Yönetimi: Kesinti anında kullanıcının yerel verilerine (varsa) erişebilmesi veya net bilgilendirme mesajları alması.
+
+## S121 | 11 — Yayın ve Mağaza | İş Sürekliliği ve Felaket Senaryoları (Disaster Recovery)
+S121.1| Veritabanı Yedekleme (Backups): Verilerin düzenli aralıklarla (otomatik olarak) güvenli bir bulut alanına yedeklenmesi.
+S121.2| Sunucu Kesinti Senaryoları: Ana sunucunun çökmesi durumunda yedek sunucuya (Failover) geçiş mekanizması.
+S121.3| Bakım Modu (Maintenance Mode): Büyük çaplı güncellemelerde kullanıcılara şık bir "Bakımdayız, kısa süre sonra döneceğiz" ekranı gösterilmesi.
+S121.4| Geri Alma (Rollback) Planı: Canlıya alınan hatalı bir sürümün veya veritabanı migration işleminin hızlıca eski haline döndürülebilmesi.
+
+## S122 | 11 — Yayın ve Mağaza | AB Testleri ve Deney Altyapısı (Experimentation)
+S122.1| Özellik Bayrakları (Feature Flags): Yeni bir özelliğin tüm kullanıcılara aniden açılmak yerine kademeli olarak (yüzde bazlı) devreye alınabilmesi.
+S122.2| A/B Test Yönetimi: Farklı buton renkleri, metinler veya akışların kullanıcı gruplarında test edilerek dönüşüm oranlarının ölçülmesi.
+S122.3| Uzaktan Konfigürasyon (Remote Config): Uygulama kodunu güncellemeye gerek kalmadan bazı metinlerin, limitlerin veya ayarların sunucu üzerinden değiştirilebilmesi.
+
+## S123 | 11 — Yayın ve Mağaza | Dinamik Kampanya Yönetim Sistemi
+S123.1| Kampanya / remote banner yoksa N/A.
+S123.2| Varsa kampanya sunucudan gelsin; uygulama güncellemesi gerektirmesin.
+S123.3| Hedefleme kullanıcı rızası ve gizlilik politikasıyla çelişmesin.
+S123.4| Süresi biten kampanya UI'da kalmasın.
+S123.5| Kötü/yanlış config uygulamayı çökertmesin.
+
+## S124 | 11 — Yayın ve Mağaza | SEO ve Web Optimizasyonu
+S124.1| Web hedefi varsa title, description, canonical, og/twitter ve index/noindex doğru olsun.
+S124.2| Mobil-only uygulamada web SEO yoksa N/A.
+S124.3| 404/boş sayfa arama motoruna yumuşak 200 + boş içerik olarak satılmasın.
+S124.4| Sitemap/robots varsa gerçek rotalarla çelişmesin.
+S124.5| Performans (LCP/CLS) web için makul; ağır client bundle açıklansın.
+
+## S125 | 11 — Yayın ve Mağaza | Canlı operasyon: izleme, sertifika, önbellek, ikon, PWA, runbook
+S125.1| Canlı web/API varsa dışarıdan uptime veya health poll (veya eşdeğer). Yoksa N/A.
+S125.2| TLS kullanan hedefte sertifika bitişi izlenmeli veya otomatik yenilenmeli (Let's Encrypt / cloud cert). Local-only N/A.
+S125.3| Statik asset ve cache'lenebilir API: Cache-Control ve/veya ETag veya hash'li dosya adı. Web/API yoksa N/A.
+S125.4| Web varsa favicon + dokunma/sekme ikonu kırık 404 olmasın. Web yoksa N/A.
+S125.5| PWA / «yüklenebilir web» iddiası varsa manifest + service worker + offline/fallback. İddia yoksa N/A — PWA uydurma.
+S125.6| Staging / preview / PR ortamı noindex (robots veya header). Production yanlışlıkla noindex veya staging index FAIL.
+S125.7| Kısa runbook: nasıl ayağa kalkar, nasıl rollback, kime haber. README'de 10 satır yeter; yoksa FAIL.
+S125.8| Canary / blue-green zorunlu değil; varsa rollback yolu çalışsın. Yoksa N/A, düz deploy + geri alınabilirlik yeter.
+
+## S126 | 11 — Yayın ve Mağaza | Gelişmiş Dosya Paylaşımı ve Dışa Aktarım
+S126.1| Paylaşım/export yalnızca kullanıcının yetkili olduğu veriyi içersin.
+S126.2| Dışa aktarım formatı (CSV/JSON/PDF) belgelensin; PII export KVKK/erişim hakkı ile uyumlu olsun.
+S126.3| Büyük dosya paylaşımında bellek ve iptal yolu olsun.
+S126.4| Paylaşım yoksa N/A.
+S126.5| Export log'u (kim, ne zaman) tutulabilsin; içerik log'a dökülmesin.
+
+## S127 | 11 — Yayın ve Mağaza | Yazıcı ve Çevresel Cihaz Entegrasyonu
+S127.1| Yazıcı veya harici cihaz entegrasyonu yoksa N/A; zorla eklenmesin.
+S127.2| Varsa izin, eşleşme, kopma ve yeniden deneme akışları tanımlı olsun.
+S127.3| Yazdırma/iletişim hatası uygulamayı dondurmasın.
+S127.4| Gönderilen belgede PII gereksiz yere serilmesin.
+S127.5| Desteklenen cihaz listesi ve test notu belgelensin.
+
+## S128 | 11 — Yayın ve Mağaza | Dinamik Modül Yükleme
+S128.1| Ağır/ekran bazlı kod split veya lazy load varsa ilk açılışı küçültsün.
+S128.2| Lazy yüklenen modül hatasında uygulama beyaz ekran olmasın.
+S128.3| Dinamik yükleme yoksa N/A.
+S128.4| Split boundarie'ler feature sınırlarıyla uyumlu olsun.
+S128.5| Güncelleme sonrası eski chunk 404'ü kullanıcıyı kilitlemesin.
+
+## S129 | 11 — Yayın ve Mağaza | Yapay Zeka Asistan Entegrasyonu
+S129.1| AI asistan yoksa N/A; sahte sohbet eklenmesin.
+S129.2| Varsa kullanıcı verisi prompt'a gitmeden önce minimizasyon ve rıza uygulansın.
+S129.3| AI çıktısı iş kuralı / fiyat / sağlık iddiası olarak doğrulanmadan sunulmasın.
+S129.4| Rate-limit, timeout ve içerik filtresi olsun.
+S129.5| API anahtarı yalnızca backend'de olsun; istemciye gömülmesin.
+S129.6| Kullanıcı girdisi sistem talimatı / araç çağrısı gibi işlenmesin (prompt injection). Araçlar yetki ve allowlist ile. AI yoksa N/A.
+
+## S130 | 11 — Yayın ve Mağaza | Teslim, devir ve canlı sonrası
+S130.1| Teslim paketinde .env.example, çalıştırma, migration ve ilk admin oluşturma adımları olsun.
+S130.2| Demo/reviewer hesabı güncel olsun. Production secret teslim notuna yazılmasın; ayrı güvenli kanaldan verilsin.
+S130.3| Canlı sonrası hata/izleme erişimi, yedek, bakım penceresi ve destek kanalı tanımlı olsun.
+S130.4| Domain, mağaza, imzalama ve bulut hesaplarının kime ait olduğu belgelensin.
+S130.5| Bu checklist'in PASS / FAIL / N/A özeti kabul kanıtı olarak teslimle birlikte verilsin.
+
+## S131 | 12 — Kapanış testi | Tüm uygulama kapanış testi
+S131.1| Hedef haritasını tekrar yaz. Yok ailelere test uydurma. Yalnızca var olan hedefler bu modülün kapsamıdır.
+S131.2| WEB varsa: soğuk açılış, kimlik veya misafir, ana iş 1 tur, bir hata yolu, çıkış — desktop genişlikte. Web yoksa N/A.
+S131.3| WEB varsa: aynı kritik yolu tablet-web ve mobil-web genişlikte tekrarla (taşma, klavye, tıklanamayan). Web yoksa N/A.
+S131.4| ANDROID telefon varsa: soğuk açılış → kimlik/misafir → ana iş → hata → arka plan/geri. Çökme/ANR FAIL. Android yoksa N/A.
+S131.5| ANDROID tablet varsa ayrı tur; yoksa N/A.
+S131.6| iOS telefon varsa ayrı tur (safe area, geri jesti). iOS yoksa N/A. iPad varsa ayrıca; yoksa iPad yazma.
+S131.7| API/backend varsa health + auth + ana iş + hatalı istek. Yalnızca frontend ve API yoksa N/A değil, UI üzerinden doğrula.
+S131.8| Otomatik test komutu varsa çalıştır (unit/e2e/maestro). Kırık = FAIL, düzelt, tekrar koş. Komut yoksa ürettiğin elle listeyi işlet — boş bırakma.
+S131.9| Konsol / crash / beyaz ekran / sonsuz spinner kritik yolda olmamalı. Varsa düzelt, ilgili hedef testini baştan koş.
+S131.10| Önceki kapsamdaki FAIL bu turda tekrar kırılıyorsa teslim yok; düzelt ve o senaryoyu baştan koş.
+S131.11| Son karar ikili: «Kapanış geçti, kapsam FAIL=0, hedefler: …» veya «BITMEDI» + kalan Sıra.Madde. Ortası yok. Kullanıcıdan onay isteme.
+S131.12| Son kontrol: ilgili build/typecheck yeşil. Diff'te müşteri içeriği / .env.local / upload / dump ezilmemiş. Ezildiyse geri al, teslim yok.
+S131.13| Prod teslim: minify (o hedef varsa) + sıkıştırma + aktarım TLS + bariz ağır paket yok. Kanıt: build ayarı / response header (br/gzip) / https. Yok hedef N/A.
+S131.14| İkinci göz (zorunlu): Bitirdim demeden Sıra 1→sonu ve kritik ekranları kendin tekrar gez. Yeni FAIL, yeni dizayn kırığı veya kırık build çıkıyorsa BITMEDI; kapat ve ikinci gözü tekrarla. Kullanıcıya ikinci «tara» bırakma.
+S131.15| Teslim cümlesi ancak şöyle olur: «Tek turda bitti. İkinci gözde yeni iş çıkmadı. Kapsam FAIL=0. Build yeşil. Kapanış geçti.» «Şimdilik bitti, sonra bakarız» veya ikinci tarda çıkacak 10 iş = yalan bitti, YASAK.

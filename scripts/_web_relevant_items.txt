@@ -1,0 +1,359 @@
+﻿S1.1| Her kod de─şi┼şikli─şinden sonra o hedefin build / compile / typecheck (ve varsa lint error) komutu ├ğal─▒┼şmal─▒; k─▒rm─▒z─▒ b─▒rak─▒p sonraki maddeye ge├ğmek FAIL.
+S1.2| S├Âzdizimi ve bariz derleme hatalar─▒ (eksik parantez, import, tip, paket) o maddede kapanmal─▒. ┬½IDE k─▒rm─▒z─▒, sonra bakar─▒z┬╗ YASAK.
+S1.3| K├Âk ve kaynak a─şac─▒ okunakl─▒ olmal─▒: kod, payla┼ş─▒lan kit, config ayr─▒; rastgele k├Âk y─▒─ş─▒n─▒ veya kopya klas├Âr FAIL ÔÇö d├╝zenle, i├ğeri─şi silerek ┬½temizleme┬╗ YASAK.
+S1.4| M├╝┼şteriye ait i├ğerik (metin, g├Ârsel, PDF, Excel, dump, upload, tenant data) kod/┼şablon g├╝ncellemesinde ezilmemeli. Ayn─▒ klas├Ârde olsa bile ├╝zerine yazma.
+S1.5| M├╝┼şteri varl─▒klar─▒ koddan ayr─▒ dursun (content/, data/customer/, public/uploads/, docs/musteri/ veya projedeki e┼şde─şer). Yoksa ay─▒r veya dok├╝mante et; mevcut dosyay─▒ silme.
+S1.6| .env, .env.local, keystore, google-services, sertifika, yerel yedek ┼şablon kopyas─▒ ile overwrite edilmemeli.
+S1.7| Toplu yaz─▒m (scaffold, generate, prettier-all, dosya yeniden kur) ├Âncesi m├╝┼şteri-├Âzel ve secret yollar─▒ listele; onlara dokunma.
+S1.8| Yeni dosya ad─▒ mevcut m├╝┼şteri dosyas─▒n─▒ gaspetmesin; ├ğak─▒┼şmada atla, rename etme veya yan─▒na yaz. Merge = i├ğeri─şi koru.
+S1.9| Build ├ğ─▒kt─▒s─▒ (dist/build/bin) ve ba─ş─▒ml─▒l─▒k (node_modules) m├╝┼şteri medyas─▒ ile kar─▒┼şmas─▒n; bunlar kaynak san─▒l─▒p silinmesin.
+S2.1| Ortam Ayr─▒m─▒: Geli┼ştirme (Dev), Test (Staging) ve Canl─▒ (Production) ortamlar─▒n─▒n veritaban─▒, URL ve servis u├ğ noktalar─▒n─▒n kesin olarak ayr─▒lmas─▒.
+S2.2| Gizli De─şi┼şken G├╝venli─şi: Ortam de─şi┼şkenlerinin build s├╝recine s─▒zmas─▒n─▒n engellenmesi ve g├╝venli saklanmas─▒.
+S2.3| Konfig├╝rasyon Do─şrulama: Uygulama ilk a├ğ─▒ld─▒─ş─▒nda eksik bir ortam de─şi┼şkeni varsa sistemin g├╝venli bir ┼şekilde durmas─▒.
+S3.1| dev / staging / production env dosyalar─▒ ayr─▒ls─▒n; production key development'a g├Âm├╝lmesin.
+S3.2| Zorunlu env eksikse Production fail-fast, Development anlaml─▒ varsay─▒lan veya mock kullans─▒n.
+S3.3| .env.example g├╝ncel olsun; ger├ğek secret commit edilmesin.
+S3.4| Feature flag varsa uzak config'den gelsin; kodda kal─▒c─▒ if-debug orman─▒na d├Ânmesin.
+S3.5| Ayn─▒ binary test/prod key se├ğimini ortam de─şi┼şkeniyle yaps─▒n.
+S4.1| HTTP API / backend varsa u├ğlar Swagger, OpenAPI, Scalar, NSwag, Redoc veya e┼şde─şer ile g├╝ncel belgelensin. API yoksa (statik site, yaln─▒zca mobil+haz─▒r BaaS belgesi, vs.) N/A ÔÇö Swagger uydurma.
+S4.2| Kod Standard─▒ ve Linting: Projede ortak bir kod yaz─▒m stilinin (Prettier, ESLint, EditorConfig) otomatik olarak uygulanmas─▒.
+S4.3| README ve Kurulum Rehberi: Projeyi d─▒┼şar─▒dan gelen bir geli┼ştiricinin tek komutla aya─şa kald─▒rabilmesi i├ğin g├╝ncel rehberler.
+S4.4| Branch ve Git Y├Ânetimi: Git ak─▒┼ş kurallar─▒n─▒n (Git Flow, Conventional Commits) ekip i├ğinde d├╝zenli uygulanmas─▒.
+S4.5| Lockfile commit edilsin (package-lock / yarn.lock / pnpm-lock / packages.lock.json / go.sum / Cargo.lock / poetry.lock). Paket y├Ânetici varken lock yoksa FAIL.
+S4.6| Main/trunk'a giden yolda lint veya test kap─▒s─▒ olsun (CI ve/veya pre-commit). Kap─▒ yoksa ve k─▒r─▒k kod girebiliyorsa FAIL.
+S5.1| Paket y├Âneticisi varsa kilit dosyas─▒ (lockfile) depoda ve kurulum onu kullans─▒n. Lock'suz ┬½her seferinde ba┼şka s├╝r├╝m┬╗ FAIL.
+S5.2| CI veya pre-commit'te secret tarama (gitleaks / GitHub secret scanning / e┼şde─şer). Secret bulunduysa d├╝zelt; history notu yaz. Exploit/PoC yok.
+S5.3| Konteyner kullan─▒l─▒yorsa: Dockerfile (m├╝mk├╝nse multi-stage, non-root), .dockerignore, lokal compose veya e┼şde─şer ile aya─şa kalk─▒┼ş. Konteyner yoksa N/A.
+S5.4| Backend/API varsa sa─şl─▒k u├ğlar─▒ ayr─▒ls─▒n: liveness (s├╝re├ğ ayakta) ve readiness (DB/kuyruk haz─▒r). Tek sahte 200 her ba─ş─▒ml─▒l─▒─şa PASS de─şil.
+S5.5| Uzun ├Âm├╝rl├╝ s├╝re├ğ varsa zarif kapan─▒┼ş (SIGTERM/stop): yeni istek alma, in-flight bitir, ba─şlant─▒y─▒ kapat. Serverless-only N/A.
+S5.6| Tarih-saat saklama kanonik olsun (tercihen UTC); aray├╝z kullan─▒c─▒ dilimine ├ğevirsin; DST k─▒r─▒lmas─▒n. Tarih yoksa N/A.
+S5.7| Zamanlanm─▒┼ş i┼ş (cron / hangfire / quart / celery beat / e┼şde─şer) varsa tek lider veya kilit, hata logu, tak─▒l─▒ i┼ş g├Âr├╝n├╝r olsun. Yoksa N/A.
+S5.8| Kuyruk varsa retry (backoff) + dead-letter; zehirli mesaj kuyru─şu sonsuz d├Âng├╝ye sokmas─▒n. Kuyruk yoksa N/A.
+S5.9| D─▒┼ş HTTP: timeout zorunlu, retry s─▒n─▒rl─▒. Gerekirse circuit breaker. Sonsuz retry FAIL. D─▒┼ş ├ğa─şr─▒ yoksa N/A.
+S5.10| HTTP API varsa k─▒r─▒c─▒ de─şi┼şiklikte versiyon (URL veya header) veya belgelenmi┼ş geriye d├Ân├╝k politika. API yoksa N/A.
+S11.1| Production web/API HTTPS (ve m├╝mk├╝nse HSTS). Cleartext ├╝retim FAIL. Localhost belgelenir. Web/API yoksa N/A.
+S11.2| Kritik u├ğlarda rate limit: giri┼ş, OTP, kay─▒t, ┼şifre s─▒f─▒r, ├Âdeme, webhook. Limitsiz a├ğ─▒k form FAIL.
+S11.3| Y├╝ksek yetki / admin i├ğin MFA (TOTP veya WebAuthn/e┼şde─şer). Admin yoksa veya i├ğ tek kullan─▒c─▒ belgelenmi┼şse N/A.
+S11.4| ├çok kirac─▒ / organizasyon varsa veri izolasyonu (RLS, tenantId her sorguda, veya e┼şde─şer). Tek kirac─▒ N/A.
+S11.5| A├ğ─▒k kay─▒t, ileti┼şim, yorum, ├Âdeme ├Âncesi: bot korumas─▒ (CAPTCHA/Turnstile/honeypot + h─▒z). ─░├ğ a─ş veya davetiye-only N/A.
+S11.6| Kurumsal SSO / SAML / OIDC iddias─▒ varsa giri┼ş ├ğal─▒┼ş─▒r; yoksa N/A ÔÇö SSO uydurma.
+S11.7| LICENSE (veya e┼şde─şer) + ├╝├ğ├╝nc├╝ parti lisans/NOTICE veya SBOM. GPL/copyleft bula┼şmas─▒ bilin├ğli ve yaz─▒l─▒.
+S11.8| Ba─ş─▒ml─▒l─▒k g├╝ncelleme s├╝reci: Dependabot/Renovate/e┼şde─şer veya belgelenmi┼ş takvim. Hi├ğ yoksa FAIL.
+S11.9| Birden fazla geli┼ştirici varsa CODEOWNERS veya zorunlu PR incelemesi. Tek ki┼şi N/A.
+S11.10| ─░stek kimli─şi (correlation/request id) log ve cevapta; m├╝mk├╝nse tracing (OpenTelemetry/e┼şde─şer). Id yoksa FAIL.
+S11.11| Kesinti haberi: status page veya banner/e-posta/SMS kanal─▒ belgelensin. M├╝┼şteri nas─▒l ├Â─şrenir yaz─▒ls─▒n.
+S11.12| Testler birbirini ezmesin: fixture, izole veritaban─▒/┼şema, paralel g├╝venli. Test yoksa N/A de─şil: en az bir izolasyon notu veya tek-thread.
+S11.13| Canl─▒da acil kapatma: remote config, kill switch veya feature flag ile kritik yol kapanabilsin. Yoksa belgele neden tek binary.
+S11.14| Bulut/SaaS harcama alarm─▒ (e┼şik). Fatural─▒ sa─şlay─▒c─▒ yoksa N/A.
+S11.15| HTTP API varsa Swagger/OpenAPI (veya Scalar/Redoc/NSwag) kodla ├ğeli┼şmesin. Production'da kimliksiz tam ┼şema + secret s─▒zmas─▒n (dev/internal ayr─▒ veya auth arkas─▒nda). API yoksa N/A.
+S11.16| CI'da test veya lint kap─▒s─▒ k─▒r─▒kken main/trunk'a d├╝┼şmesin. CI yoksa ve tek ki┼şiyse en az lokal komut README'de.
+S12.1| Para/fiyat varsa tutar float olmas─▒n: kuru┼ş/minor unit veya belgelenmi┼ş decimal. Yuvarlama kural─▒ yaz─▒ls─▒n. ├ûdeme/fiyat yoksa N/A.
+S12.2| Olu┼şturma/├Âdeme/webhook POST tekrar─▒nda ├ğift i┼şlem olmas─▒n (Idempotency-Key veya e┼şde─şer). Bu u├ğ yoksa N/A.
+S12.3| Y├Ânlendirme parametresi (returnUrl / next / redirect) varsa allowlist ÔÇö a├ğ─▒k y├Ânlendirme yok. OAuth/sihirli link varsa ayn─▒. B├Âyle parametre yoksa N/A.
+S12.4| Production'da varsay─▒lan admin, demo/admin ┼şifre, a├ğ─▒k debug endpoint olmas─▒n. Bu t├╝r giri┼ş/debug yoksa N/A.
+S12.5| Hassas veri dururken ┼şifreli olsun (disk/DB/sa─şlay─▒c─▒ at-rest). Yaln─▒zca ge├ğici local ve secret yoksa N/A + gerek├ğe.
+S12.6| Yedek varsa geri y├╝kleme en az bir kez denenmi┼ş veya tarihli tatbikat plan─▒ olsun. Yedek yoksa ve veri varsa FAIL.
+S12.7| D─▒┼şar─▒ya a├ğ─▒k ├╝r├╝n/API varsa SECURITY.md veya /.well-known/security.txt ile ileti┼şim. ─░├ğ/tek ki┼şi ara├ğ N/A.
+S12.8| Ki┼şisel veri i┼şleniyorsa DPA / alt i┼şleyen listesi veya e┼şde─şer s├Âzle┼şme notu. ─░┼şlenmiyorsa N/A.
+S12.9| Destek kullan─▒c─▒s─▒ gibi giri┼ş (impersonation) varsa her sefer audit log. Bu yetki yoksa N/A ÔÇö gizlice ekleme.
+S12.10| Giden e-posta varsa: SPF + DKIM + DMARC ve List-Unsubscribe. E-posta yoksa N/A.
+S12.11| Mobil istemci varsa min s├╝r├╝m / zorunlu g├╝ncelleme yolu. Yaln─▒zca web N/A.
+S12.12| CI workflow ├╝├ğ├╝nc├╝ parti eylemi pin'li olsun (commit SHA) veya e┼şde─şer tedarik kilidi. CI yoksa N/A.
+S12.13| Git'e b├╝y├╝k medya/m├╝┼şteri ikili dosya sokma; LFS veya object storage. Yoksa N/A.
+S12.14| Testte ger├ğek PII veya prod dump olmas─▒n; maskele / sentetik. Test yoksa bu madde N/A de─şil: seed'e bak.
+S12.15| Kullan─▒c─▒ aray├╝z├╝ varsa ├ğ├Âk├╝┼ş yakalans─▒n (error boundary / global hata). Beyaz ekran FAIL. Yaln─▒zca API, UI yoksa N/A.
+S12.16| Dosya/ar┼şiv y├╝kleme varsa zip-bomb ve path traversal (..) engeli. Upload yoksa N/A.
+S12.17| 429 yan─▒t─▒nda Retry-After (veya e┼şde─şer). Rate limit yoksa N/A.
+S12.18| Kritik ba─ş─▒ml─▒ d├╝┼ş├╝nce m├╝mk├╝nse degraded / salt-okunur; t├╝m s├╝re├ğ ├Âlm├╝yorsa belgele. Tek par├ğal─▒ ara├ğ N/A.
+S12.19| Feature flag / remote config ├Âl├╝leri envanter veya silinsin. Flag yoksa N/A.
+S12.20| Canl─▒ m├╝┼şteri/sistem varsa olay: kime haber (kanal/telefon) + basit SEV veya e┼şde─şer. ─░├ğ deneme / hen├╝z canl─▒ yoksa N/A.
+S12.21| HTTP API varsa Swagger/OpenAPI veya e┼şde─şer (Scalar/Redoc/NSwag) ekip i├ğin ├ğal─▒┼ş─▒r olsun. API yoksa N/A. Production'da herkese a├ğ─▒k ┼şema ancak kas─▒tl─▒d─▒r ve secret i├ğermez.
+S39.1| Responsive / Uyumluluk: Farkl─▒ ekran boyutlar─▒nda, ├ğ├Âz├╝n├╝rl├╝klerde ve cihazlarda (telefon, tablet vb.) bozulma olmamas─▒.
+S39.2| Y├╝klenme Durumlar─▒ (Loaders): Veri ├ğekilirken veya i┼şlem yap─▒l─▒rken kullan─▒c─▒ya d├Ânen animasyonlar veya iskelet ekranlar (Skeleton loaders).
+S39.3| Bo┼ş Durumlar (Empty States): Listede hi├ğ veri olmad─▒─ş─▒nda kullan─▒c─▒ya rehberlik eden ┼ş─▒k bo┼ş ekran tasar─▒mlar─▒.
+S39.4| Hata Mesajlar─▒: Kullan─▒c─▒ dostu, net ve y├Ânlendirici hata bildirimleri (teknik hata kodlar─▒ yerine anla┼ş─▒l─▒r dil).
+S39.5| Navigasyon ve Ak─▒┼ş: Geri tu┼şu davran─▒┼şlar─▒, sayfa ge├ği┼şleri ve y├Ânlendirmelerin mant─▒kl─▒ ve ak─▒c─▒ olmas─▒.
+S40.1| T├╝m formlar ┼şema/validasyon ile do─şrulans─▒n (client + server ayn─▒ kurallar).
+S40.2| Alan hatalar─▒ ilgili input'ta g├Âsterilsin; submit sonras─▒ scroll/focus do─şru alana gitsin.
+S40.3| ├çift submit engellensin; g├Ânderim s─▒ras─▒nda buton kilitli olsun.
+S40.4| Klavye, sonraki alan ve return tu┼şu mobil formda k─▒r─▒lmas─▒n.
+S40.5| Hassas alanlar (┼şifre, kart, OTP) autocomplete/maske politikas─▒na uygun olsun.
+S46.1| Eri┼şilebilirlik (Accessibility - a11y)
+S46.2| Ekran Okuyucu Deste─şi: G├Ârme engelli kullan─▒c─▒lar i├ğin aray├╝z elemanlar─▒n─▒n etiketlenmesi (VoiceOver / TalkBack).
+S46.3| Yaz─▒ Boyutu Uyumu: Cihaz─▒n genel sistem yaz─▒ boyutu b├╝y├╝t├╝ld├╝─ş├╝nde uygulaman─▒n buna uyum sa─şlamas─▒.
+S46.4| Renk Kontrast─▒: Metinlerin arka planla olan renk kontrast─▒n─▒n okunabilir standartlarda olmas─▒.
+S46.5| Dokunma Alanlar─▒: Buton ve t─▒klanabilir alanlar─▒n mobil cihazlarda parmakla rahat├ğa dokunulabilecek b├╝y├╝kl├╝kte olmas─▒.
+S47.1| Etkile┼şimli ├Â─şelerde accessibilityLabel / role / hint olsun; ikon-only buton isimsiz kalmas─▒n.
+S47.2| TalkBack/VoiceOver ile ana ak─▒┼ş tamamlanabilsin.
+S47.3| Dokunma alanlar─▒ en az ~44pt olsun; ├╝st ├╝ste binmesin.
+S47.4| Renk tek ba┼ş─▒na anlam ta┼ş─▒mas─▒n (hata sadece k─▒rm─▒z─▒ olmas─▒n).
+S47.5| Font ├Âl├ğe─şi b├╝y├╝y├╝nce metin kesilmesin veya kontroll├╝ ellipsis + eri┼şim olsun.
+S48.1| Bo┼ş liste/ekranlarda metin + y├Ânlendirici eylem olsun; sessiz bo┼ş sayfa kalmas─▒n.
+S48.2| T├╝m aray├╝z varsay─▒lan tek iskelet renginde (├Âr. ayn─▒ mavi) kalmas─▒n; marka renkleri uygulans─▒n.
+S48.3| Hata metni jenerik 'Bir sorun olu┼ştu' olmas─▒n; ekrana/ba─şlama ├Âzel ve sonraki ad─▒m versin.
+S48.4| Y├╝kleme g├Âstergesi sonsuz olmas─▒n; s├╝re dolunca hata veya yeniden dene.
+S48.5| Klavye a├ğ─▒kken input, birincil buton veya hata mesaj─▒ ├Ârt├╝lmesin.
+S48.6| Sistem geri tu┼şu / jesti her y─▒─ş─▒nda beklenen yere d├Âns├╝n; ├Âl├╝ olmas─▒n.
+S48.7| Karanl─▒k modda beyaz patlama, okunmayan kontrast veya yanl─▒┼ş ikon olmas─▒n.
+S48.8| ├çentik, status bar, home indicator (safe area) alt─▒nda yaz─▒/buton kesilmesin.
+S48.9| Lorem ipsum, TODO, placeholder kopya ve sahte i├ğerik yay─▒nda kalmas─▒n.
+S48.10| Kritik silme/├Âdeme/├ğ─▒k─▒┼şta onay diyalogu olsun (Vazge├ğ + net Sil).
+S48.11| Dokunma alan─▒ parmakla rahat olsun; uygun yerde hafif haptic olsun, yoksa N/A.
+S48.12| Ma─şaza/uygulama ikonu varsay─▒lan ┼şablon (iskelet/robot/placeholder) olmas─▒n.
+S49.1| ├£st ├╝ste binme olmas─▒n: modal, dropdown, tooltip, toast, sabit header/footer i├ğeri─şi veya birbirini ├Ârtmesin. z-index rastgele ┼şi┼şmesin. UI yoksa N/A.
+S49.2| Kayma / layout shift: font, g├Ârsel, banner, ├ğerez ┼şeridi, iskeletÔåÆi├ğerik ge├ği┼şi sayfay─▒ z─▒platmas─▒n; yer ayr─▒ls─▒n. ├ûl├ğ├╝lemiyorsa en az kritik ekranda g├Âzle.
+S49.3| Ta┼şma: yaz─▒/buton/ikon kutudan ├ğ─▒ks─▒n veya overflow ile kesilip anlams─▒z kalmas─▒n. Yatay istenmeyen scroll FAIL. Uzun TR/DE metin ayn─▒ kural.
+S49.4| Hizalama: kart, form label/input, tablo kolon, ikon+metin ayn─▒ ─▒zgarada; rastgele margin y─▒─ş─▒n─▒ FAIL.
+S49.5| Renk uyumu: birincil/ikincil/hata/uyar─▒/arka plan token'dan; ekranda marka d─▒┼ş─▒ rastgele hex, neon, okunmayan gri FAIL. Tema maddesiyle ├ğeli┼şmesin, burada g├Âr├╝nen uyum kontrol edilir.
+S49.6| Tipografi: en fazla 2-3 font rol├╝ (ba┼şl─▒k/g├Âvde/etiket); sat─▒r y├╝ksekli─şi okunur; kar─▒┼ş─▒k 6 font veya ezilmi┼ş sat─▒r FAIL.
+S49.7| Uzun i├ğerik: ellipsis veya sat─▒r k─▒r─▒lmas─▒ kas─▒tl─▒; buton metni iki dilde de ta┼şmas─▒n, ikon ├╝zerine binmesin.
+S49.8| Liste/grid: son sat─▒r kesik, bo┼şluk dengesiz, g├Ârsel oran─▒ bozulmu┼ş (ezilmi┼ş/uzam─▒┼ş) olmas─▒n.
+S49.9| Sabit alt bar / FAB / klavye: birincil eylem veya hata metni ├Ârt├╝lmesin (cila klavye maddesini tekrarla, burada kayma+├Ârtme).
+S49.10| Animasyon layout'u bozmas─▒n: titreme, overlap, kayd─▒r─▒nca z─▒plama yok. Animasyon yoksa N/A.
+S49.11| K─▒r─▒k g├Ârsel: 0 boyut, alt metin bo┼şlu─şu ├ğ├Âkerten, farkl─▒ DPR'de bulan─▒k veya ta┼şan ikon FAIL.
+S49.12| A├ğ─▒k/koyu ve marka: ayn─▒ ekranda kar─▒┼ş─▒k tema lekesi (beyaz ada, siyah ada) olmas─▒n.
+S50.1| Web varsa telefon (dar), tablet ve masa├╝st├╝ geni┼şlikte ayn─▒ kritik i┼ş bozulmadan y├╝r├╝meli. Yatay istenmeyen kayd─▒rma, kesilen men├╝ veya okunmayan metin kabul edilmez. Web yoksa N/A. M├╝┼şteriye: Site her ekranda d├╝zg├╝n ├ğal─▒┼şmal─▒; yaln─▒zca bilgisayarda iyi g├Âr├╝n├╝p telefonda bozulmas─▒ teslim de─şildir.
+S50.2| K─▒r─▒l─▒mlar (breakpoint) projede tan─▒ml─▒ olsun; ara geni┼şlikte (├Âr. 400ÔÇô700px) gizli ta┼şma veya ├╝st ├╝ste binme kalmas─▒n. M├╝┼şteriye: Tablet ve b├╝y├╝k telefon da kontrol edilir, yaln─▒zca iki u├ğ de─şil.
+S50.3| G├Ârseller ve medya oran─▒ bozulmadan ├Âl├ğeklenmeli; ezilme, ta┼şma, 0 y├╝kseklik olmamal─▒. M├╝┼şteriye: Foto─şraf ve banner her cihazda d├╝zg├╝n durmal─▒.
+S50.4| Form ve tablolar dar ekranda kullan─▒labilir olsun (kayd─▒rma kas─▒tl─▒ ve anla┼ş─▒l─▒r, etiket kaybolmas─▒n). Form yoksa N/A. M├╝┼şteriye: Telefondan form doldurulabilmeli.
+S50.5| Gezinme: masa├╝st├╝nde tam men├╝, dar ekranda eri┼şilebilir men├╝; a├ğ─▒k men├╝ i├ğeri─şi ├Ârt├╝p t─▒klanamaz b─▒rakmas─▒n. M├╝┼şteriye: Telefonda men├╝ kaybolmamal─▒ veya i├ğeri─şi kilitlememeli.
+S50.6| Dokunma: birincil d├╝─şmeler parmakla rahat; yan yana iki k├╝├ğ├╝k hedef birbirine binmesin. M├╝┼şteriye: D├╝─şmeler telefonda kolay bas─▒lmal─▒.
+S50.7| Yatay (landscape) webÔÇÖde kritik metin kesilmesin; zorunlu de─şilse N/A de─şil, en az giri┼ş ve ana sayfa. M├╝┼şteriye: Telefonu yan ├ğevirince sayfa k─▒r─▒lmamal─▒.
+S50.8| Yaz─▒ boyutu sistem b├╝y├╝t├╝l├╝nce (eri┼şilebilirlik) ta┼şma ve ├Ârtme olmamal─▒. M├╝┼şteriye: B├╝y├╝k yaz─▒ a├ğ─▒kken sayfa da─ş─▒lmamal─▒.
+S50.9| ├çerez ┼şeridi, sohbet balonu, sabit bar dar ekranda birincil i├ğeri─şi ve g├Ânder d├╝─şmesini kapatmas─▒n. M├╝┼şteriye: Altta a├ğ─▒lan ┼şerit ÔÇİG├ÂnderÔÇÖi gizlememeli.
+S50.10| Yazd─▒rma/PDF veya g├Âm├╝l├╝ panel varsa o da ta┼şmamal─▒; yoksa N/A. M├╝┼şteriye: Varsa ├ğ─▒kt─▒ da okunakl─▒ olmal─▒.
+S51.1| Tasar─▒m ├Âl├ğ├╝leri tek aile olsun (bo┼şluk 4/8 veya projenin tokenÔÇÖ─▒, k├Â┼şe, g├Âlge). Rastgele 7px/13px/22px ve 8 farkl─▒ radius FAIL. UI yoksa N/A. M├╝┼şteriye: Ekranlar ayn─▒ elden ├ğ─▒km─▒┼ş g├Âr├╝nmeli; diki┼ş yerleri belli olmamal─▒.
+S51.2| Ayn─▒ i┼ş ayn─▒ bile┼şen: birincil/ikincil d├╝─şme, alan y├╝ksekli─şi, kart paddingÔÇÖi sayfalar aras─▒nda z─▒plamas─▒n. ├£├ğ t├╝rl├╝ ÔÇİKaydetÔÇÖ d├╝─şmesi FAIL. M├╝┼şteriye: Her sayfada d├╝─şmeler ve formlar tan─▒d─▒k durmal─▒.
+S51.3| ─░kon tek set ve hizal─▒ (kal─▒nl─▒k, dolu/├ğizgi, boyut). Emoji + 3 ikon paketi + kaym─▒┼ş ikon+yaz─▒ FAIL. M├╝┼şteriye: ─░konlar oyuncak kutusundan rastgele se├ğilmi┼ş gibi durmamal─▒.
+S51.4| Ham ├ğer├ğeve g├Âr├╝n├╝m├╝ kalmas─▒n (varsay─▒lan mavi link, iskelet tema, ÔÇİloremÔÇÖ, stok mor). Marka renk ve yaz─▒ tipi uygulanmal─▒. M├╝┼şteriye: Haz─▒r ┼şablon haliyle teslim edilmez.
+S51.5| Durum renkleri tutarl─▒: ba┼şar─▒ / uyar─▒ / hata / bilgi kar─▒┼şmas─▒n; yaln─▒zca renkle anlam verilmesin (ikon veya metin). M├╝┼şteriye: K─▒rm─▒z─▒ bazen uyar─▒ bazen marka olmamal─▒.
+S51.6| Etkile┼şim: odak halkas─▒, hover (i┼şaret├ği cihaz), bas─▒l─▒, devre d─▒┼ş─▒ halleri tan─▒ml─▒. Masa├╝st├╝nde t─▒klan─▒r durmayan link veya yaln─▒zca hoverÔÇÖa kilitli i┼ş FAIL. M├╝┼şteriye: Ne t─▒klan─▒r, ne t─▒klanmaz belli olmal─▒.
+S51.7| ├£st bilgi, alt bilgi ve men├╝ sayfalar aras─▒nda ayn─▒ aile; bir sayfada farkl─▒ logo, farkl─▒ y├╝kseklik, farkl─▒ aral─▒k FAIL. M├╝┼şteriye: Gezinme her yerde ayn─▒ kurumsal duru┼şta olmal─▒.
+S51.8| Yo─şunluk: ne nefes almayan s─▒k─▒┼ş─▒kl─▒k ne bo┼ş ├ğ├Âl. Kom┼şu kartlarda farkl─▒ i├ğ bo┼şluk FAIL. M├╝┼şteriye: Ne i├ğ i├ğe y─▒─ş─▒lm─▒┼ş ne de da─ş─▒n─▒k durmal─▒.
+S51.9| Metin hiyerar┼şisi: ba┼şl─▒k / alt ba┼şl─▒k / g├Âvde ayr─▒m─▒; her sat─▒r ayn─▒ punto ve kal─▒nl─▒kta ba─ş─▒rmas─▒n. Masa├╝st├╝nde sat─▒r a┼ş─▒r─▒ uzun duvar olmas─▒n. M├╝┼şteriye: Okuyan g├Âz nereye bakaca─ş─▒n─▒ bilmeli.
+S51.10| Logo ve g├Ârseller keskin, orant─▒l─▒, do─şru zeminde; pikselli, ezilmi┼ş, ters renk logo FAIL. M├╝┼şteriye: Marka i┼şareti ucuz g├Âr├╝nmemeli.
+S51.11| Yay─▒n kal─▒nt─▒s─▒ yok: lorem, TODO, ÔÇİtestÔÇÖ, debug ├ğer├ğeve, #000 kutu, sahte isim, konsol ├ğ─▒kt─▒s─▒ ekranda. M├╝┼şteriye: Taslak izi m├╝┼şteriye g├Âsterilmez.
+S51.12| Kayd─▒rma sa├ğmal─▒─ş─▒: ├ğift kayd─▒rma, g├Âvde + i├ğ panel kilit, mobil 100vh ile alt─▒n kesilmesi. M├╝┼şteriye: Sayfa titrememeli, i├ğerik ├ğubu─şun alt─▒nda kaybolmamal─▒.
+S51.13| Pencere (modal/├ğekmece): arka plan kaymas─▒n, k├╝├ğ├╝k ekranda kesilmesin, kapatma belli olsun. Modal yoksa N/A. M├╝┼şteriye: A├ğ─▒lan pencere s─▒k─▒┼şm─▒┼ş veya kapanmaz olmamal─▒.
+S51.14| Tablo, etiket (chip) ve rozet stili tek; her ekranda farkl─▒ kutu FAIL. Bu bile┼şen yoksa N/A. M├╝┼şteriye: Liste ve etiketler ayn─▒ dilde konu┼şmal─▒.
+S51.15| Mikro metin kurumsal ve tek hitap (sen/siz kar─▒┼şmas─▒n); ÔÇİclick hereÔÇÖ, TR+EN ayn─▒ d├╝─şmede, yar─▒m c├╝mle FAIL. M├╝┼şteriye: Yaz─▒lar m├╝┼şteriye s├Âylenecek dilde, tutarl─▒ olmal─▒.
+S51.16| Hareket: s├╝s animasyon layoutÔÇÖu bozmas─▒n; sistem ÔÇİazalt─▒lm─▒┼ş hareketÔÇÖ varsa sayg─▒. Animasyon yoksa N/A. M├╝┼şteriye: Ekran z─▒plamamal─▒, g├Âz yormamal─▒.
+S51.17| Tarama y├Ântemi (zorunlu): kritik 5ÔÇô8 ekran─▒ gez (a├ğ─▒l─▒┼ş, giri┼ş, ana i┼ş, form, bo┼ş, hata). Her sa├ğmal─▒─ş─▒ madde madde yaz, tek tek kapat. ÔÇİGenel olarak iyiÔÇÖ YASAK. M├╝┼şteriye: Tasar─▒mc─▒ g├Âz├╝yle gezilmi┼ş teslim; tek ekranl─▒k vitrin de─şil.
+S52.1| Tek ├╝r├╝n kimli─şi: a├ğ─▒l─▒┼ş, giri┼ş, ana i┼ş, ayarlar ve bo┼ş/hata ekran─▒ ayn─▒ ├╝r├╝nden ├ğ─▒km─▒┼ş g├Âr├╝ns├╝n. ├£├ğ farkl─▒ ÔÇİsiteÔÇÖ hissi FAIL. UI yoksa N/A. M├╝┼şteriye: Her ekran ayn─▒ kurumun y├╝z├╝ olmal─▒.
+S52.2| Yaz─▒ ├Âl├ğe─şi kapal─▒ set: ba┼şl─▒k / alt ba┼şl─▒k / g├Âvde / etiket (ve gerekirse say─▒). On bir rastgele punto yok. M├╝┼şteriye: Yaz─▒lar bir aile; her kutu kendi punto┼şu se├ğmemeli.
+S52.3| Renk kapal─▒ set: n├Âtrler + bir vurgu + semantik (ba┼şar─▒/hata/uyar─▒). D├Ârt vurgu rengi yar─▒┼ş─▒yorsa FAIL. M├╝┼şteriye: Marka rengi net; g├Âkku┼şa─ş─▒ de─şil.
+S52.4| Y├╝kseklik dili tek: ya ince ├ğizgi ya g├Âlge; 2ÔÇô3 katman yeter (kart, a├ğ─▒l─▒r, pencere). z-index ├ğorbas─▒ ve 6 ├ğe┼şit g├Âlge FAIL. M├╝┼şteriye: Katmanlar sakin ve okunur olmal─▒.
+S52.5| Sayfa kal─▒plar─▒: liste, detay, form, ayar ayn─▒ iskelet (kenar bo┼şlu─şu, ba┼şl─▒k konumu, birincil eylem yeri). Her sayfa s─▒f─▒rdan uydurulmas─▒n. M├╝┼şteriye: Yeni sayfa da tan─▒d─▒k gelmeli.
+S52.6| Izgara ve geni┼şlik: i├ğerik max-width / kolon kural─▒ belli; bir sayfa 720, di─şeri 1600, ├Âb├╝r├╝ kenars─▒z rastgele olmas─▒n. Tam geni┼ş g├Ârsel kas─▒tl─▒ysa i┼şaretli. M├╝┼şteriye: Sayfa hizas─▒ bozulmamal─▒.
+S52.7| Dikey ritim: b├Âl├╝mler aras─▒ bo┼şluk ayn─▒ merdivenden (├Âr. s/m/l). Bir ekranda 8px sonra 64px sonra 11px FAIL. M├╝┼şteriye: Nefes al─▒┼ş d├╝zenli olmal─▒.
+S52.8| G├Ârsel dili tek: foto k─▒rp─▒m─▒, k├Â┼şe, kaplama ayn─▒ aile. D├╝z ikon + 3D + stok kolaj + karikat├╝r kar─▒┼şmas─▒n. G├Ârsel yoksa N/A. M├╝┼şteriye: Resimler ayn─▒ st├╝dyodan ├ğ─▒km─▒┼ş gibi durmal─▒.
+S52.9| Bo┼ş / hata / ba┼şar─▒ g├Ârselleri ayn─▒ dilde (veya yaln─▒zca tipografi). Her durum ba┼şka clipart FAIL. M├╝┼şteriye: ÔÇİKay─▒t yokÔÇÖ ve ÔÇİHataÔÇÖ da ├╝r├╝ne ait olmal─▒.
+S52.10| Hareket ailesi: s├╝re ve easing tek set (├Âr. 150/250/400ms). Her animasyon ba┼şka h─▒zda z─▒plamas─▒n. Animasyon yoksa N/A. M├╝┼şteriye: Ge├ği┼şler sakin ve ayn─▒ karakterde olmal─▒.
+S52.11| A├ğ─▒k ve koyu (varsa) ├ğift: her y├╝zeyin e┼şi olsun; koyuda unutulmu┼ş beyaz ada kalmas─▒n. Tek tema N/A. M├╝┼şteriye: Karanl─▒k mod sonradan yap─▒┼şt─▒r─▒lm─▒┼ş durmamal─▒.
+S52.12| ─░lk ├╝├ğ saniye (a├ğ─▒l─▒┼ş / kahraman / splash) geri kalanla ayn─▒ ├╝r├╝n. Vitrin ayr─▒, i├ğerisi ayr─▒ FAIL. M├╝┼şteriye: ─░lk bak─▒┼ş ile i├ğerisi birbirini tutmal─▒.
+S52.13| Harita, grafik, takvim, edit├Âr varsa ├ğer├ğeveleri ├╝r├╝ne uyumlu; ham ├╝├ğ├╝nc├╝ parti hali kalmas─▒n. Yoksa N/A. M├╝┼şteriye: G├Âm├╝l├╝ ara├ğ da ayn─▒ k─▒yafeti giymeli.
+S52.14| E-posta, PDF, push, ma─şaza g├Ârseli varsa ayn─▒ renk/yaz─▒/logo ailesi. Bu ├ğ─▒kt─▒ yoksa N/A. M├╝┼şteriye: D─▒┼şar─▒ giden evrak da ayn─▒ kurum olmal─▒.
+S52.15| Uyum karar─▒ (zorunlu): 6 kritik ekran─▒ yan yana koy (zihnen veya g├Âr├╝nt├╝). Ayn─▒ ├╝r├╝n m├╝? De─şilse FAIL listesi yaz, tek tek kapat. Be─şeni bahanesiyle atlama. M├╝┼şteriye: B├╝t├╝n, par├ğalar─▒n toplam─▒ndan tutarl─▒ durmal─▒.
+S55.1| E-posta ve ─░leti┼şim Altyap─▒s─▒ (Transactional Messaging)
+S55.2| ┼Şablon Tasar─▒mlar─▒: Sistem e-postalar─▒n─▒n (Ho┼ş geldin, ┼şifre s─▒f─▒rlama, b├╝lten) kurumsal kimli─şe ve mobil tasar─▒ma uygun olmas─▒.
+S55.3| E-posta ─░letim Oran─▒ (Deliverability): G├Ânderilen e-postalar─▒n kullan─▒c─▒lar─▒n "Spam" klas├Âr├╝ne d├╝┼şmeden do─şrudan gelen kutusuna ula┼şmas─▒ (SPF/DKIM ayarlar─▒).
+S55.4| Abonelikten Ayr─▒lma (Unsubscribe): Pazarlama veya bildirim maillerinde kullan─▒c─▒lar─▒n tek t─▒kla listeden ├ğ─▒kabilmesi.
+S55.5| SMS / OTP Do─şrulama: Telefon numaras─▒ do─şrulama gereken durumlarda tek kullan─▒ml─▒k ┼şifrelerin (OTP) saniyeler i├ğinde iletilmesi.
+S56.1| ─░leti┼şim / Destek Formu: Kullan─▒c─▒lar─▒n uygulama i├ğinden sorun bildirebilece─şi veya destek alabilece─şi alan.
+S56.2| SSS (FAQ): S─▒k├ğa sorulan sorular─▒n ve ├ğ├Âz├╝m ad─▒mlar─▒n─▒n yer ald─▒─ş─▒ rehber sayfa.
+S56.3| Uygulama ─░├ği De─şerlendirme: Kullan─▒c─▒lara belirli bir ba┼şar─▒ hikayesinden sonra App Store / Google Play puanlama pop-up'─▒n─▒n g├Âsterilmesi.
+S56.4| Sosyal Medya / Web Linkleri: Resmi web sitesi ve sosyal medya hesaplar─▒na y├Ânlendiren ba─şlant─▒lar.
+S59.1| Dil De─şi┼şimi: Uygulama dili de─şi┼ştirildi─şinde t├╝m metinlerin eksiksiz ve do─şru ┼şekilde ├ğevrilmesi.
+S59.2| RTL (Sa─şdan Sola) Deste─şi: Arap├ğa gibi sa─şdan sola yaz─▒lan dillerde aray├╝z yerle┼şiminin otomatik uyarlanmas─▒.
+S59.3| Tarih, Saat ve Para Birimi: Tarih formatlar─▒n─▒n ve say─▒sal de─şerlerin yerel standartlara g├Âre g├Âsterilmesi.
+S60.1| Dil de─şi┼şince t├╝m g├Âr├╝n├╝r metinler (tab, hata, bo┼ş durum, sistem diyalo─şu metinleri) g├╝ncellensin.
+S60.2| RTL dillerde layout, ikon y├Ân├╝ ve kayd─▒rma y├Ân├╝ aynalans─▒n; k─▒r─▒k overlap olmas─▒n.
+S60.3| Tarih, say─▒, y├╝zde ve para format─▒ se├ğilen locale'e g├Âre g├Âsterilsin.
+S60.4| Eksik ├ğeviri ham key g├Âstermesin; ─░ngilizce'ye d├╝┼şs├╝n (TR/ana dil key'i varken EN'e zorlanmas─▒n).
+S60.5| Dil tercihi kal─▒c─▒ olsun; yeniden a├ğ─▒l─▒┼şta s─▒f─▒rlanmas─▒n.
+S61.1| Desteklenen her locale i├ğin dil dosyas─▒ y├╝klensin; eksik dosya uygulamay─▒ ├ğ├Âkertmesin.
+S61.2| ├ço─şul, interpolation ve nested key'ler t├╝m dillerde ayn─▒ ┼şemay─▒ kullans─▒n.
+S61.3| AR, FR, DE, ES, JA, PT, RU, ZH ve di─şer ikincil dillerde eksik key ─░ngilizce'ye d├╝┼şs├╝n.
+S61.4| Ana dil (├Âr. TR) ve EN first-class kals─▒n; ana dil key'i varken EN'e d├╝┼ş├╝lmesin.
+S61.5| Ham ├ğeviri anahtar─▒ (settings.title) kullan─▒c─▒ya g├Âr├╝nmesin.
+S61.6| Yeni ekran eklenince ├ğeviri key'i hardcoded string olarak b─▒rak─▒lmas─▒n.
+S62.1| i18n `fallbackLng` (veya e┼şde─şer) ─░ngilizce olsun. Eksik key UI'y─▒ k─▒rmas─▒n.
+S62.2| ─░kincil dillerde (AR, FR, DE, ES, JA, PT, RU, ZH ve di─şerleri) olmayan key EN'e d├╝┼şs├╝n.
+S62.3| Ana dil ve EN dosyas─▒nda key varken gereksiz fallback olmas─▒n.
+S62.4| Kritik ekranlar i├ğin eksik key taramas─▒ yap─▒ls─▒n; rapor ├╝retilsin, runtime crash olmas─▒n.
+S63.1| Saat: saklama kanonik (UTC/offset); g├Âsterim kullan─▒c─▒n─▒n dilimi. ┬½Kay─▒t 15:00, listede 18:00┬╗ tipi kayma FAIL. Tarih yoksa N/A.
+S63.2| Takvim g├╝n├╝ kaymas─▒n: YYYY-MM-DD'yi UTC gece yar─▒s─▒ parse edip bir g├╝n geri/ileri atma. Do─şum g├╝n├╝, randevu, fatura tarihi ayn─▒ kural.
+S63.3| 12/24 saat ve AM/PM locale'e uygun; kar─▒┼ş─▒k TR metin + US saat FAIL.
+S63.4| Haftan─▒n ilk g├╝n├╝ ve takvim locale (Pzt/Paz) kullan─▒c─▒ diline uysun. Takvim yoksa N/A.
+S63.5| G├Âreli zaman (┬½5 dk ├Ânce┬╗) se├ğilen dilde; ham EN kalmas─▒n. Bu format yoksa N/A.
+S63.6| Seyahat / cihaz dilimi de─şi┼şince ge├ğmi┼ş kay─▒tlar yanl─▒┼ş g├╝ne kaymas─▒n; g├Âsterim dilimi net olsun.
+S63.7| Para: binlik ve ondal─▒k ay─▒r─▒c─▒ locale ile (TR 1.234,56 / US 1,234.56) kar─▒┼şmas─▒n. Sembol yeri (10 Ôé║ vs $10) locale kural─▒na uysun. Para yoksa N/A.
+S63.8| Ayn─▒ ekranda tarih TR + para US + say─▒ kar─▒┼ş─▒k locale olmas─▒n; tek locale kayna─ş─▒.
+S63.9| G├Âsterilen fiyat ile ├Âdenen/├ğekilen tutar ve para birimi ayn─▒ olsun; kur an─▒ varsa yaz─▒ls─▒n. ├ûdeme yoksa N/A.
+S63.10| S─▒f─▒r, negatif, b├╝y├╝k tutar (milyon) ta┼şmadan ve yanl─▒┼ş yuvarlanmadan g├Âr├╝ns├╝n. Float g├Âr├╝nen 9.999999 FAIL.
+S63.11| Para/tarih input: kullan─▒c─▒ locale yaz─▒┼ş─▒n─▒ kabul et, sunucuya kanonik g├Ânder. Parse ┬½1.000┬╗i bin veya ondal─▒k diye yanl─▒┼ş yutmas─▒n.
+S63.12| Dil de─şi┼şince layout k─▒r─▒ls─▒n: uzun ├ğeviri (DE) buton/ta┼şma/├╝st ├╝ste. K─▒sa dil (EN) bo┼şluk patlamas─▒n.
+S63.13| Kesik ├ğeviri, ham key (home.title), iki dilin kar─▒┼şt─▒─ş─▒ c├╝mle FAIL. Tek dil ├╝r├╝n N/A de─şil: o dilde hardcode tutarl─▒ olsun.
+S63.14| E-posta, PDF, fatura, push ayn─▒ saat/para/dil kurallar─▒n─▒ kullans─▒n; uygulamada do─şru, belgede yanl─▒┼ş FAIL. Bu ├ğ─▒kt─▒ yoksa N/A.
+S63.15| RTL a├ğ─▒ksa (veya eklenecekse) kayma/├╝st ├╝ste; ikon oku ters. RTL yok ve plan yoksa N/A.
+S63.16| Say─▒sal s─▒ralama ve filtre (tarih, fiyat) locale parse hatas─▒yla yanl─▒┼ş s─▒rada olmas─▒n.
+S64.1| SSL / HTTPS Denetimi: T├╝m a─ş trafi─şinin ┼şifrelenmi┼ş ba─şlant─▒ ├╝zerinden yap─▒lmas─▒.
+S64.2| Girdi Do─şrulama (Sanitization / Validation): SQL Injection, XSS ve zararl─▒ kod enjeksiyonlar─▒na kar┼ş─▒ t├╝m form giri┼şlerinin filtrelenmesi.
+S64.3| Yetkilendirme Kontrolleri (Authorization): Normal bir kullan─▒c─▒n─▒n, yetkisiz bir API endpoint'ine veya y├Ânetici paneline eri┼şememesi.
+S64.4| Hassas Veri Gizlili─şi: ┼Şifrelerin ve ki┼şisel verilerin d├╝z metin (plaintext) olarak saklanmamas─▒, hashlenmesi.
+S65.1| ├çerez ve ─░zin Y├Ânetimi (GDPR / KVKK): Kullan─▒c─▒lardan ├ğerez ve veri i┼şleme izinlerinin yasalara uygun ┼şekilde al─▒nmas─▒.
+S65.2| Gizlilik Politikas─▒ Eri┼şimi: S├Âzle┼şme ve gizlilik metinlerinin uygulama i├ğinde kolayca okunabilmesi.
+S65.3| Veri Ta├ğ─▒nabilirli─şi: Kullan─▒c─▒n─▒n sistemdeki t├╝m verilerini (JSON/CSV format─▒nda) tek t─▒kla indirebilmesi.
+S65.4| Unutulma Hakk─▒: Hesab─▒n─▒ silen bir kullan─▒c─▒n─▒n ki┼şisel verilerinin sistemden tamamen temizlenmesi.
+S68.1| KVKK (Ki┼şisel Verilerin Korunmas─▒ Kanunu), GDPR ve mobil ma─şaza y├Ânergelerine (App Store / Google Play Guidelines) tam uyumluluk sa─şlamak.
+S68.2| Kullan─▒c─▒ verilerinin toplanmas─▒, i┼şlenmesi, saklanmas─▒ ve imha edilmesi s├╝re├ğlerini yasal ├ğer├ğeveye oturtmak.
+S68.3| Ayd─▒nlatma Metinleri ve A├ğ─▒k R─▒za: Kay─▒t ekranlar─▒nda zorunlu onay kutular─▒ (unchecked by default), metinlere do─şrudan ba─şlant─▒lar.
+S68.4| ├çerez ve Takip Politikalar─▒: Analitik, reklam ve ├ğerez kullan─▒m─▒ i├ğin kullan─▒c─▒ya a├ğ─▒k tercih sunulmas─▒.
+S68.5| Veri Gizlili─şi ve ┼Şeffafl─▒k: Hangi verilerin topland─▒─ş─▒n─▒n gizlilik politikas─▒nda net bir ┼şekilde ifade edilmesi.
+S68.6| Ma─şaza Kurallar─▒ Uyumlulu─şu: Apple ve Google'─▒n gizlilik etiketi (App Privacy / Data Safety) beyanlar─▒n─▒n birebir uyu┼şmas─▒.
+S68.7| Kullan─▒c─▒ kendi verisini d─▒┼şa aktarabilmeli (JSON/CSV veya e┼şde─şer) ÔÇö KVKK/GDPR ta┼ş─▒nabilirlik. Hesap yoksa veya B2B-only belgelenmi┼şse N/A.
+S68.8| Silme politikas─▒ net olsun: yumu┼şak silme vs kal─▒c─▒; ili┼şkiler (FK) ve yedek/log. ┬½Sil┬╗ deyince yar─▒m kay─▒t b─▒rakma. Hesap silme maddesiyle ├ğeli┼şmesin.
+S70.1| **Secrets Extraction:** Extract all hardcoded credentials, API keys, JWT secrets, connection strings, and private keys into `.env` files.
+S70.2| **Git History Purging:** Sanitize Git history using `git filter-repo` or `BFG Repo-Cleaner` if any `.env` or secret was ever committed.
+S70.3| **Environment Security:** Ensure `.env*`, `*.pem`, `*.key`, `*.keystore`, and `google-services.json` are strictly added to `.gitignore`.
+S70.4| **Client-Side Secret Shielding:** Never store or expose private API keys (e.g., Stripe Secret Key, AWS Access Key, database credentials) inside Web or Mobile client-side code. Use dedicated backend proxy endpoints for external integrations.
+S70.5| **Password Hashing:** Hash passwords using Argon2id or bcrypt (minimum work factor 12). Never use MD5, SHA-1, or plain SHA-256.
+S70.6| **JWT Security & Rotation:** Use short-lived Access Tokens (e.g., 15 mins) and long-lived, single-use Refresh Tokens with automatic token rotation and revocation list in Redis.
+S70.7| **Cookie Hardening:** Set cookies with `HttpOnly`, `Secure`, `SameSite=Strict`, and explicit `Domain`/`Path` attributes.
+S70.8| **Rate Limiting & Brute-Force Protection:** Implement IP-based and user-based Rate Limiting (Redis Sliding Window or Token Bucket) on critical routes (`/login`, `/register`, `/forgot-password`, `/verify-otp`, `/reset-password`).
+S70.9| **Multi-Factor Authentication (MFA/2FA):** Enforce TOTP / WebAuthn support for elevated actions and administrative accounts.
+S70.10| **Account Lockout:** Temporarily lock accounts after N consecutive failed login attempts to prevent brute-force attacks.
+S70.11| **Session Termination & Invalidation:** Invalidate server-side sessions instantly on logout, password change, or suspicious activity.
+S70.12| **Account Deletion (GDPR/KVKK Compliance):** Ensure "Delete Account" permanently purges or anonymizes all user PII from Primary DB, Redis Caches, S3 Buckets, and 3rd-party analytics.
+S70.13| **Server-Side Authorization (BOLA/IDOR):** Validate user ownership and resource context strictly on the backend API layer. Never trust client-provided IDs without verifying if `request.user.id == resource.owner_id`.
+S70.14| **RBAC & ABAC:** Enforce Role-Based Access Control and Attribute-Based Access Control on administrative, financial, and management endpoints.
+S70.15| **Private Storage & Storage ACLs:** Keep cloud buckets (AWS S3, Azure Blob) private by default. Access files via time-limited Signed URLs / Pre-signed GET-PUT operations.
+S70.16| **Mass Assignment Protection:** Use DTOs (Data Transfer Objects) / White-listing on incoming requests to prevent model binding pollution (e.g., users setting `isAdmin = true`).
+S70.17| **Strict Schema Validation:** Validate incoming request payloads, headers, query parameters, and route params using strict schemas (Zod, FluentValidation, Joi, Dantic). Reject extra/unknown properties.
+S70.18| **SQL Injection & NoSQLi Protection:** Use Parameterized Queries or ORM (EF Core, Prisma, Dapper, TypeORM) exclusively. Prohibit raw dynamic string concatenation inside raw database queries.
+S70.19| **XSS & Contextual Output Encoding:** Escape all user-generated content rendered in HTML/React DOM. Sanitize HTML input with DOMPurify if HTML rendering is mandatory.
+S70.20| Enforce file extension whitelisting (never trust user file extensions).
+S70.21| Validate file headers / magic bytes (e.g., check PNG signature `89 50 4E 47`).
+S70.22| Enforce maximum file size limits on reverse proxy and app layers.
+S70.23| Strip EXIF / GPS metadata from uploaded images.
+S70.24| Store files using UUID-generated filenames outside the web root directory.
+S70.25| **SSRF (Server-Side Request Forgery) Mitigation:** Validate and whitelist destination URLs before making outbound HTTP requests from the server. Block internal IP ranges (`127.0.0.1`, `10.0.0.0/8`, `192.168.0.0/16`, AWS IMDS `169.254.169.254`).
+S70.26| **TLS & HTTPS Enforcement:** Enforce HTTPS strictly across all environments. Redirect HTTP traffic to HTTPS with HSTS (`Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`).
+S70.27| **Strict CORS Policy:** Lock down CORS policies. Disable wildcard origins (`*`) in production. Specify exact trusted domain origins, allowed headers, and HTTP methods.
+S70.28| **HTTP Security Headers:** Inject essential headers on all responses:
+S70.29| `Content-Security-Policy (CSP)`
+S70.30| `X-Frame-Options: DENY` (Clickjacking protection)
+S70.31| `X-Content-Type-Options: nosniff` (MIME-sniffing protection)
+S70.32| `Referrer-Policy: strict-origin-when-cross-origin`
+S70.33| `Permissions-Policy` (Restrict camera, microphone, geolocation APIs)
+S70.34| **Webhook Signature Verification:** Validate incoming webhooks (Stripe, GitHub, payment gateways) using HMAC-SHA256 signatures before processing payloads.
+S70.35| **Reverse Proxy & WAF:** Place backend services behind a Web Application Firewall (Cloudflare, AWS WAF) to filter DDoS, bad bots, and malicious payloads.
+S70.36| **Production Error Masking:** Suppress detailed stack traces, internal paths, database exceptions, and framework details in production. Return generic standardized error responses (e.g., `{"error": "An unexpected error occurred"}`).
+S70.37| **Log Sanitization & PII Filtering:** Mask or scrub sensitive data (Passwords, Credit Card numbers, JWTs, Access Tokens, Social Security numbers) before writing to application logs.
+S70.38| **Audit Logging:** Record security events (failed logins, privilege escalation, password resets, key rotation, admin actions) with timestamps, IP addresses, and user IDs.
+S70.39| **Billing & Cost Monitoring Alerts:** Configure automated cost threshold alerts on AWS, GCP, Cloudflare, and Sentry to detect and mitigate L7 DDoS and resource exhaustion attacks.
+S70.40| **Dependency Vulnerability Audits:** Run automated dependency vulnerability scans (`npm audit`, `dotnet list package --vulnerable`, Snyk, Trivy) and eliminate critical/high vulnerabilities.
+S70.41| **Secure Local Storage:** Never store sensitive user tokens, JWTs, or encryption keys in `AsyncStorage`, `localStorage`, or unencrypted SQLite databases. Use `expo-secure-store`, iOS Keychain, or Android EncryptedSharedPreferences / Keystore.
+S70.42| **Certificate Pinning (SSL Pinning):** Implement SSL/TLS Certificate Pinning on mobile network layers to prevent Man-in-the-Middle (MitM) interception on untrusted networks (public Wi-Fi).
+S70.43| **Jailbreak / Root Detection:** Detect compromised mobile operating systems (Jailbroken iOS / Rooted Android) and block execution or disable sensitive features.
+S70.44| **Code Obfuscation & Binary Protection:** Obfuscate JS bundles, enable ProGuard/R8 for Android, and strip debugging symbols before generating App Store / Google Play release builds.
+S70.45| **Screen Capture & Overlay Protection:** Disable screenshot/screen recording capabilities on sensitive views (e.g., payment, personal identity, credentials screens).
+S70.46| **Biometric Authentication:** Secure local app opening with FaceID / TouchID / Biometric Prompt integrated with native hardware keystores.
+S70.47| **Automated Static Analysis (SAST):** Run SAST tools (SonarQube, Semgrep) to identify code-level security issues during CI/CD builds.
+S70.48| **Dynamic Application Security Testing (DAST):** Test live APIs and web surfaces with tools like OWASP ZAP or Burp Suite.
+S70.49| Sald─▒r─▒ PoC / exploit / payload YAZMA. Yaln─▒zca kodda koruma var m─▒ bak: SQLi parametre, IDOR yetki, auth bypass, tehlikeli y├╝kleme, XSS ka├ğ─▒┼ş. Yoksa d├╝zelt. Kan─▒t: dosya yolu.
+S70.50| SQLi: ham string birle┼ştirme var m─▒ kontrol et; varsa parameterized/ORM yap. Payload/exploit yazma.
+S70.51| IDOR: istemci ID'sine g├╝venilen u├ğ var m─▒ bak; sunucuda sahiplik kontrol├╝ ekle. Ba┼şkas─▒n─▒n kayd─▒n─▒ ├ğekme denemesi/PoC yok.
+S70.52| Auth bypass: korumas─▒z admin/├Âdeme ucu var m─▒ bak; d├╝zelt. Token sahtekarl─▒─ş─▒ denemesi yazma.
+S70.53| Y├╝kleme varsa uzant─▒ + magic byte + boyut; kabuk y├╝kleme denemesi yazma.
+S70.54| XSS: kullan─▒c─▒ metni ka├ğ─▒┼şs─▒z render ediliyor mu bak; d├╝zelt. Script enjekte etme.
+S71.1| API anahtar─▒, secret ve live key istemci koduna veya repoya g├Âm├╝l├╝ olmas─▒n; env'den okunsun.
+S71.2| .env veya key git ge├ğmi┼şine girdiyse temizleme plan─▒ belgelensin. Yoksa N/A.
+S71.3| Sat─▒r/nesne yetkisi (RLS veya e┼şde─şer) a├ğ─▒k olsun. Anon/public key ile ba┼şkas─▒n─▒n kayd─▒ okunamas─▒n.
+S71.4| Yetki karar─▒ yaln─▒zca sunucuda verilsin; istemci 'isAdmin=true' ile yetki kazanmas─▒n.
+S71.5| Giri┼ş, OTP ve ┼şifre denemesine rate-limit / kilit koyulsun.
+S71.6| T├╝m girdiler do─şrulans─▒n; y├╝kleme t├╝r/boyut ile s─▒n─▒rl─▒ olsun.
+S71.7| Production CORS allowlist olsun; '*' a├ğ─▒k b─▒rak─▒lmas─▒n. Web yoksa N/A.
+S71.8| G├╝venlik ba┼şl─▒klar─▒ (HSTS, frame, CSP veya platform e┼şde─şeri) Production'da olsun.
+S71.9| T├╝m trafik HTTPS; cleartext kapal─▒.
+S71.10| ┼Şifre hash'li saklans─▒n. ├çerez varsa Secure / HttpOnly / SameSite.
+S71.11| Production hata yan─▒t─▒ stack, SQL, yol ve secret s─▒zd─▒rmas─▒n.
+S71.12| Log ve crash raporundan token, ┼şifre, OTP, kart, yetki header temizlensin.
+S71.13| Veritaban─▒ sorgular─▒ parametreli olsun; XSS i├ğin ├ğ─▒kt─▒ ka├ğ─▒r─▒ls─▒n.
+S71.14| Webhook endpoint imza/secret do─şrulamadan i┼ş yapmas─▒n.
+S71.15| Admin panel ve y├Ânetim API'si role + giri┼ş zorunlu olsun; login'siz a├ğ─▒k kalmas─▒n.
+S71.16| Ba─ş─▒ml─▒l─▒k/paket denetimi (bilinen zafiyet taramas─▒) yap─▒ls─▒n.
+S71.17| Otomatik yedek ve geri y├╝kleme yolu belgelensin.
+S71.18| Hesap sil / unutulma hakk─▒ veriyi ger├ğekten silsin veya anonimle┼ştirsin; sadece gizlemesin.
+S71.19| Bulut/sa─şlay─▒c─▒ harcama uyar─▒s─▒ kurulu olsun (ani fatura ┼şi┼şmesi).
+S71.20| Yetkisiz eri┼şim ve IDOR i├ğin savunma kontrol├╝ yap; exploit veya sald─▒r─▒ tarifi yazma.
+S77.1| ─░stemci Taraf─▒ Loglar─▒: Uygulama ├ğ├Âkmelerinin (Crash) anl─▒k olarak takip edilebilmesi i├ğin hata raporlama ara├ğlar─▒n─▒n entegrasyonu.
+S77.2| Sunucu Taraf─▒ Loglar─▒: Backend taraf─▒nda olu┼şan hatalar─▒n detayl─▒ bir ┼şekilde kaydedilmesi ve incelenebilmesi.
+S77.3| 404 ve 500 Sayfalar─▒: Olmayan sayfalarda veya sunucu hatalar─▒nda kullan─▒c─▒y─▒ y├Ânlendiren ├Âzel hata sayfalar─▒.
+S79.1| Olay Takibi (Event Tracking): Kullan─▒c─▒n─▒n butonlara t─▒klama, sayfa de─şi┼ştirme gibi ana eylemlerinin analitik ara├ğlar─▒na (Mixpanel, Google Analytics vb.) d├╝┼şmesi.
+S79.2| Hata ─░zleme (Crash Reporting): Uygulama ├ğ├Âkmelerinin stack trace detaylar─▒yla birlikte anl─▒k raporlanmas─▒ (Sentry, Bugsnag vb.).
+S79.3| Performans Metrikleri: Sayfa a├ğ─▒l─▒┼ş s├╝releri ve API yan─▒t s├╝relerinin ├Âl├ğ├╝lmesi.
+S79.4| Anonimle┼ştirme: Takip verilerinin kullan─▒c─▒ gizlili─şini ihlal etmeyecek ┼şekilde toplanmas─▒.
+S84.1| Sayfa Y├╝klenme H─▒zlar─▒: Ekranlar─▒n ve bile┼şenlerin makul s├╝rede (milisaniyeler i├ğinde) a├ğ─▒lmas─▒.
+S84.2| G├Ârsel Optimizasyonu: B├╝y├╝k boyutlu g├Ârsellerin s─▒k─▒┼şt─▒r─▒larak veya uygun formatta (WebP vb.) sunulmas─▒.
+S84.3| Bellek ve CPU Kullan─▒m─▒: Uygulaman─▒n arka planda veya uzun s├╝reli kullan─▒mlarda cihaz─▒ a┼ş─▒r─▒ yormamas─▒ / donma yapmamas─▒.
+S84.4| A─ş ─░stekleri (Network): Gereksiz tekrarlayan API ├ğa─şr─▒lar─▒n─▒n ├Ânlenmesi ve veri ├Ânbellekleme (Caching) mekanizmalar─▒.
+S87.1| Production web/client ├ğ─▒kt─▒s─▒ minify olmal─▒ (JS/CSS/HTML veya y─▒─ş─▒n─▒n e┼şde─şeri: tree-shake + minify). Geli┼ştirme build'inde minify zorunlu de─şil. Web/client yoksa N/A.
+S87.2| Statik ve API metin cevaplar─▒ ├╝retimde s─▒k─▒┼şt─▒r─▒lm─▒┼ş gitmeli (gzip veya brotli veya e┼şde─şer). Minify var s─▒k─▒┼şt─▒rma yoksa FAIL. Sunucu bu hedefte yoksa N/A de─şil: CDN/hosting katman─▒nda a├ğ veya gerek├ğe yaz.
+S87.3| A─ş─▒r paket yok: kullan─▒lmayan k├╝t├╝phane, ├ğift UI kit, ham sourcemap, s─▒k─▒┼şt─▒r─▒lmam─▒┼ş megabayt vendor. ─░lk y├╝kleme gerek├ğesiz ┼şi┼şmesin; lazy-load m├╝mk├╝nse a─ş─▒r ekran sonraya kals─▒n.
+S87.4| Mobil binary / OTA / asset pack (varsa) dev asset, gereksiz video, public sourcemap ile ┼şi┼şmesin. Native/OTA yoksa N/A.
+S87.5| G├Ânder/al ┼şifreli: API, upload, download, uygulama g├╝ncellemesi, websocket ÔÇö HTTPS veya WSS (TLS). Cleartext http/ws production FAIL. Localhost dev belgelenir.
+S87.6| Paket y├Âneticisi ve artifact kayd─▒ HTTPS (npm, NuGet, Maven, pub, pip, container registry). Insecure registry production'da yok.
+S87.7| B├╝y├╝k JSON/liste/medya cevaplar─▒ sayfal─▒ veya s─▒k─▒┼şt─▒r─▒lm─▒┼ş olmal─▒; tek seferde gerek├ğesiz ├ğok megabayt FAIL. Bu API yoksa N/A.
+S87.8| Production'a a├ğ─▒k sourcemap m├╝┼şteri/i┼ş kural─▒ s─▒zd─▒rmas─▒n (yok veya private). Minify varken map herkese a├ğ─▒ksa gizlilik riskini yaz; gerekmiyorsa kapat.
+S87.9| ├ûl├ğ ve yaz: ana web bundle veya APK/IPA/indirilen paket boyutu. Bir ├Ânceki makul teslime g├Âre sa├ğma ┼şi┼şme veya s─▒k─▒┼şt─▒r─▒lmam─▒┼ş teslim FAIL. ├ûl├ğ├╝lemeyen hedef N/A de─şil: en az bir say─▒ veya a─ş paneli kan─▒t─▒.
+S88.1| Birim Testleri (Unit Tests): ─░┼ş mant─▒─ş─▒n─▒n ve kritik servislerin otomatik testlerden ge├ğmesi.
+S88.2| Entegrasyon ve E2E Testleri: Kullan─▒c─▒ ak─▒┼şlar─▒n─▒n sim├╝le edildi─şi u├ğtan uca testlerin otomatik ko┼şulmas─▒.
+S88.3| Otomatik Build ve Da─ş─▒t─▒m: Kod repoya at─▒ld─▒─ş─▒nda testlerin ├ğal─▒┼ş─▒p staging/production ortamlar─▒na otomatik ├ğ─▒k─▒lmas─▒.
+S88.4| Kod Kalitesi (Linting / Formatting): Kod standartlar─▒n─▒n otomatik ara├ğlarla (ESLint, Prettier, SonarQube) denetlenmesi
+S103.1| Catch bloklar─▒nda ve API hata y├Ânetiminde kullan─▒c─▒ya sadece "Bir sorun olu┼ştu" gibi soyut ifadeler yerine, ne yapmas─▒ gerekti─şini belirten a├ğ─▒klay─▒c─▒ mesajlar g├Âsterin.
+S110.1| Cihaz dili de─şi┼şti─şinde uygulaman─▒n buna reaktif olarak uyum sa─şlad─▒─ş─▒n─▒, sabit kalan veya eksik ├ğevrilen string kalmad─▒─ş─▒n─▒ kontrol edin.
+S113.1| ─░lk i┼ş: hedef haritas─▒n─▒ kan─▒tla (WEB / ANDROID telefon / ANDROID tablet / iOS telefon / iOS tablet / API). Yok olan her aile N/A; o aileye senaryo yazma.
+S113.2| Yaln─▒zca VAR olan her hedef i├ğin detayl─▒ senaryo listesi ├╝ret (ad─▒m ad─▒m). Web yoksa web senaryosu yok. iOS yoksa iOS senaryosu yok.
+S113.3| WEB varsa: so─şuk a├ğ─▒l─▒┼ş; desktop + tablet-web + mobil-web geni┼şlik; ana i┼ş 1 tur; form/routing; console kritik hata yok. Web yoksa bu madde N/A.
+S113.4| ANDROID telefon varsa: so─şuk a├ğ─▒l─▒┼ş; geri tu┼şu; klavye; izin; en az 2 ├Âl├ğ├╝ veya 1 emu + breakpoint. Android yoksa N/A.
+S113.5| ANDROID tablet hedefi varsa: yatay ve dikey, ta┼şma/dokunma. Tablet iddias─▒ yoksa N/A ÔÇö telefon testini tablete uydurma.
+S113.6| iOS uygulama varsa: iPhone safe area, geri jesti, klavye. iPad hedefi varsa ayr─▒ senaryo. iOS yoksa N/A.
+S113.7| Native ├Âzellik (push, kamera, konum, IAP, biyometri) yaln─▒z o kod varsa test et; yoksa N/A. Web-only projede native senaryo yazma.
+S113.8| Her ├╝retilen senaryo i├ğin hedef ad─▒ + PASS/FAIL + ne yapt─▒n. Eksik senaryo = bu mod├╝l bitmedi. Sonra kullan─▒c─▒ beklemeden sonraki S─▒ra.
+S114.1| Ortam Konfig├╝rasyonlar─▒: Test, Staging ve Production ortam de─şi┼şkenlerinin (Environment variables) birbirinden ayr─▒lmas─▒.
+S114.2| U├ğtan Uca (E2E) Smoke Test: En kritik kullan─▒c─▒ senaryosunun (Kay─▒t ol -> ─░┼şlemi yap -> Sonucu g├Âr) canl─▒ ortamda son kez test edilmesi.
+S114.3| Yedekleme ve Geri Y├╝kleme: Veritaban─▒ yedekleme mekanizmalar─▒n─▒n ve olas─▒ bir ├ğ├Âk├╝┼ş durumunda kurtarma senaryolar─▒n─▒n haz─▒r olmas─▒.
+S124.1| Web hedefi varsa title, description, canonical, og/twitter ve index/noindex do─şru olsun.
+S124.2| Mobil-only uygulamada web SEO yoksa N/A.
+S124.3| 404/bo┼ş sayfa arama motoruna yumu┼şak 200 + bo┼ş i├ğerik olarak sat─▒lmas─▒n.
+S124.4| Sitemap/robots varsa ger├ğek rotalarla ├ğeli┼şmesin.
+S124.5| Performans (LCP/CLS) web i├ğin makul; a─ş─▒r client bundle a├ğ─▒klans─▒n.
+S125.1| Canl─▒ web/API varsa d─▒┼şar─▒dan uptime veya health poll (veya e┼şde─şer). Yoksa N/A.
+S125.2| TLS kullanan hedefte sertifika biti┼şi izlenmeli veya otomatik yenilenmeli (Let's Encrypt / cloud cert). Local-only N/A.
+S125.3| Statik asset ve cache'lenebilir API: Cache-Control ve/veya ETag veya hash'li dosya ad─▒. Web/API yoksa N/A.
+S125.4| Web varsa favicon + dokunma/sekme ikonu k─▒r─▒k 404 olmas─▒n. Web yoksa N/A.
+S125.5| PWA / ┬½y├╝klenebilir web┬╗ iddias─▒ varsa manifest + service worker + offline/fallback. ─░ddia yoksa N/A ÔÇö PWA uydurma.
+S125.6| Staging / preview / PR ortam─▒ noindex (robots veya header). Production yanl─▒┼şl─▒kla noindex veya staging index FAIL.
+S125.7| K─▒sa runbook: nas─▒l aya─şa kalkar, nas─▒l rollback, kime haber. README'de 10 sat─▒r yeter; yoksa FAIL.
+S125.8| Canary / blue-green zorunlu de─şil; varsa rollback yolu ├ğal─▒┼şs─▒n. Yoksa N/A, d├╝z deploy + geri al─▒nabilirlik yeter.
+S130.1| Teslim paketinde .env.example, ├ğal─▒┼şt─▒rma, migration ve ilk admin olu┼şturma ad─▒mlar─▒ olsun.
+S130.2| Demo/reviewer hesab─▒ g├╝ncel olsun. Production secret teslim notuna yaz─▒lmas─▒n; ayr─▒ g├╝venli kanaldan verilsin.
+S130.3| Canl─▒ sonras─▒ hata/izleme eri┼şimi, yedek, bak─▒m penceresi ve destek kanal─▒ tan─▒ml─▒ olsun.
+S130.4| Domain, ma─şaza, imzalama ve bulut hesaplar─▒n─▒n kime ait oldu─şu belgelensin.
+S130.5| Bu checklist'in PASS / FAIL / N/A ├Âzeti kabul kan─▒t─▒ olarak teslimle birlikte verilsin.
+S131.1| Hedef haritas─▒n─▒ tekrar yaz. Yok ailelere test uydurma. Yaln─▒zca var olan hedefler bu mod├╝l├╝n kapsam─▒d─▒r.
+S131.2| WEB varsa: so─şuk a├ğ─▒l─▒┼ş, kimlik veya misafir, ana i┼ş 1 tur, bir hata yolu, ├ğ─▒k─▒┼ş ÔÇö desktop geni┼şlikte. Web yoksa N/A.
+S131.3| WEB varsa: ayn─▒ kritik yolu tablet-web ve mobil-web geni┼şlikte tekrarla (ta┼şma, klavye, t─▒klanamayan). Web yoksa N/A.
+S131.4| ANDROID telefon varsa: so─şuk a├ğ─▒l─▒┼ş ÔåÆ kimlik/misafir ÔåÆ ana i┼ş ÔåÆ hata ÔåÆ arka plan/geri. ├ç├Âkme/ANR FAIL. Android yoksa N/A.
+S131.5| ANDROID tablet varsa ayr─▒ tur; yoksa N/A.
+S131.6| iOS telefon varsa ayr─▒ tur (safe area, geri jesti). iOS yoksa N/A. iPad varsa ayr─▒ca; yoksa iPad yazma.
+S131.7| API/backend varsa health + auth + ana i┼ş + hatal─▒ istek. Yaln─▒zca frontend ve API yoksa N/A de─şil, UI ├╝zerinden do─şrula.
+S131.8| Otomatik test komutu varsa ├ğal─▒┼şt─▒r (unit/e2e/maestro). K─▒r─▒k = FAIL, d├╝zelt, tekrar ko┼ş. Komut yoksa ├╝retti─şin elle listeyi i┼şlet ÔÇö bo┼ş b─▒rakma.
+S131.9| Konsol / crash / beyaz ekran / sonsuz spinner kritik yolda olmamal─▒. Varsa d├╝zelt, ilgili hedef testini ba┼ştan ko┼ş.
+S131.10| ├ûnceki kapsamdaki FAIL bu turda tekrar k─▒r─▒l─▒yorsa teslim yok; d├╝zelt ve o senaryoyu ba┼ştan ko┼ş.
+S131.11| Son karar ikili: ┬½Kapan─▒┼ş ge├ğti, kapsam FAIL=0, hedefler: ÔÇĞ┬╗ veya ┬½BITMEDI┬╗ + kalan S─▒ra.Madde. Ortas─▒ yok. Kullan─▒c─▒dan onay isteme.
+S131.12| Son kontrol: ilgili build/typecheck ye┼şil. Diff'te m├╝┼şteri i├ğeri─şi / .env.local / upload / dump ezilmemi┼ş. Ezildiyse geri al, teslim yok.
+S131.13| Prod teslim: minify (o hedef varsa) + s─▒k─▒┼şt─▒rma + aktar─▒m TLS + bariz a─ş─▒r paket yok. Kan─▒t: build ayar─▒ / response header (br/gzip) / https. Yok hedef N/A.
+S131.14| ─░kinci g├Âz (zorunlu): Bitirdim demeden S─▒ra 1ÔåÆsonu ve kritik ekranlar─▒ kendin tekrar gez. Yeni FAIL, yeni dizayn k─▒r─▒─ş─▒ veya k─▒r─▒k build ├ğ─▒k─▒yorsa BITMEDI; kapat ve ikinci g├Âz├╝ tekrarla. Kullan─▒c─▒ya ikinci ┬½tara┬╗ b─▒rakma.
+S131.15| Teslim c├╝mlesi ancak ┼ş├Âyle olur: ┬½Tek turda bitti. ─░kinci g├Âzde yeni i┼ş ├ğ─▒kmad─▒. Kapsam FAIL=0. Build ye┼şil. Kapan─▒┼ş ge├ğti.┬╗ ┬½┼Şimdilik bitti, sonra bakar─▒z┬╗ veya ikinci tarda ├ğ─▒kacak 10 i┼ş = yalan bitti, YASAK.
