@@ -35,8 +35,12 @@
     const params = new URLSearchParams(window.location.search);
     const q = params.get("lang");
     if (q && META[resolveLang(q)]) return resolveLang(q);
-    // First visit: English by default
-    return "en";
+    // Prefer browser language when supported; else site primary (TR) to match html lang
+    try {
+      const nav = (navigator.language || navigator.userLanguage || "tr").slice(0, 2).toLowerCase();
+      if (META[nav]) return nav;
+    } catch (_) {}
+    return "tr";
   }
 
   function t(lang, key) {

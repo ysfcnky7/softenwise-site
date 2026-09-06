@@ -429,7 +429,7 @@ const featuredProducts = [
     description:
       "Topluluk ve sosyal akış odaklı mobil uygulama: BLOC ile iOS ve Android’de paylaşım, keşif ve etkileşimi modern bir arayüzde birleştirin.",
     bullets: [
-      "App Store ve Google Play üzerinden indirilebilir",
+      "App Store ve Google Play’de aranabilir (mağaza arama bağlantısı)",
       "Sosyal akış ve topluluk etkileşimine uygun arayüz",
       "SoftenWise mühendislik kalitesiyle geliştirildi",
     ],
@@ -529,7 +529,7 @@ if (
     `
       : `
       <div class="product-media">
-        <div class="product-media-placeholder">${product.name}<br />Yakında</div>
+        <div class="product-media-placeholder">${product.name}<br />${(window.SW_I18N && window.SW_I18N.t("product.soon")) || "Yakında"}</div>
       </div>
     `;
 
@@ -664,6 +664,16 @@ if (
 // ===== CONTACT FORMS (MULTI PAGE SUPPORT) =====
 const contactForms = document.querySelectorAll("[data-contact-form]");
 
+const i18nText = (key, fallback) => {
+  try {
+    if (window.SW_I18N && typeof window.SW_I18N.t === "function") {
+      const v = window.SW_I18N.t(key);
+      if (v && v !== key) return v;
+    }
+  } catch (_) {}
+  return fallback;
+};
+
 const createHumanCheck = (form) => {
   const wrapper = document.createElement("div");
   wrapper.className = "human-check";
@@ -681,7 +691,8 @@ const createHumanCheck = (form) => {
   input.id = inputId;
   input.inputMode = "numeric";
   input.className = "human-check-input";
-  input.placeholder = "Sonuç";
+  input.placeholder = i18nText("form.human.placeholder", "Sonuç");
+  input.setAttribute("aria-label", i18nText("form.human.aria", "Doğrulama sonucu"));
   input.required = true;
   input.autocomplete = "off";
   input.min = "0";
@@ -720,33 +731,61 @@ contactForms.forEach((form) => {
   const submitBtn = form.querySelector("button[type='submit']");
   if (!submitBtn) return;
 
-  const defaultLabel =
-    form.dataset.submitLabel || submitBtn.textContent.trim() || "Gönder";
+  const labelSnapshot = submitBtn.textContent.trim();
+  const getSubmitLabel = () => {
+    const key = submitBtn.getAttribute("data-i18n");
+    if (key) return i18nText(key, labelSnapshot);
+    return form.dataset.submitLabel || labelSnapshot || i18nText("form.send", "Gönder");
+  };
   const endpoint = form.dataset.endpoint || "https://formspree.io/f/xldqyewl";
   const startedAt = Date.now();
+
+  let errorEl = form.querySelector(".form-error");
+  if (!errorEl) {
+    errorEl = document.createElement("p");
+    errorEl.className = "form-error";
+    errorEl.setAttribute("role", "alert");
+    errorEl.setAttribute("aria-live", "assertive");
+    errorEl.hidden = true;
+    submitBtn.after(errorEl);
+  }
+
+  const showError = (msg) => {
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+  };
+  const clearError = () => {
+    errorEl.textContent = "";
+    errorEl.hidden = true;
+  };
 
   const humanCheck = createHumanCheck(form);
   submitBtn.before(humanCheck.element);
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    clearError();
 
     const elapsedMs = Date.now() - startedAt;
     if (elapsedMs < 4000) {
-      alert("Lütfen formu dikkatlice doldurup tekrar deneyin.");
+      showError(i18nText("form.err.slow", "Lütfen formu dikkatlice doldurup tekrar deneyin."));
       return;
     }
 
     if (!humanCheck.validate()) {
-      alert("Doğrulama yanıtı hatalı. Lütfen tekrar deneyin.");
+      showError(i18nText("form.err.human", "Doğrulama yanıtı hatalı. Lütfen tekrar deneyin."));
       humanCheck.input.focus();
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = "Gönderiliyor...";
+    submitBtn.textContent = i18nText("form.sending", "Gönderiliyor...");
 
     const formData = new FormData(form);
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller
+      ? setTimeout(() => controller.abort(), 20000)
+      : null;
 
     try {
       const response = await fetch(endpoint, {
@@ -755,6 +794,7 @@ contactForms.forEach((form) => {
         headers: {
           Accept: "application/json",
         },
+        signal: controller ? controller.signal : undefined,
       });
 
       if (response.ok) {
@@ -766,19 +806,60 @@ contactForms.forEach((form) => {
           document.getElementById("formSuccess");
         if (successMsg) successMsg.style.display = "block";
 
-        submitBtn.textContent = "Talep Alındı";
+        submitBtn.textContent = i18nText("form.received", "Talep Alındı");
       } else {
-        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+        showError(i18nText("form.err.generic", "Bir hata oluştu. Lütfen tekrar deneyin."));
         submitBtn.disabled = false;
-        submitBtn.textContent = defaultLabel;
+        submitBtn.textContent = getSubmitLabel();
       }
     } catch (error) {
-      alert("Bağlantı hatası. Lütfen tekrar deneyin.");
+      showError(i18nText("form.err.network", "Bağlantı hatası. Lütfen tekrar deneyin."));
       submitBtn.disabled = false;
-      submitBtn.textContent = defaultLabel;
+      submitBtn.textContent = getSubmitLabel();
+    } finally {
+      if (timeoutId) clearTimeout(timeoutId);
     }
   });
 });
+
+// ===== COOKIE / LOCAL STORAGE NOTICE (no ad trackers) =====
+(() => {
+  const KEY = "sw-cookie-ack";
+  try {
+    if (localStorage.getItem(KEY) === "1") return;
+  } catch (_) {
+    return;
+  }
+
+  document.documentElement.classList.add("cookie-notice-open");
+  const bar = document.createElement("div");
+  bar.className = "cookie-notice";
+  bar.setAttribute("role", "dialog");
+  bar.setAttribute("aria-live", "polite");
+  bar.innerHTML = `
+    <p>${i18nText(
+      "cookie.notice",
+      "Bu sitede reklam çerezi yok. Dil tercihi cihazınızda saklanır. Ayrıntılar için gizlilik ve çerez metinlerine bakın."
+    )}
+      <a href="cerez-politikasi.html">${i18nText("footer.cookies.short", "Çerezler")}</a>
+      ·
+      <a href="gizlilik.html">${i18nText("footer.privacy.short", "Gizlilik")}</a>
+    </p>
+    <div class="cookie-notice__actions">
+      <button type="button" class="cookie-notice__btn">${i18nText("cookie.accept", "Anladım")}</button>
+    </div>
+  `;
+  document.body.appendChild(bar);
+  requestAnimationFrame(() => bar.classList.add("is-visible"));
+  bar.querySelector("button")?.addEventListener("click", () => {
+    try {
+      localStorage.setItem(KEY, "1");
+    } catch (_) {}
+    document.documentElement.classList.remove("cookie-notice-open");
+    bar.classList.remove("is-visible");
+    bar.remove();
+  });
+})();
 
 // ===== SERVICE CATEGORY FILTER =====
 const serviceFilterButtons = document.querySelectorAll("[data-service-filter]");
