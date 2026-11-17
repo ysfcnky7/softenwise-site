@@ -240,9 +240,9 @@ h2,
 }
 
 .hero.hero--home .btn-ghost:hover {
-  background: rgba(14, 58, 70, 0.06) !important;
-  border-color: rgba(14, 58, 70, 0.5) !important;
-  color: var(--accent-deep) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #fff !important;
 }
 
 /* —— Section rhythm —— */
@@ -611,31 +611,31 @@ h2,
   opacity: 0.9;
 }
 
-/* —— Hero split showcase —— */
+/* —— Hero split stage —— */
 .hero.hero--home {
-  min-height: min(88vh, 780px) !important;
+  min-height: min(90vh, 820px) !important;
 }
 
 .hero.hero--home .hero-brand {
-  font-size: clamp(44px, 7.5vw, 78px) !important;
+  font-size: clamp(48px, 8vw, 86px) !important;
   font-weight: 550 !important;
-  letter-spacing: -0.035em !important;
-  color: var(--accent-deep) !important;
+  letter-spacing: -0.04em !important;
+  color: #fff !important;
 }
 
 .hero.hero--home h1 {
-  font-size: clamp(28px, 3.8vw, 42px) !important;
-  font-weight: 500 !important;
-  max-width: 14ch !important;
-  line-height: 1.15 !important;
-  color: var(--text-on-night, #0f232b) !important;
+  font-size: clamp(22px, 2.8vw, 32px) !important;
+  font-weight: 450 !important;
+  max-width: 18ch !important;
+  line-height: 1.25 !important;
+  color: rgba(255, 255, 255, 0.78) !important;
 }
 
 .hero.hero--home .hero-copy > p:not(.hero-brand) {
-  font-size: 1.08rem !important;
-  line-height: 1.65 !important;
-  max-width: 38ch !important;
-  color: var(--text-on-night-muted, rgba(15, 35, 48, 0.72)) !important;
+  font-size: 1.02rem !important;
+  line-height: 1.55 !important;
+  max-width: 34ch !important;
+  color: rgba(255, 255, 255, 0.58) !important;
 }
 
 /* —— Reveal —— */
@@ -680,18 +680,29 @@ h2,
 
 /* ========== VISUAL SCALE FIX (pro images) ========== */
 
-/* Hero secondary CTA — light split surface */
-.hero.hero--home .btn-ghost {
+/* Hero CTAs — dark stage */
+.hero.hero--home .btn-primary {
+  background: #fff !important;
   color: var(--accent-deep) !important;
-  border-color: rgba(14, 58, 70, 0.3) !important;
+  box-shadow: none !important;
+}
+
+.hero.hero--home .btn-primary:hover {
+  background: #e8eef0 !important;
+  color: var(--accent-deep) !important;
+}
+
+.hero.hero--home .btn-ghost {
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
   background: transparent !important;
   font-weight: 600 !important;
 }
 
 .hero.hero--home .btn-ghost:hover {
-  background: rgba(14, 58, 70, 0.06) !important;
-  border-color: rgba(14, 58, 70, 0.5) !important;
-  color: var(--accent-deep) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #fff !important;
 }
 
 /* Reference logos — larger, clearer */

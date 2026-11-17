@@ -393,64 +393,45 @@ if (productJump) {
 const featuredProducts = [
   {
     name: "SoftenWise Clinic",
-    image: "images/clinic_image.png",
-    imageAlt: "SoftenWise Clinic",
+    image: "images/showcase/clinic-ui.png",
+    imageAlt: "SoftenWise Clinic hasta ve tedavi paneli",
     imageMode: "cover",
-    description:
-      "Randevu, hasta takibi ve finans — klinik operasyonu tek panelde.",
-    bullets: [
-      "Dest Clinic referansı",
-      "Çok dil ve rol bazlı erişim",
-      "Canlı ürün hattı",
-    ],
+    description: "Randevu, hasta ve tedavi — tek panel.",
+    bullets: [],
     cta: "İncele",
     detailUrl: "urunler.html#softenwise-clinic",
   },
   {
     name: "SoftenWise Liman",
-    image: "images/softenwise-liman-og.png",
-    imageAlt: "SoftenWise Liman — Kaleiçi Yat Limanı",
+    image: "images/showcase/liman-web.png",
+    imageAlt: "SoftenWise Liman web yönetim paneli",
     imageMode: "cover",
     label: "Antalya · canlı",
-    description:
-      "Kaleiçi Yat Limanı’nda canlı: gişe, sefer, cari ve kasa tek sistemde.",
-    bullets: [
-      "Web + Android / iOS",
-      "Gişe, sefer ve kasa",
-      "Antalya canlı referans",
-    ],
+    description: "Web panel: sefer, gişe, kasa — Kaleiçi’de canlı.",
+    bullets: [],
     cta: "İncele",
     detailUrl: "urunler.html#softenwise-liman",
+  },
+  {
+    name: "BLOC",
+    image: "images/showcase/bloc-og.png",
+    imageAlt: "BLOC — mahalle sosyal ağı",
+    imageMode: "cover",
+    label: "Village",
+    description: "Mahalle sosyal ağı — keşfet, bağlan.",
+    bullets: [],
+    cta: "İncele",
+    detailUrl: "urunler.html#bloc",
   },
   {
     name: "SoftenWise Maps",
     image: "images/softenwise-maps-logo.png",
     imageAlt: "SoftenWise Maps",
     imageMode: "contain",
-    description:
-      "Saha CBS: harita, bölge, rota ve REST API ile operasyon görünürlüğü.",
-    bullets: [
-      "Harita ve katman yönetimi",
-      "Rota ve mesafe analizi",
-      "Çok kiracılı mimari",
-    ],
+    description: "Saha CBS, rota ve REST API.",
+    bullets: [],
     cta: "İncele",
     detailUrl: "urunler.html#softenwise-maps",
-  },
-  {
-    name: "Otomini",
-    image: "images/otomini-logo.webp",
-    imageAlt: "Otomini",
-    imageMode: "contain",
-    description:
-      "İkinci el değerleme, ekspertiz ve galeri vitrini.",
-    bullets: [
-      "Anlık değerleme",
-      "Şeffaf ekspertiz",
-      "Galeri yönetimi",
-    ],
-    cta: "İncele",
-    detailUrl: "urunler.html#otomini",
   },
 ];
 
@@ -570,6 +551,11 @@ if (
       footerHtml = `<div class="product-cta">${product.cta}</div>`;
     }
 
+    const bullets = Array.isArray(product.bullets) ? product.bullets : [];
+    const listHtml = bullets.length
+      ? `<ul class="product-list">${bullets.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>`
+      : "";
+
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
@@ -577,9 +563,7 @@ if (
         ${badgeHtml}
       </div>
       <p class="product-desc">${product.description}</p>
-      <ul class="product-list">
-        ${product.bullets.map((bullet) => `<li>${bullet}</li>`).join("")}
-      </ul>
+      ${listHtml}
       ${footerHtml}
     `;
 
