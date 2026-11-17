@@ -111,12 +111,146 @@ h2,
   box-shadow: none !important;
   backdrop-filter: blur(18px) saturate(1.05) !important;
   -webkit-backdrop-filter: blur(18px) saturate(1.05) !important;
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease !important;
 }
 
 .site-header.scrolled {
   background: rgba(251, 252, 252, 0.94) !important;
   box-shadow: none !important;
   border-bottom-color: var(--border-strong) !important;
+}
+
+/* Home hero sits under sticky header so dark-over-hero chrome works */
+body.page-home .hero.hero--home {
+  margin-top: calc(-1 * var(--header-height, 72px));
+  padding-top: calc(var(--header-height, 72px) + clamp(48px, 8vw, 88px)) !important;
+}
+
+@media (max-width: 860px) {
+  body.page-home .hero.hero--home {
+    padding-top: calc(var(--header-height, 72px) + clamp(36px, 10vw, 64px)) !important;
+  }
+}
+
+/* Transparent / dark header while over home hero */
+.site-header.header--over-hero {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-header.header--over-hero::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+
+.site-header.header--over-hero .nav > a,
+.site-header.header--over-hero .nav-item > a,
+.site-header.header--over-hero .nav-main-link {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.site-header.header--over-hero .nav > a:hover,
+.site-header.header--over-hero .nav-item > a:hover,
+.site-header.header--over-hero .nav-main-link:hover {
+  color: #fff !important;
+}
+
+.site-header.header--over-hero .logo-text,
+.site-header.header--over-hero .menu-btn,
+.site-header.header--over-hero .nav-parent-toggle {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Lang switch: keep label readable on dark hero; leave menu on white */
+.site-header.header--over-hero .lang-switch__btn {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.site-header.header--over-hero .lang-switch__btn:hover,
+.site-header.header--over-hero .lang-switch.is-open .lang-switch__btn {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: #fff !important;
+}
+
+.site-header.header--over-hero .lang-switch__menu {
+  z-index: 120;
+}
+
+.site-header.header--over-hero .lang-switch__option {
+  color: var(--accent, #0e3a46) !important;
+  background: transparent !important;
+}
+
+.site-header.header--over-hero .lang-switch__option:hover,
+.site-header.header--over-hero .lang-switch__option.is-active {
+  background: var(--bg-soft, #f3f6f7) !important;
+  color: var(--accent, #0e3a46) !important;
+}
+
+.site-header.header--over-hero .menu-btn span,
+.site-header.header--over-hero .menu-btn::before,
+.site-header.header--over-hero .menu-btn::after {
+  background: #fff !important;
+}
+
+.site-header.header--over-hero .logo-img {
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+.site-header.header--over-hero .nav-cta,
+.site-header.header--over-hero a.nav-cta,
+.site-header.header--over-hero .nav-main-link--cta,
+.site-header.header--over-hero a.nav-main-link--cta {
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.site-header.header--over-hero .nav-main-link--cta:hover,
+.site-header.header--over-hero a.nav-main-link--cta:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #fff !important;
+}
+
+/* Mobile open menu: restore light header chrome */
+html.menu-open .site-header.header--over-hero,
+body.menu-open .site-header.header--over-hero {
+  background: rgba(251, 252, 252, 0.98) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+html.menu-open .site-header.header--over-hero .nav-main-link,
+html.menu-open .site-header.header--over-hero .nav > a,
+html.menu-open .site-header.header--over-hero .menu-btn,
+html.menu-open .site-header.header--over-hero .lang-switch__btn,
+body.menu-open .site-header.header--over-hero .nav-main-link,
+body.menu-open .site-header.header--over-hero .nav > a,
+body.menu-open .site-header.header--over-hero .menu-btn,
+body.menu-open .site-header.header--over-hero .lang-switch__btn {
+  color: rgba(20, 38, 46, 0.82) !important;
+}
+
+html.menu-open .site-header.header--over-hero .logo-img,
+body.menu-open .site-header.header--over-hero .logo-img {
+  filter: none;
+}
+
+/* Keep dropdown readable when header is over hero */
+.site-header.header--over-hero .nav-dropdown {
+  color: var(--text-main);
+}
+
+.site-header.header--over-hero .nav-dropdown .nav-dd-title,
+.site-header.header--over-hero .nav-dropdown .nav-main-link {
+  color: var(--text-main) !important;
 }
 
 .site-header .logo-img {
@@ -369,6 +503,26 @@ h2,
   transform: translateX(4px);
 }
 
+.service-index__more {
+  margin: 22px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: center;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.service-index__more a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 550;
+}
+
+.service-index__more a:hover {
+  text-decoration: underline;
+}
+
 /* —— Case feature —— */
 .case-feature {
   background: var(--paper) !important;
@@ -401,6 +555,50 @@ h2,
       padding-left: 0;
     }
   }
+
+.case-feature--compact .case-feature__links {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--border-strong);
+}
+
+.case-feature--compact .case-feature__links a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.25s var(--ease-out-expo), color 0.2s ease;
+}
+
+.case-feature--compact .case-feature__links a span:first-child {
+  font-weight: 550;
+  font-size: 1.02rem;
+}
+
+.case-feature--compact .case-feature__links a span:last-child {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.case-feature--compact .case-feature__links a:hover {
+  color: var(--accent-2);
+  padding-left: 4px;
+}
+
+.case-feature--compact .case-feature__cta {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.product-showcase--stage {
+  touch-action: pan-y;
+}
 
 /* —— Products band —— */
 .products-band__item {

@@ -504,10 +504,10 @@ if (
         wrapper.rel = "noopener noreferrer";
         wrapper.setAttribute(
           "aria-label",
-          `${product.name} harici bağlantı, yeni sekmede açılır`
+          `${displayName} harici bağlantı, yeni sekmede açılır`
         );
       } else {
-        wrapper.setAttribute("aria-label", `${product.name} ürün detayına git`);
+        wrapper.setAttribute("aria-label", `${displayName} ürün detayına git`);
       }
     } else if (!linkUrl) {
       item.classList.add("is-disabled");
@@ -657,22 +657,58 @@ if (
   productShowcase.addEventListener("focusin", stopAutoplay);
   productShowcase.addEventListener("focusout", startAutoplay);
 
+  // Touch swipe (mobile)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  productShowcase.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.changedTouches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      stopAutoplay();
+    },
+    { passive: true }
+  );
+  productShowcase.addEventListener(
+    "touchend",
+    (e) => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        if (dx < 0) next();
+        else prev();
+      }
+      restartAutoplay();
+    },
+    { passive: true }
+  );
+
   goTo(0);
   startAutoplay();
 }
 
+// ===== HEADER OVER HOME HERO =====
+(() => {
+  const header = document.querySelector(".site-header");
+  const homeHero = document.querySelector(".hero--home");
+  if (!header || !homeHero) return;
+
+  const sync = () => {
+    const heroBottom = homeHero.getBoundingClientRect().bottom;
+    const over = heroBottom > header.offsetHeight + 8;
+    header.classList.toggle("header--over-hero", over);
+    document.body.classList.toggle("has-home-hero", true);
+  };
+
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+  window.addEventListener("resize", sync);
+})();
+
 // ===== CONTACT FORMS (MULTI PAGE SUPPORT) =====
 const contactForms = document.querySelectorAll("[data-contact-form]");
-
-const i18nText = (key, fallback) => {
-  try {
-    if (window.SW_I18N && typeof window.SW_I18N.t === "function") {
-      const v = window.SW_I18N.t(key);
-      if (v && v !== key) return v;
-    }
-  } catch (_) {}
-  return fallback;
-};
 
 const createHumanCheck = (form) => {
   const wrapper = document.createElement("div");

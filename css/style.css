@@ -4696,8 +4696,20 @@ a.product-cta:hover {
 }
 
 /* Continuous client marquee inside Selected Clients */
-.logo-strip__marquee.logo-marquee--dual {
+.logo-strip__marquee.logo-marquee--dual,
+.logo-strip__marquee.logo-marquee {
   margin-top: 0;
+}
+
+.logo-strip__marquee.logo-marquee:not(.logo-marquee--dual) {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
 .logo-strip .logo-marquee-rows {
@@ -5881,7 +5893,7 @@ a.product-cta:hover {
 }
 
 
-@media (max-width: 980px) {
+@media (max-width: 860px) {
   .hero.hero--home {
     min-height: 0;
     align-items: stretch;
@@ -6261,18 +6273,19 @@ a.product-cta:hover {
 .cookie-notice {
   position: fixed;
   z-index: 1300;
-  left: 16px;
+  left: auto;
   right: 16px;
   bottom: 16px;
-  max-width: 520px;
-  margin-inline: auto;
-  padding: 14px 16px;
-  border-radius: 14px;
+  max-width: 340px;
+  width: min(340px, calc(100vw - 32px));
+  margin-inline: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
   border: 1px solid rgba(14, 58, 70, 0.14);
   background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 12px 40px rgba(14, 58, 70, 0.16);
+  box-shadow: 0 10px 28px rgba(14, 58, 70, 0.14);
   display: none;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
 }
 .cookie-notice.is-visible {
@@ -6301,8 +6314,8 @@ html.cookie-notice-open .quick-contact {
 }
 .cookie-notice p {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.45;
   color: #2a3d46;
   flex: 1;
 }
@@ -6318,9 +6331,9 @@ html.cookie-notice-open .quick-contact {
 .cookie-notice__btn {
   border: 0;
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 6px 12px;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   background: #0e3a46;
@@ -6329,7 +6342,11 @@ html.cookie-notice-open .quick-contact {
 @media (max-width: 560px) {
   .cookie-notice {
     flex-direction: column;
-    bottom: 16px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+    width: auto;
   }
 }
 
