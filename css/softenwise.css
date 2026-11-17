@@ -130,6 +130,31 @@ body.page-home .hero.hero--home {
   body.page-home .hero.hero--home {
     padding-top: calc(var(--header-height, 72px) + clamp(36px, 10vw, 64px)) !important;
   }
+
+  .hero.hero--home .hero-brand {
+    font-size: clamp(40px, 10vw, 64px) !important;
+    margin-bottom: 10px !important;
+  }
+
+  .hero.hero--home h1 {
+    font-size: clamp(18px, 3.4vw, 26px) !important;
+    margin-bottom: 10px !important;
+  }
+
+  .hero.hero--home .hero-copy > p:not(.hero-brand) {
+    margin-bottom: 18px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .hero.hero--home .product-track {
+    min-height: 240px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero.hero--home .product-track {
+    min-height: 200px !important;
+  }
 }
 
 /* Transparent / dark header while over home hero */
@@ -209,15 +234,15 @@ body.page-home .hero.hero--home {
 .site-header.header--over-hero a.nav-cta,
 .site-header.header--over-hero .nav-main-link--cta,
 .site-header.header--over-hero a.nav-main-link--cta {
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
-  background: rgba(255, 255, 255, 0.12) !important;
+  color: var(--accent-deep, #082a33) !important;
+  border-color: transparent !important;
+  background: #fff !important;
 }
 
 .site-header.header--over-hero .nav-main-link--cta:hover,
 .site-header.header--over-hero a.nav-main-link--cta:hover {
-  background: rgba(255, 255, 255, 0.22) !important;
-  color: #fff !important;
+  background: #e8eef0 !important;
+  color: var(--accent-deep, #082a33) !important;
 }
 
 /* Mobile open menu: restore light header chrome */
@@ -435,7 +460,15 @@ body.menu-open .site-header.header--over-hero .logo-img {
   text-transform: uppercase !important;
   font-weight: 600 !important;
   color: var(--text-muted) !important;
-  margin-bottom: 28px !important;
+  margin-bottom: 8px !important;
+}
+
+.logo-strip__proof {
+  margin: 0 0 22px;
+  max-width: 48ch;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-muted);
 }
 
 .logo-strip__row {
