@@ -76,8 +76,8 @@
   <link rel="stylesheet" href="css/local-fonts.css?v=202609050" />
 
   <!-- CSS — ?v= cache bust: scripts/apply-asset-version.ps1 ($AssetVersion) -->
-  <link rel="stylesheet" href="css/style.css?v=202611170" />
-  <link rel="stylesheet" href="css/softenwise.css?v=202609050" />
+  <link rel="stylesheet" href="css/style.css?v=202611184" />
+  <link rel="stylesheet" href="css/softenwise.css?v=202611184" />
 
   <!-- JSON-LD (SEO) -->
   <script type="application/ld+json">
@@ -289,19 +289,33 @@
 
     <main id="main">
     <section class="hero hero--home" id="top">
-      <div class="hero-visual" aria-hidden="true">
-        <img src="images/hero-brand-scene.jpg" alt="" width="1536" height="1024" decoding="async" fetchpriority="high" />
-      </div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="hero-brand" data-i18n="gap.0102">SoftenWise</p>
-          <h1 data-i18n="home.hero.h1">Kurumsal yazılım sistemleri tasarlıyor ve hayata geçiriyoruz.</h1>
-          <p data-i18n="home.hero.p">
-            Özel yazılım, mobil uygulama, entegrasyon ve güvenlik alanlarında net kapsam, şeffaf süreç ve canlı sonrası destek sunuyoruz.
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn-primary" data-i18n="home.hero.cta">Görüşme planlayın</a>
-            <a href="#solutions" class="btn-ghost" data-i18n="home.hero.ghost">Hizmetlerimiz</a>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <p class="hero-brand" data-i18n="gap.0102">SoftenWise</p>
+            <h1 data-i18n="home.hero.h1">Klinik, liman ve saha için canlı yazılım sistemleri.</h1>
+            <p data-i18n="home.hero.lead">Net kapsam, şeffaf teslim. Ürünlerimiz üretimde.</p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn-primary" data-i18n="home.hero.cta">Görüşme planlayın</a>
+              <a href="urunler.html" class="btn-ghost" data-i18n="home.showcase.products">Ürünler</a>
+            </div>
+          </div>
+
+          <div class="hero-products reveal">
+            <div class="product-showcase product-showcase--stage" id="productShowcase" data-autoplay-ms="5600" aria-roledescription="carousel" aria-label="SoftenWise ürünleri">
+              <div class="product-track" id="productTrack" role="list"></div>
+              <div class="product-showcase-footer">
+                <div class="product-dots" id="productDots"></div>
+                <div class="product-controls">
+                  <button type="button" class="product-nav-btn" id="productPrev" aria-label="Önceki ürün">
+                    <svg class="sw-icon" width="18" height="18" aria-hidden="true"><use href="#sw-arrow-left"></use></svg>
+                  </button>
+                  <button type="button" class="product-nav-btn" id="productNext" aria-label="Sonraki ürün">
+                    <svg class="sw-icon" width="18" height="18" aria-hidden="true"><use href="#sw-arrow-right"></use></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -310,48 +324,25 @@
     <section class="logo-strip" id="references" aria-label="Referanslar">
       <div class="container">
         <p class="logo-strip__label" data-i18n="home.refs.label">Seçilmiş referanslar</p>
-        <div class="logo-marquee logo-marquee--dual logo-strip__marquee reveal" aria-label="Referans logoları">
-          <div class="logo-marquee-rows">
-            <div class="logo-marquee-row">
-              <div class="logo-track">
-                <div class="logo-item"><a href="urunler.html#kaleici-yat-limani" aria-label="Kaleiçi Yat Limanı"><img src="images/reference/kaleiciyatlimaniref.svg" alt="Kaleiçi Yat Limanı" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" aria-label="Point Croissant"><img src="images/reference/pointcroissantref.png" alt="Point Croissant" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo"><img src="images/reference/sharingoref.png" alt="Sharingo" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-label="AytuCar"><img src="images/reference/aytucarref.png" alt="AytuCar" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-label="Aytu Otomotiv"><img src="images/reference/aytuotomotivref.png" alt="Aytu Otomotiv" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-label="Otomini"><img src="images/reference/otominiref.png" alt="Otomini" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-label="Jenesis"><img src="images/reference/jenesisref.png" alt="Jenesis" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><img src="images/reference/destclinicaref.jpg" alt="Dest Clinic" width="220" height="72" loading="lazy" decoding="async" /></div>
-                <div class="logo-item" aria-hidden="true"><a href="urunler.html#kaleici-yat-limani" tabindex="-1"><img src="images/reference/kaleiciyatlimaniref.svg" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/pointcroissantref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/sharingoref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/aytucarref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/aytuotomotivref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/otominiref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/jenesisref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><img src="images/reference/destclinicaref.jpg" alt="" width="220" height="72" loading="lazy" decoding="async" /></div>
-              </div>
-            </div>
-            <div class="logo-marquee-row logo-marquee-row--rtl">
-              <div class="logo-track">
-                <div class="logo-item"><a href="urunler.html#kaleici-yat-limani" aria-label="Kaleiçi Yat Limanı"><img src="images/reference/kaleiciyatlimaniref.svg" alt="Kaleiçi Yat Limanı" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" aria-label="Point Croissant"><img src="images/reference/pointcroissantref.png" alt="Point Croissant" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><img src="images/reference/destclinicaref.jpg" alt="Dest Clinic" width="220" height="72" loading="lazy" decoding="async" /></div>
-                <div class="logo-item"><a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-label="Jenesis"><img src="images/reference/jenesisref.png" alt="Jenesis" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-label="Otomini"><img src="images/reference/otominiref.png" alt="Otomini" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-label="Aytu Otomotiv"><img src="images/reference/aytuotomotivref.png" alt="Aytu Otomotiv" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-label="AytuCar"><img src="images/reference/aytucarref.png" alt="AytuCar" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item"><a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo"><img src="images/reference/sharingoref.png" alt="Sharingo" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="urunler.html#kaleici-yat-limani" tabindex="-1"><img src="images/reference/kaleiciyatlimaniref.svg" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/pointcroissantref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><img src="images/reference/destclinicaref.jpg" alt="" width="220" height="72" loading="lazy" decoding="async" /></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/jenesisref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/otominiref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/aytuotomotivref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/aytucarref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-                <div class="logo-item" aria-hidden="true"><a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/sharingoref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
-              </div>
-            </div>
+        <p class="logo-strip__proof reveal" data-i18n="home.refs.proof">Dest Clinic · Kaleiçi Yat Limanı · Point Croissant · Sharingo</p>
+        <div class="logo-marquee logo-strip__marquee reveal" aria-label="Referans logoları">
+          <div class="logo-track">
+            <div class="logo-item"><a href="urunler.html#kaleici-yat-limani" aria-label="Kaleiçi Yat Limanı"><img src="images/reference/kaleiciyatlimaniref.svg" alt="Kaleiçi Yat Limanı" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" aria-label="Point Croissant"><img src="images/reference/pointcroissantref.png" alt="Point Croissant" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" aria-label="Sharingo"><img src="images/reference/sharingoref.png" alt="Sharingo" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" aria-label="AytuCar"><img src="images/reference/aytucarref.png" alt="AytuCar" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" aria-label="Aytu Otomotiv"><img src="images/reference/aytuotomotivref.png" alt="Aytu Otomotiv" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" aria-label="Otomini"><img src="images/reference/otominiref.png" alt="Otomini" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" aria-label="Jenesis"><img src="images/reference/jenesisref.png" alt="Jenesis" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item"><img src="images/reference/destclinicaref.jpg" alt="Dest Clinic" width="220" height="72" loading="lazy" decoding="async" /></div>
+            <div class="logo-item" aria-hidden="true"><a href="urunler.html#kaleici-yat-limani" tabindex="-1"><img src="images/reference/kaleiciyatlimaniref.svg" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><a href="https://pointcroissant.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/pointcroissantref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><a href="https://www.sharingo.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/sharingoref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><a href="https://www.aytucar.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/aytucarref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><a href="https://aytuotomotiv.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/aytuotomotivref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><a href="https://otomini.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/otominiref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><a href="https://www.jenesis.com.tr/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/reference/jenesisref.png" alt="" width="220" height="72" loading="lazy" decoding="async" /></a></div>
+            <div class="logo-item" aria-hidden="true"><img src="images/reference/destclinicaref.jpg" alt="" width="220" height="72" loading="lazy" decoding="async" /></div>
           </div>
         </div>
       </div>
@@ -386,119 +377,43 @@
               <span class="service-index__arrow" aria-hidden="true">→</span>
             </a>
           </li>
-          <li class="service-index__item reveal">
-            <a href="guvenlik-denetim.html">
-              <span class="service-index__title" data-i18n="home.svc.sec">Güvenlik ve Denetim</span>
-              <span class="service-index__desc" data-i18n="home.svc.sec.desc">Risk analizi, uyumluluk ve teknik güvenlik değerlendirmesi.</span>
-              <span class="service-index__arrow" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="service-index__item reveal">
-            <a href="teknik-danismanlik.html">
-              <span class="service-index__title" data-i18n="home.svc.consult">Teknik Danışmanlık</span>
-              <span class="service-index__desc" data-i18n="home.svc.consult.desc">Mimari kararlar, ölçeklenme ve teknoloji yol haritası.</span>
-              <span class="service-index__arrow" aria-hidden="true">→</span>
-            </a>
-          </li>
         </ul>
+        <p class="service-index__more reveal">
+          <a href="guvenlik-denetim.html" data-i18n="home.svc.sec">Güvenlik ve Denetim</a>
+          <span aria-hidden="true">·</span>
+          <a href="teknik-danismanlik.html" data-i18n="home.svc.consult">Teknik Danışmanlık</a>
+        </p>
       </div>
     </section>
 
-    <section class="case-feature" id="projects">
+    <section class="case-feature case-feature--compact" id="projects">
       <div class="container">
         <header class="section-head">
           <span class="section-kicker reveal" data-i18n="home.case.kicker">Projeler</span>
           <h2 class="reveal" data-i18n="home.case.h2">Seçilmiş çalışmalar</h2>
-          <p class="section-desc reveal" data-i18n="home.case.desc">Ürün portföyümüz ve referanslarımız. Gizlilik sözleşmesi kapsamındaki projeler paylaşılmaz.</p>
+          <p class="section-desc reveal" data-i18n="home.case.desc">Canlı ürünler ve referanslar. NDA kapsamındakiler paylaşılmaz.</p>
         </header>
-        <div class="case-feature__grid reveal">
-          <div>
-            <figure class="case-feature__media">
-              <img src="images/clinic_image.png" alt="SoftenWise Clinic ürün arayüzü" width="960" height="540" loading="lazy" decoding="async"  data-i18n-attr="alt:attr.016" />
-            </figure>
-            <p class="case-feature__sector" data-i18n="home.case.sector">Ürün · SoftenWise Clinic</p>
-            <h3 class="case-feature__title" data-i18n="home.case.title">Klinik operasyonunu tek panelde yönetin</h3>
-            <p class="case-feature__summary" data-i18n="home.case.summary">
-              Randevu, hasta takibi, finans ve çok dilli operasyonu SoftenWise Clinic üzerinde birleştirdik. Referanslarımız arasında Dest Clinic yer almaktadır.
-            </p>
-            <div class="case-feature__cols">
-              <div>
-                <strong data-i18n="home.case.problem">Sorun</strong>
-                <p data-i18n="home.case.problem.p">Şube ve finans süreçleri dağınık araçlarda ilerliyordu; yönetim görünürlüğü sınırlıydı.</p>
-              </div>
-              <div>
-                <strong data-i18n="home.case.solution">Çözüm</strong>
-                <p data-i18n="home.case.solution.p">Rol bazlı web paneli, denetim kaydı, çok dil desteği ve şube görünürlüğü.</p>
-              </div>
-              <div>
-                <strong data-i18n="home.case.impact">Sonuç</strong>
-                <p data-i18n="home.case.impact.p">Operasyon tek ekrandan yönetilir; deneme sürecinden canlıya net bir geçiş yolu.</p>
-              </div>
-            </div>
-            <p class="case-feature__cta" data-i18n="nest.0026" data-i18n-html><a href="urunler.html#softenwise-clinic" class="btn-ghost"><span data-i18n="home.case.cta">Clinic ürününü inceleyin</span></a></p>
-          </div>
-          <div class="case-feature__more" aria-label="Diğer örnekler" data-i18n-attr="aria-label:attr.005">
-            <a href="urunler.html#kaleici-yat-limani">
-              <span data-i18n="home.case.liman">Antalya Kaleiçi Yat Limanı SoftenWise Liman’da</span>
-              <span data-i18n="home.case.liman.meta">Web · Android · iOS · cari / gişe</span>
-            </a>
-            <a href="urunler.html#otomini">
-              <span data-i18n="home.case.otomini">Otomini — ikinci el değerleme ve galeri</span>
-              <span data-i18n="home.case.otomini.meta">SoftenWise ürünü</span>
-            </a>
-            <a href="urunler.html#softenwise-maps">
-              <span data-i18n="home.case.maps">SoftenWise Maps — saha CBS ve harita API</span>
-              <span data-i18n="home.case.maps.meta">Kurumsal ürün</span>
-            </a>
-            <a href="#references">
-              <span data-i18n="home.case.refs">Kaleiçi Yat Limanı · Point Croissant · Sharingo · Aytu · Jenesis</span>
-              <span data-i18n="home.case.refs.meta">Referanslar</span>
-            </a>
-            <p class="case-feature__cta" data-i18n="nest.0029" data-i18n-html><a href="#contact" class="btn-primary" data-i18n="home.case.talk">Projenizi konuşalım</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="products-band" id="products">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-kicker reveal" data-i18n="home.prod.kicker">Ürünler</span>
-          <h2 class="reveal" data-i18n="home.prod.h2">SoftenWise ürünleri</h2>
-          <p class="section-desc reveal" data-i18n="home.prod.desc">Klinik, liman, harita ve otomotiv — canlıda kullanılan SoftenWise ürün hatları. SoftenWise Liman: Antalya Kaleiçi Yat Limanı.</p>
-        </header>
-        <div class="products-band__grid">
-          <a class="products-band__item reveal" href="urunler.html#softenwise-clinic">
-            <span class="products-band__visual">
-              <img src="images/clinic_image.png" alt="" width="640" height="360" loading="lazy" decoding="async" />
-            </span>
-            <img class="products-band__logo" src="images/softenwise-clinic-logo.png" alt="" width="200" height="52" loading="lazy" decoding="async" />
-            <strong data-i18n="gap.0103">SoftenWise Clinic</strong>
-            <span data-i18n="home.prod.clinic">Klinik ve sağlık operasyonları için dijital platform.</span>
+        <div class="case-feature__links reveal" aria-label="Diğer örnekler" data-i18n-attr="aria-label:attr.005">
+          <a href="urunler.html#softenwise-clinic">
+            <span data-i18n="home.case.sector">Ürün · SoftenWise Clinic</span>
+            <span data-i18n="home.case.clinic.meta">Canlı · Dest Clinic referansı</span>
           </a>
-          <a class="products-band__item reveal" href="urunler.html#softenwise-liman">
-            <span class="products-band__visual products-band__visual--logo">
-              <img src="images/softenwise-liman-logo.png" alt="" width="280" height="120" loading="lazy" decoding="async" />
-            </span>
-            <strong data-i18n="urunler.liman.name">SoftenWise Liman</strong>
-            <span data-i18n="home.prod.liman">Antalya Kaleiçi canlı — web, Android / iOS, gişe, cari, sefer ve kasa.</span>
+          <a href="urunler.html#kaleici-yat-limani">
+            <span data-i18n="home.case.liman">Antalya Kaleiçi Yat Limanı SoftenWise Liman’da</span>
+            <span data-i18n="home.case.liman.meta">Canlı · Web · Android · iOS</span>
           </a>
-          <a class="products-band__item reveal" href="urunler.html#softenwise-maps">
-            <span class="products-band__visual products-band__visual--logo">
-              <img src="images/softenwise-maps-logo.png" alt="" width="280" height="120" loading="lazy" decoding="async" />
-            </span>
-            <strong data-i18n="gap.0104">SoftenWise Maps</strong>
-            <span data-i18n="home.prod.maps">Konum ve harita tabanlı operasyon araçları.</span>
+          <a href="urunler.html#softenwise-maps">
+            <span data-i18n="home.case.maps">SoftenWise Maps — saha CBS ve harita API</span>
+            <span data-i18n="home.case.maps.meta">Kurumsal ürün · rota / REST</span>
           </a>
-          <a class="products-band__item reveal" href="urunler.html#otomini">
-            <span class="products-band__visual products-band__visual--logo">
-              <img src="images/otomini-logo.webp" alt="" width="280" height="120" loading="lazy" decoding="async" />
-            </span>
-            <strong data-i18n="gap.0105">Otomini</strong>
-            <span data-i18n="home.prod.otomini">Otomotiv ve filo süreçleri için dijital çözümler.</span>
+          <a href="urunler.html#otomini">
+            <span data-i18n="home.case.otomini">Otomini — ikinci el değerleme ve galeri</span>
+            <span data-i18n="home.case.otomini.meta">SoftenWise ürünü · canlı</span>
           </a>
         </div>
-        <p class="products-band__more" data-i18n="nest.0033" data-i18n-html><a href="urunler.html" class="btn-ghost" data-i18n="home.prod.more">Tüm ürünleri inceleyin</a></p>
+        <p class="case-feature__cta reveal">
+          <a href="urunler.html" class="btn-ghost" data-i18n="home.prod.more">Tüm ürünleri inceleyin</a>
+        </p>
       </div>
     </section>
 
@@ -627,9 +542,9 @@
       <svg class="sw-icon quick-contact__phone-icon" aria-hidden="true" focusable="false"><use href="#sw-phone"/></svg>
     </a>
   </div>
-  <script src="js/locales.js?v=202611172"></script>
+  <script src="js/locales.js?v=202611184"></script>
   <script src="js/i18n.js?v=202607178"></script>
-  <script src="js/main.js?v=202609050" defer></script>
+  <script src="js/main.js?v=202611179" defer></script>
 </body>
 
 </html>
