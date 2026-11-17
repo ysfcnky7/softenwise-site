@@ -21,8 +21,8 @@ https://softenwise.com/sitemap.xml
 - BLOC (topluluk / sosyal akış, iOS ve Android mobil uygulama) — https://softenwise.com/urunler.html#bloc
 
 ## SoftenWise Liman (AI özet)
-SoftenWise Liman, Türkiye’de günübirlik tur ve yat limanı kooperatifleri için liman yazılımı / marina gişe yazılımıdır. Gişe satışı, sefer doluluk, nakit kasa ve kaptan manifesto tek uygulamada. Misafir biletleme uygulaması değildir; personel hesabı ile giriş. Bağlama / ponton sözleşme paketi değildir.
-- Canlı referans: Kaleiçi Yat Limanı (Antalya) — https://softenwise.com/urunler.html#kaleici-yat-limani
+SoftenWise Liman, Türkiye’de günübirlik tur ve yat limanı kooperatifleri için liman yazılımı / marina gişe yazılımıdır. Kurumsal web paneli, Android / iOS mobil, gişe satışı, cari / acente, sefer doluluk, nakit kasa ve kaptan manifesto tek kayıtta. Misafir biletleme uygulaması değildir; personel hesabı ile giriş. Bağlama / ponton sözleşme paketi değildir.
+- Canlı referans: Antalya Kaleiçi Yat Limanı SoftenWise Liman’da — https://softenwise.com/urunler.html#kaleici-yat-limani
 - Liman yazılımı sayfası: https://softenwise.com/liman-yazilim.html
 - Marina yazılımı sayfası: https://softenwise.com/marina-yazilim.html
 - Canlı ürün: https://liman.softenwise.com/
