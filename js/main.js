@@ -389,48 +389,69 @@ if (productJump) {
   }
 }
 
+// ===== I18N HELPER (early — used by hero showcase) =====
+const i18nText = (key, fallback) => {
+  try {
+    if (window.SW_I18N && typeof window.SW_I18N.t === "function") {
+      const v = window.SW_I18N.t(key);
+      if (v && v !== key) return v;
+    }
+  } catch (_) {}
+  return fallback;
+};
+
 // ===== HERO PRODUCT SHOWCASE =====
 const featuredProducts = [
   {
     name: "SoftenWise Clinic",
+    nameKey: "home.showcase.clinic.name",
     image: "images/showcase/clinic-ui.png",
-    imageAlt: "SoftenWise Clinic hasta ve tedavi paneli",
+    imageAlt: "SoftenWise Clinic",
     imageMode: "cover",
     description: "Randevu, hasta ve tedavi — tek panel.",
+    descKey: "home.showcase.clinic.desc",
     bullets: [],
     cta: "İncele",
+    ctaKey: "home.showcase.cta",
     detailUrl: "urunler.html#softenwise-clinic",
   },
   {
     name: "SoftenWise Liman",
-    image: "images/showcase/liman-web.png",
-    imageAlt: "SoftenWise Liman web yönetim paneli",
+    nameKey: "home.showcase.liman.name",
+    image: "images/showcase/liman-fake.jpg",
+    imageAlt: "SoftenWise Liman",
     imageMode: "cover",
-    label: "Antalya · canlı",
-    description: "Web panel: sefer, gişe, kasa — Kaleiçi’de canlı.",
+    description: "Web panel: satış, gişe ve sefer.",
+    descKey: "home.showcase.liman.desc",
     bullets: [],
     cta: "İncele",
+    ctaKey: "home.showcase.cta",
     detailUrl: "urunler.html#softenwise-liman",
   },
   {
     name: "BLOC",
-    image: "images/showcase/bloc-og.png",
-    imageAlt: "BLOC — mahalle sosyal ağı",
+    nameKey: "home.showcase.bloc.name",
+    image: "images/showcase/bloc-fake.jpg",
+    imageAlt: "BLOC",
     imageMode: "cover",
-    label: "Village",
     description: "Mahalle sosyal ağı — keşfet, bağlan.",
+    descKey: "home.showcase.bloc.desc",
     bullets: [],
     cta: "İncele",
+    ctaKey: "home.showcase.cta",
     detailUrl: "urunler.html#bloc",
   },
   {
     name: "SoftenWise Maps",
-    image: "images/softenwise-maps-logo.png",
+    nameKey: "home.showcase.maps.name",
+    image: "images/showcase/maps-fake.jpg",
     imageAlt: "SoftenWise Maps",
-    imageMode: "contain",
+    imageMode: "cover",
     description: "Saha CBS, rota ve REST API.",
+    descKey: "home.showcase.maps.desc",
     bullets: [],
     cta: "İncele",
+    ctaKey: "home.showcase.cta",
     detailUrl: "urunler.html#softenwise-maps",
   },
 ];
@@ -454,6 +475,9 @@ if (
   const autoplayMs = Number(productShowcase.dataset.autoplayMs) || 5000;
 
   const renderProductItem = (product, index) => {
+    const displayName = i18nText(product.nameKey, product.name);
+    const displayDesc = i18nText(product.descKey, product.description);
+    const displayCta = i18nText(product.ctaKey, product.cta);
     const item = document.createElement("article");
     item.className = "product-item";
     item.setAttribute("role", "listitem");
@@ -502,18 +526,14 @@ if (
     const mediaHtml = product.image
       ? `
       <div class="${mediaClass}">
-        <img src="${product.image}" alt="${product.imageAlt || product.name}" ${imgAttrs} />
+        <img src="${product.image}" alt="${product.imageAlt || displayName}" ${imgAttrs} />
       </div>
     `
       : `
       <div class="product-media">
-        <div class="product-media-placeholder">${product.name}<br />${(window.SW_I18N && window.SW_I18N.t("product.soon")) || "Yakında"}</div>
+        <div class="product-media-placeholder">${displayName}<br />${i18nText("product.soon", "Yakında")}</div>
       </div>
     `;
-
-    const badgeHtml = product.label
-      ? `<span class="product-badge">${product.label}</span>`
-      : "";
 
     const hrefAttr = (u) => String(u).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 
@@ -545,10 +565,10 @@ if (
         ${appBadge}
       </div>
       ${altLinksRow}
-      <a class="product-cta" href="${hrefAttr(linkUrl)}">${product.cta}</a>
+      <a class="product-cta" href="${hrefAttr(linkUrl)}">${displayCta}</a>
     </div>`;
     } else {
-      footerHtml = `<div class="product-cta">${product.cta}</div>`;
+      footerHtml = `<div class="product-cta">${displayCta}</div>`;
     }
 
     const bullets = Array.isArray(product.bullets) ? product.bullets : [];
@@ -559,10 +579,9 @@ if (
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
-        <h3 class="product-name">${product.name}</h3>
-        ${badgeHtml}
+        <h3 class="product-name">${displayName}</h3>
       </div>
-      <p class="product-desc">${product.description}</p>
+      <p class="product-desc">${displayDesc}</p>
       ${listHtml}
       ${footerHtml}
     `;
