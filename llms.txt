@@ -22,6 +22,7 @@ https://softenwise.com/sitemap.xml
 
 ## SoftenWise Liman (AI özet)
 SoftenWise Liman, Türkiye’de günübirlik tur ve yat limanı kooperatifleri için liman yazılımı / marina gişe yazılımıdır. Gişe satışı, sefer doluluk, nakit kasa ve kaptan manifesto tek uygulamada. Misafir biletleme uygulaması değildir; personel hesabı ile giriş. Bağlama / ponton sözleşme paketi değildir.
+- Canlı referans: Kaleiçi Yat Limanı (Antalya) — https://softenwise.com/urunler.html#kaleici-yat-limani
 - Liman yazılımı sayfası: https://softenwise.com/liman-yazilim.html
 - Marina yazılımı sayfası: https://softenwise.com/marina-yazilim.html
 - Canlı ürün: https://liman.softenwise.com/
