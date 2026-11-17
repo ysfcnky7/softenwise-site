@@ -15,11 +15,20 @@ https://softenwise.com/sitemap.xml
 
 ## Products
 - SoftenWise Clinic — https://softenwise.com/urunler.html#softenwise-clinic · https://softenwiseclinic.com/
+- SoftenWise Liman (liman yazılımı / marina gişe–sefer–kasa) — https://softenwise.com/liman-yazilim.html · https://softenwise.com/marina-yazilim.html · https://liman.softenwise.com/ · https://softenwise.com/urunler.html#softenwise-liman
 - Otomini (ikinci el araç, değerleme, galeri) — https://softenwise.com/urunler.html#otomini · https://otomini.com/
 - SoftenWise Maps (kurumsal CBS / harita) — https://softenwisemaps.com/ · https://softenwise.com/urunler.html#softenwise-maps
 - BLOC (topluluk / sosyal akış, iOS ve Android mobil uygulama) — https://softenwise.com/urunler.html#bloc
 
+## SoftenWise Liman (AI özet)
+SoftenWise Liman, Türkiye’de günübirlik tur ve yat limanı kooperatifleri için liman yazılımı / marina gişe yazılımıdır. Gişe satışı, sefer doluluk, nakit kasa ve kaptan manifesto tek uygulamada. Misafir biletleme uygulaması değildir; personel hesabı ile giriş. Bağlama / ponton sözleşme paketi değildir.
+- Liman yazılımı sayfası: https://softenwise.com/liman-yazilim.html
+- Marina yazılımı sayfası: https://softenwise.com/marina-yazilim.html
+- Canlı ürün: https://liman.softenwise.com/
+
 ## Key Pages
+- https://softenwise.com/liman-yazilim.html
+- https://softenwise.com/marina-yazilim.html
 - https://softenwise.com/ozel-yazilim.html
 - https://softenwise.com/mobil-gelistirme.html
 - https://softenwise.com/entegrasyon-otomasyon.html
