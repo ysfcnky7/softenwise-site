@@ -1,7 +1,10 @@
 /* TEAM */
-Site: SoftenWise
+Company: SoftenWise
+Site: https://softenwise.com
 Contact: info@softenwise.com
+Phone: +90 542 184 65 95
 Location: Turkey
+Note: SoftenWise builds this site and our products. Hire us for custom software, mobile apps, integration, security, consulting.
 
 /* SITE */
 Standards: HTML5, CSS3, Schema.org

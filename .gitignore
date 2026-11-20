@@ -1,31 +1,50 @@
-# SoftenWise static site
+# =============================================================================
+# SoftenWise commercial / static site
+# =============================================================================
 
 # Node
 node_modules/
 dist/
-npm-debug.log*
 .pnpm-store/
+npm-debug.log*
+yarn-error.log*
+playwright-report/
+blob-report/
+test-results/
+.playwright/
 
 # Secrets / local env
 .env
 .env.*
 !.env.example
+!.env.*.example
 *.pem
 *.p12
-*.keystore
+*.key
 google-services.json
 GoogleService-Info.plist
+credentials.json
 
 # IDE / OS
 .idea/
-.vscode/
+.vs/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 .DS_Store
 Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# Logs / coverage
+# Logs / coverage / scratch
 *.log
 coverage/
 TEST*.xml
+*.tmp
+*.bak
+tmp/
+temp/
+_tmp*/
 
 # Media dumps (keep curated assets in images/)
 *.mp4
@@ -34,6 +53,9 @@ TEST*.xml
 *.flv
 *.mov
 *.wmv
+*.zip
+*.7z
+*.rar
 
 # Local checklist working copies (never commit customer Excel)
 scripts/_softenwise_checklist.json
@@ -44,6 +66,4 @@ scripts/_append_css.js
 
 # Ops notes must not ship with static site
 notes.txt
-
 docs/OPS_NOTES.local.md
-notes.txt
