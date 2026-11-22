@@ -5850,9 +5850,11 @@ a.product-cta:hover {
 .hero.hero--home .hero-brand {
   color: #fff;
   margin-bottom: 18px;
-  font-size: clamp(48px, 8vw, 86px);
+  font-size: clamp(40px, 11vw, 86px);
   letter-spacing: -0.04em;
   line-height: 0.95;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .hero.hero--home h1 {
@@ -6096,6 +6098,8 @@ a.product-cta:hover {
 
   .hero.hero--home .hero-brand {
     margin-bottom: 10px;
+    font-size: clamp(36px, 12vw, 52px);
+    letter-spacing: -0.03em;
   }
 
   .hero.hero--home h1 {

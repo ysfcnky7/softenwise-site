@@ -132,8 +132,9 @@ body.page-home .hero.hero--home {
   }
 
   .hero.hero--home .hero-brand {
-    font-size: clamp(40px, 10vw, 64px) !important;
+    font-size: clamp(32px, 11vw, 52px) !important;
     margin-bottom: 10px !important;
+    letter-spacing: -0.03em !important;
   }
 
   .hero.hero--home h1 {
@@ -849,10 +850,12 @@ body.menu-open .site-header.header--over-hero .logo-img {
 }
 
 .hero.hero--home .hero-brand {
-  font-size: clamp(48px, 8vw, 86px) !important;
+  font-size: clamp(40px, 11vw, 86px) !important;
   font-weight: 550 !important;
   letter-spacing: -0.04em !important;
   color: #fff !important;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .hero.hero--home h1 {
