@@ -6581,6 +6581,18 @@ a.product-cta:hover {
 .footer-designed:hover {
   color: var(--accent, #2a5865);
 }
+.footer-share {
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(14, 58, 70, 0.16);
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-height: 44px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+}
 .legal-prose h2 {
   margin-top: 1.6em;
   font-size: 1.15rem;

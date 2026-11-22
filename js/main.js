@@ -1154,6 +1154,22 @@ if (serviceFilterButtons.length && serviceCards.length) {
 })();
 
 (() => {
+  document.querySelectorAll("[data-share-page]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const payload = { title: document.title, url: window.location.href };
+      try {
+        if (navigator.share) await navigator.share(payload);
+        else if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(payload.url);
+        }
+      } catch (_) {
+        /* user cancel */
+      }
+    });
+  });
+})();
+
+(() => {
   const showCrash = () => {
     if (document.getElementById("sw-crash")) return;
     const el = document.createElement("div");
