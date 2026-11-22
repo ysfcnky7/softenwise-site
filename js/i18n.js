@@ -28,13 +28,13 @@
   }
 
   function getInitialLang() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("lang");
+    if (q && META[resolveLang(q)]) return resolveLang(q);
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored && META[stored]) return stored;
     } catch (_) {}
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get("lang");
-    if (q && META[resolveLang(q)]) return resolveLang(q);
     // Prefer browser language when supported; else site primary (TR) to match html lang
     try {
       const nav = (navigator.language || navigator.userLanguage || "tr").slice(0, 2).toLowerCase();
