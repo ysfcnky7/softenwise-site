@@ -1404,8 +1404,7 @@ a.product-cta:hover {
 .process,
 .work,
 .references,
-.about,
-.faq {
+.about {
   padding: 96px 0;
 }
 
@@ -2709,47 +2708,6 @@ a.product-cta:hover {
   font-size: 14px;
 }
 
-/* FAQ */
-.faq {
-  background: var(--bg-soft);
-  border-top: 1px solid var(--line-on-night);
-}
-
-.faq-grid {
-  margin-top: 34px;
-  display: grid;
-  gap: 12px;
-}
-
-.faq-item {
-  background: var(--surface-card);
-  border: 1px solid var(--line-on-night);
-  border-radius: var(--r-lg);
-  padding: 14px 14px;
-  transition: border-color 0.22s ease, box-shadow 0.22s ease,
-    transform 0.22s ease;
-  box-shadow: var(--inset-sheen-faint);
-}
-.faq-item:hover {
-  border-color: rgba(14, 58, 70, 0.22);
-  box-shadow: 0 18px 40px rgba(14, 58, 70, 0.1);
-  transform: translateY(-2px);
-}
-
-.faq-item summary {
-  cursor: pointer;
-  font-weight: 700;
-  list-style: none;
-}
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-content {
-  margin-top: 10px;
-  color: var(--text-muted);
-}
-
 /* CTA / CONTACT */
 .cta {
   padding: 96px 0;
@@ -3156,8 +3114,7 @@ a.product-cta:hover {
   .contact-form,
   .service-card,
   .work-card,
-  .step,
-  .faq-item {
+  .step {
     transition: none;
   }
 
@@ -4058,8 +4015,7 @@ a.product-cta:hover {
   .process,
   .work,
   .references,
-  .about,
-  .faq {
+  .about {
     padding: 72px 0;
   }
 
@@ -4267,8 +4223,7 @@ a.product-cta:hover {
 @media (hover: none) {
   .service-card:hover,
   .work-card:hover,
-  .step:hover,
-  .faq-item:hover {
+  .step:hover {
     transform: none;
     box-shadow: none;
   }
