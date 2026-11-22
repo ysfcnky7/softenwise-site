@@ -60,10 +60,13 @@ report.versionSkew = {
 };
 
 const mainJs = fs.readFileSync(path.join(ROOT, "js/main.js"), "utf8");
-const block = mainJs.match(/const featuredProducts = \[([\s\S]*?)\];/)?.[1] || "";
-const names = [...block.matchAll(/name:\s*"([^"]+)"/g)].map((m) => m[1]);
-report.showcase.order = names;
-report.showcase.limanFirst = names[0]?.includes("Liman") || false;
+const netJs = fs.readFileSync(path.join(ROOT, "js/softenwise-network.js"), "utf8");
+const siteIds = [...netJs.matchAll(/\{\s*id:\s*"([^"]+)"/g)].map((m) => m[1]);
+const productIds = siteIds.filter((id) => id !== "softenwise");
+report.showcase.order = productIds;
+report.showcase.count = productIds.length;
+report.showcase.fromNetwork = /showcaseProducts/.test(netJs) && /SoftenWiseNetwork\.showcaseProducts/.test(mainJs);
+report.showcase.limanFirst = productIds[0] === "liman";
 
 const crit = [
   "home.hero.lead",
@@ -83,6 +86,8 @@ const unclean =
   report.missingKeys.length > 0 ||
   report.brokenLocalHrefs.length > 0 ||
   !report.showcase.limanFirst ||
+  !report.showcase.fromNetwork ||
+  report.showcase.count < 2 ||
   Object.keys(report.parityGaps || {}).length > 0 ||
   Object.values(report.criticalKeys || {}).some((ok) => !ok) ||
   report.versionSkew.locales.length !== 1 ||

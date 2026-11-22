@@ -988,6 +988,7 @@ a.product-cta:hover {
 .product-dots {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -5814,6 +5815,11 @@ a.product-cta:hover {
 
 .hero.hero--home .product-showcase-footer {
   padding: 0 2px;
+}
+
+.hero.hero--home .product-dots {
+  flex-wrap: wrap;
+  row-gap: 6px;
 }
 
 .hero.hero--home .product-dot {

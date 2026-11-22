@@ -401,60 +401,11 @@ const i18nText = (key, fallback) => {
 };
 
 // ===== HERO PRODUCT SHOWCASE =====
-const featuredProducts = [
-  {
-    name: "SoftenWise Liman",
-    nameKey: "home.showcase.liman.name",
-    image: "images/showcase/liman-kaleici.jpg",
-    imageAlt: "SoftenWise Liman — Antalya Kaleiçi Yat Limanı",
-    imageMode: "cover",
-    description: "Kaleiçi Yat Limanı’nda kullanılan liman yazılımı. Gişe, sefer ve kasa yönetimini bir araya getirir.",
-    descKey: "home.showcase.liman.desc",
-    bullets: [],
-    cta: "İncele",
-    ctaKey: "home.showcase.cta",
-    detailUrl: "urunler.html#kaleici-yat-limani",
-  },
-  {
-    name: "SoftenWise Clinic",
-    nameKey: "home.showcase.clinic.name",
-    image: "images/showcase/clinic-ui.png",
-    imageAlt: "SoftenWise Clinic",
-    imageMode: "cover",
-    description: "Randevu, hasta ve tedavi süreçlerini tek panelde toplar.",
-    descKey: "home.showcase.clinic.desc",
-    bullets: [],
-    cta: "İncele",
-    ctaKey: "home.showcase.cta",
-    detailUrl: "urunler.html#softenwise-clinic",
-  },
-  {
-    name: "BLOC",
-    nameKey: "home.showcase.bloc.name",
-    image: "images/showcase/bloc-fake.jpg",
-    imageAlt: "BLOC",
-    imageMode: "cover",
-    description: "Mahalle sakinlerinin keşfetmesi ve bağlanması için sosyal ağ.",
-    descKey: "home.showcase.bloc.desc",
-    bullets: [],
-    cta: "İncele",
-    ctaKey: "home.showcase.cta",
-    detailUrl: "urunler.html#bloc",
-  },
-  {
-    name: "SoftenWise Maps",
-    nameKey: "home.showcase.maps.name",
-    image: "images/showcase/maps-fake.jpg",
-    imageAlt: "SoftenWise Maps",
-    imageMode: "cover",
-    description: "Saha ekipleri için harita, rota planlama ve API.",
-    descKey: "home.showcase.maps.desc",
-    bullets: [],
-    cta: "İncele",
-    ctaKey: "home.showcase.cta",
-    detailUrl: "urunler.html#softenwise-maps",
-  },
-];
+const featuredProducts =
+  typeof SoftenWiseNetwork !== "undefined" &&
+  typeof SoftenWiseNetwork.showcaseProducts === "function"
+    ? SoftenWiseNetwork.showcaseProducts()
+    : [];
 
 const productShowcase = document.getElementById("productShowcase");
 const productTrack = document.getElementById("productTrack");
