@@ -590,10 +590,10 @@ if (
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
-        <h3 class="product-name">${escapeHtml(displayName)}</h3>
+        <h3 class="product-name" data-i18n="${escapeHtml(product.nameKey)}">${escapeHtml(displayName)}</h3>
         ${badgeHtml}
       </div>
-      <p class="product-desc"${unpublished ? ' aria-hidden="true"' : ""}>${escapeHtml(displayDesc)}</p>
+      <p class="product-desc"${unpublished ? ' aria-hidden="true"' : ""} data-i18n="${escapeHtml(product.descKey)}">${escapeHtml(displayDesc)}</p>
       ${listHtml}
       ${footerHtml}
     `;

@@ -287,7 +287,7 @@
     applyLang,
     getInitialLang,
     META,
-    t: (k) => t(getInitialLang(), k),
+    t: (k) => t(resolveLang(document.documentElement.lang) || getInitialLang(), k),
     sanitizeTrustedHtml,
   };
 

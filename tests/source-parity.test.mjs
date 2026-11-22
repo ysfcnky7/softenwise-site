@@ -30,6 +30,7 @@ describe("browser sources keep allowlist logic", () => {
       "resolveFormEndpoint",
       "input[name=\"_gotcha\"]",
       "https://formspree.io/f/xldqyewl",
+      "data-i18n=\"${escapeHtml(product.descKey)}\"",
     ]) {
       assert.ok(src.includes(needle), needle);
     }
