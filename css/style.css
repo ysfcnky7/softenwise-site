@@ -844,41 +844,45 @@ body.menu-open .quick-contact {
 
 .product-media-mark {
   position: absolute;
-  inset: 0;
+  left: 12px;
+  bottom: 12px;
+  right: auto;
+  top: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 1px;
   pointer-events: none;
-  text-align: center;
-  padding: 8%;
-  background:
-    radial-gradient(ellipse 58% 46% at 50% 48%, rgba(3, 16, 24, 0.42), transparent 72%);
+  text-align: left;
+  padding: 7px 11px 8px;
+  max-width: calc(100% - 24px);
+  border-radius: 8px;
+  background: rgba(8, 24, 32, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .product-media-mark__brand {
   font-family: var(--font-sans);
-  font-size: clamp(13px, 1.7vw, 18px);
+  font-size: 10px;
   font-weight: 650;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: none;
 }
 
 .product-media-mark__name {
   font-family: var(--font-display);
-  font-size: clamp(40px, 6.2vw, 76px);
-  font-weight: 650;
-  font-style: italic;
-  line-height: 0.88;
-  letter-spacing: -0.04em;
+  font-size: 17px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: #fff;
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.28),
-    0 10px 32px rgba(0, 0, 0, 0.5),
-    0 0 48px rgba(120, 220, 240, 0.42);
+  text-shadow: none;
 }
 
 .product-media img {
@@ -5840,13 +5844,18 @@ a.product-cta:hover {
   object-position: center;
 }
 
+.hero.hero--home .product-media-mark {
+  left: 14px;
+  bottom: 14px;
+}
+
 .hero.hero--home .product-media-mark__brand {
-  font-size: clamp(16px, 2.1vw, 22px);
-  letter-spacing: 0.32em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
 }
 
 .hero.hero--home .product-media-mark__name {
-  font-size: clamp(52px, 7.4vw, 88px);
+  font-size: 18px;
 }
 
 .hero.hero--home .product-name {
@@ -6018,13 +6027,19 @@ a.product-cta:hover {
     aspect-ratio: 16 / 10;
   }
 
+  .hero.hero--home .product-media-mark {
+    left: 10px;
+    bottom: 10px;
+    padding: 6px 9px 7px;
+  }
+
   .hero.hero--home .product-media-mark__brand {
-    font-size: clamp(13px, 3.2vw, 16px);
-    letter-spacing: 0.24em;
+    font-size: 9px;
+    letter-spacing: 0.12em;
   }
 
   .hero.hero--home .product-media-mark__name {
-    font-size: clamp(40px, 12vw, 58px);
+    font-size: 15px;
   }
 
   .hero.hero--home .product-desc {

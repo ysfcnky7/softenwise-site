@@ -25,7 +25,7 @@
    */
   var SHOWCASE = {
     liman: {
-      image: "images/showcase/liman-kaleici.jpg?v=f6ae391c28",
+      image: "images/showcase/liman-kaleici.jpg?v=062b1e97a1",
       imageAlt: "SoftenWise Liman — Antalya Kaleiçi Yat Limanı",
       imageMode: "cover",
       description:
