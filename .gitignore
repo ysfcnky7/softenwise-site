@@ -60,12 +60,15 @@ _tmp*/
 *.7z
 *.rar
 
-# Local checklist working copies (never commit customer Excel)
+# Local checklist working copies / one-shot audit outputs
 scripts/_softenwise_checklist.json
 scripts/_web_relevant_items.txt
 scripts/_dump_items.js
 scripts/_probe.js
 scripts/_append_css.js
+scripts/_chief_audit_report.json
+scripts/_tmp*
+scripts/_fix_*
 
 # Ops notes must not ship with static site
 notes.txt
