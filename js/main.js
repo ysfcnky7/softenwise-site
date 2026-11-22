@@ -844,6 +844,34 @@ contactForms.forEach((form) => {
     messageField.setAttribute("enterkeyhint", "send");
   }
 
+  let topicField = form.querySelector('[name="topic"]');
+  if (!topicField) {
+    const group = document.createElement("div");
+    group.className = "form-group";
+    const label = document.createElement("label");
+    label.className = "form-label";
+    label.setAttribute("for", "field-topic");
+    label.textContent = i18nText("form.topic", "Konu");
+    topicField = document.createElement("select");
+    topicField.name = "topic";
+    topicField.id = "field-topic";
+    topicField.required = true;
+    [
+      ["iletisim", i18nText("form.topic.contact", "İletişim")],
+      ["oneri", i18nText("form.topic.suggest", "Öneri")],
+      ["sikayet", i18nText("form.topic.complain", "Şikayet")],
+    ].forEach(([value, text]) => {
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = text;
+      topicField.appendChild(opt);
+    });
+    group.append(label, topicField);
+    const firstGroup = form.querySelector(".form-group");
+    if (firstGroup) firstGroup.before(group);
+    else form.prepend(group);
+  }
+
   let errorEl = form.querySelector(".form-error");
   if (!errorEl) {
     errorEl = document.createElement("p");
@@ -989,7 +1017,19 @@ contactForms.forEach((form) => {
         const successMsg =
           form.querySelector(".form-success") ||
           document.getElementById("formSuccess");
-        if (successMsg) successMsg.style.display = "block";
+        if (successMsg) {
+          const topic = (formData.get("topic") || "iletisim").toString();
+          const okMap = {
+            oneri: i18nText("form.ok.suggest", "Öneriniz alındı. Teşekkürler."),
+            sikayet: i18nText(
+              "form.ok.complain",
+              "Şikayetiniz iletildi. Gerekirse info@softenwise.com yazın."
+            ),
+            iletisim: i18nText("form.ok.contact", "Mesajınız alındı. En kısa sürede dönüş yapacağız."),
+          };
+          successMsg.textContent = okMap[topic] || okMap.iletisim;
+          successMsg.style.display = "block";
+        }
 
         submitBtn.textContent = i18nText("form.received", "Talep Alındı");
       } else if (response.status === 429) {
