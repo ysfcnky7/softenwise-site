@@ -1209,6 +1209,12 @@ if (serviceFilterButtons.length && serviceCards.length) {
   });
 })();
 
+window.SW_LOG = {
+  info() {},
+  warn() {},
+  error() {},
+};
+
 (() => {
   const showCrash = () => {
     if (document.getElementById("sw-crash")) return;
