@@ -10,11 +10,11 @@
     { id: "maps", name: "SoftenWise Maps", url: "https://softenwisemaps.com/" },
     { id: "otomini", name: "Otomini", url: "https://otomini.com/" },
     { id: "bloc", name: "BLOC", url: "https://bloc.app/" },
-    { id: "filter", name: "Filter", url: "https://filter-date.com/" },
+    { id: "filter", name: "Filter", url: "https://filter-date.com/", live: false },
     { id: "puff", name: "Puff", url: "https://puffsocial.net/" },
-    { id: "viaguide", name: "ViaGuide", url: "https://viaguideapp.com/" },
-    { id: "lokman", name: "Lokman", url: "https://lokmanapp.com/" },
-    { id: "gavel", name: "Gavel", url: "https://gavelsale.com/" },
+    { id: "viaguide", name: "ViaGuide", url: "https://viaguideapp.com/", live: false },
+    { id: "lokman", name: "Lokman", url: "https://lokmanapp.com/", live: false },
+    { id: "gavel", name: "Gavel", url: "https://gavelsale.com/", live: false },
     { id: "xagent", name: "XAgent", url: "https://xagentweb.com/" },
   ];
 
@@ -47,28 +47,28 @@
       detailUrl: "urunler.html#softenwise-maps",
     },
     otomini: {
-      image: "images/showcase/otomini-ui.webp",
+      image: "images/showcase/otomini-hero.webp",
       imageAlt: "Otomini",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "İkinci el araç değerleme, ekspertiz ve galeri sunumu.",
       detailUrl: "urunler.html#otomini",
     },
     bloc: {
       image: "images/showcase/bloc-fake.jpg",
       imageAlt: "BLOC",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "Mahalle sakinlerinin keşfetmesi ve bağlanması için sosyal ağ.",
       detailUrl: "urunler.html#bloc",
     },
     filter: {
       image: "images/showcase/filter-og.png",
       imageAlt: "Filter",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "Dating uygulaması: gerçek cevaplar, turnuva keşfi ve kapılı sohbet.",
       detailUrl: "urunler.html#filter",
     },
     puff: {
-      image: "images/showcase/puff-icon.png",
+      image: "images/showcase/puff-map.png",
       imageAlt: "Puff",
       imageMode: "contain",
       description: "Haritada kısa ömürlü mesaj; sohbet yalnızca karşılıklı kabul ile açılır.",
@@ -77,28 +77,28 @@
     viaguide: {
       image: "images/showcase/viaguide-og.png",
       imageAlt: "ViaGuide",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "Sertifikalı yerel rehberlerle şehir yürüyüşü ve deneyim rezervasyonu.",
       detailUrl: "https://viaguideapp.com/",
     },
     lokman: {
       image: "images/showcase/lokman-og.png",
       imageAlt: "Lokman",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "Dijital aktar: bitki tanıma, karışım kontrolü ve şifa ansiklopedisi.",
       detailUrl: "https://lokmanapp.com/",
     },
     gavel: {
       image: "images/showcase/gavel-og.png",
       imageAlt: "Gavel",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "Canlı müzayede: gerçek zamanlı teklif ve şeffaf satış süreci.",
       detailUrl: "https://gavelsale.com/",
     },
     xagent: {
       image: "images/showcase/xagent-og.png",
       imageAlt: "XAgent",
-      imageMode: "cover",
+      imageMode: "contain",
       description: "Doğrulanmış araştırmacılarla özel araştırma pazaryeri.",
       detailUrl: "https://xagentweb.com/",
     },
@@ -118,20 +118,22 @@
     var ordered = first ? [first].concat(extra) : extra;
     return ordered.map(function (site) {
       var meta = SHOWCASE[site.id] || {};
+      var unpublished = site.live === false;
       return {
         id: site.id,
         name: site.name,
         nameKey: "home.showcase." + site.id + ".name",
         image: meta.image || "",
-        imageAlt: meta.imageAlt || site.name,
+        imageAlt: unpublished ? site.name : meta.imageAlt || site.name,
         imageMode: meta.imageMode || "cover",
         description: meta.description || "",
         descKey: "home.showcase." + site.id + ".desc",
         bullets: [],
         cta: "İncele",
         ctaKey: "home.showcase.cta",
-        detailUrl: meta.detailUrl || site.url,
-        url: site.url,
+        detailUrl: unpublished ? "" : meta.detailUrl || site.url,
+        url: unpublished ? "" : site.url,
+        unpublished: unpublished,
       };
     });
   }
@@ -156,14 +158,25 @@
     });
   }
 
+  function networkNode(s) {
+    if (s.live === false) {
+      var span = document.createElement("span");
+      span.className = "sw-network-soon";
+      span.textContent = s.name;
+      span.setAttribute("aria-label", s.name);
+      return span;
+    }
+    var a = document.createElement("a");
+    a.href = s.url;
+    a.rel = "noopener noreferrer";
+    a.textContent = s.name;
+    return a;
+  }
+
   function fill(container) {
     if (!container) return;
     others().forEach(function (s) {
-      var a = document.createElement("a");
-      a.href = s.url;
-      a.rel = "noopener noreferrer";
-      a.textContent = s.name;
-      container.appendChild(a);
+      container.appendChild(networkNode(s));
     });
   }
 
@@ -196,12 +209,9 @@
     ul.className = "promoList";
     others().forEach(function (s) {
       var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = s.url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      a.textContent = s.name;
-      li.appendChild(a);
+      var node = networkNode(s);
+      if (node.tagName === "A") node.target = "_blank";
+      li.appendChild(node);
       ul.appendChild(li);
     });
     sec.appendChild(ul);

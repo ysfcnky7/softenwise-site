@@ -879,6 +879,36 @@ body.menu-open .quick-contact {
   cursor: default;
 }
 
+/* Yayında olmayan ürün: yalnız ad (ve Yakında rozeti) okunur */
+.product-item.is-unpublished .product-media,
+.product-item.is-unpublished .product-desc,
+.product-item.is-unpublished .product-list,
+.product-item.is-unpublished .product-cta,
+.product-item.is-unpublished .product-card-footer {
+  filter: blur(14px);
+  user-select: none;
+  pointer-events: none;
+}
+
+.product-tile--unpublished .product-unpublished-blur,
+.product-detail.is-unpublished .product-unpublished-blur {
+  filter: blur(14px);
+  user-select: none;
+  pointer-events: none;
+}
+
+.product-item.is-unpublished .product-name,
+.product-item.is-unpublished .product-badge {
+  filter: none;
+  user-select: text;
+}
+
+.footer-col .sw-network-soon,
+.promoList .sw-network-soon {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
 .product-card-head {
   display: flex;
   align-items: flex-start;
@@ -5732,7 +5762,7 @@ a.product-cta:hover {
 }
 
 .hero.hero--home .product-track {
-  min-height: 420px;
+  min-height: 430px;
 }
 
 .hero.hero--home .product-list,
@@ -5752,7 +5782,10 @@ a.product-cta:hover {
 }
 
 .hero.hero--home .product-media {
-  aspect-ratio: 16 / 11;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #050d11;
@@ -5763,17 +5796,17 @@ a.product-cta:hover {
 }
 
 .hero.hero--home .product-media img {
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero.hero--home .product-media--contain {
-  background: linear-gradient(160deg, #0a1a20 0%, #061014 100%);
+  background: #050d11;
   padding: 0;
 }
 
 .hero.hero--home .product-media--contain img {
-  padding: 28px 36px;
+  padding: 0;
   object-fit: contain;
   object-position: center;
 }

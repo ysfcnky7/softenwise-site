@@ -429,12 +429,14 @@ if (
     const displayName = i18nText(product.nameKey, product.name);
     const displayDesc = i18nText(product.descKey, product.description);
     const displayCta = i18nText(product.ctaKey, product.cta);
+    const unpublished = Boolean(product.unpublished);
+    const soonLabel = i18nText("product.soon", "Yakında");
     const item = document.createElement("article");
     item.className = "product-item";
     item.setAttribute("role", "listitem");
     item.setAttribute("aria-hidden", "true");
 
-    const linkUrl = (product.detailUrl || product.url || "").trim();
+    const linkUrl = unpublished ? "" : (product.detailUrl || product.url || "").trim();
     const sl = product.storeLinks;
     const hasStoreLinks =
       sl &&
@@ -464,6 +466,11 @@ if (
       item.classList.add("is-disabled");
     }
 
+    if (unpublished) {
+      item.classList.add("is-unpublished", "is-disabled");
+      wrapper.setAttribute("aria-label", `${displayName} — ${soonLabel}`);
+    }
+
     const mediaClass =
       product.imageMode === "contain"
         ? "product-media product-media--contain"
@@ -474,15 +481,16 @@ if (
         ? 'loading="eager" fetchpriority="high" decoding="async" width="640" height="360"'
         : 'loading="lazy" decoding="async" width="640" height="360"';
 
+    const mediaAria = unpublished ? ' aria-hidden="true"' : "";
     const mediaHtml = product.image
       ? `
-      <div class="${mediaClass}">
-        <img src="${product.image}" alt="${product.imageAlt || displayName}" ${imgAttrs} />
+      <div class="${mediaClass}"${mediaAria}>
+        <img src="${product.image}" alt="${unpublished ? "" : product.imageAlt || displayName}" ${imgAttrs} />
       </div>
     `
       : `
-      <div class="product-media">
-        <div class="product-media-placeholder">${displayName}<br />${i18nText("product.soon", "Yakında")}</div>
+      <div class="product-media"${mediaAria}>
+        <div class="product-media-placeholder">${displayName}<br />${soonLabel}</div>
       </div>
     `;
 
@@ -519,7 +527,9 @@ if (
       <a class="product-cta" href="${hrefAttr(linkUrl)}">${displayCta}</a>
     </div>`;
     } else {
-      footerHtml = `<div class="product-cta">${displayCta}</div>`;
+      footerHtml = unpublished
+        ? `<div class="product-cta" aria-hidden="true">${displayCta}</div>`
+        : `<div class="product-cta">${displayCta}</div>`;
     }
 
     const bullets = Array.isArray(product.bullets) ? product.bullets : [];
@@ -527,12 +537,17 @@ if (
       ? `<ul class="product-list">${bullets.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>`
       : "";
 
+    const badgeHtml = unpublished
+      ? `<span class="product-badge" data-i18n="product.soon">${soonLabel}</span>`
+      : "";
+
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
         <h3 class="product-name">${displayName}</h3>
+        ${badgeHtml}
       </div>
-      <p class="product-desc">${displayDesc}</p>
+      <p class="product-desc"${unpublished ? ' aria-hidden="true"' : ""}>${displayDesc}</p>
       ${listHtml}
       ${footerHtml}
     `;
