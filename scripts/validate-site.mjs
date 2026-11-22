@@ -113,6 +113,7 @@ const assetPatterns = [
   /css\/style\.css\?v=([0-9]+)/,
   /css\/softenwise\.css\?v=([0-9]+)/,
   /js\/sprite-inject\.js\?v=([0-9]+)/,
+  /js\/softenwise-network\.js\?v=([0-9]+)/,
   /js\/locales\.js\?v=([0-9]+)/,
   /js\/i18n\.js\?v=([0-9]+)/,
   /js\/main\.js\?v=([0-9]+)/,

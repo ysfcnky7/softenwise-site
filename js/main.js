@@ -434,7 +434,7 @@ const featuredProducts = [
     image: "images/showcase/bloc-fake.jpg",
     imageAlt: "BLOC",
     imageMode: "cover",
-    description: "Mahalle için keşif ve bağlantı odaklı sosyal uygulama.",
+    description: "Mahalle sakinlerinin keşfetmesi ve bağlanması için sosyal ağ.",
     descKey: "home.showcase.bloc.desc",
     bullets: [],
     cta: "İncele",

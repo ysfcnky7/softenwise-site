@@ -30,14 +30,20 @@ function injectQuick(html) {
   return html.replace(marker, q + marker);
 }
 
+function assetVersion() {
+  const raw = read(path.join(ROOT, "scripts", "asset-version.txt")).trim();
+  return /^\d{10,14}$/.test(raw) ? raw : "1";
+}
+
 function syncLayout(name, text) {
   if (name === "404.html") {
     const m = text.match(/<main\s+class="err404"[^>]*>[\s\S]*?<\/main>/i);
     if (!m) return text;
+    const v = assetVersion();
     const body =
       "<body>\n" +
       '  <a class="skip-link" href="#main">İçeriğe atla</a>\n' +
-      '  <script src="js/sprite-inject.js?v=202604081"></script>\n' +
+      `  <script src="js/sprite-inject.js?v=${v}"></script>\n` +
       HEADER_SUB +
       "\n  " +
       m[0] +
@@ -46,7 +52,10 @@ function syncLayout(name, text) {
       "\n\n" +
       QUICK.trimEnd() +
       "\n" +
-      '  <script src="js/main.js?v=202604224" defer></script>\n' +
+      `  <script src="js/softenwise-network.js?v=${v}"></script>\n` +
+      `  <script src="js/locales.js?v=${v}"></script>\n` +
+      `  <script src="js/i18n.js?v=${v}"></script>\n` +
+      `  <script src="js/main.js?v=${v}" defer></script>\n` +
       "</body>";
     return text.replace(/<body>[\s\S]*?<\/body>/i, body);
   }

@@ -170,6 +170,9 @@
 
   function init() {
     if (!window.SW_LOCALES) return;
+    if (window.SoftenWiseNetwork && window.SoftenWiseNetwork.injectCommercial) {
+      window.SoftenWiseNetwork.injectCommercial();
+    }
     const inner = document.querySelector(".header-inner");
     if (inner) {
       const menuBtn = document.getElementById("menuBtn");

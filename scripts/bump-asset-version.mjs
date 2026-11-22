@@ -20,6 +20,7 @@ const ASSETS = [
   { kind: "href", file: "css/style.css" },
   { kind: "href", file: "css/softenwise.css" },
   { kind: "src", file: "js/sprite-inject.js" },
+  { kind: "src", file: "js/softenwise-network.js" },
   { kind: "src", file: "js/locales.js" },
   { kind: "src", file: "js/i18n.js" },
   { kind: "src", file: "js/main.js" },
