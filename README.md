@@ -35,6 +35,10 @@ npx --yes serve .
 
 Asset cache bust: `scripts/apply-asset-version.ps1`
 
+## Rollback
+
+Önceki Git etiketine veya commit’e dönüp aynı statik host’a yeniden yayınla. `_headers` ve `npm run bump` ile üretilen `?v=` sürümleri birlikte gitsin.
+
 ## Ortam
 
 Bu site sunucu tarafı `.env` gerektirmez. Form uç noktası istemci tarafında Formspree ID’sidir (`js/main.js`). Gizli anahtar commit etmeyin; `.env` / `.env.local` yok sayılır.

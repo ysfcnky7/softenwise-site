@@ -13,8 +13,8 @@
     "check:mobile": "node scripts/mobile-compat-check.mjs",
     "audit:checklist": "node scripts/audit-item-by-item.mjs",
     "pack": "node scripts/pack-static.mjs",
-    "test": "node --test tests/bump-asset-version.test.mjs tests/cli.test.mjs tests/html-sanitize.test.mjs tests/pack-static.test.mjs tests/source-parity.test.mjs tests/url-safety.test.mjs tests/validate-site.test.mjs",
-    "test:coverage": "c8 --check-coverage --lines 100 --functions 100 --branches 100 --statements 100 node --test tests/bump-asset-version.test.mjs tests/cli.test.mjs tests/html-sanitize.test.mjs tests/pack-static.test.mjs tests/source-parity.test.mjs tests/url-safety.test.mjs tests/validate-site.test.mjs"
+    "test": "node --test tests/bump-asset-version.test.mjs tests/cli.test.mjs tests/html-sanitize.test.mjs tests/main-js-contract.test.mjs tests/pack-static.test.mjs tests/source-parity.test.mjs tests/url-safety.test.mjs tests/validate-site.test.mjs",
+    "test:coverage": "c8 --check-coverage --lines 100 --functions 100 --branches 100 --statements 100 node --test tests/bump-asset-version.test.mjs tests/cli.test.mjs tests/html-sanitize.test.mjs tests/main-js-contract.test.mjs tests/pack-static.test.mjs tests/source-parity.test.mjs tests/url-safety.test.mjs tests/validate-site.test.mjs"
   },
   "c8": {
     "include": [

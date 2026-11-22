@@ -15,4 +15,6 @@ pipelines:
               exit 1
             fi
           - npm ci
+          - npm test
+          - npm run test:coverage
           - npm run validate

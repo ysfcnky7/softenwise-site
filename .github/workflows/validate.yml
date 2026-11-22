@@ -24,4 +24,6 @@ jobs:
           node-version-file: ".nvmrc"
           cache: npm
       - run: npm ci
+      - run: npm test
+      - run: npm run test:coverage
       - run: npm run validate
