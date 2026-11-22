@@ -484,12 +484,7 @@ if (
     const mediaAria = unpublished ? ' aria-hidden="true"' : "";
     let mediaMarkHtml = "";
     if (product.id === "liman") {
-      const bits = String(displayName).trim().split(/\s+/);
-      const last = bits.length > 1 ? bits.pop() : displayName;
-      const brand = bits.join(" ");
-      mediaMarkHtml = `<div class="product-media-mark" aria-hidden="true">${
-        brand ? `<span class="product-media-mark__brand">${brand}</span>` : ""
-      }<span class="product-media-mark__name">${last}</span></div>`;
+      mediaMarkHtml = `<div class="product-media-mark product-media-mark--logo" aria-hidden="true"><img src="images/softenwise-liman-mark.png?v=9bbddc61b7" alt="" width="328" height="101" decoding="async" /></div>`;
     }
     const mediaHtml = product.image
       ? `

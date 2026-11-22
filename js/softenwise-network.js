@@ -15,7 +15,7 @@
     { id: "viaguide", name: "ViaGuide", url: "https://viaguideapp.com/", live: false },
     { id: "lokman", name: "Lokman", url: "https://lokmanapp.com/", live: false },
     { id: "gavel", name: "Gavel", url: "https://gavelsale.com/", live: false },
-    { id: "xagent", name: "XAgent", url: "https://xagentweb.com/" },
+    { id: "xagent", name: "XAgent", url: "https://xagentweb.com/", live: false },
   ];
 
   /**
