@@ -39,6 +39,7 @@
     try {
       const nav = (navigator.language || navigator.userLanguage || "tr").slice(0, 2).toLowerCase();
       if (META[nav]) return nav;
+      return "en";
     } catch (_) {}
     return "tr";
   }
