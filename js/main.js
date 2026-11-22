@@ -403,6 +403,19 @@ const i18nText = (key, fallback) => {
 // ===== HERO PRODUCT SHOWCASE =====
 const featuredProducts = [
   {
+    name: "SoftenWise Liman",
+    nameKey: "home.showcase.liman.name",
+    image: "images/showcase/liman-live.png",
+    imageAlt: "SoftenWise Liman — Antalya Kaleiçi Yat Limanı",
+    imageMode: "cover",
+    description: "Antalya Kaleiçi Yat Limanı canlı — gişe, sefer, kasa.",
+    descKey: "home.showcase.liman.desc",
+    bullets: [],
+    cta: "İncele",
+    ctaKey: "home.showcase.cta",
+    detailUrl: "urunler.html#kaleici-yat-limani",
+  },
+  {
     name: "SoftenWise Clinic",
     nameKey: "home.showcase.clinic.name",
     image: "images/showcase/clinic-ui.png",
@@ -414,19 +427,6 @@ const featuredProducts = [
     cta: "İncele",
     ctaKey: "home.showcase.cta",
     detailUrl: "urunler.html#softenwise-clinic",
-  },
-  {
-    name: "SoftenWise Liman",
-    nameKey: "home.showcase.liman.name",
-    image: "images/showcase/liman-fake.jpg",
-    imageAlt: "SoftenWise Liman",
-    imageMode: "cover",
-    description: "Web panel: satış, gişe ve sefer.",
-    descKey: "home.showcase.liman.desc",
-    bullets: [],
-    cta: "İncele",
-    ctaKey: "home.showcase.cta",
-    detailUrl: "urunler.html#softenwise-liman",
   },
   {
     name: "BLOC",

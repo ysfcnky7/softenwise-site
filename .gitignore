@@ -2,16 +2,19 @@
 # SoftenWise commercial / static site
 # =============================================================================
 
-# Node
+# Node — never commit dependencies (GitHub / Bitbucket / zip upload)
 node_modules/
+**/node_modules/
 dist/
 .pnpm-store/
+.npm/
 npm-debug.log*
 yarn-error.log*
 playwright-report/
 blob-report/
 test-results/
 .playwright/
+*.tgz
 
 # Secrets / local env
 .env

@@ -21,3 +21,18 @@ Bu yazılımı **SoftenWise** üretir ve destekler. Ürün adı şirket adı de�
 5. Hakkımızda metnine ürün sloganı ekleme; şirket metni her repoda aynı kalır.
 
 Bu repodaki ürün: **SoftenWise kurumsal site**.
+
+## Proje ajanları
+
+Uzun / komple iş → `@softenwise-chief` (orkestratör). Liste: `.cursor/agents/README.md`.
+
+| Ajan | İş |
+|------|-----|
+| `softenwise-chief` | Orkestratör — bitirene kadar |
+| `softenwise-i18n` | Dil dosyası / ham key |
+| `softenwise-ui-ux` | Hero / showcase (Liman ilk) |
+| `softenwise-content` | Liman · Kaleiçi · ürün metni |
+| `softenwise-frontend` | HTML/CSS/JS |
+| `softenwise-devops` | GitHub · `node_modules` · cache |
+| `softenwise-qa` | `npm run validate` |
+| `softenwise-seo` / `security` / `reviewer` / `tech-lead` | İlgili dikey |
