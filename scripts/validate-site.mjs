@@ -43,6 +43,11 @@ for (const h of [
   if (headers.includes(h)) ok(`header ${h}`);
   else fail(`_headers missing ${h}`);
 }
+if (/max-age=0,\s*must-revalidate/.test(headers) && /immutable/.test(headers)) {
+  ok("header cache split html-revalidate + asset-immutable");
+} else {
+  fail("_headers must revalidate HTML and immutably cache versioned assets");
+}
 
 const index = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
 if (index.includes("demo-")) fail("index still has demo- logos");
@@ -109,14 +114,14 @@ else fail("cookie z-index");
 
 // Asset ?v= must be present and identical across all HTML (npm run bump)
 const assetPatterns = [
-  /css\/local-fonts\.css\?v=([0-9]+)/,
-  /css\/style\.css\?v=([0-9]+)/,
-  /css\/softenwise\.css\?v=([0-9]+)/,
-  /js\/sprite-inject\.js\?v=([0-9]+)/,
-  /js\/softenwise-network\.js\?v=([0-9]+)/,
-  /js\/locales\.js\?v=([0-9]+)/,
-  /js\/i18n\.js\?v=([0-9]+)/,
-  /js\/main\.js\?v=([0-9]+)/,
+  /css\/local-fonts\.css\?v=([A-Za-z0-9]+)/,
+  /css\/style\.css\?v=([A-Za-z0-9]+)/,
+  /css\/softenwise\.css\?v=([A-Za-z0-9]+)/,
+  /js\/sprite-inject\.js\?v=([A-Za-z0-9]+)/,
+  /js\/softenwise-network\.js\?v=([A-Za-z0-9]+)/,
+  /js\/locales\.js\?v=([A-Za-z0-9]+)/,
+  /js\/i18n\.js\?v=([A-Za-z0-9]+)/,
+  /js\/main\.js\?v=([A-Za-z0-9]+)/,
 ];
 const htmlNames = fs.readdirSync(ROOT).filter((f) => f.endsWith(".html"));
 const versionSets = assetPatterns.map(() => new Set());
@@ -131,6 +136,10 @@ for (const name of htmlNames) {
 const allVers = new Set(versionSets.flatMap((s) => [...s]));
 if (allVers.size === 1) ok(`asset ?v= sync (${[...allVers][0]})`);
 else if (allVers.size > 1) fail(`asset ?v= skew: ${[...allVers].join(", ")} — run npm run bump`);
+
+const networkJs = fs.readFileSync(path.join(ROOT, "js/softenwise-network.js"), "utf8");
+if (/liman-kaleici\.jpg\?v=[A-Za-z0-9]+/.test(networkJs)) ok("showcase liman image is cache-busted");
+else fail("showcase liman image missing ?v= — run npm run bump");
 
 if (errors.length) {
   console.error(`\n${errors.length} failure(s)`);

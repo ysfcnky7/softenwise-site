@@ -509,10 +509,10 @@ if (
     let footerHtml;
     if (hasStoreLinks) {
       const storeFooterInactive = Boolean(product.storeLinksInactive);
-      const playBadgeImg = `<img src="images/badge-google-play.svg?v=1" alt="" width="155" height="46" loading="lazy" decoding="async" />`;
-      const appBadgeImg = `<img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="lazy" decoding="async" />`;
-      const playBadgeImgInactive = `<img src="images/badge-google-play.svg?v=1" alt="" width="155" height="46" loading="lazy" decoding="async" aria-hidden="true" />`;
-      const appBadgeImgInactive = `<img src="images/badge-app-store.svg?v=1" alt="" width="135" height="40" loading="lazy" decoding="async" aria-hidden="true" />`;
+      const playBadgeImg = `<img src="images/badge-google-play.svg?v=1a647c858a" alt="" width="155" height="46" loading="lazy" decoding="async" />`;
+      const appBadgeImg = `<img src="images/badge-app-store.svg?v=b740566285" alt="" width="135" height="40" loading="lazy" decoding="async" />`;
+      const playBadgeImgInactive = `<img src="images/badge-google-play.svg?v=1a647c858a" alt="" width="155" height="46" loading="lazy" decoding="async" aria-hidden="true" />`;
+      const appBadgeImgInactive = `<img src="images/badge-app-store.svg?v=b740566285" alt="" width="135" height="40" loading="lazy" decoding="async" aria-hidden="true" />`;
 
       const playBadge = storeFooterInactive
         ? `<span class="store-badge-link store-badge-link--play store-badge-link--inactive" role="img" aria-label="Google Play — yakında">${playBadgeImgInactive}</span>`
