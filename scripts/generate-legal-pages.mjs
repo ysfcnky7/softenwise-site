@@ -9,6 +9,13 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const header = fs.readFileSync(path.join(ROOT, "partials/site-header-subpage.html"), "utf8");
 const footer = fs.readFileSync(path.join(ROOT, "partials/site-footer.html"), "utf8");
 const quick = fs.readFileSync(path.join(ROOT, "partials/site-quick-contact.html"), "utf8");
+const assetVersion = (
+  fs.existsSync(path.join(ROOT, "scripts/asset-version.txt"))
+    ? fs.readFileSync(path.join(ROOT, "scripts/asset-version.txt"), "utf8")
+    : ""
+)
+  .trim()
+  .replace(/\D/g, "") || String(Date.now()).slice(0, 12);
 
 const pages = [
   {
@@ -100,8 +107,12 @@ function shell(p) {
   <meta name="theme-color" content="#0e3a46" />
   <meta name="author" content="SoftenWise" />
   <link rel="icon" href="icons/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
   <link rel="canonical" href="${p.canonical}" />
   <link rel="sitemap" type="application/xml" title="Site haritası" href="https://softenwise.com/sitemap.xml" />
+  <link rel="alternate" type="text/plain" href="https://softenwise.com/llms.txt" title="SoftenWise LLM indeksi" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SoftenWise" />
   <meta property="og:title" content="${p.title}" />
@@ -112,13 +123,13 @@ function shell(p) {
   <meta name="twitter:title" content="${p.title}" />
   <meta name="twitter:description" content="${p.desc}" />
   <meta name="twitter:image" content="https://softenwise.com/images/og-image.png" />
-  <link rel="stylesheet" href="css/local-fonts.css?v=202607167" />
-  <link rel="stylesheet" href="css/style.css?v=202607228" />
-  <link rel="stylesheet" href="css/softenwise.css?v=202607228" />
+  <link rel="stylesheet" href="css/local-fonts.css?v=${assetVersion}" />
+  <link rel="stylesheet" href="css/style.css?v=${assetVersion}" />
+  <link rel="stylesheet" href="css/softenwise.css?v=${assetVersion}" />
 </head>
 <body class="page-legal">
   <a class="skip-link" href="#main">İçeriğe atla</a>
-  <script src="js/sprite-inject.js?v=202607163"></script>
+  <script src="js/sprite-inject.js?v=${assetVersion}"></script>
 ${header}
   <main id="main">
     <section class="page-hero">
@@ -136,13 +147,14 @@ ${p.body}
   </main>
 ${footer}
 ${quick}
-  <script src="js/locales.js?v=202607163"></script>
-  <script src="js/i18n.js?v=202607163"></script>
-  <script src="js/main.js?v=202607228" defer></script>
+  <script src="js/locales.js?v=${assetVersion}"></script>
+  <script src="js/i18n.js?v=${assetVersion}"></script>
+  <script src="js/main.js?v=${assetVersion}" defer></script>
 </body>
 </html>
 `;
 }
+
 
 for (const p of pages) {
   fs.writeFileSync(path.join(ROOT, p.file), shell(p).replace(/\r\n/g, "\n"), "utf8");

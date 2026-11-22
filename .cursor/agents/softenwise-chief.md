@@ -40,7 +40,7 @@ Uzmanlar: `.cursor/agents/softenwise-*.md`
 2. **Done-when** — tek satır ölçülebilir hedef
 3. **WBS** — 5–12 madde; sırayla
 4. **Kanıt** — grep/read/`npm run validate`; varsayımla patch yok
-5. **Uygula** — dar diff; cache bust `?v=` güncelle (locales/i18n/main)
+5. **Uygula** — dar diff; CSS/JS sonrası `npm run bump` (otomatik `?v=`)
 6. **Doğrula** — validate + kritik key parity (tr↔en↔diğer)
 7. **Rapor** — bitti / kaldı / risk; hemen sonraki madde
 

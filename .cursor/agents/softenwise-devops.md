@@ -19,7 +19,13 @@ Bu repo static site; `playwright` için `npm install` lokal kalır.
 
 ## Cache bust
 
-`locales.js` / `i18n.js` / `main.js` / CSS değişince tüm HTML `?v=` değerlerini senkron artır.
+CSS/JS değişince:
+
+```bash
+npm run bump
+```
+
+Tek sürüm tüm HTML’e yazılır (`scripts/bump-asset-version.mjs` → `scripts/asset-version.txt`). Elle `?v=` kovalama. `npm run validate` sürüm skew kontrol eder.
 
 ## Deploy
 

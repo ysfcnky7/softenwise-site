@@ -107,6 +107,30 @@ else fail("form still uses alert for errors");
 if (/z-index:\s*1300/.test(fs.readFileSync(path.join(ROOT, "css/style.css"), "utf8"))) ok("cookie z-index");
 else fail("cookie z-index");
 
+// Asset ?v= must be present and identical across all HTML (npm run bump)
+const assetPatterns = [
+  /css\/local-fonts\.css\?v=([0-9]+)/,
+  /css\/style\.css\?v=([0-9]+)/,
+  /css\/softenwise\.css\?v=([0-9]+)/,
+  /js\/sprite-inject\.js\?v=([0-9]+)/,
+  /js\/locales\.js\?v=([0-9]+)/,
+  /js\/i18n\.js\?v=([0-9]+)/,
+  /js\/main\.js\?v=([0-9]+)/,
+];
+const htmlNames = fs.readdirSync(ROOT).filter((f) => f.endsWith(".html"));
+const versionSets = assetPatterns.map(() => new Set());
+for (const name of htmlNames) {
+  const html = fs.readFileSync(path.join(ROOT, name), "utf8");
+  assetPatterns.forEach((re, i) => {
+    const m = html.match(re);
+    if (!m) fail(`${name} missing asset version for ${re}`);
+    else versionSets[i].add(m[1]);
+  });
+}
+const allVers = new Set(versionSets.flatMap((s) => [...s]));
+if (allVers.size === 1) ok(`asset ?v= sync (${[...allVers][0]})`);
+else if (allVers.size > 1) fail(`asset ?v= skew: ${[...allVers].join(", ")} — run npm run bump`);
+
 if (errors.length) {
   console.error(`\n${errors.length} failure(s)`);
   process.exit(1);

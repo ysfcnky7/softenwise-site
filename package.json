@@ -5,6 +5,8 @@
   "description": "SoftenWise static commercial website (HTML/CSS/JS)",
   "type": "module",
   "scripts": {
+    "bump": "node scripts/bump-asset-version.mjs",
+    "version:assets": "node scripts/bump-asset-version.mjs",
     "validate": "node scripts/validate-site.mjs",
     "sync:layout": "node scripts/apply-softenwise-delivery.mjs",
     "generate:legal": "node scripts/generate-legal-pages.mjs",

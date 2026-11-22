@@ -1,16 +1,17 @@
-# Bump $AssetVersion when CSS/JS change, then run: .\scripts\apply-asset-version.ps1
-$AssetVersion = "202604081"
+﻿# SoftenWise — asset ?v= bump (wrapper)
+# Tercih: npm run bump
+# Eski kullanım: .\scripts\apply-asset-version.ps1
+# Opsiyonel sabit sürüm: .\scripts\apply-asset-version.ps1 -Version 202611231145
+
+param(
+  [string]$Version = ""
+)
+
 $root = Resolve-Path (Join-Path $PSScriptRoot "..")
+Set-Location $root
 
-Get-ChildItem -Path $root -Filter "*.html" | ForEach-Object {
-  $p = $_.FullName
-  $c = [IO.File]::ReadAllText($p)
-  $c = $c -replace 'href="css/local-fonts\.css[^"]*"', "href=`"css/local-fonts.css?v=$AssetVersion`""
-  $c = $c -replace 'href="css/style\.css[^"]*"', "href=`"css/style.css?v=$AssetVersion`""
-  $c = $c -replace 'src="js/sprite-inject\.js[^"]*"', "src=`"js/sprite-inject.js?v=$AssetVersion`""
-  $c = $c -replace 'src="js/main\.js[^"]*"', "src=`"js/main.js?v=$AssetVersion`""
-  $utf8 = New-Object System.Text.UTF8Encoding $false
-  [IO.File]::WriteAllText($p, $c, $utf8)
+if ($Version) {
+  npm run bump -- --set $Version
+} else {
+  npm run bump
 }
-
-Write-Host "Applied asset version v=$AssetVersion to HTML in $root"

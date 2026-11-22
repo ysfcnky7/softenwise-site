@@ -79,8 +79,22 @@ report.criticalKeys = Object.fromEntries(
 const gi = fs.readFileSync(path.join(ROOT, ".gitignore"), "utf8");
 report.gitignoreNodeModules = /node_modules\//.test(gi);
 
+const unclean =
+  report.missingKeys.length > 0 ||
+  report.brokenLocalHrefs.length > 0 ||
+  !report.showcase.limanFirst ||
+  Object.keys(report.parityGaps || {}).length > 0 ||
+  Object.values(report.criticalKeys || {}).some((ok) => !ok) ||
+  report.versionSkew.locales.length !== 1 ||
+  report.versionSkew.i18n.length !== 1 ||
+  report.versionSkew.main.length !== 1 ||
+  !report.gitignoreNodeModules;
+
+report.clean = !unclean;
+
 fs.writeFileSync(
   path.join(ROOT, "scripts/_chief_audit_report.json"),
   JSON.stringify(report, null, 2)
 );
 console.log(JSON.stringify(report, null, 2));
+if (unclean) process.exit(1);
