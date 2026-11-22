@@ -1,17 +1,14 @@
 {
-  "missingKeys": [
-    "urunler.html:attr:bloc.play.search",
-    "urunler.html:attr:bloc.ios.search"
-  ],
+  "missingKeys": [],
   "versionSkew": {
     "locales": [
-      "202611221"
+      "202611222"
     ],
     "i18n": [
-      "202611221"
+      "202611222"
     ],
     "main": [
-      "202611221"
+      "202611222"
     ]
   },
   "brokenLocalHrefs": [],
@@ -26,112 +23,112 @@
   },
   "notes": [],
   "parityGaps": {},
-  "trKeyCount": 691,
+  "trKeyCount": 693,
   "versions": {
     "404.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "academy.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "cerez-politikasi.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "entegrasyon-otomasyon.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "girisim-ortakligi.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "gizlilik.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "guvenlik-denetim.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "hakkimizda.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "index.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "kariyer.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "kaynaklar.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "kvkk.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "liman-yazilim.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "marina-yazilim.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "mobil-gelistirme.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "mobil-uygulama-gelistirme-sureci.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "ozel-yazilim-maliyeti.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "ozel-yazilim.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "teknik-danismanlik.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "urunler.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     },
     "yazilim-firmasi-nasil-secilir.html": {
-      "locales": "202611221",
-      "i18n": "202611221",
-      "main": "202611221"
+      "locales": "202611222",
+      "i18n": "202611222",
+      "main": "202611222"
     }
   },
   "criticalKeys": {
