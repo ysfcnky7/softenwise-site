@@ -1,0 +1,12 @@
+---
+description: SoftenWise kurumsal site ajanları ve sabit öncelikler
+alwaysApply: true
+---
+
+# SoftenWise site — ajan / öncelik
+
+- Orkestratör: `@softenwise-chief` — `.cursor/agents/`
+- Ham i18n key görünürse → `js/locales.js` parity + tüm HTML `locales.js?v=` bump
+- Hero showcase **ilk slayt = SoftenWise Liman / Antalya Kaleiçi Yat Limanı**
+- `node_modules/` asla commit/push/zip — `.gitignore` korur
+- Agent commit/push yok; `npm run validate` ile kapat
