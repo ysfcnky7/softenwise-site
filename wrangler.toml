@@ -1,0 +1,4 @@
+# SoftenWise static site — Cloudflare Pages (wrangler pages deploy)
+name = "softenwise-site"
+compatibility_date = "2026-11-23"
+pages_build_output_dir = "."

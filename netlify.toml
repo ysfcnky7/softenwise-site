@@ -1,0 +1,15 @@
+# SoftenWise static site — Netlify
+# Publish dist/ only. node_modules and tooling never go to the CDN.
+
+[build]
+  publish = "dist"
+  command = "node scripts/validate-site.mjs && node scripts/pack-static.mjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_CONFIG_PRODUCTION = "true"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+[dev]
+  publish = "."
+  autoLaunch = false

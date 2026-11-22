@@ -166,6 +166,11 @@
       span.setAttribute("aria-label", s.name);
       return span;
     }
+    if (!/^https:\/\//i.test(String(s.url || ""))) {
+      var blocked = document.createElement("span");
+      blocked.textContent = s.name;
+      return blocked;
+    }
     var a = document.createElement("a");
     a.href = s.url;
     a.rel = "noopener noreferrer";

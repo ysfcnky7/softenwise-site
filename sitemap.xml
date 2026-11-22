@@ -127,6 +127,12 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://softenwise.com/kullanim.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://softenwise.com/cerez-politikasi.html</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>yearly</changefreq>

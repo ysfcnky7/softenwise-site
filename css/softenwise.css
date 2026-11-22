@@ -147,13 +147,13 @@ body.page-home .hero.hero--home {
   }
 
   .hero.hero--home .product-track {
-    min-height: 240px !important;
+    min-height: 0 !important;
   }
 }
 
 @media (max-width: 767px) {
   .hero.hero--home .product-track {
-    min-height: 200px !important;
+    min-height: 0 !important;
   }
 }
 
@@ -279,8 +279,9 @@ body.menu-open .site-header.header--over-hero .logo-img {
 }
 
 .site-header .logo-img {
-  height: 28px;
+  height: 36px;
   width: auto;
+  object-fit: contain;
   opacity: 0.96;
 }
 

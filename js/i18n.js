@@ -50,6 +50,96 @@
     return pack[key] ?? en[key] ?? tr[key] ?? key;
   }
 
+  function isSafeHref(href) {
+    const v = String(href || "").trim();
+    if (!v) return false;
+    const lower = v.toLowerCase();
+    if (lower.startsWith("javascript:") || lower.startsWith("data:") || lower.startsWith("vbscript:")) {
+      return false;
+    }
+    if (v.startsWith("//")) return false;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(v)) {
+      return /^(https?:|mailto:|tel:)/i.test(v);
+    }
+    return true;
+  }
+
+  function isSafeImgSrc(src) {
+    const v = String(src || "").trim();
+    if (!v || v.includes("..") || v.startsWith("//")) return false;
+    const lower = v.toLowerCase();
+    if (lower.startsWith("javascript:") || lower.startsWith("data:") || lower.startsWith("vbscript:")) {
+      return false;
+    }
+    if (/^[a-z][a-z0-9+.-]*:/i.test(v)) return false;
+    return /^(images|icons)\//i.test(v);
+  }
+
+  const ATTR_ALLOW = {
+    A: new Set(["href", "rel", "target", "class"]),
+    IMG: new Set(["src", "alt", "width", "height", "loading", "decoding", "class"]),
+    SPAN: new Set(["class", "aria-hidden"]),
+    STRONG: new Set(["class"]),
+    EM: new Set(["class"]),
+    B: new Set(["class"]),
+    I: new Set(["class"]),
+    SMALL: new Set(["class"]),
+    BR: new Set([]),
+  };
+
+  /** First-party locale HTML only — strip scripts, handlers, and unsafe URLs. */
+  function sanitizeTrustedHtml(html) {
+    const allowed = new Set(Object.keys(ATTR_ALLOW));
+    const tpl = document.createElement("template");
+    tpl.innerHTML = String(html || "");
+
+    const sanitize = (parent) => {
+      [...parent.childNodes].forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) return;
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          parent.removeChild(node);
+          return;
+        }
+        sanitize(node);
+        const tag = node.tagName;
+        if (!allowed.has(tag)) {
+          while (node.firstChild) parent.insertBefore(node.firstChild, node);
+          parent.removeChild(node);
+          return;
+        }
+        const keep = ATTR_ALLOW[tag];
+        [...node.attributes].forEach((attr) => {
+          const n = attr.name.toLowerCase();
+          if (n.startsWith("on") || n === "style" || n === "srcdoc" || !keep.has(n)) {
+            node.removeAttribute(attr.name);
+          }
+        });
+        if (tag === "A") {
+          const href = node.getAttribute("href") || "";
+          if (!isSafeHref(href)) {
+            node.removeAttribute("href");
+          } else {
+            try {
+              const u = new URL(href, document.baseURI);
+              if (u.origin !== window.location.origin) {
+                node.setAttribute("rel", "noopener noreferrer");
+              }
+            } catch {
+              node.removeAttribute("href");
+            }
+          }
+        }
+        if (tag === "IMG") {
+          const src = node.getAttribute("src") || "";
+          if (!isSafeImgSrc(src)) node.remove();
+        }
+      });
+    };
+
+    sanitize(tpl.content);
+    return tpl.innerHTML;
+  }
+
   function applyAttr(el, lang) {
     const raw = el.getAttribute("data-i18n-attr");
     if (!raw) return;
@@ -57,7 +147,7 @@
       const [attr, key] = pair.split(":").map((s) => s.trim());
       if (!attr || !key) return;
       const val = t(lang, key);
-      if (attr === "html") el.innerHTML = val;
+      if (attr === "html") el.innerHTML = sanitizeTrustedHtml(val);
       else el.setAttribute(attr, val);
     });
   }
@@ -72,7 +162,7 @@
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (!key) return;
-      if (el.hasAttribute("data-i18n-html")) el.innerHTML = t(code, key);
+      if (el.hasAttribute("data-i18n-html")) el.innerHTML = sanitizeTrustedHtml(t(code, key));
       else el.textContent = t(code, key);
     });
 
@@ -192,7 +282,13 @@
     });
   }
 
-  window.SW_I18N = { applyLang, getInitialLang, META, t: (k) => t(getInitialLang(), k) };
+  window.SW_I18N = {
+    applyLang,
+    getInitialLang,
+    META,
+    t: (k) => t(getInitialLang(), k),
+    sanitizeTrustedHtml,
+  };
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

@@ -1,2 +1,9 @@
 /notes.txt /404.html 404
 /scripts/* /404.html 404
+/node_modules/* /404.html 404
+/package.json /404.html 404
+/package-lock.json /404.html 404
+/partials/* /404.html 404
+/bitbucket-pipelines.yml /404.html 404
+/netlify.toml /404.html 404
+/wrangler.toml /404.html 404

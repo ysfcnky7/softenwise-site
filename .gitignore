@@ -5,16 +5,22 @@
 # Node — never commit dependencies (GitHub / Bitbucket / zip upload)
 node_modules/
 **/node_modules/
+node_modules
 dist/
 .pnpm-store/
 .npm/
+.yarn/
 npm-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 playwright-report/
 blob-report/
 test-results/
 .playwright/
+ms-playwright/
+.cache/
 *.tgz
+package-lock.json.bak
 
 # Secrets / local env
 .env
@@ -24,9 +30,11 @@ test-results/
 *.pem
 *.p12
 *.key
+*.p8
 google-services.json
 GoogleService-Info.plist
 credentials.json
+auth.json
 
 # IDE / OS
 .idea/
@@ -67,9 +75,21 @@ scripts/_dump_items.js
 scripts/_probe.js
 scripts/_append_css.js
 scripts/_chief_audit_report.json
+scripts/_i18n_audit*
+scripts/_*.json
 scripts/_tmp*
 scripts/_fix_*
 
 # Ops notes must not ship with static site
 notes.txt
 docs/OPS_NOTES.local.md
+
+# Host / CLI caches (Netlify, Cloudflare, Vercel) — never zip these
+.netlify/
+.wrangler/
+.vercel/
+.cloudflare/
+
+# Agent transcripts / local dumps
+agent-transcripts/
+.cursor/*.log

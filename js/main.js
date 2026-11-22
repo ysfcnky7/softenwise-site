@@ -3,6 +3,11 @@ const menuBtn = document.getElementById("menuBtn");
 const nav = document.getElementById("nav");
 const header = document.getElementById("header");
 
+const mainEl = document.getElementById("main");
+if (mainEl && !mainEl.hasAttribute("tabindex")) {
+  mainEl.setAttribute("tabindex", "-1");
+}
+
 // ===== MOBILE MENU (ARIA + SAFE) =====
 /** 768–900 aralığında nav sıkışmasını önlemek için mobil menü; yatay telefonda genişlik >900 olsa da menü kalsın */
 const MOBILE_NAV_MAX = 900;
@@ -31,7 +36,8 @@ if (menuBtn && nav) {
     const btn = document.getElementById("menuBtn");
     if (!inner || !btn) return;
     if (nav.parentElement !== inner) {
-      inner.insertBefore(nav, btn);
+      const langMount = inner.querySelector(".lang-switch-mount");
+      inner.insertBefore(nav, langMount || btn);
     }
   };
 
@@ -190,7 +196,7 @@ if (menuBtn && nav) {
     };
 
     const openDesktopHover = () => {
-      if (!isMobileNavViewport()) return;
+      if (isMobileNavViewport()) return;
       clearCloseTimer();
       navItemsWithDropdown.forEach((other) => {
         if (other !== item) other.classList.remove("is-hover");
@@ -199,7 +205,7 @@ if (menuBtn && nav) {
     };
 
     const scheduleDesktopClose = () => {
-      if (!isMobileNavViewport()) return;
+      if (isMobileNavViewport()) return;
       clearCloseTimer();
       closeTimer = setTimeout(() => {
         item.classList.remove("is-hover");
@@ -211,7 +217,7 @@ if (menuBtn && nav) {
     item.addEventListener("mouseleave", scheduleDesktopClose);
     item.addEventListener("focusin", openDesktopHover);
     item.addEventListener("focusout", (e) => {
-      if (!isMobileNavViewport()) return;
+      if (isMobileNavViewport()) return;
       if (item.contains(e.relatedTarget)) return;
       scheduleDesktopClose();
     });
@@ -301,8 +307,8 @@ if (activeNav) {
   } else if (page === "index.html" && window.location.hash) {
     const hashLink = activeNav.querySelector(`.nav-main-link[href="${window.location.hash}"]`);
     setActive(hashLink);
-  } else if (page === "index.html" || page === "404.html") {
-    /* ana sayfa / 404 — varsayılan aktif yok */
+  } else if (page === "index.html" || page === "404.html" || page === "500.html") {
+    /* ana sayfa / 404 / 500 — varsayılan aktif yok */
   }
   /* diğer bilinmeyen sayfalar: yanlışlıkla Hizmetler aktif etme */
 }
@@ -357,6 +363,7 @@ if (prefersReducedMotion) {
       }
       io.observe(el);
     });
+    window.addEventListener("pagehide", () => io.disconnect(), { once: true });
   }
 }
 
@@ -386,6 +393,7 @@ if (productJump) {
     );
 
     sections.forEach((section) => jumpIo.observe(section));
+    window.addEventListener("pagehide", () => jumpIo.disconnect(), { once: true });
   }
 }
 
@@ -398,6 +406,37 @@ const i18nText = (key, fallback) => {
     }
   } catch (_) {}
   return fallback;
+};
+
+const escapeHtml = (s) =>
+  String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+const isSafeNavUrl = (raw) => {
+  const v = String(raw || "").trim();
+  if (!v) return false;
+  const lower = v.toLowerCase();
+  if (lower.startsWith("javascript:") || lower.startsWith("data:") || lower.startsWith("vbscript:")) {
+    return false;
+  }
+  if (v.startsWith("//")) return false;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(v)) return /^https?:/i.test(v);
+  return true;
+};
+
+const hrefAttr = (u) => {
+  if (!isSafeNavUrl(u)) return "#";
+  return String(u).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+};
+
+const FORMSPREE_ENDPOINT_RE = /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/;
+const DEFAULT_FORM_ENDPOINT = "https://formspree.io/f/xldqyewl";
+const resolveFormEndpoint = (raw) => {
+  const v = String(raw || "").trim();
+  return FORMSPREE_ENDPOINT_RE.test(v) ? v : DEFAULT_FORM_ENDPOINT;
 };
 
 // ===== HERO PRODUCT SHOWCASE =====
@@ -436,7 +475,8 @@ if (
     item.setAttribute("role", "listitem");
     item.setAttribute("aria-hidden", "true");
 
-    const linkUrl = unpublished ? "" : (product.detailUrl || product.url || "").trim();
+    const rawLinkUrl = unpublished ? "" : (product.detailUrl || product.url || "").trim();
+    const linkUrl = isSafeNavUrl(rawLinkUrl) ? rawLinkUrl : "";
     const sl = product.storeLinks;
     const hasStoreLinks =
       sl &&
@@ -486,10 +526,13 @@ if (
     if (product.id === "liman") {
       mediaMarkHtml = `<div class="product-media-mark product-media-mark--logo" aria-hidden="true"><img src="images/softenwise-liman-mark.png?v=9bbddc61b7" alt="" width="328" height="101" decoding="async" /></div>`;
     }
-    const mediaHtml = product.image
+    const safeImage = isSafeNavUrl(product.image) && !/^[a-z][a-z0-9+.-]*:/i.test(String(product.image || "").trim())
+      ? String(product.image)
+      : "";
+    const mediaHtml = safeImage
       ? `
       <div class="${mediaClass}"${mediaAria}>
-        <img src="${product.image}" alt="${unpublished ? "" : product.imageAlt || displayName}" ${imgAttrs} />
+        <img src="${escapeHtml(safeImage)}" alt="${unpublished ? "" : escapeHtml(product.imageAlt || displayName)}" ${imgAttrs} />
         ${mediaMarkHtml}
       </div>
     `
@@ -498,8 +541,6 @@ if (
         <div class="product-media-placeholder">${displayName}<br />${soonLabel}</div>
       </div>
     `;
-
-    const hrefAttr = (u) => String(u).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 
     let footerHtml;
     if (hasStoreLinks) {
@@ -529,17 +570,17 @@ if (
         ${appBadge}
       </div>
       ${altLinksRow}
-      <a class="product-cta" href="${hrefAttr(linkUrl)}">${displayCta}</a>
+      <a class="product-cta" href="${hrefAttr(linkUrl)}">${escapeHtml(displayCta)}</a>
     </div>`;
     } else {
       footerHtml = unpublished
-        ? `<div class="product-cta" aria-hidden="true">${displayCta}</div>`
-        : `<div class="product-cta">${displayCta}</div>`;
+        ? `<div class="product-cta" aria-hidden="true">${escapeHtml(displayCta)}</div>`
+        : `<div class="product-cta">${escapeHtml(displayCta)}</div>`;
     }
 
     const bullets = Array.isArray(product.bullets) ? product.bullets : [];
     const listHtml = bullets.length
-      ? `<ul class="product-list">${bullets.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>`
+      ? `<ul class="product-list">${bullets.map((bullet) => `<li>${escapeHtml(bullet)}</li>`).join("")}</ul>`
       : "";
 
     const badgeHtml = unpublished
@@ -549,10 +590,10 @@ if (
     wrapper.innerHTML = `
       ${mediaHtml}
       <div class="product-card-head">
-        <h3 class="product-name">${displayName}</h3>
+        <h3 class="product-name">${escapeHtml(displayName)}</h3>
         ${badgeHtml}
       </div>
-      <p class="product-desc"${unpublished ? ' aria-hidden="true"' : ""}>${displayDesc}</p>
+      <p class="product-desc"${unpublished ? ' aria-hidden="true"' : ""}>${escapeHtml(displayDesc)}</p>
       ${listHtml}
       ${footerHtml}
     `;
@@ -586,9 +627,14 @@ if (
       const isActive = i === activeIndex;
       item.classList.toggle("active", isActive);
       item.setAttribute("aria-hidden", String(!isActive));
+      if (isActive) item.removeAttribute("inert");
+      else item.setAttribute("inert", "");
     });
     dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === activeIndex);
+      const isActive = i === activeIndex;
+      dot.classList.toggle("active", isActive);
+      if (isActive) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
     });
   };
 
@@ -655,6 +701,18 @@ if (
     },
     { passive: true }
   );
+
+  productShowcase.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      next();
+      restartAutoplay();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      prev();
+      restartAutoplay();
+    }
+  });
 
   goTo(0);
   startAutoplay();
@@ -744,8 +802,47 @@ contactForms.forEach((form) => {
     if (key) return i18nText(key, labelSnapshot);
     return form.dataset.submitLabel || labelSnapshot || i18nText("form.send", "Gönder");
   };
-  const endpoint = form.dataset.endpoint || "https://formspree.io/f/xldqyewl";
+  const endpoint = resolveFormEndpoint(form.dataset.endpoint || DEFAULT_FORM_ENDPOINT);
   const startedAt = Date.now();
+
+  let honeypot = form.querySelector('input[name="_gotcha"]');
+  if (!honeypot) {
+    honeypot = document.createElement("input");
+    honeypot.type = "text";
+    honeypot.name = "_gotcha";
+    form.prepend(honeypot);
+  }
+  honeypot.classList.add("hp-field");
+  honeypot.tabIndex = -1;
+  honeypot.autocomplete = "off";
+  honeypot.setAttribute("aria-hidden", "true");
+  honeypot.removeAttribute("style");
+
+  if (!form.getAttribute("method")) form.setAttribute("method", "post");
+  if (!form.getAttribute("action")) form.setAttribute("action", endpoint);
+
+  const nameField = form.querySelector('[name="name"]');
+  const emailField = form.querySelector('[name="email"]');
+  const messageField = form.querySelector('[name="message"]');
+  if (nameField) {
+    nameField.setAttribute("maxlength", "120");
+    if (!nameField.getAttribute("autocomplete")) nameField.setAttribute("autocomplete", "name");
+    if (!nameField.hasAttribute("required")) nameField.required = true;
+  }
+  if (emailField) {
+    emailField.setAttribute("maxlength", "254");
+    if (!emailField.getAttribute("autocomplete")) emailField.setAttribute("autocomplete", "email");
+    if (!emailField.hasAttribute("required")) emailField.required = true;
+    if (emailField.type !== "email") emailField.type = "email";
+    emailField.setAttribute("inputmode", "email");
+    emailField.setAttribute("enterkeyhint", "next");
+  }
+  if (nameField) nameField.setAttribute("enterkeyhint", "next");
+  if (messageField) {
+    messageField.setAttribute("maxlength", "4000");
+    if (!messageField.hasAttribute("required")) messageField.required = true;
+    messageField.setAttribute("enterkeyhint", "send");
+  }
 
   let errorEl = form.querySelector(".form-error");
   if (!errorEl) {
@@ -769,9 +866,38 @@ contactForms.forEach((form) => {
   const humanCheck = createHumanCheck(form);
   submitBtn.before(humanCheck.element);
 
+  const successEl =
+    form.querySelector(".form-success") || document.getElementById("formSuccess");
+  const hideSuccess = () => {
+    if (successEl) successEl.style.display = "none";
+  };
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     clearError();
+    hideSuccess();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      const invalid = form.querySelector(":invalid");
+      if (invalid && typeof invalid.focus === "function") invalid.focus();
+      return;
+    }
+
+    [nameField, emailField, messageField].forEach((el) => {
+      if (el && "value" in el) el.value = String(el.value || "").trim();
+    });
+    const blank = [nameField, emailField, messageField].find((el) => el && !String(el.value || "").trim());
+    if (blank) {
+      showError(
+        i18nText(
+          "form.err.client",
+          "İstek kabul edilmedi. Alanları kontrol edip yeniden gönderin; sürmezse info@softenwise.com yazın."
+        )
+      );
+      blank.focus();
+      return;
+    }
 
     const elapsedMs = Date.now() - startedAt;
     if (elapsedMs < 4000) {
@@ -779,16 +905,68 @@ contactForms.forEach((form) => {
       return;
     }
 
+    const RL_KEY = "sw-form-rl";
+    const RL_MS = 20000;
+    let lastRl = 0;
+    try {
+      lastRl = Number(sessionStorage.getItem(RL_KEY) || 0);
+    } catch (_) {
+      lastRl = 0;
+    }
+    if (lastRl && Date.now() - lastRl < RL_MS) {
+      showError(
+        i18nText(
+          "form.err.limit",
+          "Çok sık gönderim. Yaklaşık 20 saniye bekleyip tekrar deneyin."
+        )
+      );
+      return;
+    }
+
+    if ((honeypot.value || "").trim()) {
+      form.reset();
+      humanCheck.refresh();
+      const successMsg =
+        form.querySelector(".form-success") || document.getElementById("formSuccess");
+      if (successMsg) successMsg.style.display = "block";
+      submitBtn.textContent = i18nText("form.received", "Talep Alındı");
+      submitBtn.disabled = true;
+      return;
+    }
+
     if (!humanCheck.validate()) {
-      showError(i18nText("form.err.human", "Doğrulama yanıtı hatalı. Lütfen tekrar deneyin."));
+      showError(
+        i18nText(
+          "form.err.human",
+          "Doğrulama yanıtı yanlış. Toplamı yeniden hesaplayıp gönderin."
+        )
+      );
       humanCheck.input.focus();
+      return;
+    }
+
+    const emailVal = emailField ? String(emailField.value || "").trim() : "";
+    if (emailField && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+      showError(
+        i18nText(
+          "form.err.email",
+          "E-posta geçersiz görünüyor. Adresi kontrol edip tekrar gönderin."
+        )
+      );
+      emailField.focus();
       return;
     }
 
     submitBtn.disabled = true;
     submitBtn.textContent = i18nText("form.sending", "Gönderiliyor...");
+    try {
+      sessionStorage.setItem(RL_KEY, String(Date.now()));
+    } catch (_) {
+      /* ignore quota / private mode */
+    }
 
     const formData = new FormData(form);
+    formData.delete("_gotcha");
     const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
     const timeoutId = controller
       ? setTimeout(() => controller.abort(), 20000)
@@ -814,13 +992,48 @@ contactForms.forEach((form) => {
         if (successMsg) successMsg.style.display = "block";
 
         submitBtn.textContent = i18nText("form.received", "Talep Alındı");
+      } else if (response.status === 429) {
+        const ra = response.headers.get("Retry-After");
+        const sec = ra && /^\d+$/.test(String(ra).trim()) ? Number(ra.trim()) : 20;
+        try {
+          sessionStorage.setItem(RL_KEY, String(Date.now() - RL_MS + sec * 1000));
+        } catch (_) {
+          /* ignore */
+        }
+        showError(
+          i18nText(
+            "form.err.limit",
+            "Çok sık gönderim. Yaklaşık 20 saniye bekleyip tekrar deneyin."
+          )
+        );
+        submitBtn.disabled = false;
+        submitBtn.textContent = getSubmitLabel();
+      } else if (response.status >= 500) {
+        showError(
+          i18nText(
+            "form.err.server",
+            "İşlem tamamlanamadı. Biraz sonra tekrar deneyin; sürerse info@softenwise.com yazın."
+          )
+        );
+        submitBtn.disabled = false;
+        submitBtn.textContent = getSubmitLabel();
       } else {
-        showError(i18nText("form.err.generic", "Bir hata oluştu. Lütfen tekrar deneyin."));
+        showError(
+          i18nText(
+            "form.err.client",
+            "İstek kabul edilmedi. Alanları kontrol edip yeniden gönderin; sürmezse info@softenwise.com yazın."
+          )
+        );
         submitBtn.disabled = false;
         submitBtn.textContent = getSubmitLabel();
       }
     } catch (error) {
-      showError(i18nText("form.err.network", "Bağlantı hatası. Lütfen tekrar deneyin."));
+      showError(
+        i18nText(
+          "form.err.network",
+          "Ağ koptu veya zaman aşımı. Bağlantınızı kontrol edip Gönder’e tekrar basın."
+        )
+      );
       submitBtn.disabled = false;
       submitBtn.textContent = getSubmitLabel();
     } finally {
@@ -843,22 +1056,41 @@ contactForms.forEach((form) => {
   bar.className = "cookie-notice";
   bar.setAttribute("role", "dialog");
   bar.setAttribute("aria-live", "polite");
-  bar.innerHTML = `
-    <p>${i18nText(
-      "cookie.notice",
-      "Bu sitede reklam çerezi yok. Dil tercihi cihazınızda saklanır. Ayrıntılar için gizlilik ve çerez metinlerine bakın."
-    )}
-      <a href="cerez-politikasi.html">${i18nText("footer.cookies.short", "Çerezler")}</a>
-      ·
-      <a href="gizlilik.html">${i18nText("footer.privacy.short", "Gizlilik")}</a>
-    </p>
-    <div class="cookie-notice__actions">
-      <button type="button" class="cookie-notice__btn">${i18nText("cookie.accept", "Anladım")}</button>
-    </div>
-  `;
+  bar.setAttribute("aria-labelledby", "cookie-notice-text");
+
+  const noticeP = document.createElement("p");
+  noticeP.id = "cookie-notice-text";
+  noticeP.appendChild(
+    document.createTextNode(
+      i18nText(
+        "cookie.notice",
+        "Bu sitede reklam çerezi yok. Dil tercihi cihazınızda saklanır. Ayrıntılar için gizlilik ve çerez metinlerine bakın."
+      ) + " "
+    )
+  );
+  const cookiesLink = document.createElement("a");
+  cookiesLink.href = "cerez-politikasi.html";
+  cookiesLink.textContent = i18nText("footer.cookies.short", "Çerezler");
+  noticeP.appendChild(cookiesLink);
+  noticeP.appendChild(document.createTextNode(" · "));
+  const privacyLink = document.createElement("a");
+  privacyLink.href = "gizlilik.html";
+  privacyLink.textContent = i18nText("footer.privacy.short", "Gizlilik");
+  noticeP.appendChild(privacyLink);
+
+  const actions = document.createElement("div");
+  actions.className = "cookie-notice__actions";
+  const acceptBtn = document.createElement("button");
+  acceptBtn.type = "button";
+  acceptBtn.className = "cookie-notice__btn";
+  acceptBtn.textContent = i18nText("cookie.accept", "Anladım");
+  actions.appendChild(acceptBtn);
+
+  bar.appendChild(noticeP);
+  bar.appendChild(actions);
   document.body.appendChild(bar);
   requestAnimationFrame(() => bar.classList.add("is-visible"));
-  bar.querySelector("button")?.addEventListener("click", () => {
+  acceptBtn.addEventListener("click", () => {
     try {
       localStorage.setItem(KEY, "1");
     } catch (_) {}
@@ -897,3 +1129,67 @@ if (serviceFilterButtons.length && serviceCards.length) {
     });
   });
 }
+
+(() => {
+  const iconFor = (el) => {
+    const i18n = el.getAttribute("data-i18n") || "";
+    const href = el.getAttribute("href") || "";
+    if (el.matches('[type="submit"]') || el.closest("form")) return "sw-mail";
+    if (/err404|err500/.test(i18n) || /404\.html|500\.html/.test(href)) return "sw-arrow-left";
+    if (el.classList.contains("cookie-notice__btn")) return "sw-clipboard-list";
+    return "sw-arrow-right";
+  };
+  const decorate = (el) => {
+    if (!el || el.querySelector(".sw-icon, .btn-action-icon")) return;
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "sw-icon btn-action-icon");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", `#${iconFor(el)}`);
+    svg.appendChild(use);
+    el.insertBefore(svg, el.firstChild);
+  };
+  document.querySelectorAll(".btn-primary, .btn-ghost, .cookie-notice__btn").forEach(decorate);
+})();
+
+(() => {
+  const showCrash = () => {
+    if (document.getElementById("sw-crash")) return;
+    const el = document.createElement("div");
+    el.id = "sw-crash";
+    el.setAttribute("role", "alert");
+    el.style.cssText =
+      "position:sticky;top:0;z-index:1400;padding:12px 16px;background:#4a1c1c;color:#fff;text-align:center;font:600 15px/1.4 system-ui,sans-serif";
+    el.textContent = i18nText(
+      "ui.crash",
+      "Sayfa beklenmedik bir hata verdi. Yenileyin; sürerse info@softenwise.com yazın."
+    );
+    document.body.prepend(el);
+  };
+  window.addEventListener("error", showCrash);
+  window.addEventListener("unhandledrejection", showCrash);
+})();
+
+(() => {
+  const id = "sw-offline";
+  const show = () => {
+    if (document.getElementById(id)) return;
+    const el = document.createElement("div");
+    el.id = id;
+    el.setAttribute("role", "status");
+    el.style.cssText =
+      "position:relative;z-index:90;padding:10px 16px;background:#3d4a50;color:#fff;text-align:center;font:600 14px/1.4 system-ui,sans-serif";
+    el.textContent = i18nText(
+      "ui.offline",
+      "Çevrimdışısınız. Bağlantı gelince form ve sayfa yeniden çalışır."
+    );
+    const header = document.getElementById("header");
+    if (header && header.parentNode) header.after(el);
+    else document.body.appendChild(el);
+  };
+  const hide = () => document.getElementById(id)?.remove();
+  window.addEventListener("offline", show);
+  window.addEventListener("online", hide);
+  if (typeof navigator !== "undefined" && navigator.onLine === false) show();
+})();

@@ -59,6 +59,12 @@
 
   --header-height: 72px;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --color-primary: var(--accent);
+  --color-secondary: var(--accent-2);
+  --color-success: #2a5865;
+  --color-danger: #8a3a32;
+  --color-close: var(--text-muted);
 }
 
 /* RESET */
@@ -72,6 +78,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   color-scheme: light;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -110,6 +117,7 @@ h2,
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -146,9 +154,20 @@ a {
   border-radius: 10px;
   z-index: 999;
 }
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   left: 16px;
   top: 16px;
+  z-index: 1500;
+}
+
+#main:focus {
+  outline: none;
+}
+
+#main:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 /* HEADER — sade kurumsal şerit */
@@ -195,13 +214,16 @@ a {
 
 .logo-img {
   display: block;
-  height: 1.52rem;
+  height: 2.25rem;
   width: auto;
   flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .site-header .logo-img {
-  height: 1.52rem;
+  height: 2.25rem;
+  width: auto;
+  object-fit: contain;
 }
 
 .logo-img--footer {
@@ -425,11 +447,13 @@ a {
   display: block;
   flex-shrink: 0;
   overflow: visible;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
 }
 
 .nav-dd-icon .sw-icon {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 }
 
 .nav-parent-toggle .sw-icon {
@@ -511,6 +535,8 @@ a {
   border: 1px solid rgba(14, 58, 70, 0.08);
   cursor: pointer;
   padding: 12px 14px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 12px;
   flex-shrink: 0;
   line-height: 0;
@@ -1278,7 +1304,10 @@ a.product-cta:hover {
 
 /* BUTTONS */
 .btn-primary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 13px 22px;
   background: var(--accent);
   color: #fff;
@@ -1331,8 +1360,19 @@ a.product-cta:hover {
   transform: none;
 }
 
+.btn-primary .btn-action-icon,
+.btn-ghost .btn-action-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+}
+
 .btn-ghost {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 13px 22px;
   border-radius: var(--r-sm);
   text-decoration: none;
@@ -2963,8 +3003,8 @@ a.product-cta:hover {
 }
 
 .contact-icon .sw-icon {
-  width: 12px;
-  height: 12px;
+  width: 18px;
+  height: 18px;
   color: var(--accent);
 }
 
@@ -3043,6 +3083,12 @@ a.product-cta:hover {
   width: 100%;
   max-width: 100%;
   text-align: left;
+}
+
+.footer-col .contact-link--location {
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: default;
 }
 
 .footer-col a[href^="tel:"] {
@@ -3147,7 +3193,9 @@ a.product-cta:hover {
   }
 
   .site-header .logo-img {
-    height: 1.35rem;
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
   }
 }
 
@@ -3409,9 +3457,11 @@ a.product-cta:hover {
   html.menu-open .site-header .menu-btn,
   html.menu-open .site-header .logo,
   html.menu-open .site-header .lang-switch,
+  html.menu-open .site-header .lang-switch-mount,
   body.menu-open .site-header .menu-btn,
   body.menu-open .site-header .logo,
-  body.menu-open .site-header .lang-switch {
+  body.menu-open .site-header .lang-switch,
+  body.menu-open .site-header .lang-switch-mount {
     pointer-events: auto;
   }
 
@@ -3956,7 +4006,9 @@ a.product-cta:hover {
   }
 
   .site-header .logo-img {
-    height: 1rem;
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
   }
 
   .nav-mobile-footer {
@@ -4278,6 +4330,10 @@ a.product-cta:hover {
   color: rgba(18, 38, 47, 0.72);
 }
 
+.site-footer .footer-col .contact-link--location {
+  color: rgba(18, 38, 47, 0.72);
+}
+
 .site-footer .footer-col a:hover {
   color: var(--accent);
 }
@@ -4365,6 +4421,16 @@ a.product-cta:hover {
   position: relative;
   overflow: hidden;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .contact-form::before {
@@ -4555,7 +4621,9 @@ a.product-cta:hover {
   }
 
   .site-header .logo-img {
-    height: clamp(1.05rem, 4.5vw, 1.35rem);
+    height: clamp(1.85rem, 5vw, 2.25rem);
+    width: auto;
+    object-fit: contain;
   }
 
   .btn-primary,
@@ -6042,8 +6110,43 @@ a.product-cta:hover {
     min-height: 0;
   }
 
+  /* Single-column hero: keep the active slide in flow so 16:10 media is not clipped. */
   .hero.hero--home .product-track {
-    min-height: 240px;
+    position: relative;
+    flex: 0 0 auto;
+    min-height: 0;
+  }
+
+  .hero.hero--home .product-item {
+    position: static;
+    display: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .hero.hero--home .product-item.active {
+    display: block;
+    pointer-events: auto;
+  }
+
+  .hero.hero--home .product-card {
+    height: auto;
+  }
+
+  .hero.hero--home .product-nav-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .hero.hero--home .product-dot {
+    min-width: 10px;
+    min-height: 10px;
+    padding: 8px;
+    box-sizing: content-box;
+    background-clip: content-box;
   }
 
   .hero.hero--home .product-media {
@@ -6093,10 +6196,6 @@ a.product-cta:hover {
     gap: 10px;
   }
 
-  .hero.hero--home .product-track {
-    min-height: 200px;
-  }
-
   .hero.hero--home .product-name {
     font-size: 1.05rem;
   }
@@ -6130,6 +6229,15 @@ a.product-cta:hover {
 
   .logo-strip__row {
     animation: fadeIn 0.7s ease 0.15s both;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (max-width: 860px) {
+  .hero.hero--home .product-item,
+  .hero.hero--home .product-item.active,
+  .hero.hero--home .product-item:not(.active) {
+    transform: none;
+    transition: none;
   }
 }
 
@@ -6464,6 +6572,15 @@ a.product-cta:hover {
 .footer-legal-inline a:hover {
   color: var(--accent, #2a5865);
 }
+.footer-designed {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+.footer-designed:hover {
+  color: var(--accent, #2a5865);
+}
 .legal-prose h2 {
   margin-top: 1.6em;
   font-size: 1.15rem;
@@ -6511,9 +6628,12 @@ html.cookie-notice-open .quick-contact {
 }
 .form-error {
   margin: 10px 0 0;
-  color: #b42318;
+  color: var(--color-danger);
   font-size: 14px;
   font-weight: 600;
+}
+.form-success {
+  color: var(--color-success);
 }
 .form-error[hidden] {
   display: none !important;
