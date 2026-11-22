@@ -833,12 +833,52 @@ body.menu-open .quick-contact {
 }
 
 .product-media {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line-on-night);
   background: #dbeaf0;
+}
+
+.product-media-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  pointer-events: none;
+  text-align: center;
+  padding: 8%;
+  background:
+    radial-gradient(ellipse 58% 46% at 50% 48%, rgba(3, 16, 24, 0.42), transparent 72%);
+}
+
+.product-media-mark__brand {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 1.7vw, 18px);
+  font-weight: 650;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+.product-media-mark__name {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.2vw, 76px);
+  font-weight: 650;
+  font-style: italic;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: #fff;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28),
+    0 10px 32px rgba(0, 0, 0, 0.5),
+    0 0 48px rgba(120, 220, 240, 0.42);
 }
 
 .product-media img {
@@ -5796,8 +5836,25 @@ a.product-cta:hover {
 }
 
 .hero.hero--home .product-media img {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
+}
+
+.hero.hero--home .product-media-mark__brand {
+  font-size: clamp(16px, 2.1vw, 22px);
+  letter-spacing: 0.32em;
+}
+
+.hero.hero--home .product-media-mark__name {
+  font-size: clamp(52px, 7.4vw, 88px);
+}
+
+.hero.hero--home .product-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
 
 .hero.hero--home .product-media--contain {
@@ -5830,14 +5887,6 @@ a.product-cta:hover {
 
 .hero.hero--home .product-card-head {
   align-items: baseline;
-}
-
-.hero.hero--home .product-name {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 550;
-  color: #fff;
-  letter-spacing: -0.02em;
 }
 
 .hero.hero--home .product-badge {
@@ -5967,6 +6016,15 @@ a.product-cta:hover {
 
   .hero.hero--home .product-media {
     aspect-ratio: 16 / 10;
+  }
+
+  .hero.hero--home .product-media-mark__brand {
+    font-size: clamp(13px, 3.2vw, 16px);
+    letter-spacing: 0.24em;
+  }
+
+  .hero.hero--home .product-media-mark__name {
+    font-size: clamp(40px, 12vw, 58px);
   }
 
   .hero.hero--home .product-desc {

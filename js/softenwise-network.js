@@ -11,7 +11,7 @@
     { id: "otomini", name: "Otomini", url: "https://otomini.com/" },
     { id: "bloc", name: "BLOC", url: "https://bloc.app/" },
     { id: "filter", name: "Filter", url: "https://filter-date.com/", live: false },
-    { id: "puff", name: "Puff", url: "https://puffsocial.net/" },
+    { id: "puff", name: "Puff", url: "https://puffsocial.net/", live: false },
     { id: "viaguide", name: "ViaGuide", url: "https://viaguideapp.com/", live: false },
     { id: "lokman", name: "Lokman", url: "https://lokmanapp.com/", live: false },
     { id: "gavel", name: "Gavel", url: "https://gavelsale.com/", live: false },
@@ -25,7 +25,7 @@
    */
   var SHOWCASE = {
     liman: {
-      image: "images/showcase/liman-kaleici.jpg",
+      image: "images/showcase/liman-kaleici.jpg?v=2026112301",
       imageAlt: "SoftenWise Liman — Antalya Kaleiçi Yat Limanı",
       imageMode: "cover",
       description:

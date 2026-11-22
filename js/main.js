@@ -482,10 +482,20 @@ if (
         : 'loading="lazy" decoding="async" width="640" height="360"';
 
     const mediaAria = unpublished ? ' aria-hidden="true"' : "";
+    let mediaMarkHtml = "";
+    if (product.id === "liman") {
+      const bits = String(displayName).trim().split(/\s+/);
+      const last = bits.length > 1 ? bits.pop() : displayName;
+      const brand = bits.join(" ");
+      mediaMarkHtml = `<div class="product-media-mark" aria-hidden="true">${
+        brand ? `<span class="product-media-mark__brand">${brand}</span>` : ""
+      }<span class="product-media-mark__name">${last}</span></div>`;
+    }
     const mediaHtml = product.image
       ? `
       <div class="${mediaClass}"${mediaAria}>
         <img src="${product.image}" alt="${unpublished ? "" : product.imageAlt || displayName}" ${imgAttrs} />
+        ${mediaMarkHtml}
       </div>
     `
       : `
