@@ -1,0 +1,145 @@
+{
+  "missingKeys": [
+    "urunler.html:attr:bloc.play.search",
+    "urunler.html:attr:bloc.ios.search"
+  ],
+  "versionSkew": {
+    "locales": [
+      "202611221"
+    ],
+    "i18n": [
+      "202611221"
+    ],
+    "main": [
+      "202611221"
+    ]
+  },
+  "brokenLocalHrefs": [],
+  "showcase": {
+    "order": [
+      "SoftenWise Liman",
+      "SoftenWise Clinic",
+      "BLOC",
+      "SoftenWise Maps"
+    ],
+    "limanFirst": true
+  },
+  "notes": [],
+  "parityGaps": {},
+  "trKeyCount": 691,
+  "versions": {
+    "404.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "academy.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "cerez-politikasi.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "entegrasyon-otomasyon.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "girisim-ortakligi.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "gizlilik.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "guvenlik-denetim.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "hakkimizda.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "index.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "kariyer.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "kaynaklar.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "kvkk.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "liman-yazilim.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "marina-yazilim.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "mobil-gelistirme.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "mobil-uygulama-gelistirme-sureci.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "ozel-yazilim-maliyeti.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "ozel-yazilim.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "teknik-danismanlik.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "urunler.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    },
+    "yazilim-firmasi-nasil-secilir.html": {
+      "locales": "202611221",
+      "i18n": "202611221",
+      "main": "202611221"
+    }
+  },
+  "criticalKeys": {
+    "home.hero.lead": true,
+    "home.showcase.products": true,
+    "home.showcase.liman.name": true,
+    "home.showcase.liman.desc": true,
+    "home.case.liman": true
+  },
+  "gitignoreNodeModules": true
+}
