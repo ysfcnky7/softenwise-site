@@ -6132,8 +6132,24 @@ a.product-cta:hover {
     font-size: 15px;
   }
 
+  /* Keep slide description visible so it updates with the carousel on phone */
   .hero.hero--home .product-desc {
-    display: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.62);
+    margin: 0;
+  }
+
+  .hero.hero--home .product-card {
+    gap: 8px;
+  }
+
+  .hero.hero--home .product-showcase-footer {
+    margin-top: 4px;
   }
 }
 
