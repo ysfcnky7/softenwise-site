@@ -13,3 +13,7 @@ Components: Static site, accessible markup
 
 Sitemap: https://softenwise.com/sitemap.xml
 Robots: https://softenwise.com/robots.txt
+
+/* DISCOVERY */
+Yazılım firması: https://softenwise.com/yazilim-firmasi.html
+Fikirden yazılım: https://softenwise.com/fikirden-yazilim.html
