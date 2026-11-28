@@ -54,15 +54,15 @@ if (menuBtn && nav) {
     const headerHeight = header.offsetHeight || header.getBoundingClientRect().height;
     const hb = header.getBoundingClientRect().bottom;
     const mb = menuBtn?.getBoundingClientRect?.().bottom ?? hb;
-    let y = Math.max(hb, mb, headerHeight) + 8;
+    const landscape = window.innerHeight <= 520;
+    let y = Math.max(hb, mb, headerHeight) + (landscape ? 4 : 8);
     if (!Number.isFinite(y) || y < 40) {
       const raw = getComputedStyle(document.documentElement).getPropertyValue("--header-height");
       const parsed = parseFloat(raw);
       y = Number.isFinite(parsed) ? parsed + 16 : 88;
     }
-    const landscape = window.innerHeight <= 520;
-    const PAD_MIN = landscape ? 56 : 60;
-    const PAD_MAX = landscape ? 92 : 124;
+    const PAD_MIN = landscape ? 72 : 60;
+    const PAD_MAX = landscape ? 88 : 124;
     y = Math.min(Math.max(y, PAD_MIN), PAD_MAX);
     document.documentElement.style.setProperty("--nav-mobile-offset-top", `${Math.round(y * 100) / 100}px`);
   };
@@ -1176,17 +1176,19 @@ if (serviceFilterButtons.length && serviceCards.length) {
     const href = el.getAttribute("href") || "";
     if (el.matches('[type="submit"]') || el.closest("form")) return "sw-mail";
     if (/err404|err500/.test(i18n) || /404\.html|500\.html/.test(href)) return "sw-arrow-left";
-    if (el.classList.contains("cookie-notice__btn")) return "sw-clipboard-list";
+    if (el.classList.contains("cookie-notice__btn")) return null;
     return "sw-arrow-right";
   };
   const decorate = (el) => {
     if (!el || el.querySelector(".sw-icon, .btn-action-icon")) return;
+    const icon = iconFor(el);
+    if (!icon) return;
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "sw-icon btn-action-icon");
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute("focusable", "false");
     const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    use.setAttribute("href", `#${iconFor(el)}`);
+    use.setAttribute("href", `#${icon}`);
     svg.appendChild(use);
     el.insertBefore(svg, el.firstChild);
   };
